@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.statusLayout {
+  display: flex;
+}
+
+.statusCol1 {
+  margin: 4px, 4px;
+  padding: 4px;
+  background-color: #141414;
+  min-width: 28rem;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+}
+.statusCol1 .statusHeader {
+  height: 7rem;
+  width: 25rem;
+  border-bottom: 1px solid #434343;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  /* border: 1px solid blue; */
+}
+.statusCol1 .statusHeader .profileImageCont {
+  height: 70px;
+  width: 70px;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.statusCol1 .statusHeader .profileImageCont .profileImage {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.statusCol1 .statusHeader .content {
+  height: 70px;
+  width: 20rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.statusCol1 .statusHeader .content p {
+  margin-bottom: 0.5rem;
+  color: #b5f0f7;
+}
+.statusCol1 .statusHeader .content span {
+  margin-bottom: 0.5rem;
+  color: #4e7a90;
+  font-size: 0.9rem;
+}
+.statusCol1 .recent {
+  color: #b3b3b3;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.statusCol1 .statusNotification {
+  height: 5rem;
+  width: 100%;
+  border: 1px solid #434343;
+}
+.statusCol1 .statusNotification .statusImageCont {
+  height: 70px;
+  width: 70px;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.statusCol1 .statusImageCont .statusImage {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #fff;
+}
+.statusCol2 {
+  width: 100%;
+  /* background-color: rgb(106, 43, 43); */
+  height: 100vh;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #141414;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.statusCol2 .placeholder {
+  width: 25rem;
+  height: 12rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+.statusCol2 .placeholder p {
+  color: #ffffff8c;
+  font-weight: 500;
+  /* font-size: large; */
+  /* margin-top: 5rem; */
+}

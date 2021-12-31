@@ -1,0 +1,43 @@
+.userChatCont {
+  width: 100%;
+  height: 4rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #f2f2f2;
+  /* border-bottom-height: 70%; */
+}
+.userChatCont .chatText {
+  width: 100%;
+  height: 3rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.userChatCont .chatName {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.userChatCont .spansTime {
+  font-size: 1rem;
+  margin-right: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.userChatCont .spanHeading {
+  font-size: 1.1rem;
+  /* margin-top: 2rem; */
+}
+
+.userChatCont .msgPreview {
+  margin-top: -0.7rem;
+  font-size: 0.95rem;
+}
+
+.chatHead {
+  margin-right: 1rem;
+}
