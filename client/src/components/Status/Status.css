@@ -7,13 +7,38 @@
 .statusLayout {
   display: flex;
 }
+#style-1::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
 
+#style-1::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  height: 10px;
+
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
+}
+
+.scroll {
+  height: 79vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+  cursor: pointer;
+}
 .statusCol1 {
   margin: 4px, 4px;
   padding: 4px;
   background-color: #141414;
   min-width: 28rem;
-  height: 100vh;
+  /* height: 100vh; */
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
@@ -21,15 +46,14 @@
 .statusCol1 .statusHeader {
   height: 7rem;
   width: 25rem;
-  border-bottom: 1px solid #434343;
   display: flex;
   align-items: center;
   margin-left: 1rem;
   /* border: 1px solid blue; */
 }
 .statusCol1 .statusHeader .profileImageCont {
-  height: 70px;
-  width: 70px;
+  height: 60px;
+  width: 60px;
   /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
@@ -37,8 +61,8 @@
 }
 
 .statusCol1 .statusHeader .profileImageCont .profileImage {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   background: #fff;
 }
@@ -61,7 +85,7 @@
   color: #4e7a90;
   font-size: 0.9rem;
 }
-.statusCol1 .recent {
+.statusCol1 .recent p {
   color: #b3b3b3;
   margin-left: 1rem;
   margin-top: 0.5rem;
@@ -69,39 +93,85 @@
   font-size: 0.8rem;
   font-weight: 500;
   margin-bottom: 1rem;
+  /* border-top: 1px solid #434343; */
+}
+.statusCol1 .recent {
+  margin-bottom: 1rem;
+
+  border-top: 1px solid #434343;
 }
 
 .statusCol1 .statusNotification {
-  height: 5rem;
+  height: 4rem;
   width: 100%;
-  border: 1px solid #434343;
+  /* border: 1px solid #434343; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.statusCol1 .statusNotification:hover {
+  background: #262626;
+  cursor: pointer;
 }
 .statusCol1 .statusNotification .statusImageCont {
-  height: 70px;
-  width: 70px;
-  /* border: 1px solid blue; */
+  height: 60px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+.statusCol1 .statusNotification .statusContactInfo {
+  width: 18rem;
+  height: 4rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.statusCol1 .statusNotification .statusContactInfo h3 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+.statusCol1 .statusNotification .statusContactInfo span {
+  color: #4e7a90;
+  font-size: 1rem;
+}
+.statusCol1 .statusNotification .statusContactInfo .time {
+  font-size: 0.95rem;
+}
 .statusCol1 .statusImageCont .statusImage {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   background: #fff;
+}
+.col2Layout {
+  width: 100%;
+  height: 100vh;
+  /* border: 1px solid blue; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  background-color: #000;
+  /* display: flex; */
+  /* justify-content: space-around; */
+  /* flex-direction: column;
+  align-items: center; */
 }
 .statusCol2 {
   width: 100%;
   /* background-color: rgb(106, 43, 43); */
   height: 100vh;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #141414;
+  background-color: #000;
   display: flex;
-  justify-content: center;
+  /* justify-content: space-around; */
+  flex-direction: column;
   align-items: center;
 }
 .statusCol2 .placeholder {
@@ -118,4 +188,14 @@
   font-weight: 500;
   /* font-size: large; */
   /* margin-top: 5rem; */
+}
+
+.col2Layout .statusCancelIcon {
+  width: 100%;
+  /* border: 1px solid blue; */
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1.5rem;
 }

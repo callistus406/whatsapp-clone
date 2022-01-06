@@ -6,4 +6,5 @@ export const CenterDivContent = styled.div`
   align-items: center;
   height: ${(props) => (props.height ? props.height : "2rem")};
   width: ${(props) => (props.width ? props.width : "auto")};
+  border-bottom: 1px solid #e3e3e3;
 `;

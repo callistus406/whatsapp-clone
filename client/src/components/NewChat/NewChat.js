@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import "./NewChat.css";
 import styled from "styled-components";
@@ -64,6 +64,7 @@ const StyledSearchIcon = styled(SearchIcon)`
     color: #666c6f;
   }
 `;
+
 function NewChat(props) {
   const [searchInput, setSearchInput] = useState(".");
   const [icons, setIcons] = useState({
@@ -71,14 +72,22 @@ function NewChat(props) {
 
     background: false,
   });
+  useEffect(() => {
+    console.log(icons.search);
+    if (icons.search === false) {
+      document.addEventListener("click", (e) => {
+        console.log(e);
+      });
+    }
+  }, [icons.search]);
   const divRef = useRef();
   const inputRef = useRef();
   const [cancel, setCancel] = useState(false);
-  console.log(searchInput);
 
   let propStore;
   const handleClick = (prop) => (event) => {
     divRef.current.style.backgroundColor = "#fff";
+
     if (prop === "search") {
       propStore = icons.search;
     } else if (prop === "background") {
@@ -86,6 +95,7 @@ function NewChat(props) {
     }
     setIcons({ ...icons, [prop]: !propStore });
   };
+  // console.log(icons.search);
 
   const handleChange = (event) => {
     setSearchInput(event.target.value);
