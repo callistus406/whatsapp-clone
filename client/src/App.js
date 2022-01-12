@@ -7,9 +7,11 @@ import MenuListComposition from "./components/Tests/Tests";
 import BasicPopover from "./components/Tests/Poper";
 // import Settings from "./components/Settings/UserSettings";
 import Meee from "./components/Tests/Meee";
+import Poper from "./components/Tests/Poper";
 import UserChat from "./components/UserChat/UserChat";
 import { useState } from "react";
 
+import SearchContact from "./components/SearchContact/SearchContact";
 import {
   Menu,
   Item,
@@ -19,32 +21,6 @@ import {
   useContextMenu,
 } from "react-contexify";
 function App() {
-  const [myId, setMyId] = useState("nill");
-  let MENU_ID = "myId";
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
-
-  console.log(MENU_ID);
-  function handleContextMenu(event) {
-    event.preventDefault();
-    show(event, {
-      props: {
-        key: "value",
-      },
-    });
-  }
-  const arr = [
-    {
-      id: "mill",
-      component: <UserChat click={handleContextMenu} passMenu={MENU_ID} />,
-    },
-  ];
-  function ReturnUserChat(props) {
-    MENU_ID = props.id;
-
-    return <UserChat click={handleContextMenu} passMenu={MENU_ID} />;
-  }
   return (
     <Provider store={store}>
       <div>

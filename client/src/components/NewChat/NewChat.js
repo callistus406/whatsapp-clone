@@ -65,7 +65,7 @@ const StyledSearchIcon = styled(SearchIcon)`
   }
 `;
 
-function NewChat(props) {
+function NewChat({ handleClickAction, toggle }) {
   const [searchInput, setSearchInput] = useState(".");
   const [icons, setIcons] = useState({
     search: true,
@@ -145,12 +145,12 @@ function NewChat(props) {
   //   color: rgb(51 183 246);
   return (
     <div className="newChatCont">
-      <StyledDiv toggle={props.toggle} width="28rem">
+      <StyledDiv toggle={toggle} width="28rem">
         <div className="newChatHeader">
           <div className="navArrow">
             {/* profile toggle */}
 
-            <StyledArrowBackIcon onClick={props.clickAction.newChatToggle} />
+            <StyledArrowBackIcon onClick={handleClickAction.newChatToggle} />
             <p>New chat</p>
           </div>
         </div>

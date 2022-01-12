@@ -1,71 +1,27 @@
 import React from "react";
-import "./UserProfile.css";
-import styled from "styled-components";
-import EditIcon from "@mui/icons-material/Edit";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { connect } from "react-redux";
-const StyledDiv = styled.div`
-  height: 100%; /* 100% Full-height */
-  width: ${(props) =>
-    props.toggle ? props.width : 0}; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #fff;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s;
-`;
-
-const StyleProfileBox = styled.div`
-  height: 100%;
-  width: 100%;
-  background: #ededed;
-`;
-
-const DisplayPic = styled.div`
-  height: 202px;
-  width: 202px;
-  border-radius: 50%;
-  border: 1px solid blue;
-`;
-const StyleProfilePicBox = styled.div`
-  height: 16rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const CustomDiv = styled.div`
-  height: ${(props) => props.height};
-  width: ${(props) => props.width};
-  background-color: ${(props) => props.background};
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.fontSize};
-  border: ${(props) => props.border};
-  display: ${(props) => props.display};
-  justify-content:${(props) => props.justifyContent}
-  align-items: ${(props) => props.alignItems};
-  padding-left: ${(props) => props.padding}
-`;
-const StyledEditIcon = styled(EditIcon)`
-  color: #919191;
-`;
-const StyledArrowBackIcon = styled(ArrowBackIcon)`
-  color: #fff;
-  cursor: pointer;
-`;
-function UserProfile(props) {
+import {
+  StyledContainer,
+  StyleProfileBox,
+  DisplayPic,
+  StyleProfilePicBox,
+  CustomDiv,
+  StyledEditIcon,
+  StyledArrowBackIcon,
+  StyledProfileHeader,
+  StyledNavArrow,
+} from "./UserProfile.styles";
+function UserProfile({ handleClickAction, toggle }) {
+  console.log(handleClickAction);
   return (
     <div className="userProfileCont">
-      <StyledDiv toggle={props.toggle} width="28rem">
-        <div className="userProfileHeader">
-          <div className="navArrow">
+      <StyledContainer toggle={toggle} width="28rem">
+        <StyledProfileHeader>
+          <StyledNavArrow>
             {/* profile toggle */}
-            <StyledArrowBackIcon onClick={props.clickAction.profileToggle} />
+            <StyledArrowBackIcon onClick={handleClickAction} />
             <p>Profile</p>
-          </div>
-        </div>
+          </StyledNavArrow>
+        </StyledProfileHeader>
         <div className="profileContent"></div>
         <StyleProfileBox>
           <StyleProfilePicBox>
@@ -129,7 +85,7 @@ function UserProfile(props) {
             </div>
           </CustomDiv>
         </StyleProfileBox>
-      </StyledDiv>
+      </StyledContainer>
     </div>
   );
 }

@@ -1,67 +1,110 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  Menu,
-  Item,
-  Separator,
-  Submenu,
-  MenuProvider,
-  useContextMenu,
-} from "react-contexify";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import "react-contexify/dist/ReactContexify.css";
 
-export default function Meee(props) {
-  let MENU_ID = props.mee;
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-  function handleContextMenu(event) {
-    event.preventDefault();
-    show(event, {
-      props: {
-        key: "value",
+const theme = createTheme({
+  overrides: {
+    MuiBackdrop: {
+      root: {
+        backgroundColor: "rgba(255,255,255,0.2)",
       },
-    });
+    },
+  },
+});
+const StyledDialogContent = styled(DialogContent)`
+  && {
+    min-width: 25rem;
+    height: 12rem;
   }
-  const groupDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Exit group",
-    "Pin chat",
-    "Mark as read",
-  ];
-  const handleItemClick = ({ event, props }) => console.log(event, props);
+`;
+const StyledOkButton = styled(Button)`
+  && {
+    background-color: #0aa545;
+    color: #fff;
+  }
+`;
+const StyledCancelButton = styled(Button)`
+  && {
+    color: #0aa545;
+  }
+`;
+export default function Meee(props) {
+  const [open, setOpen] = React.useState(false);
 
-  const StyledItem = styled(Item)`
-    .react-contexify__item__content {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-    &:hover {
-      .react-contexify__item__content {
-        background-color: #000;
-      }
-    }
-  `;
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      <p onContextMenu={handleContextMenu}>
-        lorem ipsum blabladhasi blaghs blah
-      </p>
-      <Menu id={MENU_ID}>
-        {groupDialog.map((item) => {
-          return (
-            <StyledItem
-              // style={{  }}
-              onClick={handleItemClick}
-            >
-              {item}
-            </StyledItem>
-          );
-        })}
-      </Menu>
+      <ThemeProvider theme={theme}>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Open alert dialog
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Choose Theme</DialogTitle>
+          <StyledDialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Gender</FormLabel>
+                <RadioGroup
+                  aria-label="gender"
+                  defaultValue="light"
+                  name="radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="light"
+                    control={<Radio />}
+                    label="Light"
+                  />
+                  <FormControlLabel
+                    value="dark"
+                    control={<Radio />}
+                    label="Dark"
+                  />
+                  <FormControlLabel
+                    value="default"
+                    control={<Radio />}
+                    label="System default"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </DialogContentText>
+          </StyledDialogContent>
+          <DialogActions>
+            <StyledCancelButton onClick={handleClose}>
+              CANCEL
+            </StyledCancelButton>
+            <StyledOkButton onClick={handleClose} autoFocus>
+              OK
+            </StyledOkButton>
+          </DialogActions>
+        </Dialog>
+      </ThemeProvider>
     </div>
   );
 }

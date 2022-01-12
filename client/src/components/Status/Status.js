@@ -1,25 +1,20 @@
 import React from "react";
-import "./Status.css";
-function Status() {
-  function StatusNotification() {
-    return (
-      <div className="statusNotification">
-        <div className="statusImageCont">
-          <div className="statusImage"></div>
-        </div>
-        <div className="statusContactInfo">
-          <h3>Chibyke</h3>
-          <span>
-            today at <span className="time"> 9:51 am</span>
-          </span>
-        </div>
-      </div>
-    );
-  }
+
+import {
+  StyledStatusContainer,
+  StyledStatusColOne,
+  StyledStatusHeader,
+  StyledStatusNotification,
+  StyledStatusColTwoLayout,
+  StyledStatusColTwo,
+} from "./Status.style";
+function Status({ handleClickAction, toggle }) {
+  console.log(handleClickAction);
+
   return (
-    <div className="statusLayout">
-      <div className="statusCol1">
-        <div className="statusHeader">
+    <StyledStatusContainer toggle={toggle}>
+      <StyledStatusColOne>
+        <StyledStatusHeader>
           <div className="profileImageCont">
             <div className="profileImage"></div>
           </div>
@@ -27,7 +22,7 @@ function Status() {
             <p>My Status</p>
             <span>No updates</span>
           </div>
-        </div>
+        </StyledStatusHeader>
         <div className="scroll" id="style-1">
           <div className="recent">
             <p>Recent</p>
@@ -65,12 +60,18 @@ function Status() {
           <StatusNotification />
           {/* </div> */}
         </div>
-      </div>
+      </StyledStatusColOne>
 
-      <div className="col2Layout">
+      <StyledStatusColTwoLayout>
         <div className="statusCancelIcon">
           <div>
-            <svg viewBox="0 0 24 24" width="24" height="24" class="">
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              onClick={handleClickAction}
+              className="icon"
+            >
               <path
                 fill="#efefef"
                 d="M19.8 5.8l-1.6-1.6-6.2 6.2-6.2-6.2-1.6 1.6 6.2 6.2-6.2 6.2 1.6 1.6 6.2-6.2 6.2 6.2 1.6-1.6-6.2-6.2 6.2-6.2z"
@@ -78,7 +79,7 @@ function Status() {
             </svg>
           </div>
         </div>
-        <div className="statusCol2">
+        <StyledStatusColTwo>
           <div className="placeholder">
             <div className="statusIcon">
               <svg
@@ -96,9 +97,24 @@ function Status() {
             </div>
             <p>Click on a contact to view their status updates </p>
           </div>
-        </div>
+        </StyledStatusColTwo>
+      </StyledStatusColTwoLayout>
+    </StyledStatusContainer>
+  );
+}
+function StatusNotification() {
+  return (
+    <StyledStatusNotification>
+      <div className="statusImageCont">
+        <div className="statusImage"></div>
       </div>
-    </div>
+      <div className="statusContactInfo">
+        <h3>Chibyke</h3>
+        <span>
+          today at <span className="time"> 9:51 am</span>
+        </span>
+      </div>
+    </StyledStatusNotification>
   );
 }
 

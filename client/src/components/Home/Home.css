@@ -6,6 +6,9 @@
 .layoutContainer {
   display: flex;
 }
+.column1 {
+  border-right: 1px solid #dadada;
+}
 .contactsCol {
   margin: 4px, 4px;
   /* padding: 4px; */
@@ -37,11 +40,11 @@
   background-color: #555;
 }
 
-.chatColCont {
+.openChat {
   width: 100%;
   /* background-color: rgb(106, 43, 43); */
   height: 100vh;
-  border: 1px solid blue;
+  /* border: 1px solid rgb(104, 24, 35); */
 }
 .chatsCol {
   width: 100%;
@@ -270,8 +273,8 @@
 
 .openChat {
   width: 100%;
-  height: 24rem;
-  border: 1px solid blue;
+  height: 100vh;
+  /* border: 1px solid blue; */
 }
 
 .openChat .openChatHead {
@@ -354,29 +357,33 @@
 }
 /* message */
 
-.chatColCont .msgSpace {
+.openChat .msgSpace {
   width: 100%;
-  height: 20rem;
+  height: calc(100vh - (3.6rem + 3.875rem));
   background-color: #e3e3e3;
+  background-image: url("../img/bgDefault2.png");
 }
-.chatColCont .msgBar {
+.openChat .msgBar {
   width: 100%;
-  height: 4rem;
+  height: 3.875rem;
   background-color: #f0f0f0;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* margin-top: 1rem; */
 }
 
-.chatColCont .msgBar .emojiIcons {
+.openChat .msgBar .emojiIcons {
   width: 13%;
   height: 3rem;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.chatColCont .msgBar .emojiIcons .emojiCont {
+.openChat .msgBar .emojiIcons .emojiCont {
   width: 50px;
   height: 50px;
   /* border: 1px solid blue; */
@@ -384,7 +391,7 @@
   justify-content: center;
   align-items: center;
 }
-.chatColCont .msgBar .emojiIcons .emoji {
+.openChat .msgBar .emojiIcons .emoji {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -393,16 +400,17 @@
   justify-content: center;
   align-items: center;
 }
-.chatColCont .msgBar .emojiIcons .attachmentCont {
+.openChat .msgBar .emojiIcons .attachmentCont {
   width: 50px;
   height: 50px;
   /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.chatColCont .msgBar .emojiIcons .attachment {
+.openChat .msgBar .emojiIcons .attachment {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -412,33 +420,103 @@
   align-items: center;
 }
 
-.chatColCont .msgBar .msgInputCont {
-  width: 50%;
+.openChat .msgBar .msgInputCont {
+  width: 80%;
   height: 50px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.chatColCont .msgBar .msgInput {
+.openChat .msgBar .msgInput {
   width: 100%;
-  height: 2.7rem;
-  border-radius: 3rem;
-  font-size: 1.2rem;
+  height: 2.625rem;
+  border-radius: 1.25rem;
+  font-size: 1rem;
+  color: #626262;
+  background: #ffffff;
+  border: none;
+  padding-left: 1rem;
 }
-
-.chatColCont .msgBar .recorderCont {
+.openChat .msgBar .msgInput::placeholder {
+  color: #9b9b9b;
+  font-size: 0.9rem;
+}
+.openChat .msgBar .msgInput:focus {
+  outline: none;
+}
+.openChat .msgBar .recorderCont {
   width: 50px;
   height: 50px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.chatColCont .msgBar .recorder {
+.openChat .msgBar .recorder {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* speed dial */
+
+.speedDial-photo {
+  background: linear-gradient(
+    to bottom,
+    #ac44cf 0%,
+    #ac44cf 50%,
+    #bf59cf 50%,
+    #bf59cf 100%
+  );
+}
+.speedDial-document {
+  background: linear-gradient(
+    to bottom,
+    #0063cb 0%,
+    #0063cb 50%,
+    #0070e6 50%,
+    #0070e6 100%
+  );
+}
+.speedDial-camera {
+  background: linear-gradient(
+    to bottom,
+    #0063cb 0%,
+    #0063cb 50%,
+    #0070e6 50%,
+    #0070e6 100%
+  );
+}
+
+.speedDial-contact {
+  background: linear-gradient(
+    to bottom,
+    #0795dc 0%,
+    #0795dc 50%,
+    #0eabf4 50%,
+    #0eabf4 100%
+  );
+}
+.speedDial-sticker {
+  background: linear-gradient(
+    to bottom,
+    #0795dc 0%,
+    #0795dc 50%,
+    #0eabf4 50%,
+    #0eabf4 100%
+  );
+}
+
+.MuiSpeedDial-fab {
+  background: #f0f0f0 !important;
+}
+
+.shadow {
+  box-shadow: none !important;
 }
