@@ -14,6 +14,7 @@ import {
   TOGGLE_NOTIFICATION,
   TOGGLE_CHAT_WALLPAPER,
   TOGGLE_BLOCKED_CONTACTS,
+  TOGGLE_MSG_SEARCH,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -21,6 +22,8 @@ const initialState = {
   displayStatusContainer: false,
   displayChatContainer: false,
   displayOptionsContainer: false,
+  // this state is for msg search bar
+  displayMsgSearchLayout: false,
 };
 
 export function displayProfileReducer(state = initialState, action) {
@@ -62,6 +65,18 @@ export function displayOptionsReducer(state = initialState, action) {
       return {
         ...state,
         displayOptionsContainer: !state.displayOptionsContainer,
+      };
+    default:
+      return state;
+  }
+}
+// reducer for msg search bar
+export function displayMsgSearchBarReducer(state = initialState, action) {
+  switch (action.type) {
+    case TOGGLE_MSG_SEARCH:
+      return {
+        ...state,
+        displayMsgSearchLayout: !state.displayMsgSearchLayout,
       };
     default:
       return state;
@@ -175,21 +190,10 @@ export function wallpaperReducer(state = settingsInitialState, action) {
       return state;
   }
 }
-export function archivedMsgsReducer(state = settingsInitialState, action) {
-  switch (action.type) {
-    case TOGGLE_BLOCKED_CONTACTS:
-      return {
-        ...state,
-        displayArchivedMsgs: !state.displayArchivedMsgs,
-      };
-    default:
-      return state;
-  }
-}
 
 export function blockedContactsReducer(state = settingsInitialState, action) {
   switch (action.type) {
-    case TOGGLE_NOTIFICATION:
+    case TOGGLE_BLOCKED_CONTACTS:
       return {
         ...state,
         displayBlockedContacts: !state.displayBlockedContacts,

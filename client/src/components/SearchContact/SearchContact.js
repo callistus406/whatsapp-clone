@@ -5,49 +5,15 @@ import {
   StyledContainer,
   StyledNavArrow,
   StyledArrowBackIcon,
-  StyledNewGrpHeader,
-  StyledNewGrpContent,
+  StyledMsgSearchHeader,
+  StyledMsgSearchContent,
   StyledInputContainer,
   StyledContactHeading,
   StyledContactInfo,
   StyledContactContainer,
 } from "./SearchContact.style.js";
-const StyledNavContainer = styled.div`
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: yellow; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s;
-  a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #000;
-    display: block;
-    transition: 0.3s;
-    &:hover {
-      color: #f1f1f1;
-    }
-  }
-  .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  .cont {
-    width: 200px;
-    height: 200px;
-    background-color: black;
-  }
-`;
-function SearchContact(props) {
+
+function SearchContact({ handleClickAction, toggle }) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -64,30 +30,19 @@ function SearchContact(props) {
 
   return (
     <div>
-      <button
-        style={{ marginLeft: "1000px", position: "absolute" }}
-        onClick={openNav}
-      >
-        click
-      </button>
       {/* <StyledNavContainer> */}
-      <StyledContainer id="mySidenav" width={mack}>
-        <StyledNewGrpHeader>
+      <StyledContainer id="mySidenav" toggle={toggle} width="28rem">
+        <StyledMsgSearchHeader>
           <div className="navArrow">
             <StyledNavArrow>
-              <div className="">
-                <StyledArrowBackIcon
-                  onClick={function () {
-                    return (document.getElementById("mySidenav").style.width =
-                      "0rem");
-                  }}
-                />
+              <div onClick={handleClickAction}>
+                <CancelButton />
               </div>
-              <p>Add group participants</p>
+              <p>Search Messages</p>
             </StyledNavArrow>
           </div>
-        </StyledNewGrpHeader>
-        <StyledNewGrpContent>
+        </StyledMsgSearchHeader>
+        <StyledMsgSearchContent>
           <StyledInputContainer>
             <input type="text" placeholder="Type contact name     " />
           </StyledInputContainer>
@@ -98,7 +53,7 @@ function SearchContact(props) {
           <ShowContact name="David" about="Musician" />
           <ShowContact name="Gangster" about="coder" />
           <ShowContact name="Miracle" about="Loading About..." />
-        </StyledNewGrpContent>
+        </StyledMsgSearchContent>
       </StyledContainer>
       {/* <a
           href="javascript:void(0)"
@@ -177,6 +132,16 @@ function DeleteIcon() {
       <path
         fill="#B6B6B6"
         d="M17.25 7.8L16.2 6.75l-4.2 4.2-4.2-4.2L6.75 7.8l4.2 4.2-4.2 4.2 1.05 1.05 4.2-4.2 4.2 4.2 1.05-1.05-4.2-4.2 4.2-4.2z"
+      ></path>
+    </svg>
+  );
+}
+function CancelButton() {
+  return (
+    <svg viewBox="0 0 24 24" width="24" height="24" class="">
+      <path
+        fill="#51585C"
+        d="m19.1 17.2-5.3-5.3 5.3-5.3-1.8-1.8-5.3 5.4-5.3-5.3-1.8 1.7 5.3 5.3-5.3 5.3L6.7 19l5.3-5.3 5.3 5.3 1.8-1.8z"
       ></path>
     </svg>
   );

@@ -72,17 +72,11 @@ function NewChat({ handleClickAction, toggle }) {
 
     background: false,
   });
-  useEffect(() => {
-    console.log(icons.search);
-    if (icons.search === false) {
-      document.addEventListener("click", (e) => {
-        console.log(e);
-      });
-    }
-  }, [icons.search]);
+
   const divRef = useRef();
   const inputRef = useRef();
   const [cancel, setCancel] = useState(false);
+  const [hide, setHide] = useState(false);
 
   let propStore;
   const handleClick = (prop) => (event) => {
@@ -107,9 +101,19 @@ function NewChat({ handleClickAction, toggle }) {
       //   clickAction.newChatToggle();
     }
   };
-
+  function hideSearchIcon(e) {}
+  // useEffect(() => {
+  //   if (inputRef.current.className !== document.activeElement) {
+  //     console.log(" not done");
+  //   } else {
+  //     setHide((prevState) => !prevState);
+  //   }
+  // }, []);
+  document.addEventListener("click", () => {
+    setIcons({ ...icons, search: !propStore });
+  });
   function handleCancel() {
-    setSearchInput("");
+    setHide((prevState) => !prevState);
     inputRef.current.value = "";
     setCancel(false);
   }
@@ -160,7 +164,7 @@ function NewChat({ handleClickAction, toggle }) {
             {icons.search ? <StyledSearchIcon /> : <ArrowBack />}
           </span>
           <span className="clearIconCont">
-            {cancel ? <ClearIcon onClick={handleCancel} /> : ""}
+            {icons.cancel ? <ClearIcon onClick={handleCancel} /> : ""}
           </span>
           <input
             type="text"
@@ -168,6 +172,8 @@ function NewChat({ handleClickAction, toggle }) {
             className="inputSearch"
             onChange={handleChange}
             onClick={handleClick("search")}
+            onFocus={hideSearchIcon}
+            // onFocus={() => setHide((prevState) => !prevState)}
           />
         </div>
         <Contacts />

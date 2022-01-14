@@ -1,6 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
   displayProfileReducer,
@@ -18,6 +17,7 @@ import {
   blockedContactsReducer,
   keyboardShortcutsReducer,
   helpReducer,
+  displayMsgSearchBarReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -25,6 +25,8 @@ const rootReducer = combineReducers({
   status: displayStatusReducer,
   newChat: displayChatReducer,
   options: displayOptionsReducer,
+  // from search msg
+  searchMsg: displayMsgSearchBarReducer,
   // from options
   newGroup: newGroupReducer,
   archive: archiveReducer,

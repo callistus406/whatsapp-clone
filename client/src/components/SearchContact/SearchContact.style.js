@@ -3,14 +3,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
-  width: ${(props) => (props.width ? "26rem" : "0rem")};
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  border: 1px solid blue;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s;
+  width: ${(props) => (props.toggle ? "23rem" : "0rem")};
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+
+  overflow-x: hidden;
+  transition: 0.2s;
 `;
 
 export const StyledArrowBackIcon = styled(ArrowBackIcon)`
@@ -24,25 +24,26 @@ export const StyledNavArrow = styled.div`
   display: flex;
   align-items: center;
   ${"" /* justify-content: center; */}
-  color: #fff;
+
   display: "flex";
 
   p {
+    color: #0c0c0c;
     margin-left: 2rem;
     font-size: 1.1rem;
   }
 `;
 
-export const StyledNewGrpHeader = styled.div`
-  height: 6.5rem;
+export const StyledMsgSearchHeader = styled.div`
+  height: 3.625rem;
   /* border: 1px solid blue; */
   /* position: absolute; */
-  background: #00bfa5;
+  background: #ededed;
   display: flex;
   justify-content: center;
   align-items: flex-end;
 `;
-export const StyledNewGrpContent = styled.div`
+export const StyledMsgSearchContent = styled.div`
   height: calc(100vh - 6.5rem);
   width: ${(props) => (props.toggle ? props.width : 0)}
   ${"" /* background: #ededed; */}

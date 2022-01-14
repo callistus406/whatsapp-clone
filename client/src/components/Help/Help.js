@@ -8,20 +8,20 @@ import {
   StyledCustomDiv,
   StyledHelpLinksContainer,
 } from "./Help.style.js";
-function Help(props) {
+export function Help({ handleClickAction, toggle }) {
   return (
-    <StyledContainer toggle={props.toggle} width="28rem">
+    <StyledContainer toggle={toggle} width="28rem">
       <StyledHelpHeader>
         <div className="navArrow">
-          <StyledNavArrow display={props.toggle}>
+          <StyledNavArrow display={toggle}>
             <div className="">
-              <StyledArrowBackIcon onClick={props.clickAction.profileToggle} />
+              <StyledArrowBackIcon onClick={handleClickAction} />
             </div>
             <p>Help</p>
           </StyledNavArrow>
         </div>
       </StyledHelpHeader>
-      <StyledHelpContent toggle={props.toggle} width="28rem">
+      <StyledHelpContent toggle={toggle} width="28rem">
         <div className="iconCont">
           <div className="icon"></div>
         </div>
@@ -43,5 +43,3 @@ function Help(props) {
     </StyledContainer>
   );
 }
-
-export default Help;

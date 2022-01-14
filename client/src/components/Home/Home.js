@@ -22,9 +22,20 @@ import NewGrp from "../ New Grp/NewGrp";
 import ArchivedChats from "../Archived Chats/ArchivedChats";
 import StarredMsgs from "../Starred Msgs/StarredMsgs";
 import UserSettings from "../Settings/UserSettings";
-import Notification from "../Notification/Notification";
+import { Notification } from "../Notification/Notification";
 import BlockedContacts from "../Blocked Contacts/BlockedContacts";
 import Status from "../Status/Status";
+import "react-contexify/dist/ReactContexify.css";
+import SearchContact from "../SearchContact/SearchContact";
+
+import {
+  Menu as ContexifyMenu,
+  Item,
+  Separator,
+  Submenu,
+  MenuProvider,
+  useContextMenu,
+} from "react-contexify";
 import {
   profileToggle,
   newChatToggle,
@@ -34,12 +45,7 @@ import {
   archiveToggle,
   starredMsgsToggle,
   settingsToggle,
-  toggleNotification,
-  toggleTheme,
-  toggleWallpaper,
-  toggleBlockedContacts,
-  toggleKeyboardShortcuts,
-  toggleHelp,
+  toggleMsgSearch,
   logout,
 } from "../../Redux-State/action creators/pageActions";
 import {
@@ -52,7 +58,12 @@ import {
   StyledActionIcons,
   StyledMenuItem,
   StyledMenuList,
+  StyledMessageSpace,
   StyledBox,
+  StyledItem,
+  StyledOptions,
+  StyledOpenChat,
+  StyledContactsCol,
 } from "./Home.style";
 import {
   StatusIcon,
@@ -219,14 +230,12 @@ function Content({ homeProps, toggle }) {
 }
 
 function Home(props) {
-  console.log(props.displayProfileContainer);
-
   const [open, setOpen] = useState(false);
   console.log(props);
   function clickHandler() {
     setOpen(!open);
   }
-  console.log(props);
+
   return (
     <div className="homeParentCont">
       <div className="layoutContainer">
@@ -260,19 +269,19 @@ function Home(props) {
           toggle={props.displaySettingsLayout}
           handleClickAction={props.settingsToggle}
         />
-        <Notification
-          toggle={props.displayNotification}
-          handleClickAction={props.toggleNotification}
-        />
-        <BlockedContacts
-          toggle={props.displayBlockedContacts}
-          handleClickAction={props.toggleBlockedContacts}
+        <SearchContact
+          toggle={props.displayMsgSearchLayout}
+          handleClickAction={props.toggleMsgSearch}
         />
 
         <div className="column1">
           <Content homeProps={props} />
 
-          <div className="contactsCol" id="style-1">
+          <StyledContactsCol
+            id="style-1"
+            width="24rem"
+            toggle={props.displayMsgSearchLayout}
+          >
             <UserChat passMenu="qwerty" />
             <UserChat passMenu="qwerty1" />
             <UserChat passMenu="qwerty2" />
@@ -281,11 +290,11 @@ function Home(props) {
             <UserChat passMenu="qwerty1y" />
             <UserChat passMenu="qwerty2e" />
             <UserChat passMenu="qwerty3e" />
-          </div>
+          </StyledContactsCol>
         </div>
 
         {/* <div className="chatColCont"> */}
-        <div className="openChat">
+        <StyledOpenChat margin={props.displayMsgSearchLayout}>
           <div className="openChatHead">
             <div className="imageCont">
               <div className="image"></div>
@@ -304,14 +313,14 @@ function Home(props) {
             </div>
             <div className="icons">
               <div className="searchIcon">
-                <SearchIcon />
+                <SearchIcon click={props.toggleMsgSearch} />
               </div>
-              <div className="optionIcon">
+              <Options className="optionIcon">
                 <MsgOptionsIcon />
-              </div>
+              </Options>
             </div>
           </div>
-          <div className="msgSpace"></div>
+          <Message id="qwerty" />
           <div className="msgBar">
             <div className="emojiIcons">
               <div className="emojiCont">
@@ -369,7 +378,7 @@ function Home(props) {
               </div>
             </div>
           </div>
-        </div>
+        </StyledOpenChat>
 
         <div className="">
           {/* commented */}
@@ -397,7 +406,9 @@ function mapStateToProps(state) {
     displayProfileContainer: state.profile.displayProfileContainer,
     displayStatusContainer: state.status.displayStatusContainer,
     displayChatContainer: state.newChat.displayChatContainer,
-    displayOptionsContainer: state.options.displayChatContainer,
+    // displayOptionsContainer: state.options.displayChatContainer,
+    // search msg state
+    displayMsgSearchLayout: state.searchMsg.displayMsgSearchLayout,
     // options state
     displayCreateNewGrp: state.newGroup.displayNewGroup,
     displayArchiveLayout: state.archive.displayArchive,
@@ -405,12 +416,12 @@ function mapStateToProps(state) {
     displaySettingsLayout: state.settings.displaySettings,
     logout: state.options.logout,
     // settings sub menu
-    displayNotification: state.notification.displayNotification,
-    displayTheme: state.theme.displayTheme,
-    displayWallpaper: state.wallpaper.displayWallpaper,
-    displayBlockedContacts: state.blockedContacts.displayBlockedContacts,
-    displayKeyboardShortcuts: state.keyboardShortCuts.displayKeyboardShortcuts,
-    displayHelp: state.help.displayHelp,
+    // displayNotification: state.notification.displayNotification,
+    // displayTheme: state.theme.displayTheme,
+    // displayWallpaper: state.wallpaper.displayWallpaper,
+    // displayBlockedContacts: state.blockedContacts.displayBlockedContacts,
+    // displayKeyboardShortcuts: state.keyboardShortCuts.displayKeyboardShortcuts,
+    // displayHelp: state.help.displayHelp,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -419,6 +430,8 @@ function mapDispatchToProps(dispatch) {
     statusToggle: () => dispatch(statusToggle()),
     newChatToggle: () => dispatch(newChatToggle()),
     optionsToggle: () => dispatch(optionsToggle()),
+    // search msg action
+    toggleMsgSearch: () => dispatch(toggleMsgSearch()),
     // sub menu actions
     newGroupToggle: () => dispatch(newGroupToggle()),
     archiveToggle: () => dispatch(archiveToggle()),
@@ -426,13 +439,93 @@ function mapDispatchToProps(dispatch) {
     settingsToggle: () => dispatch(settingsToggle()),
     logout: () => dispatch(logout()),
     // settings sub menu actions
-    toggleNotification: () => dispatch(toggleNotification()),
-    toggleTheme: () => dispatch(toggleTheme()),
-    toggleWallpaper: () => dispatch(toggleWallpaper()),
-    toggleBlockedContacts: () => dispatch(toggleBlockedContacts()),
-    toggleKeyboardShortcuts: () => dispatch(toggleKeyboardShortcuts()),
-    toggleHelp: () => dispatch(toggleHelp()),
+    // toggleNotification: () => dispatch(toggleNotification()),
+    // toggleTheme: () => dispatch(toggleTheme()),
+    // toggleWallpaper: () => dispatch(toggleWallpaper()),
+    // toggleBlockedContacts: () => dispatch(toggleBlockedContacts()),
+    // toggleKeyboardShortcuts: () => dispatch(toggleKeyboardShortcuts()),
+    // toggleHelp: () => dispatch(toggleHelp()),
   };
 }
 
+function Message(props) {
+  let MENU_ID = "qwerty";
+  const { show } = useContextMenu({
+    id: MENU_ID,
+  });
+
+  const groupDialog = [
+    "Archive chat",
+    "Mute notification",
+    "Exit group",
+    "Pin chat",
+    "Mark as read",
+  ];
+  const contactDialog = [
+    "Archive chat",
+    "Mute notification",
+    "Delete chat",
+    "Pin chat",
+    "Mark as read",
+  ];
+
+  function handleContextMenu(event) {
+    event.preventDefault();
+    show(event, {
+      props: {
+        key: "value",
+      },
+    });
+  }
+  const handleItemClick = ({ event, props }) => console.log(event, props);
+  return (
+    <StyledMessageSpace onContextMenu={handleContextMenu}>
+      <Menu id={MENU_ID} style={{ width: "12rem" }}>
+        {groupDialog.map((item) => {
+          return <StyledItem onClick={handleItemClick}>{item}</StyledItem>;
+        })}
+      </Menu>
+    </StyledMessageSpace>
+  );
+}
+function Options(props) {
+  let MENU_ID = "qwerty";
+  const { show } = useContextMenu({
+    id: MENU_ID,
+  });
+
+  const groupDialog = [
+    "Archive chat",
+    "Mute notification",
+    "Exit group",
+    "Pin chat",
+    "Mark as read",
+  ];
+  const contactDialog = [
+    "Archive chat",
+    "Mute notification",
+    "Delete chat",
+    "Pin chat",
+    "Mark as read",
+  ];
+
+  function handleContextMenu(event) {
+    event.preventDefault();
+    show(event, {
+      props: {
+        key: "value",
+      },
+    });
+  }
+  const handleItemClick = ({ event, props }) => console.log(event, props);
+  return (
+    <StyledOptions onContextMenu={handleContextMenu}>
+      <Menu id={MENU_ID} style={{ width: "12rem" }}>
+        {groupDialog.map((item) => {
+          return <StyledItem onClick={handleItemClick}>{item}</StyledItem>;
+        })}
+      </Menu>
+    </StyledOptions>
+  );
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

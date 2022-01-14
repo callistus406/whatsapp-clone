@@ -5,7 +5,15 @@ import MenuItem from "@mui/material/MenuItem";
 import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
 import Box from "@mui/material/Box";
 import MenuList from "@mui/material/MenuList";
-
+import Image from "../img/bgDefault2.png";
+import {
+  Menu,
+  Item,
+  Separator,
+  Submenu,
+  MenuProvider,
+  useContextMenu,
+} from "react-contexify";
 export const StyledSpeedDial = styled(SpeedDial)`
   .MuiFab-root {
     box-shadow: none;
@@ -91,4 +99,52 @@ export const StyledBox = styled(Box)`
   & {
     background-color: red;
   }
+`;
+export const StyledMessageSpace = styled.div`
+  width: 100%;
+  height: calc(100vh - (3.6rem + 3.875rem));
+  ${"" /* background-color: pink; */}
+  background-image: url(${Image});
+`;
+export const StyledOptions = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const StyledItem = styled(Item)`
+  & {
+    .react-contexify__item__content {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .react-contexify {
+      min-width: 20rem;
+    }
+  }
+`;
+
+export const StyledOpenChat = styled.div`
+  width: 100%;
+  height: 100vh;
+  margin-right: ${(props) => (props.margin ? "23rem" : "0rem")};
+  ${"" /* border: 1px solid blue; */}
+  transition: 0.2s;
+`;
+export const StyledContactsCol = styled.div`
+  ${"" /* border: 1px solid blue; */}
+  margin: 4px, 4px;
+  /* padding: 4px; */
+  /* background-color: green; */
+  min-width: ${(props) => (props.toggle ? props.width : "28rem")};
+  height: 65.5vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+  transition: 0.2s;
 `;

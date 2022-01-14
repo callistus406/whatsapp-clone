@@ -7,9 +7,11 @@ export const StyledContainer = styled.div`
     props.toggle ? props.width : 0}; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1;
-  top: 0;
+  top: 0; /* Stay at the top */
   left: 0;
   background-color: #fff;
+
+  transition: 0.3s;
 
   ${"" /* transition: 0.1s; */}
 `;
@@ -51,10 +53,9 @@ export const StyledBlockedContactsHeader = styled.div`
 export const StyledBlockedContactsContent = styled.div`
   height: calc(100vh - 6.5rem);
   background: #ededed;
-  display: ${(props) => (props.toggle ? "block" : "none")};
+  ${"" /* display: ${(props) => (props.toggle ? "block" : "none")}; */}
   margin: 4px, 4px;
   transition: 0.1s;
-  min-width: 28rem;
   overflow-x: hidden;
   overflow-y: auto;
   ${"" /* border: 1px solid blue; */}

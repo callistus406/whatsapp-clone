@@ -14,6 +14,7 @@ import {
   TOGGLE_THEME,
   TOGGLE_HELP,
   TOGGLE_NOTIFICATION,
+  TOGGLE_MSG_SEARCH,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -42,6 +43,13 @@ export function optionsToggle() {
   return {
     type: TOGGLE_OPTIONS,
     info: "this action  will display the options dropdown slide",
+  };
+}
+// ACTION FOR MSG SEARCH BAR
+export function toggleMsgSearch() {
+  return {
+    type: TOGGLE_MSG_SEARCH,
+    info: "this action  will display the message search slide ",
   };
 }
 

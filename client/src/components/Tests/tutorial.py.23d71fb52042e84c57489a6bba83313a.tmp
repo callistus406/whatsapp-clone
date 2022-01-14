@@ -1,7 +1,7 @@
 print("hello world")
 num = [3,4,6,6,2,1,4,6,4,3]
-for i in num:
+for i in range(num):
     print(num[i])
 
 
-# print(num)
+print(num)

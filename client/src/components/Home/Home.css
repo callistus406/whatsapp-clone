@@ -9,16 +9,15 @@
 .column1 {
   border-right: 1px solid #dadada;
 }
-.contactsCol {
+/* .contactsCol {
   margin: 4px, 4px;
-  /* padding: 4px; */
-  /* background-color: green; */
+
   min-width: 28rem;
   height: 65.5vh;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-}
+} */
 /* customizing scroll bar */
 
 #style-1::-webkit-scrollbar-track {
@@ -271,13 +270,12 @@
 }
 /* fdddddddddddddddddddddddddddd */
 
-.openChat {
+/* .openChat {
   width: 100%;
   height: 100vh;
-  /* border: 1px solid blue; */
-}
+} */
 
-.openChat .openChatHead {
+.openChatHead {
   background: #ededed;
   width: 100%;
   height: 3.6rem;
@@ -288,7 +286,7 @@
   align-items: center;
 }
 
-.openChat .openChatHead .imageCont {
+.openChatHead .imageCont {
   width: 50px;
   height: 50px;
   /* border: 1px solid blue; */
@@ -296,7 +294,7 @@
   justify-content: center;
   align-items: center;
 }
-.openChat .openChatHead .imageCont .image {
+.openChatHead .imageCont .image {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -306,7 +304,7 @@
   align-items: center;
   background-color: aliceblue;
 }
-.openChat .openChatHead .chatHeadInfo {
+.openChatHead .chatHeadInfo {
   /* border: 1px solid blue; */
   width: 60%;
   display: flex;
@@ -314,7 +312,7 @@
   align-items: center;
   height: 3.5rem;
 }
-.openChat .openChatHead .chatHeadInfo .title {
+.openChatHead .chatHeadInfo .title {
   display: flex;
   flex-direction: column;
   /* border: 1px solid blue; */
@@ -323,12 +321,12 @@
   height: 3rem;
   margin-left: 1rem;
 }
-.openChat .openChatHead .chatHeadInfo .title p {
+.openChatHead .chatHeadInfo .title p {
 }
-.openChat .openChatHead .chatHeadInfo .title div {
+.openChatHead .chatHeadInfo .title div {
   font-size: 0.8rem;
 }
-.openChat .openChatHead .icons {
+.openChatHead .icons {
   width: 7rem;
   height: 3.5rem;
   /* border: 1px solid rgb(79, 79, 99); */
@@ -337,7 +335,7 @@
   align-items: center;
   margin-left: auto;
 }
-.openChat .openChatHead .icons .searchIcon {
+.openChatHead .icons .searchIcon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -346,7 +344,7 @@
   justify-content: center;
   align-items: center;
 }
-.openChat .openChatHead .icons .optionIcon {
+.openChatHead .icons .optionIcon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -356,14 +354,14 @@
   align-items: center;
 }
 /* message */
-
-.openChat .msgSpace {
+/* 
+ .msgSpace {
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
   background-color: #e3e3e3;
   background-image: url("../img/bgDefault2.png");
-}
-.openChat .msgBar {
+} */
+.msgBar {
   width: 100%;
   height: 3.875rem;
   background-color: #f0f0f0;
@@ -373,7 +371,7 @@
   /* margin-top: 1rem; */
 }
 
-.openChat .msgBar .emojiIcons {
+.msgBar .emojiIcons {
   width: 13%;
   height: 3rem;
   /* border: 1px solid blue; */
@@ -383,7 +381,7 @@
   align-items: center;
 }
 
-.openChat .msgBar .emojiIcons .emojiCont {
+.msgBar .emojiIcons .emojiCont {
   width: 50px;
   height: 50px;
   /* border: 1px solid blue; */
@@ -391,7 +389,7 @@
   justify-content: center;
   align-items: center;
 }
-.openChat .msgBar .emojiIcons .emoji {
+.msgBar .emojiIcons .emoji {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -400,7 +398,7 @@
   justify-content: center;
   align-items: center;
 }
-.openChat .msgBar .emojiIcons .attachmentCont {
+.msgBar .emojiIcons .attachmentCont {
   width: 50px;
   height: 50px;
   /* border: 1px solid blue; */
@@ -410,7 +408,7 @@
   position: relative;
 }
 
-.openChat .msgBar .emojiIcons .attachment {
+.msgBar .emojiIcons .attachment {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -420,7 +418,7 @@
   align-items: center;
 }
 
-.openChat .msgBar .msgInputCont {
+.msgBar .msgInputCont {
   width: 80%;
   height: 50px;
   /* border: 1px solid blue; */
@@ -428,7 +426,7 @@
   justify-content: center;
   align-items: center;
 }
-.openChat .msgBar .msgInput {
+.msgBar .msgInput {
   width: 100%;
   height: 2.625rem;
   border-radius: 1.25rem;
@@ -438,14 +436,14 @@
   border: none;
   padding-left: 1rem;
 }
-.openChat .msgBar .msgInput::placeholder {
+.msgBar .msgInput::placeholder {
   color: #9b9b9b;
   font-size: 0.9rem;
 }
-.openChat .msgBar .msgInput:focus {
+.msgBar .msgInput:focus {
   outline: none;
 }
-.openChat .msgBar .recorderCont {
+.msgBar .recorderCont {
   width: 50px;
   height: 50px;
   /* border: 1px solid blue; */
@@ -454,7 +452,7 @@
   align-items: center;
 }
 
-.openChat .msgBar .recorder {
+.msgBar .recorder {
   width: 40px;
   height: 40px;
   border-radius: 50%;
