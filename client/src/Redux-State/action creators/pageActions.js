@@ -15,6 +15,7 @@ import {
   TOGGLE_HELP,
   TOGGLE_NOTIFICATION,
   TOGGLE_MSG_SEARCH,
+  TOGGLE_GROUP_INFO,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -50,6 +51,13 @@ export function toggleMsgSearch() {
   return {
     type: TOGGLE_MSG_SEARCH,
     info: "this action  will display the message search slide ",
+  };
+}
+// ACTION FOR GROUP INFO
+export function toggleGroupInfo() {
+  return {
+    type: TOGGLE_GROUP_INFO,
+    info: "this action  will display the group information ",
   };
 }
 

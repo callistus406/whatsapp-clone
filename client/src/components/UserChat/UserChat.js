@@ -1,13 +1,5 @@
 import React, { useRef, useCallback, useEffect } from "react";
-import styled from "styled-components";
-
-// import ClickAwayListener from "@mui/material/ClickAwayListener";
-// import Grow from "@mui/material/Grow";
-// import Paper from "@mui/material/Paper";
-// import Popper from "@mui/material/Popper";
-// import MenuItem from "@mui/material/MenuItem";
-// import useContextMenu from "../Tests/useContextMenu";
-import { style } from "../Tests/style.css";
+import { groupDialog } from "../../Global variables/variables";
 import "react-contexify/dist/ReactContexify.css";
 import {
   Menu,
@@ -34,21 +26,6 @@ function UserChat(props) {
     id: MENU_ID,
   });
 
-  const groupDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Exit group",
-    "Pin chat",
-    "Mark as read",
-  ];
-  const contactDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Delete chat",
-    "Pin chat",
-    "Mark as read",
-  ];
-
   function handleContextMenu(event) {
     event.preventDefault();
     show(event, {
@@ -58,7 +35,7 @@ function UserChat(props) {
     });
   }
 
-  const handleItemClick = ({ event, props }) => console.log(event, props);
+  // const handleItemClick = ({ event, props }) => console.log(event, props);
 
   return (
     <StyledUserChatLayout onContextMenu={handleContextMenu}>
@@ -78,7 +55,7 @@ function UserChat(props) {
       </StyledUserChatCont>
       <Menu id={MENU_ID} style={{ width: "12rem" }}>
         {groupDialog.map((item) => {
-          return <StyledItem onClick={handleItemClick}>{item}</StyledItem>;
+          return <StyledItem key={item.id}>{item.text}</StyledItem>;
         })}
       </Menu>
       <div className="borderBottom"></div>
@@ -86,6 +63,6 @@ function UserChat(props) {
   );
 }
 
-export default UserChat;
+export default React.memo(UserChat);
 
 // EBEBEB

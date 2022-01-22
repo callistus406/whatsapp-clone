@@ -279,20 +279,23 @@
   background: #ededed;
   width: 100%;
   height: 3.6rem;
-  /* border-bottom: 1px solid blue; */
-  display: flex;
+  border: 1px solid blue;
+  display: grid;
+  grid-template-columns: 1fr 5fr 2fr;
+
   cursor: pointer;
-  display: flex;
+
   align-items: center;
 }
 
 .openChatHead .imageCont {
   width: 50px;
   height: 50px;
-  /* border: 1px solid blue; */
+  border: 1px solid blue;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* flex: 0.2; */
 }
 .openChatHead .imageCont .image {
   width: 40px;
@@ -315,11 +318,12 @@
 .openChatHead .chatHeadInfo .title {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid blue; */
+  border: 1px solid blue;
   width: 100%;
   justify-content: space-between;
   height: 3rem;
   margin-left: 1rem;
+  /* flex: 100%; */
 }
 .openChatHead .chatHeadInfo .title p {
 }
@@ -329,10 +333,11 @@
 .openChatHead .icons {
   width: 7rem;
   height: 3.5rem;
-  /* border: 1px solid rgb(79, 79, 99); */
+  border: 1px solid rgb(79, 79, 99);
   display: flex;
   justify-content: space-around;
   align-items: center;
+  /* flex: 5%; */
   margin-left: auto;
 }
 .openChatHead .icons .searchIcon {

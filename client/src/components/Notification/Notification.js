@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import {
+  // import connect from '../Home/MessageBox';
   StyledContainer,
   StyledNavArrow,
   StyledArrowBackIcon,
@@ -12,6 +13,13 @@ import {
 } from "./Notification.style";
 
 export function Notification({ handleClickAction, toggle }) {
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    countRef.current = countRef.current + 1;
+
+    console.log("Notification logged " + countRef.current);
+  });
   const styles = customStyles();
 
   const [checked, setChecked] = React.useState({
@@ -57,7 +65,6 @@ export function Notification({ handleClickAction, toggle }) {
               //   className={styles.text}
               control={
                 <Checkbox
-                  defaultChecked
                   checked={checked.sounds}
                   onChange={handleChange("sounds")}
                   style={styles.checkbox}
@@ -71,7 +78,6 @@ export function Notification({ handleClickAction, toggle }) {
             <StyledFormControlLabel
               control={
                 <Checkbox
-                  defaultChecked
                   checked={checked.desktopAlert}
                   onChange={handleChange("desktopAlert")}
                   style={styles.checkbox}
@@ -88,7 +94,6 @@ export function Notification({ handleClickAction, toggle }) {
             <StyledFormControlLabel
               control={
                 <Checkbox
-                  defaultChecked
                   checked={checked.showPreview}
                   onChange={handleChange("showPreview")}
                   style={styles.checkbox}
@@ -102,7 +107,6 @@ export function Notification({ handleClickAction, toggle }) {
               control={
                 <Checkbox
                   style={styles.checkbox}
-                  defaultChecked
                   checked={checked.cancelAllDesktopNotification}
                   onChange={handleChange("cancelAllDesktopNotification")}
                 />

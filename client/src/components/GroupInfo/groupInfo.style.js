@@ -11,7 +11,7 @@ export const StyledContainer = styled.div`
   right: 0;
 
   overflow-x: hidden;
-  transition: 0.1s;
+  transition: 0.2s;
 `;
 
 export const StyledNavArrow = styled.div`

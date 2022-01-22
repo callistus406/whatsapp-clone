@@ -62,11 +62,11 @@ function UserSettings(props) {
     props.toggleKeyboardShortcuts,
     props.toggleHelp,
   ];
-  console.log(props);
+  // console.log(props);
   const [open, setOpen] = React.useState(false);
-  console.log(open);
+  // console.log(open);
   const handleClickOpen = () => {
-    console.log("ewewe");
+    // console.log("ewewe");
     // setOpen(true);
   };
 
@@ -77,7 +77,7 @@ function UserSettings(props) {
     return;
   }
   function SettingsOptions({ icon, text, clickAction }) {
-    console.log(clickAction);
+    // console.log(clickAction);
     return (
       <div className="settingsOption" onClick={clickAction}>
         <div className="icon">{icon}</div>

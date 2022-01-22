@@ -27,7 +27,7 @@ import BlockedContacts from "../Blocked Contacts/BlockedContacts";
 import Status from "../Status/Status";
 import "react-contexify/dist/ReactContexify.css";
 import SearchContact from "../SearchContact/SearchContact";
-
+import { groupDialog } from "../../Global variables/variables";
 import {
   Menu as ContexifyMenu,
   Item,
@@ -47,6 +47,7 @@ import {
   settingsToggle,
   toggleMsgSearch,
   logout,
+  toggleGroupInfo,
 } from "../../Redux-State/action creators/pageActions";
 import {
   StyledSpeedDial,
@@ -75,19 +76,32 @@ import {
   RecorderIcon,
   Attachment,
   StickerIcon,
+  ProfileIcon,
 } from "./HomeIcons";
+import GroupInfo from "../GroupInfo/GroupInfo";
+import MessageBox from "./MessageBox";
+import HomeContent from "./HomeComp/HomeContent";
 const actions = [
-  { icon: <InsertPhotoIcon />, name: "Share", class: "speedDial-contact" },
+  { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
-  { icon: <StickerIcon />, name: "Save", class: "speedDial-sticker" },
-  { icon: <CameraAltIcon />, name: "Save", class: "speedDial-camera" },
-  { icon: <InsertDriveFileIcon />, name: "Save", class: "speedDial-document " },
-  { icon: <PersonIcon />, name: "Copy", class: "speedDial-photo" },
+  { icon: <StickerIcon />, name: "sicker", class: "speedDial-sticker" },
+  { icon: <CameraAltIcon />, name: "camera", class: "speedDial-camera" },
+  { icon: <InsertDriveFileIcon />, name: "file", class: "speedDial-document " },
+  { icon: <PersonIcon />, name: "contact", class: "speedDial-photo" },
 ];
 
 // Menu;
-function Content({ homeProps, toggle }) {
-  console.log(homeProps.displayProfileContainer);
+const Content = React.memo(function Content({
+  homeProps: {
+    profileToggle,
+    displayChatContainer,
+    displayStatusContainer,
+    statusToggle,
+    newChatToggle,
+  },
+  toggle,
+}) {
+  // console.log(homeProps);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const onClickHandler = (event) => {
@@ -96,29 +110,15 @@ function Content({ homeProps, toggle }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <div className="topHeader">
       <div className="profileDisplay">
-        <div className="profileIcon" onClick={homeProps.profileToggle}>
-          <img
-            className="avatarImage"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTApbxj4499GJJWMYvKUVnzMUBJBt1b_Aob0A&usqp=CAU"
-            alt=""
-            // srcset=""
-          />
-        </div>
+        <ProfileIcon />
         <div className="profileActions">
-          <StyledActionIcons
-            toggle={homeProps.displayStatusContainer}
-            onClick={homeProps.statusToggle}
-          >
+          <StyledActionIcons>
             <StatusIcon />
           </StyledActionIcons>
-          <StyledActionIcons
-            toggle={homeProps.displayChatContainer}
-            onClick={homeProps.newChatToggle}
-          >
+          <StyledActionIcons>
             <MessageIcon />
           </StyledActionIcons>
 
@@ -182,13 +182,12 @@ function Content({ homeProps, toggle }) {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <StyledMenuItem onClick={homeProps.newGroupToggle}>
+              {/* <StyledMenuItem onClick={homeProps.newGroupToggle}>
                 New Group
               </StyledMenuItem>
               <StyledMenuItem onClick={homeProps.archiveToggle}>
                 Archive
               </StyledMenuItem>
-              {/* <Divider /> */}
               <StyledMenuItem onClick={homeProps.starredMsgsToggle}>
                 Stared messages
               </StyledMenuItem>
@@ -197,7 +196,7 @@ function Content({ homeProps, toggle }) {
               </StyledMenuItem>
               <StyledMenuItem onClick={homeProps.logout}>
                 Log out
-              </StyledMenuItem>
+              </StyledMenuItem> */}
             </Menu>
           </div>
         </div>
@@ -227,11 +226,20 @@ function Content({ homeProps, toggle }) {
       </CenterDivContent>
     </div>
   );
-}
+});
 
 function Home(props) {
+  const countRef = useRef(0);
+  const msgCont = useRef();
   const [open, setOpen] = useState(false);
-  console.log(props);
+  useEffect(() => {
+    countRef.current = countRef.current + 1;
+    msgCont.current = document.getElementById("margin");
+    // console.log(msgCont);
+    console.log(
+      "home -0-0 rendered..............." + countRef.current + "---times"
+    );
+  });
   function clickHandler() {
     setOpen(!open);
   }
@@ -240,19 +248,13 @@ function Home(props) {
     <div className="homeParentCont">
       <div className="layoutContainer">
         {/* {props.displayProfileContainer ? ( */}
-        <UserProfile
-          toggle={props.displayProfileContainer}
-          handleClickAction={props.profileToggle}
-        />
-        <Status
-          toggle={props.displayStatusContainer}
-          handleClickAction={props.statusToggle}
-        />
 
-        <NewChat
-          toggle={props.displayChatContainer}
-          handleClickAction={props.newChatToggle}
-        />
+        <UserProfile />
+        <Status />
+        <NewChat />
+        {/*
+        
+
         <NewGrp
           toggle={props.displayCreateNewGrp}
           handleClickAction={props.newGroupToggle}
@@ -268,118 +270,35 @@ function Home(props) {
         <UserSettings
           toggle={props.displaySettingsLayout}
           handleClickAction={props.settingsToggle}
-        />
-        <SearchContact
-          toggle={props.displayMsgSearchLayout}
-          handleClickAction={props.toggleMsgSearch}
-        />
+        /> */}
+        {/* <GroupInfo
+          toggle={props.displayGroupInfoLayout}
+          handleClickAction={props.toggleGroupInfo}
+        /> */}
+        <SearchContact />
 
         <div className="column1">
-          <Content homeProps={props} />
+          <HomeContent />
 
           <StyledContactsCol
             id="style-1"
             width="24rem"
             toggle={props.displayMsgSearchLayout}
           >
-            <UserChat passMenu="qwerty" />
+            {/* <UserChat passMenu="qwerty" />
             <UserChat passMenu="qwerty1" />
             <UserChat passMenu="qwerty2" />
             <UserChat passMenu="qwerty3" />
             <UserChat passMenu="qwertyy" />
             <UserChat passMenu="qwerty1y" />
             <UserChat passMenu="qwerty2e" />
-            <UserChat passMenu="qwerty3e" />
+            <UserChat passMenu="qwerty3e" /> */}
           </StyledContactsCol>
         </div>
 
         {/* <div className="chatColCont"> */}
-        <StyledOpenChat margin={props.displayMsgSearchLayout}>
-          <div className="openChatHead">
-            <div className="imageCont">
-              <div className="image"></div>
-            </div>
-            <div className="chatHeadInfo">
-              <div className="title">
-                <p>Nigeria News</p>
-                <div>
-                  {" "}
-                  <span> friend 1</span> <span> friend 2</span>{" "}
-                  <span> friend 3</span>
-                  <span> friend 4</span>
-                  <span> friend 5</span>{" "}
-                </div>
-              </div>
-            </div>
-            <div className="icons">
-              <div className="searchIcon">
-                <SearchIcon click={props.toggleMsgSearch} />
-              </div>
-              <Options className="optionIcon">
-                <MsgOptionsIcon />
-              </Options>
-            </div>
-          </div>
-          <Message id="qwerty" />
-          <div className="msgBar">
-            <div className="emojiIcons">
-              <div className="emojiCont">
-                <div className="emoji">
-                  <EmojiIcon />
-                </div>
-              </div>
-              <div className="attachmentCont">
-                <StyledBox
-                  sx={{
-                    // height: 350,
-                    transform: "translateZ(0px)",
-                    flexGrow: 1,
-                  }}
-                >
-                  <StyledSpeedDial
-                    ariaLabel="SpeedDial openIcon example"
-                    sx={{
-                      position: "absolute",
-                      bottom: -25,
-                      left: -9,
-                      boxShadow: 0,
-                    }}
-                    icon={<Attachment />}
-                    onClick={clickHandler}
-                    open={open}
-                  >
-                    {/* <div className="pin"></div>  */}
-                    {actions.map((action) => (
-                      <SpeedDialAction
-                        key={action.name}
-                        icon={action.icon}
-                        tooltipTitle={action.name}
-                        className={`${action.class} `}
-                        disableRipple={true}
-                      />
-                    ))}
-                  </StyledSpeedDial>
-                </StyledBox>
-                <div className="attachment"></div>
-              </div>
-            </div>
-
-            <div className="msgInputCont">
-              <input
-                type="text"
-                className="msgInput"
-                placeholder="Type a message"
-              />
-            </div>
-
-            <div className="recorderCont">
-              <div className="recorder">
-                <RecorderIcon />
-              </div>
-            </div>
-          </div>
-        </StyledOpenChat>
-
+        {/* here */}
+        <MessageBox />
         <div className="">
           {/* commented */}
           {/* <div className="chatColDiv">
@@ -403,18 +322,20 @@ function Home(props) {
 
 function mapStateToProps(state) {
   return {
-    displayProfileContainer: state.profile.displayProfileContainer,
-    displayStatusContainer: state.status.displayStatusContainer,
-    displayChatContainer: state.newChat.displayChatContainer,
+    // displayProfileContainer: state.profile.displayProfileContainer,
+    // displayStatusContainer: state.status.displayStatusContainer,
+    // displayChatContainer: state.newChat.displayChatContainer,
     // displayOptionsContainer: state.options.displayChatContainer,
     // search msg state
-    displayMsgSearchLayout: state.searchMsg.displayMsgSearchLayout,
+    // displayMsgSearchLayout: state.searchMsg.displayMsgSearchLayout,
+    // group info state
+    displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     // options state
-    displayCreateNewGrp: state.newGroup.displayNewGroup,
-    displayArchiveLayout: state.archive.displayArchive,
-    displayStarredMgsLayout: state.starredMsgs.displayStarredMsgs,
-    displaySettingsLayout: state.settings.displaySettings,
-    logout: state.options.logout,
+    // displayCreateNewGrp: state.newGroup.displayNewGroup,
+    // displayArchiveLayout: state.archive.displayArchive,
+    // displayStarredMgsLayout: state.starredMsgs.displayStarredMsgs,
+    // displaySettingsLayout: state.settings.displaySettings,
+    // logout: state.options.logout,
     // settings sub menu
     // displayNotification: state.notification.displayNotification,
     // displayTheme: state.theme.displayTheme,
@@ -426,18 +347,20 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    profileToggle: () => dispatch(profileToggle()),
-    statusToggle: () => dispatch(statusToggle()),
-    newChatToggle: () => dispatch(newChatToggle()),
+    // profileToggle: () => dispatch(profileToggle()),
+    // statusToggle: () => dispatch(statusToggle()),
+    // newChatToggle: () => dispatch(newChatToggle()),
     optionsToggle: () => dispatch(optionsToggle()),
     // search msg action
-    toggleMsgSearch: () => dispatch(toggleMsgSearch()),
+    // toggleMsgSearch: () => dispatch(toggleMsgSearch()),
+    // search group info
+    toggleGroupInfo: () => dispatch(toggleGroupInfo()),
     // sub menu actions
-    newGroupToggle: () => dispatch(newGroupToggle()),
-    archiveToggle: () => dispatch(archiveToggle()),
-    starredMsgsToggle: () => dispatch(starredMsgsToggle()),
-    settingsToggle: () => dispatch(settingsToggle()),
-    logout: () => dispatch(logout()),
+    // newGroupToggle: () => dispatch(newGroupToggle()),
+    // archiveToggle: () => dispatch(archiveToggle()),
+    // starredMsgsToggle: () => dispatch(starredMsgsToggle()),
+    // settingsToggle: () => dispatch(settingsToggle()),
+    // logout: () => dispatch(logout()),
     // settings sub menu actions
     // toggleNotification: () => dispatch(toggleNotification()),
     // toggleTheme: () => dispatch(toggleTheme()),
@@ -454,21 +377,6 @@ function Message(props) {
     id: MENU_ID,
   });
 
-  const groupDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Exit group",
-    "Pin chat",
-    "Mark as read",
-  ];
-  const contactDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Delete chat",
-    "Pin chat",
-    "Mark as read",
-  ];
-
   function handleContextMenu(event) {
     event.preventDefault();
     show(event, {
@@ -482,7 +390,11 @@ function Message(props) {
     <StyledMessageSpace onContextMenu={handleContextMenu}>
       <Menu id={MENU_ID} style={{ width: "12rem" }}>
         {groupDialog.map((item) => {
-          return <StyledItem onClick={handleItemClick}>{item}</StyledItem>;
+          return (
+            <StyledItem key={item.id} onClick={handleItemClick}>
+              {item.text}
+            </StyledItem>
+          );
         })}
       </Menu>
     </StyledMessageSpace>
@@ -493,21 +405,6 @@ function Options(props) {
   const { show } = useContextMenu({
     id: MENU_ID,
   });
-
-  const groupDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Exit group",
-    "Pin chat",
-    "Mark as read",
-  ];
-  const contactDialog = [
-    "Archive chat",
-    "Mute notification",
-    "Delete chat",
-    "Pin chat",
-    "Mark as read",
-  ];
 
   function handleContextMenu(event) {
     event.preventDefault();
@@ -522,10 +419,14 @@ function Options(props) {
     <StyledOptions onContextMenu={handleContextMenu}>
       <Menu id={MENU_ID} style={{ width: "12rem" }}>
         {groupDialog.map((item) => {
-          return <StyledItem onClick={handleItemClick}>{item}</StyledItem>;
+          return (
+            <StyledItem key={item.id} onClick={handleItemClick}>
+              {item.text}
+            </StyledItem>
+          );
         })}
       </Menu>
     </StyledOptions>
   );
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));

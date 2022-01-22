@@ -40,7 +40,6 @@ const actions = [
 
 export default function OpenIconSpeedDial() {
   const [open, setOpen] = useState(false);
-  console.log(open);
   function clickHandler() {
     setOpen(!open);
   }

@@ -26,7 +26,7 @@ export const StyledNavArrow = styled.div`
   align-items: center;
   ${"" /* justify-content: center; */}
   color: #fff;
-  display: ${(props) => (props.display ? "flex" : "none")};
+  display: ${(props) => (props.toggle ? "flex" : "none")};
 
   p {
     margin-left: 2rem;

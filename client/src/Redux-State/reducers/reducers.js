@@ -15,6 +15,7 @@ import {
   TOGGLE_CHAT_WALLPAPER,
   TOGGLE_BLOCKED_CONTACTS,
   TOGGLE_MSG_SEARCH,
+  TOGGLE_GROUP_INFO,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -24,6 +25,8 @@ const initialState = {
   displayOptionsContainer: false,
   // this state is for msg search bar
   displayMsgSearchLayout: false,
+  // this state is for group info
+  displayGroupInfoLayout: false,
 };
 
 export function displayProfileReducer(state = initialState, action) {
@@ -77,6 +80,18 @@ export function displayMsgSearchBarReducer(state = initialState, action) {
       return {
         ...state,
         displayMsgSearchLayout: !state.displayMsgSearchLayout,
+      };
+    default:
+      return state;
+  }
+}
+// reducer for group info
+export function displayGroupInfo(state = initialState, action) {
+  switch (action.type) {
+    case TOGGLE_GROUP_INFO:
+      return {
+        ...state,
+        displayGroupInfoLayout: !state.displayGroupInfoLayout,
       };
     default:
       return state;

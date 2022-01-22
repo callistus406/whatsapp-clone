@@ -132,7 +132,7 @@ export const StyledItem = styled(Item)`
 export const StyledOpenChat = styled.div`
   width: 100%;
   height: 100vh;
-  margin-right: ${(props) => (props.margin ? "23rem" : "0rem")};
+  margin-right: ${(props) => (props.toggle ? "23rem" : "0rem")};
   ${"" /* border: 1px solid blue; */}
   transition: 0.2s;
 `;

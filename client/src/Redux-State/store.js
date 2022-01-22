@@ -17,6 +17,7 @@ import {
   blockedContactsReducer,
   keyboardShortcutsReducer,
   helpReducer,
+  displayGroupInfo,
   displayMsgSearchBarReducer,
 } from "./reducers/reducers";
 
@@ -27,6 +28,8 @@ const rootReducer = combineReducers({
   options: displayOptionsReducer,
   // from search msg
   searchMsg: displayMsgSearchBarReducer,
+  // from group info
+  groupInfo: displayGroupInfo,
   // from options
   newGroup: newGroupReducer,
   archive: archiveReducer,
@@ -41,4 +44,4 @@ const rootReducer = combineReducers({
   keyboardShortCuts: keyboardShortcutsReducer,
   help: helpReducer,
 });
-export const store = createStore(rootReducer, applyMiddleware(logger));
+export const store = createStore(rootReducer);

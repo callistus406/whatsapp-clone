@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import {
   StyledContainer,
   StyleProfileBox,
@@ -10,15 +10,24 @@ import {
   StyledProfileHeader,
   StyledNavArrow,
 } from "./UserProfile.styles";
-function UserProfile({ handleClickAction, toggle }) {
-  console.log(handleClickAction);
+import { profileToggle } from "../../Redux-State/action creators/pageActions";
+import { connect } from "react-redux";
+
+function UserProfile(props) {
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    countRef.current = countRef.current + 1;
+
+    console.log("profile logged " + countRef.current);
+  });
   return (
     <div className="userProfileCont">
-      <StyledContainer toggle={toggle} width="28rem">
+      <StyledContainer toggle={props.displayProfileContainer} width="28rem">
         <StyledProfileHeader>
           <StyledNavArrow>
             {/* profile toggle */}
-            <StyledArrowBackIcon onClick={handleClickAction} />
+            <StyledArrowBackIcon onClick={props.profileToggle} />
             <p>Profile</p>
           </StyledNavArrow>
         </StyledProfileHeader>
@@ -89,6 +98,23 @@ function UserProfile({ handleClickAction, toggle }) {
     </div>
   );
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    profileToggle: () => dispatch(profileToggle()),
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    displayProfileContainer: state.profile.displayProfileContainer,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(React.memo(UserProfile));
 // function mapStateToProps(state) {
 //   return {
 //     displayProfileContainer: state.displayProfileContainer,
@@ -99,6 +125,4 @@ function UserProfile({ handleClickAction, toggle }) {
 //     displayProfile: () => dispatch(displayProfile()),
 //   };
 // }
-
-export default UserProfile;
 // className={props.toggle ? "userProfileCont" : ""}
