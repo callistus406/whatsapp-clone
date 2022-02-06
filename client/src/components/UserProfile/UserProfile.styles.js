@@ -10,7 +10,7 @@ export const StyledContainer = styled.div`
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #fff;
-  overflow-x: hidden; /* Disable horizontal scroll */
+  overflow-x: hidden;
   transition: 0.5s;
 
   .content {

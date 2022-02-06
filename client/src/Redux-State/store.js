@@ -19,6 +19,7 @@ import {
   helpReducer,
   displayGroupInfo,
   displayMsgSearchBarReducer,
+  selectContactReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -43,5 +44,6 @@ const rootReducer = combineReducers({
   blockedContacts: blockedContactsReducer,
   keyboardShortCuts: keyboardShortcutsReducer,
   help: helpReducer,
+  selectContact: selectContactReducer,
 });
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(logger));

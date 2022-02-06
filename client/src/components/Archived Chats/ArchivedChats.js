@@ -1,9 +1,6 @@
 import React from "react";
-import EditIcon from "@mui/icons-material/Edit";
 import { connect } from "react-redux";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { makeStyles } from "@mui/styles";
+
 import {
   StyledContainer,
   StyledNavArrow,
@@ -11,22 +8,22 @@ import {
   StyledArchiveHeader,
   StyledArchiveContent,
 } from "./ArchivedChats.styles";
-
-function ArchivedChats({ handleClickAction, toggle }) {
+import { archiveToggle } from "../../Redux-State/action creators/pageActions.js";
+function ArchivedChats(props) {
   return (
     <div>
-      <StyledContainer toggle={toggle} width="28rem">
+      <StyledContainer toggle={props.displayArchiveLayout} width="28rem">
         <StyledArchiveHeader>
           <div className="navArrow">
-            <StyledNavArrow display={toggle}>
+            <StyledNavArrow display={props.displayArchiveLayout}>
               <div className="">
-                <StyledArrowBackIcon onClick={handleClickAction} />
+                <StyledArrowBackIcon onClick={props.archiveToggle} />
               </div>
               <p>Archived Chats</p>
             </StyledNavArrow>
           </div>
         </StyledArchiveHeader>
-        <StyledArchiveContent toggle={toggle} width="28rem">
+        <StyledArchiveContent toggle={props.displayArchiveLayout} width="28rem">
           <div className="archiveIcon">
             <ArchiveIcon />
           </div>
@@ -47,4 +44,14 @@ function ArchiveIcon() {
   );
 }
 
-export default ArchivedChats;
+function mapStateToProps(state) {
+  return {
+    displayArchiveLayout: state.archive.displayArchive,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    archiveToggle: () => dispatch(archiveToggle()),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ArchivedChats);

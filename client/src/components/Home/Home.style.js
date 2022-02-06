@@ -6,6 +6,8 @@ import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
 import Box from "@mui/material/Box";
 import MenuList from "@mui/material/MenuList";
 import Image from "../img/bgDefault2.png";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import {
   Menu,
   Item,
@@ -15,11 +17,13 @@ import {
   useContextMenu,
 } from "react-contexify";
 export const StyledSpeedDial = styled(SpeedDial)`
-  .MuiFab-root {
-    box-shadow: none;
-    height: 50px !important;
-    width: 50px !important;
-    color: white;
+  && {
+    .MuiFab-root {
+      box-shadow: none;
+      height: 45px !important;
+      width: 45px !important;
+      color: white;
+    }
   }
 `;
 export const StyledSpan = styled.span`
@@ -43,21 +47,24 @@ export const StyledIcon = {
 };
 
 export const StyledInputSearch = styled.input`
-  width: 60%;
-  height: 2rem;
-  border-radius: 18px;
-  background-color: #fff;
+  width: 90%;
+  height: 2.1rem;
   border: none;
-  ${"" /* position: relative; */}
-  ${"" /* padding-right: 4px; */}
-    &:focus {
+  border-radius: 7rem;
+  font-size: 0.95rem;
+  color: #737373;
+  padding-left: 3.5rem;
+  padding-right: 1rem;
+  &:focus {
     outline: none;
   }
 `;
 export const StyledSearchIcon = styled(SearchIcon)`
-  ${"" /* color: #fff; */}
-  position: absolute;
-  left: 110px;
+  && {
+    position: absolute;
+    margin-left: -14%;
+    color: #5a6064;
+  }
 `;
 
 export const StyledNotificationIcon = styled(NotificationsOffIcon)`
@@ -105,6 +112,85 @@ export const StyledMessageSpace = styled.div`
   height: calc(100vh - (3.6rem + 3.875rem));
   ${"" /* background-color: pink; */}
   background-image: url(${Image});
+
+  ${"" /* .......................... */}
+
+  }
+`;
+
+export const StyledMessageCont = styled.div`
+  width: 100%;
+  height: calc(100vh - (3.6rem + 3.875rem));
+
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+
+  z-index: 1; /* Stay on top */
+
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar-track {
+    ${"" /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
+    ${"" /* border-radius: 10px; */}
+    background-color: #eae6df transparent transparent transparentt;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: #eae6df;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 10px;
+
+    border-radius: 10px;
+    ${"" /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
+    background-color: #BDBCB8;
+  }
+`;
+
+export const StyledMsgInfo = styled.div`
+  margin-left: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 0.5rem;
+  div {
+    width: 40%;
+    ${"" /* border: 1px solid blue; */}
+  }
+  .arrowCont {
+    border: 1px solid blue;
+    position: relative;
+    .keyBoardArrow {
+      ${"" /* position: absolute; */}
+    }
+  }
+`;
+
+export const StyledKeyBoardArrow = styled.span`
+  display: ${(props) => (props.hide ? "flex" : "none")};
+`;
+export const StyledMsgInfoIcon = styled(KeyboardArrowDownIcon)`
+  && {
+    position: absolute;
+    margin-left: -1.2rem;
+    margin-top: -0.6rem;
+    color: #a4b0b8;
+  }
+`;
+export const StyledMsgName = styled.span`
+  font-size: 0.8rem;
+  color: #acafb1;
+  margin-left: 0.5rem;
+  border-bottom: ${(props) => (props.border ? " 1px solid #363a3c" : "none")};
+`;
+export const StyledMsgNumber = styled.span`
+  font-size: 0.8rem;
+  color: #acafb1;
+  margin-left: 0.5rem;
+  border-bottom: ${(props) => (props.border ? " 1px solid #363a3c" : "none")};
 `;
 export const StyledOptions = styled.div`
   width: 30px;
@@ -125,6 +211,52 @@ export const StyledItem = styled(Item)`
 
     .react-contexify {
       min-width: 20rem;
+    }
+  }
+`;
+export const StyledSearchBarContainer = styled.div`
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  .inputSearch {
+    width: 25rem;
+    height: 2.1rem;
+    border: none;
+    border-radius: 7rem;
+    font-size: 0.95rem;
+    color: #737373;
+    padding-left: 3.5rem;
+    padding-right: 1rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  .searchIconCont {
+    position: absolute;
+    margin-left: -21rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .MuiSvgIcon-root {
+      width: 1.2rem;
+      height: 1.2rem;
+      /* display: none; */
+    }
+  }
+  .clearIconCont {
+    position: absolute;
+    margin-left: 21rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .MuiSvgIcon-root {
+      color: #666c6f;
+
+      width: 1.2rem;
+      height: 1.2rem;
     }
   }
 `;

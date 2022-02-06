@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import {
-  // import connect from '../Home/MessageBox';
   StyledContainer,
   StyledNavArrow,
   StyledArrowBackIcon,
@@ -12,7 +11,9 @@ import {
   StyledNotificationContent,
 } from "./Notification.style";
 
-export function Notification({ handleClickAction, toggle }) {
+import { toggleNotification } from "../../Redux-State/action creators/pageActions";
+import { connect } from "react-redux";
+export function NotificationComponent(props) {
   const countRef = useRef(0);
 
   useEffect(() => {
@@ -47,12 +48,16 @@ export function Notification({ handleClickAction, toggle }) {
 
   return (
     <div className="notification">
-      <StyledContainer toggle={toggle} width="28rem" id="mySidenav">
+      <StyledContainer
+        toggle={props.displayNotification}
+        width="28rem"
+        id="mySidenav"
+      >
         <StyledNotificationHeader>
           <div className="navArrow">
-            <StyledNavArrow display={toggle}>
+            <StyledNavArrow display={props.displayNotification}>
               <div className="">
-                <StyledArrowBackIcon onClick={handleClickAction} />
+                <StyledArrowBackIcon onClick={props.toggleNotification} />
               </div>
               <p>Notifications</p>
             </StyledNavArrow>
@@ -120,20 +125,18 @@ export function Notification({ handleClickAction, toggle }) {
   );
 }
 
-// <div className="notification">
-// <StyledContainer toggle={props.toggle} width="28rem">
-//   <div className="notificationHeader">
-//     <div className="navArrow">
-//       <StyledNavArrow display={props.toggle}>
-//         <div className="">
-//           <StyledArrowBackIcon
-//             onClick={props.clickAction.profileToggle}
-//           />
-//         </div>
-//         <p>Notifications</p>
-//       </StyledNavArrow>
-//     </div>
-//   </div>
-//   .notification
-// </StyledContainer>
-// </div>
+function mapStateToProps(state) {
+  return {
+    displayNotification: state.notification.displayNotification,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleNotification: () => dispatch(toggleNotification()),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotificationComponent);

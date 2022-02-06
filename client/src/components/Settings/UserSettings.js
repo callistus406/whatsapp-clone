@@ -7,11 +7,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { connect } from "react-redux";
-import { Notification as NotificationComponent } from "../Notification/Notification";
+import NotificationComponent from "../Notification/NotificationComponent";
 import { Help as HelpComponent } from "../Help/Help";
 import BlockedContacts from "../Blocked Contacts/BlockedContacts";
 import SelectTheme from "../SelectTheme/SelectTheme";
-
+// import {optionTex}
+import { settingsToggle } from "../../Redux-State/action creators/pageActions";
 import {
   toggleNotification,
   toggleTheme,
@@ -76,25 +77,24 @@ function UserSettings(props) {
   function returnNothing() {
     return;
   }
-  function SettingsOptions({ icon, text, clickAction }) {
-    // console.log(clickAction);
+  function SettingsOptions(props) {
     return (
-      <div className="settingsOption" onClick={clickAction}>
-        <div className="icon">{icon}</div>
+      <div className="settingsOption" onClick={props.clickAction}>
+        <div className="icon">{props.icon}</div>
         <div className="textCont">
-          <p>{text}</p>
+          <p>{props.text}</p>
         </div>
       </div>
     );
   }
   return (
     <div className="settings">
-      <StyledContainer toggle={props.toggle} width="28rem">
+      <StyledContainer toggle={props.displaySettingsLayout} width="28rem">
         <div className="settingsHeader">
           <div className="navArrow">
-            <StyledNavArrow display={props.toggle}>
+            <StyledNavArrow display={props.displaySettingsLayout}>
               <div className="">
-                <StyledArrowBackIcon onClick={props.handleClickAction} />
+                <StyledArrowBackIcon onClick={props.settingsToggle} />
               </div>
               <p>Settings</p>
             </StyledNavArrow>
@@ -124,10 +124,7 @@ function UserSettings(props) {
           })}
         </div>
       </StyledContainer>
-      <NotificationComponent
-        toggle={props.displayNotification}
-        handleClickAction={props.toggleNotification}
-      />
+      <NotificationComponent />
       <BlockedContacts
         toggle={props.displayBlockedContacts}
         handleClickAction={props.toggleBlockedContacts}
@@ -143,16 +140,16 @@ function UserSettings(props) {
     </div>
   );
 }
-
 function mapStateToProps(state) {
   return {
-    // settings sub menu
     displayNotification: state.notification.displayNotification,
     displayTheme: state.theme.displayTheme,
     displayWallpaper: state.wallpaper.displayWallpaper,
     displayBlockedContacts: state.blockedContacts.displayBlockedContacts,
     displayKeyboardShortcuts: state.keyboardShortCuts.displayKeyboardShortcuts,
     displayHelp: state.help.displayHelp,
+    // search msg state
+    displaySettingsLayout: state.settings.displaySettings,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -163,6 +160,8 @@ function mapDispatchToProps(dispatch) {
     toggleBlockedContacts: () => dispatch(toggleBlockedContacts()),
     toggleKeyboardShortcuts: () => dispatch(toggleKeyboardShortcuts()),
     toggleHelp: () => dispatch(toggleHelp()),
+    // search msg action
+    settingsToggle: () => dispatch(settingsToggle()),
   };
 }
 

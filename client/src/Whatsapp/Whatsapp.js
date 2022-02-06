@@ -5,6 +5,8 @@ import Home from "../components/Home/Home";
 import SearchContact from "../components/SearchContact/SearchContact";
 // import ContextMenu from "../components/Tests/Context";
 import ContextMenuHoc from "../components/ContextMenu/ContextMenuHoc";
+// import
+import { CustomizedDialogs } from "../components/Tests/Contacts";
 function Whatsapp() {
   return (
     <Provider store={store}>

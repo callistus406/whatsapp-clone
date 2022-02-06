@@ -1,21 +1,12 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import { groupDialog } from "../../Global variables/variables";
 import "react-contexify/dist/ReactContexify.css";
-import {
-  Menu,
-  Item,
-  Separator,
-  Submenu,
-  MenuProvider,
-  useContextMenu,
-} from "react-contexify";
+import { Menu, useContextMenu } from "react-contexify";
 
 import {
   StyledUserChatCont,
   StyledUserChatLayout,
   StyledUserChatText,
-  StyledChats,
-  StyledMenuList,
   StyledItem,
   StyledCircle,
 } from "./userChatStyles.js";

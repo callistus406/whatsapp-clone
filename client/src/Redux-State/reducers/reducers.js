@@ -16,6 +16,7 @@ import {
   TOGGLE_BLOCKED_CONTACTS,
   TOGGLE_MSG_SEARCH,
   TOGGLE_GROUP_INFO,
+  SELECT_CONTACTS,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -235,6 +236,25 @@ export function helpReducer(state = settingsInitialState, action) {
       return {
         ...state,
         displayHelp: !state.displayHelp,
+      };
+    default:
+      return state;
+  }
+}
+
+const selectContactsInitialState = {
+  displayContactName: [],
+};
+// reducer for selecting contacts
+export function selectContactReducer(
+  state = selectContactsInitialState,
+  action
+) {
+  switch (action.type) {
+    case SELECT_CONTACTS:
+      return {
+        ...state,
+        displayContactName: action.payload,
       };
     default:
       return state;

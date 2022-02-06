@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { starredMsgsToggle } from "../../Redux-State/action creators/pageActions.js";
 import {
   StyledContainer,
   StyledNavArrow,
@@ -6,14 +8,14 @@ import {
   StyledStarredMsgsHeader,
   StyledStarredMsgsContent,
 } from "./StarredMsgs.style.js";
-function StarredMsgs({ handleClickAction, toggle }) {
+function StarredMsgs(props) {
   return (
-    <StyledContainer toggle={toggle} width="28rem">
+    <StyledContainer toggle={props.displayStarredMgsLayout} width="28rem">
       <StyledStarredMsgsHeader>
         <div className="navArrow">
-          <StyledNavArrow display={toggle}>
+          <StyledNavArrow display={props.displayStarredMgsLayout}>
             <div className="">
-              <StyledArrowBackIcon onClick={handleClickAction} />
+              <StyledArrowBackIcon onClick={props.starredMsgsToggle} />
             </div>
             <p>Starred messages</p>
           </StyledNavArrow>
@@ -24,4 +26,15 @@ function StarredMsgs({ handleClickAction, toggle }) {
   );
 }
 
-export default StarredMsgs;
+function mapStateToProps(state) {
+  return {
+    displayStarredMgsLayout: state.starredMsgs.displayStarredMsgs,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    starredMsgsToggle: () => dispatch(starredMsgsToggle()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StarredMsgs);

@@ -36,3 +36,7 @@ export const MUTE_NOTIFICATION = "MUTE_NOTIFICATION";
 export const EXIT_GROUP = "EXIT_GROUP";
 export const PIN_CHAT = "PIN_CHAT";
 export const MARK_AS_READ = "MARK_AS_READ";
+
+// SELECT CONTACTS
+
+export const SELECT_CONTACTS = "SELECT_CONTACTS";

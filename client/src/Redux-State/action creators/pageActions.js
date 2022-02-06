@@ -16,6 +16,7 @@ import {
   TOGGLE_NOTIFICATION,
   TOGGLE_MSG_SEARCH,
   TOGGLE_GROUP_INFO,
+  SELECT_CONTACTS,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -136,5 +137,13 @@ export function toggleHelp() {
   return {
     type: TOGGLE_HELP,
     info: "this action  will display help",
+  };
+}
+// THIS WILL SELECT CONTACTS
+export function toggleSelectContacts(data) {
+  return {
+    type: SELECT_CONTACTS,
+    payload: data,
+    info: "this action  will individual contacts",
   };
 }
