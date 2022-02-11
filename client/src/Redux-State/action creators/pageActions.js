@@ -17,6 +17,7 @@ import {
   TOGGLE_MSG_SEARCH,
   TOGGLE_GROUP_INFO,
   SELECT_CONTACTS,
+  SEARCH_GROUP_PARTICIPANTS,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -145,5 +146,11 @@ export function toggleSelectContacts(data) {
     type: SELECT_CONTACTS,
     payload: data,
     info: "this action  will individual contacts",
+  };
+}
+export function toggleGrpParticipants() {
+  return {
+    type: SEARCH_GROUP_PARTICIPANTS,
+    info: "this action  will display group participants",
   };
 }

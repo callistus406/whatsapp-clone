@@ -1,13 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ArrowBack, CancelButton, Avatar } from "./icons.js";
+import { ArrowBack, CancelButton, Avatar, InfoIcon } from "./icons.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
+import SearchIcon from "@mui/icons-material/Search";
 // switch
 import Switch from "@mui/material/Switch";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { styled as muiStyled } from "@mui/material/styles";
+import styled from "styled-components";
+
 import {
   StyledContainer,
   StyledNavArrow,
@@ -23,10 +32,79 @@ import {
   StyledMembersChatText,
   StyledCircle,
   StyledMembersLayout,
-} from "./groupInfo.style.js";
-import { toggleGroupInfo } from "../../Redux-State/action creators/pageActions";
+  StyledMembersHeader,
+  StyledGroupHeading,
+} from "./style.js";
+import {
+  toggleGroupInfo,
+  toggleGrpParticipants,
+} from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
+import SearchParticipants from "../Search Participants/SearchParticipants.js";
 function GroupInfo(props) {
+  console.log(props);
+
+  const [editInfo, setEditInfo] = useState(false);
+
+  function showIcon(bool) {
+    setEditInfo(bool);
+  }
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  function AlertDialog() {
+    const StyledButton = muiStyled(Button)(({ theme }) => ({
+      backgroundColor: "#008069",
+      minWidth: "4rem",
+      color: "#fff",
+      "&:hover": {
+        background: "#017561",
+      },
+      marginRight: "1rem",
+      marginBottom: "1rem",
+    }));
+    const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
+      color: "#55626A",
+      fontSize: "0.9rem",
+    }));
+    const StyledDialog = muiStyled(Dialog)(({ theme }) => ({}));
+    const StyledSpace = styled.div`
+      ${"" /* height: 1rem; */}
+      width: 23rem;
+    `;
+    return (
+      <div>
+        <StyledDialog
+          open={open}
+          // onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <StyledDialogTitle id="alert-dialog-title">
+            Only admins can edit this group's info
+          </StyledDialogTitle>
+          <DialogContent>
+            <StyledSpace>
+              {/* Only admins can edit this group's info */}
+            </StyledSpace>
+          </DialogContent>
+          <DialogActions>
+            <StyledButton onClick={handleClose} autoFocus>
+              OK
+            </StyledButton>
+          </DialogActions>
+        </StyledDialog>
+      </div>
+    );
+  }
+
   return (
     // <GroupInfoContent>
 
@@ -47,7 +125,19 @@ function GroupInfo(props) {
           <div className="circleImg">
             <Avatar />
           </div>
-          <span className="groupName">NIGERIA NEWS</span>
+          <StyledGroupHeading
+            onMouseEnter={() => showIcon(true)}
+            onMouseLeave={() => showIcon(false)}
+          >
+            <span className="groupName">NIGERIA NEWS </span>
+            {editInfo ? (
+              <span className="groupInfoIcon" onClick={handleClickOpen}>
+                <InfoIcon />
+              </span>
+            ) : (
+              ""
+            )}
+          </StyledGroupHeading>
           <p>Group 173 participants</p>
         </StyledGroupImg>
         <StyledGroupInfo>
@@ -92,6 +182,13 @@ function GroupInfo(props) {
         </StyledMuteNotification>
 
         <StyledMembersLayout>
+          <StyledMembersHeader>
+            <p>254 participants</p>
+            <div onClick={props.toggleGrpParticipants}>
+              <SearchIcon />
+              <SearchParticipants activate={props.displayGrpParticipants} />
+            </div>
+          </StyledMembersHeader>
           <Members role="Group admin" />
           <Members />
           <Members />
@@ -160,12 +257,16 @@ function mapStateToProps(state) {
   return {
     // search msg state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
+    // get participants state
+    displayGrpParticipants: state.grpParticipants.displayGrpParticipants,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     // search msg action
     toggleGroupInfo: () => dispatch(toggleGroupInfo()),
+    // action to get group participants
+    toggleGrpParticipants: () => dispatch(toggleGrpParticipants()),
   };
 }
 

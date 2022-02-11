@@ -1,6 +1,6 @@
-import { groupDialog } from "../../Global variables/variables";
+import { groupDialog, messageDialog } from "../../Global variables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import Menu from "@mui/material/Menu";
+
 import { connect } from "react-redux";
 import {
   toggleMsgSearch,
@@ -21,6 +21,11 @@ import {
   StyledMsgNumber,
   StyledMsgInfoIcon,
   StyledKeyBoardArrow,
+  StyledContextMenu,
+  StyledContextMenuItem,
+  StyledFab,
+  StyledContextMenu4MsgSpace,
+  StyledContextMenuItem4MsgSpace,
 } from "./Home.style";
 import { Menu as ContexifyMenu, useContextMenu } from "react-contexify";
 import {
@@ -40,7 +45,7 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -141,7 +146,7 @@ function MessageBox(props) {
           </div>
           <div className="optionIcon" onClick={handleContextMenu}>
             <MsgOptionsIcon />
-            <Menu id={MENU_ID} style={{ width: "12rem" }}>
+            <ContexifyMenu id={MENU_ID} style={{ width: "12rem" }}>
               {groupDialog.map((item) => {
                 return (
                   <StyledItem key={item.id} onClick={handleItemClick}>
@@ -149,7 +154,7 @@ function MessageBox(props) {
                   </StyledItem>
                 );
               })}
-            </Menu>
+            </ContexifyMenu>
           </div>
         </div>
       </div>
@@ -184,7 +189,7 @@ function MessageBox(props) {
                 {/* <div className="pin"></div>  */}
                 {actions.map((action) => (
                   <SpeedDialAction
-                    boxShadow={false}
+                    // boxShadow={false}
                     key={action.name}
                     icon={action.icon}
                     tooltipTitle={action.name}
@@ -220,34 +225,84 @@ function MessageBox(props) {
 }
 
 const Message = React.memo(function Message(props) {
-  let MENU_ID = "qwerty";
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
+  const messageScroll = useRef();
+  const msgSpaceRef = useRef();
+  const [isVisible, setIsVisible] = useState(true);
+  const scrollToBottom = () => {
+    messageScroll.current.scrollIntoView({ behavior: "smooth" });
+  };
 
-  function handleContextMenu(event) {
+  const listenToScroll = () => {
+    let heightToHideFrom = 1000;
+    const winScroll = msgSpaceRef.current.scrollTop;
+    console.log(winScroll);
+    if (winScroll > heightToHideFrom) {
+      isVisible && // to limit setting state only the first time
+        setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [props.message]);
+  // for scroll to bottom
+  const [height, setHeight] = useState(0);
+
+  const [contextMenu, setContextMenu] = React.useState(null);
+
+  const handleContextMenu = (event) => {
     event.preventDefault();
-    show(event, {
-      props: {
-        key: "value",
-      },
-    });
-  }
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX - 2,
+            mouseY: event.clientY - 4,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null
+    );
+  };
 
-  const handleItemClick = ({ event, props }) => console.log(event, props);
+  const handleClose = () => {
+    setContextMenu(null);
+  };
+
   return (
-    <StyledMessageSpace onContextMenu={handleContextMenu}>
-      <Menu id={MENU_ID} style={{ width: "12rem" }}>
+    <StyledMessageSpace
+      onContextMenu={handleContextMenu}
+      style={{ cursor: "context-menu" }}
+    >
+      <StyledContextMenu4MsgSpace
+        PaperProps={{
+          style: {
+            // maxHeight: "5rem",
+            height: "auto",
+            minWidth: "13rem",
+          },
+        }}
+        open={contextMenu !== null}
+        onClose={handleClose}
+        anchorReference="anchorPosition"
+        autoFocus={false}
+        anchorPosition={
+          contextMenu !== null
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
         {groupDialog.map((item) => {
           return (
-            <StyledItem key={item.id} onClick={handleItemClick}>
+            <StyledContextMenuItem4MsgSpace onClick={handleClose}>
               {item.text}
-            </StyledItem>
+            </StyledContextMenuItem4MsgSpace>
           );
         })}
-      </Menu>
+      </StyledContextMenu4MsgSpace>
 
-      <StyledMessageCont>
+      <StyledMessageCont ref={msgSpaceRef}>
         <ReceivedMsgs />
 
         <ReceivedMsgs />
@@ -257,11 +312,39 @@ const Message = React.memo(function Message(props) {
           }
           return "";
         })}
+        {/* {isVisible && (
+          <StyledFab>
+            <KeyboardArrowDownIcon />
+          </StyledFab>
+        )} */}
+
+        <div ref={messageScroll} />
       </StyledMessageCont>
     </StyledMessageSpace>
   );
 });
 function ReceivedMsgs() {
+  const [contextMenu, setContextMenu] = React.useState(null);
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX - 2,
+            mouseY: event.clientY - 4,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null
+    );
+  };
+
+  const handleClose = () => {
+    setContextMenu(null);
+  };
+
   const msgInfoRef = useRef();
   const [borderBottom, setBorderBottom] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
@@ -273,9 +356,12 @@ function ReceivedMsgs() {
     setShowArrow(value);
   }
   const date = new Date();
+  const mins = date.getMinutes();
+  const hours = date.getHours();
 
   return (
     <div
+      onContextMenu={handleClose}
       class="talk-bubble tri-right left-top"
       onMouseEnter={() => hideArrow(true)}
       onMouseLeave={() => hideArrow(false)}
@@ -292,9 +378,35 @@ function ReceivedMsgs() {
           <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName>
         </div>
 
-        <StyledKeyBoardArrow hide={showArrow}>
+        <StyledKeyBoardArrow hide={showArrow} onClick={handleContextMenu}>
           <StyledMsgInfoIcon fontSize="medium" />
         </StyledKeyBoardArrow>
+        <StyledContextMenu
+          PaperProps={{
+            style: {
+              // maxHeight: ITEM_HEIGHT * 4.5,
+              minHeight: "16.9rem",
+              width: "auto",
+            },
+          }}
+          open={contextMenu !== null}
+          onClose={handleClose}
+          anchorReference="anchorPosition"
+          autoFocus={false}
+          anchorPosition={
+            contextMenu !== null
+              ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+              : undefined
+          }
+        >
+          {messageDialog.map((item) => {
+            return (
+              <StyledContextMenuItem onClick={handleClose}>
+                {item.text}
+              </StyledContextMenuItem>
+            );
+          })}
+        </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
         <p>
@@ -303,9 +415,11 @@ function ReceivedMsgs() {
         </p>
         <div className="msgTime">
           <div>
-            <span>{date.getHours()}:</span>
-            <span>{date.getMinutes()}</span>
-            <span>{date.getHours() >= 12 ? "pm" : "am"}</span>
+            <span>{hours}:</span>
+            <span>{mins}</span>
+            <span className="timeZo">
+              {date.getHours() >= 12 ? "pm" : "am"}
+            </span>
           </div>
         </div>
       </div>

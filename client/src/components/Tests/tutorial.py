@@ -19,4 +19,9 @@ person = {
         "house": "23 owerri"
     }
 }
-print(person.name)
+# print(person.name)
+string = "banana"
+# for i in range(len(string)):
+#     print(string[i])
+var = "this is just a test"
+print("just" in var)

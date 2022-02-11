@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import SpeedDial from "@mui/material/SpeedDial";
 import SearchIcon from "@mui/icons-material/Search";
-import MenuItem from "@mui/material/MenuItem";
+
 import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
 import Box from "@mui/material/Box";
 import MenuList from "@mui/material/MenuList";
 import Image from "../img/bgDefault2.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Menu from "@mui/material/Menu";
+import { styled as muiStyled } from "@mui/material/styles";
+import MenuItem from "@mui/material/MenuItem";
 
 import {
-  Menu,
+  MenuContexify,
   Item,
   Separator,
   Submenu,
@@ -102,6 +105,21 @@ export const StyledMenuList = styled(MenuList)`
   }
 `;
 
+export const StyledContextMenu = muiStyled(Menu)(({ theme }) => ({
+  fontSize: "0.8rem",
+}));
+export const StyledContextMenu4MsgSpace = muiStyled(Menu)(({ theme }) => ({
+  fontSize: "1rem",
+}));
+export const StyledContextMenuItem4MsgSpace = muiStyled(MenuItem)(
+  ({ theme }) => ({
+    fontSize: "1rem",
+  })
+);
+export const StyledContextMenuItem = muiStyled(MenuItem)(({ theme }) => ({
+  fontSize: "0.9rem",
+}));
+
 export const StyledBox = styled(Box)`
   & {
     background-color: red;
@@ -110,9 +128,9 @@ export const StyledBox = styled(Box)`
 export const StyledMessageSpace = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
-  ${"" /* background-color: pink; */}
-  background-image: url(${Image});
 
+  background-image: url(${Image});
+z-index:-1;
   ${"" /* .......................... */}
 
   }
@@ -121,6 +139,7 @@ export const StyledMessageSpace = styled.div`
 export const StyledMessageCont = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
+  position: relative;
 
   border: 1px solid blue;
   display: flex;
@@ -279,4 +298,23 @@ export const StyledContactsCol = styled.div`
   overflow-y: auto;
   text-align: justify;
   transition: 0.2s;
+`;
+
+// message box
+
+export const StyledFab = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  ${"" /* border: 1px solid blue; */}
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888d90;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;

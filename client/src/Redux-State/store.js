@@ -20,6 +20,7 @@ import {
   displayGroupInfo,
   displayMsgSearchBarReducer,
   selectContactReducer,
+  selectGroupParticipantsReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -45,5 +46,6 @@ const rootReducer = combineReducers({
   keyboardShortCuts: keyboardShortcutsReducer,
   help: helpReducer,
   selectContact: selectContactReducer,
+  grpParticipants: selectGroupParticipantsReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(logger));

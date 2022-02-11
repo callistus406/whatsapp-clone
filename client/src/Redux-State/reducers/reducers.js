@@ -17,6 +17,7 @@ import {
   TOGGLE_MSG_SEARCH,
   TOGGLE_GROUP_INFO,
   SELECT_CONTACTS,
+  SEARCH_GROUP_PARTICIPANTS,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -255,6 +256,24 @@ export function selectContactReducer(
       return {
         ...state,
         displayContactName: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+const groupInitialStates = {
+  displayGrpParticipants: false,
+};
+// reducer for group participants
+export function selectGroupParticipantsReducer(
+  state = groupInitialStates,
+  action
+) {
+  switch (action.type) {
+    case SEARCH_GROUP_PARTICIPANTS:
+      return {
+        ...state,
+        displayGrpParticipants: !state.displayGrpParticipants,
       };
     default:
       return state;

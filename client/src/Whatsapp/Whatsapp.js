@@ -7,6 +7,7 @@ import SearchContact from "../components/SearchContact/SearchContact";
 import ContextMenuHoc from "../components/ContextMenu/ContextMenuHoc";
 // import
 import { CustomizedDialogs } from "../components/Tests/Contacts";
+import FloatingActionButtons from "../components/Tests/Fab";
 function Whatsapp() {
   return (
     <Provider store={store}>
@@ -21,6 +22,7 @@ function Whatsapp() {
         <UserChat passMenu="qwerty3" /> */}
 
         <Home />
+        {/* <FloatingActionButtons /> */}
         {/* <SearchContact /> */}
 
         {/* <MenuListComposition /> */}

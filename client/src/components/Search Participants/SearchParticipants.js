@@ -30,15 +30,21 @@ import {
   StyledCheckbox,
   ArrowBack,
   StyledFab,
-} from "./styles";
-import { toggleSelectContacts } from "../../Redux-State/action creators/pageActions";
+  StyledMembersChatCont,
+  StyledMembersChatText,
+  StyledCircle,
+  StyledAlphabeticalHeader,
+} from "./style";
+
+import { toggleGrpParticipants } from "../../Redux-State/action creators/pageActions";
 const BootstrapDialog = muiStyled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
+    // padding: theme.spacing(2),
   },
   "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
+    // padding: theme.spacing(1),
   },
+  //   padding: "0",
 }));
 const StyledBootstrapDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
   backgroundColor: "#008069",
@@ -46,7 +52,9 @@ const StyledBootstrapDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
   borderRadius: "none",
   display: "flex",
   alignItems: "center",
+  fontSize: "1.1rem",
 }));
+
 let array = [];
 
 const BootstrapDialogTitle = (props) => {
@@ -57,8 +65,8 @@ const BootstrapDialogTitle = (props) => {
       {children}
       {onClose ? (
         <IconButton
-          aria-label="close"
-          onClick={onClose}
+          //   aria-label="close"
+          //   //   onClick={onClose}
           sx={{
             position: "absolute",
             right: 8,
@@ -78,14 +86,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const CustomizedDialogs = connect(
-  (state) => ({
-    displayContactName: state.selectContact.displayContactName,
-  }),
-  (dispatch) => ({
-    toggleSelectContacts: (data) => dispatch(toggleSelectContacts(data)),
-  })
-)((props) => {
+const SearchParticipants = (props) => {
   useEffect(() => {
     countRef.current = countRef.current + 1;
     // console.log(msgCont);
@@ -96,15 +97,15 @@ export const CustomizedDialogs = connect(
     );
   });
 
-  const [open, setOpen] = React.useState(false);
+  //   const [open, setOpen] = React.useState(props.displayGrpParticipants);
   const inputRef = useRef();
   const countRef = useRef(0);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  //   const handleClickOpen = () => {
+  //     setOpen(true);
+  //   };
+  //   const handleClose = () => {
+  //     setOpen(false);
+  //   };
 
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState(".");
@@ -139,21 +140,44 @@ export const CustomizedDialogs = connect(
     inputRef.current.value = "";
     setCancel(false);
   }
+
+  function Members(props) {
+    return (
+      <div>
+        {props.name ? (
+          <StyledAlphabeticalHeader space={true}>
+            {/* <p className="title">fd</p> */}
+            <p className="title">{props.name.slice(0, 1).toUpperCase()}</p>
+            <p className="borderBottom"></p>
+          </StyledAlphabeticalHeader>
+        ) : (
+          <StyledAlphabeticalHeader>
+            <p className="borderBottom"></p>
+          </StyledAlphabeticalHeader>
+        )}
+        <StyledMembersChatCont>
+          <div className="chatHead">
+            <StyledCircle />
+          </div>
+          <StyledMembersChatText>
+            <div className="chatName">
+              <span className="spanHeading">
+                {props.name ? props.name : "+2348109364893"}
+              </span>
+              <span className={props.role ? "role" : ""}>{props.role}</span>
+            </div>
+            <div className="msgPreview">
+              <p>Loading about...</p>
+            </div>
+          </StyledMembersChatText>
+        </StyledMembersChatCont>
+      </div>
+    );
+  }
   function ShowContact(props) {
-    const [checked, setChecked] = React.useState(false);
-    // console.log(props.name);
-    const handleChange = (event) => {
-      array.push(props.name);
-      setChecked(event.target.checked);
-      if (checked === false) {
-        setData(...data, array);
-      } else {
-      }
-    };
     return (
       <div className="">
         <StyledContactContainer>
-          <Checkbox checked={checked} onChange={handleChange} />
           <div className="avatarCont">
             <div className="avatar">
               <ContactIcon />
@@ -170,8 +194,8 @@ export const CustomizedDialogs = connect(
           </StyledContactInfo>
           <div className="deleteIconCont">
             {/* <div className="deleteIcon">
-                <DeleteIcon />
-              </div> */}
+                  <DeleteIcon />
+                </div> */}
           </div>
         </StyledContactContainer>
         <StyledBorderBottom />
@@ -181,20 +205,21 @@ export const CustomizedDialogs = connect(
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open dialog
-      </Button>
+      </Button> */}
       <BootstrapDialog
-        onClose={handleClose}
+        // onClose={handleClose}
+        disableBackdropClick
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={props.displayGrpParticipants}
       >
         <StyledBootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose}
+          //   onClose={handleClose}
         >
           <ClearIcon style={{ marginRight: "1rem", color: "#B2D8D1" }} />
-          Send Contacts
+          Search Participants
         </StyledBootstrapDialogTitle>
         <StyledSearchBarContainer ref={divRef}>
           <span className="searchIconCont">
@@ -215,41 +240,50 @@ export const CustomizedDialogs = connect(
             // onClick={handleClick("search")}
           />
         </StyledSearchBarContainer>
-        <StyledContactsTitle>
+        {/* <StyledContactsTitle>
           <span>CONTACTS</span>
-        </StyledContactsTitle>
+        </StyledContactsTitle> */}
         <StyledDialogContent dividers>
-          <ShowContact
+          {/* <ShowContact
             parentProps={props}
+            role="admin"
             name="Austin"
             about="full stack developer"
           />
+       
           <ShowContact
             parentProps={props}
-            name="micheal"
-            about="web developer"
-          />
-          <ShowContact
-            parentProps={props}
-            name="Obama"
-            about="Devops engineer"
-          />
-          <ShowContact
-            parentProps={props}
-            name="Rice"
-            about=" desktop app developer"
+            name="mack"
+            about=" python  developer"
           />
           <ShowContact
             parentProps={props}
             name="mack"
             about=" python  developer"
           />
+          <ShowContact
+            parentProps={props}
+            name="mack"
+            about=" python  developer"
+          /> */}
+
+          <Members role="Group admin" name="Gift" />
+          <Members name="micheal" />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
         </StyledDialogContent>
         {/* <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
-          </Button>
-        </DialogActions> */}
+            <Button autoFocus onClick={handleClose}>
+              Save changes
+            </Button>
+          </DialogActions> */}
         <StyledBottom display={data.length <= 0 ? false : true}>
           <StyledFloatingActionButtons
             display={data.length <= 0 ? false : true}
@@ -263,7 +297,7 @@ export const CustomizedDialogs = connect(
       </BootstrapDialog>
     </div>
   );
-});
+};
 
 export function ContactIcon() {
   return (
@@ -298,7 +332,7 @@ export function ContactIcon() {
 
 // ----------------------------
 
-export function FloatingActionButtons() {
+function FloatingActionButtons() {
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
       <StyledFab aria-label="add" size="large">
@@ -310,3 +344,17 @@ export function FloatingActionButtons() {
 function updateName(name) {
   return [...array, name];
 }
+
+function mapStateToProps(state) {
+  return {
+    displayGrpParticipants: state.grpParticipants.displayGrpParticipants,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleGrpParticipants: () => dispatch(toggleGrpParticipants()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchParticipants);
