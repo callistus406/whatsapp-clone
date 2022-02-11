@@ -340,10 +340,15 @@ export const StyledMembersHeader = styled.div`
 export const StyledGroupHeading = styled.div`
   width: 80%;
   position: relative;
-
+  margin-top: 1rem;
   .groupInfoIcon {
     position: absolute;
     top: 0;
     right: 0;
+  }
+  .groupName {
+    &:hover {
+      background-color: #f0f2f5;
+    }
   }
 `;

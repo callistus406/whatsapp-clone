@@ -18,6 +18,7 @@ import {
   TOGGLE_GROUP_INFO,
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
+  TOGGLE_GRP_STARRED_MSGS,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -151,6 +152,13 @@ export function toggleSelectContacts(data) {
 export function toggleGrpParticipants() {
   return {
     type: SEARCH_GROUP_PARTICIPANTS,
+    info: "this action  will display group participants",
+  };
+}
+// starred grp action
+export function toggleStarredGrpMsgs() {
+  return {
+    type: TOGGLE_GRP_STARRED_MSGS,
     info: "this action  will display group participants",
   };
 }

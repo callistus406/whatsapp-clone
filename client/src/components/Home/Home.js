@@ -20,13 +20,13 @@ import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import NewGrp from "../ New Grp/NewGrp";
 import ArchivedChats from "../Archived Chats/ArchivedChats";
-import StarredMsgs from "../Starred Msgs/StarredMsgs";
+import StarredMsgs from "../StarredMsgs/StarredMsgs";
 import UserSettings from "../Settings/UserSettings";
-import BlockedContacts from "../Blocked Contacts/BlockedContacts";
+import BlockedContacts from "../BlockedContacts/BlockedContacts";
 import Status from "../Status/Status";
 import "react-contexify/dist/ReactContexify.css";
 import SearchContact from "../SearchContact/SearchContact";
-import { groupDialog } from "../../Global variables/variables";
+import { groupDialog } from "../../GlobalVariables/variables";
 import {
   Menu as ContexifyMenu,
   Item,

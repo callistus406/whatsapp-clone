@@ -1,4 +1,4 @@
-import { groupDialog, messageDialog } from "../../Global variables/variables";
+import { groupDialog, messageDialog } from "../../GlobalVariables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 
 import { connect } from "react-redux";

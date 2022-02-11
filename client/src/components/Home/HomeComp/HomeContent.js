@@ -11,7 +11,7 @@ import "react-contexify/dist/ReactContexify.css";
 
 import "react-contexify/dist/ReactContexify.css";
 import SearchContact from "../../SearchContact/SearchContact";
-import { groupDialog } from "../../../Global variables/variables";
+import { groupDialog } from "../../../GlobalVariables/variables";
 
 import {
   settingsToggle,

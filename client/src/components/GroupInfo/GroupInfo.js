@@ -38,10 +38,21 @@ import {
 import {
   toggleGroupInfo,
   toggleGrpParticipants,
+  toggleStarredGrpMsgs,
 } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
-import SearchParticipants from "../Search Participants/SearchParticipants.js";
+import SearchParticipants from "../SearchParticipants/SearchParticipants.js";
 function GroupInfo(props) {
+  const membersRef = useRef();
+  const scrollToBottom = () => {
+    membersRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, []);
+  function handleScroll() {
+    scrollToBottom();
+  }
   console.log(props);
 
   const [editInfo, setEditInfo] = useState(false);
@@ -74,7 +85,10 @@ function GroupInfo(props) {
       color: "#55626A",
       fontSize: "0.9rem",
     }));
-    const StyledDialog = muiStyled(Dialog)(({ theme }) => ({}));
+    const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
+      backgroundColor: "rgba(255,255,255,0.9)",
+      boxShadow: "none",
+    }));
     const StyledSpace = styled.div`
       ${"" /* height: 1rem; */}
       width: 23rem;
@@ -109,6 +123,7 @@ function GroupInfo(props) {
     // <GroupInfoContent>
 
     <StyledContainer id="mySidenav" toggle={props.displayGroupInfoLayout}>
+      <AlertDialog />
       <StyledMsgSearchHeader>
         <div className="navArrow">
           <StyledNavArrow>
@@ -138,7 +153,7 @@ function GroupInfo(props) {
               ""
             )}
           </StyledGroupHeading>
-          <p>Group 173 participants</p>
+          <p onClick={handleScroll}>Group 173 participants</p>
         </StyledGroupImg>
         <StyledGroupInfo>
           <span>Group created by +2348143674356, on 04/06/2018 at 6:10 pm</span>
@@ -153,7 +168,7 @@ function GroupInfo(props) {
           </div>
         </GroupInfoLinks>
         <StyledStarredMsg>
-          <div className="starredMsg">
+          <div className="starredMsg" onClick={props.toggleStarredGrpMsgs}>
             <div>
               <span className="star">
                 <StarRoundedIcon fontSize="small" />
@@ -181,7 +196,7 @@ function GroupInfo(props) {
           <p className="conditional">until tomorrow at 3:22 am</p>
         </StyledMuteNotification>
 
-        <StyledMembersLayout>
+        <StyledMembersLayout ref={membersRef}>
           <StyledMembersHeader>
             <p>254 participants</p>
             <div onClick={props.toggleGrpParticipants}>
@@ -255,6 +270,8 @@ function Members(props) {
 }
 function mapStateToProps(state) {
   return {
+    displayStarredGrpMsgs: state.starredGrpMsg.displayStarredGrpMsgs,
+
     // search msg state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     // get participants state
@@ -263,6 +280,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
+    toggleStarredGrpMsgs: () => dispatch(toggleStarredGrpMsgs()),
+
     // search msg action
     toggleGroupInfo: () => dispatch(toggleGroupInfo()),
     // action to get group participants

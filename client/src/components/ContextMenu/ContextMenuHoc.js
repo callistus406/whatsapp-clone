@@ -2,7 +2,7 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import { groupDialog } from "../../Global variables/variables";
+import { groupDialog } from "../../GlobalVariables/variables";
 export default function ContextMenu(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
 

@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { connect } from "react-redux";
 import NotificationComponent from "../Notification/NotificationComponent";
 import { Help as HelpComponent } from "../Help/Help";
-import BlockedContacts from "../Blocked Contacts/BlockedContacts";
+import BlockedContacts from "../BlockedContacts/BlockedContacts";
 import SelectTheme from "../SelectTheme/SelectTheme";
 // import {optionTex}
 import { settingsToggle } from "../../Redux-State/action creators/pageActions";

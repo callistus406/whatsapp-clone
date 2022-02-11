@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useEffect } from "react";
-import { groupDialog } from "../../Global variables/variables";
+import { groupDialog } from "../../GlobalVariables/variables";
 import "react-contexify/dist/ReactContexify.css";
 import { Menu, useContextMenu } from "react-contexify";
 

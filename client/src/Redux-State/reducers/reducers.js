@@ -18,6 +18,7 @@ import {
   TOGGLE_GROUP_INFO,
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
+  TOGGLE_GRP_STARRED_MSGS,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -263,6 +264,7 @@ export function selectContactReducer(
 }
 const groupInitialStates = {
   displayGrpParticipants: false,
+  displayStarredGrpMsgs: false,
 };
 // reducer for group participants
 export function selectGroupParticipantsReducer(
@@ -274,6 +276,18 @@ export function selectGroupParticipantsReducer(
       return {
         ...state,
         displayGrpParticipants: !state.displayGrpParticipants,
+      };
+    default:
+      return state;
+  }
+}
+// starred for group msgs
+export function starredGrpMsgReducer(state = groupInitialStates, action) {
+  switch (action.type) {
+    case TOGGLE_GRP_STARRED_MSGS:
+      return {
+        ...state,
+        displayStarredGrpMsgs: !state.displayStarredGrpMsgs,
       };
     default:
       return state;

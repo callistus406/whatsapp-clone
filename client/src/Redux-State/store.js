@@ -21,6 +21,7 @@ import {
   displayMsgSearchBarReducer,
   selectContactReducer,
   selectGroupParticipantsReducer,
+  starredGrpMsgReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -47,5 +48,6 @@ const rootReducer = combineReducers({
   help: helpReducer,
   selectContact: selectContactReducer,
   grpParticipants: selectGroupParticipantsReducer,
+  starredGrpMsg: starredGrpMsgReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(logger));
