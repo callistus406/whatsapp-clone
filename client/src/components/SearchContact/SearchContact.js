@@ -96,6 +96,7 @@ function SearchContact(props) {
             ref={inputRef}
             type="text"
             className="inputSearch"
+            // autoFocus={true}
             onFocus={focus}
             onBlur={unfocus}
             onChange={handleChange}

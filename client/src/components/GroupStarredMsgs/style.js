@@ -5,7 +5,7 @@ export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
   width: ${(props) => (props.toggle ? "23rem" : "0rem")};
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   top: 0;
   right: 0;
   border-left: 1px solid #dadada;
@@ -42,19 +42,21 @@ export const StyledNavArrow = styled.div`
   display: ${(props) => (props.display ? "flex" : "none")};
 
   p {
-    margin-left: 2rem;
+    margin-left: 1.5rem;
     font-size: 1.1rem;
   }
 `;
 
 export const StyledStarredMsgsHeader = styled.div`
-  height: 6.5rem;
+  height: 6.75rem;
   /* border: 1px solid blue; */
   /* position: absolute; */
-  background: #00bfa5;
+  background: #008069;
   display: flex;
-  justify-content: center;
+  ${"" /* justify-content: center; */}
   align-items: flex-end;
+  padding-bottom: 0.5rem;
+  padding-left: 1.2rem;
 `;
 export const StyledStarredMsgsContent = styled.div`
   height: calc(100vh - 6.5rem);
@@ -63,4 +65,7 @@ export const StyledStarredMsgsContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  .placeholder {
+    color: #8f9ea7;
+  }
 `;
