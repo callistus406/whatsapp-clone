@@ -34,6 +34,7 @@ import {
   StyledMembersLayout,
   StyledMembersHeader,
   StyledGroupHeading,
+  StyledGroupInstruction,
 } from "./style.js";
 import {
   toggleGroupInfo,
@@ -42,6 +43,7 @@ import {
 } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
 import SearchParticipants from "../SearchParticipants/SearchParticipants.js";
+import StarredMsgs from "../GroupStarredMsgs/StarredMsgs";
 function GroupInfo(props) {
   const membersRef = useRef();
   const scrollToBottom = () => {
@@ -124,6 +126,7 @@ function GroupInfo(props) {
 
     <StyledContainer id="mySidenav" toggle={props.displayGroupInfoLayout}>
       <AlertDialog />
+      <StarredMsgs toggle={props.displayStarredGrpMsgs} />
       <StyledMsgSearchHeader>
         <div className="navArrow">
           <StyledNavArrow>
@@ -156,6 +159,23 @@ function GroupInfo(props) {
           <p onClick={handleScroll}>Group 173 participants</p>
         </StyledGroupImg>
         <StyledGroupInfo>
+          <StyledGroupInstruction
+            onMouseEnter={() => showIcon(true)}
+            onMouseLeave={() => showIcon(false)}
+          >
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Voluptatem, aspernatur! Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Odio, incidunt.
+            </p>
+            {editInfo ? (
+              <span className="groupInfoIcon" onClick={handleClickOpen}>
+                <InfoIcon />
+              </span>
+            ) : (
+              ""
+            )}
+          </StyledGroupInstruction>
           <span>Group created by +2348143674356, on 04/06/2018 at 6:10 pm</span>
         </StyledGroupInfo>
         <GroupInfoLinks>

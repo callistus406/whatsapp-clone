@@ -75,14 +75,15 @@ export const StyledGroupImg = styled.div`
 
 export const StyledGroupInfo = styled.div`
   width: 100%;
-  height: 6rem;
+  min-height: 6rem;
   ${"" /* border: 1px solid red; */}
   border-bottom: 10px solid #ededed;
   color: #909090;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1.2rem 1rem 1.2rem;
   span {
     ${"" /* width: 90%; */}
     font-size: 0.9rem;
@@ -147,7 +148,7 @@ export const StyledStarredMsg = styled.div`
   padding: 0 1.5rem;
   display: flex;
   border-bottom: 10px solid #ededed;
-
+  cursor: pointer;
   align-items: center;
   .starredMsg {
     display: flex;
@@ -350,5 +351,16 @@ export const StyledGroupHeading = styled.div`
     &:hover {
       background-color: #f0f2f5;
     }
+  }
+`;
+
+export const StyledGroupInstruction = styled(StyledGroupHeading)`
+  height: auto;
+  margin-bottom: 1rem;
+  width: 100%;
+  color: #3b4a54;
+  ${"" /* border: 1px solid blue; */}
+  .groupInfoIcon {
+    margin-left: 1rem;
   }
 `;
