@@ -8,6 +8,7 @@ import ContextMenuHoc from "../components/ContextMenu/ContextMenuHoc";
 // import
 import { CustomizedDialogs } from "../components/Tests/Contacts";
 import FloatingActionButtons from "../components/Tests/Fab";
+import Scroll from "../components/Tests/Scroll";
 function Whatsapp() {
   return (
     <Provider store={store}>
