@@ -9,7 +9,8 @@ import {
   StyledArrowBackIcon,
   StyledProfileHeader,
   StyledNavArrow,
-} from "./UserProfile.styles";
+  StyledProfileContent,
+} from "./styles";
 import { profileToggle } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
 
@@ -31,69 +32,71 @@ function UserProfile(props) {
             <p>Profile</p>
           </StyledNavArrow>
         </StyledProfileHeader>
-        <div className="profileContent"></div>
-        <StyleProfileBox>
-          <StyleProfilePicBox>
-            <DisplayPic></DisplayPic>
-          </StyleProfilePicBox>
+        <StyledProfileContent>
+          <div className="profileContent"></div>
+          <StyleProfileBox>
+            <StyleProfilePicBox>
+              <DisplayPic></DisplayPic>
+            </StyleProfilePicBox>
 
-          <CustomDiv
-            height="5.4rem"
-            width="100%"
-            background="#fff"
-            color="#43B1A7"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <div className="content">
-              <p>Your name</p>
-              <span style={{ color: "#000" }}>Callistus</span>
-            </div>
-            <div className="editIcon">
-              <StyledEditIcon />
-            </div>
-          </CustomDiv>
-          <CustomDiv
-            height="4.7rem"
-            width="100%"
-            background="#EDEDED"
-            color="#43B1A7"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            fontSize="1rem"
-            padding="1rem"
-          >
-            <p
-              style={{
-                alignSelf: "center",
-                width: "90%",
-              }}
+            <CustomDiv
+              height="5.4rem"
+              width="100%"
+              background="#fff"
+              color="#008069"
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
             >
-              This is not your username or pin.This name will be visible to your
-              whatsapp contacts
-            </p>
-          </CustomDiv>
-          <CustomDiv
-            height="8.5rem"
-            width="100%"
-            background="#fff"
-            color="#43B1A7"
-            padding="1rem"
-            display="flex"
-          >
-            <div className="status">
-              <p>About</p>
-              <span style={{ color: "#000" }}>
-                This is where you enter you status
-              </span>
-            </div>
-            <div className="editIcon">
-              <StyledEditIcon />
-            </div>
-          </CustomDiv>
-        </StyleProfileBox>
+              <div className="content">
+                <p>Your name</p>
+                <span style={{ color: "#000" }}>Callistus</span>
+              </div>
+              <div className="editIcon">
+                <StyledEditIcon />
+              </div>
+            </CustomDiv>
+            <CustomDiv
+              height="4.7rem"
+              width="100%"
+              background="#EDEDED"
+              color="#43B1A7"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              fontSize="1rem"
+              padding="1rem"
+            >
+              <p
+                style={{
+                  alignSelf: "center",
+                  width: "90%",
+                }}
+              >
+                This is not your username or pin.This name will be visible to
+                your whatsapp contacts
+              </p>
+            </CustomDiv>
+            <CustomDiv
+              height="8.5rem"
+              width="100%"
+              background="#fff"
+              color="#43B1A7"
+              padding="1rem"
+              display="flex"
+            >
+              <div className="status">
+                <p>About</p>
+                <span style={{ color: "#000" }}>
+                  This is where you enter you status
+                </span>
+              </div>
+              <div className="editIcon">
+                <StyledEditIcon />
+              </div>
+            </CustomDiv>
+          </StyleProfileBox>
+        </StyledProfileContent>
       </StyledContainer>
     </div>
   );
