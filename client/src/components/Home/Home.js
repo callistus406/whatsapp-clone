@@ -27,14 +27,7 @@ import Status from "../Status/Status";
 import "react-contexify/dist/ReactContexify.css";
 import SearchContact from "../SearchContact/SearchContact";
 import { groupDialog } from "../../GlobalVariables/variables";
-import {
-  Menu as ContexifyMenu,
-  Item,
-  Separator,
-  Submenu,
-  MenuProvider,
-  useContextMenu,
-} from "react-contexify";
+
 import {
   profileToggle,
   newChatToggle,
@@ -65,6 +58,11 @@ import {
   StyledOpenChat,
   StyledContactsCol,
   StyledSearchBarContainer,
+  StyledContextMenu,
+  StyledContextMenuItem,
+  StyledFab,
+  StyledContextMenu4MsgSpace,
+  StyledContextMenuItem4MsgSpace,
 } from "./Home.style";
 import {
   StatusIcon,
@@ -241,23 +239,31 @@ function mapDispatchToProps(dispatch) {
 }
 
 function Message(props) {
-  let MENU_ID = "qwerty";
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
+  const [contextMenu, setContextMenu] = React.useState(null);
 
-  function handleContextMenu(event) {
+  const handleContextMenu = (event) => {
     event.preventDefault();
-    show(event, {
-      props: {
-        key: "value",
-      },
-    });
-  }
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX - 2,
+            mouseY: event.clientY - 4,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null
+    );
+  };
+
+  const handleClose = () => {
+    setContextMenu(null);
+  };
+
   const handleItemClick = ({ event, props }) => console.log(event, props);
   return (
     <StyledMessageSpace onContextMenu={handleContextMenu}>
-      <Menu id={MENU_ID} style={{ width: "12rem" }}>
+      {/* <Menu id={MENU_ID} style={{ width: "12rem" }}>
         {groupDialog.map((item) => {
           return (
             <StyledItem key={item.id} onClick={handleItemClick}>
@@ -265,37 +271,35 @@ function Message(props) {
             </StyledItem>
           );
         })}
-      </Menu>
+      </Menu> */}
+      <StyledContextMenu
+        PaperProps={{
+          style: {
+            // maxHeight: ITEM_HEIGHT * 4.5,
+            minHeight: "16.9rem",
+            width: "auto",
+          },
+        }}
+        open={contextMenu !== null}
+        onClose={handleClose}
+        anchorReference="anchorPosition"
+        autoFocus={false}
+        anchorPosition={
+          contextMenu !== null
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
+        {groupDialog.map((item) => {
+          return (
+            <StyledContextMenuItem onClick={handleClose}>
+              {item.text}
+            </StyledContextMenuItem>
+          );
+        })}
+      </StyledContextMenu>
     </StyledMessageSpace>
   );
 }
-function Options(props) {
-  let MENU_ID = "qwerty";
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
 
-  function handleContextMenu(event) {
-    event.preventDefault();
-    show(event, {
-      props: {
-        key: "value",
-      },
-    });
-  }
-  const handleItemClick = ({ event, props }) => console.log(event, props);
-  return (
-    <StyledOptions onContextMenu={handleContextMenu}>
-      <Menu id={MENU_ID} style={{ width: "12rem" }}>
-        {groupDialog.map((item) => {
-          return (
-            <StyledItem key={item.id} onClick={handleItemClick}>
-              {item.text}
-            </StyledItem>
-          );
-        })}
-      </Menu>
-    </StyledOptions>
-  );
-}
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));

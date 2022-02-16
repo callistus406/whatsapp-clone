@@ -11,14 +11,6 @@ import Menu from "@mui/material/Menu";
 import { styled as muiStyled } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 
-import {
-  MenuContexify,
-  Item,
-  Separator,
-  Submenu,
-  MenuProvider,
-  useContextMenu,
-} from "react-contexify";
 export const StyledSpeedDial = styled(SpeedDial)`
   && {
     .MuiFab-root {
@@ -113,7 +105,9 @@ export const StyledContextMenu4MsgSpace = muiStyled(Menu)(({ theme }) => ({
 }));
 export const StyledContextMenuItem4MsgSpace = muiStyled(MenuItem)(
   ({ theme }) => ({
-    fontSize: "1rem",
+    fontSize: "0.9rem",
+    color: "#48565F",
+    height: "2.5rem",
   })
 );
 export const StyledContextMenuItem = muiStyled(MenuItem)(({ theme }) => ({
@@ -128,9 +122,9 @@ export const StyledBox = styled(Box)`
 export const StyledMessageSpace = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
-
+   position: relative; 
   background-image: url(${Image});
-z-index:-1;
+${"" /* z-index:-1; */}
   ${"" /* .......................... */}
 
   }
@@ -139,8 +133,7 @@ z-index:-1;
 export const StyledMessageCont = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
-  position: relative;
-
+  ${"" /* position: absolute; */}
   border: 1px solid blue;
   display: flex;
   flex-direction: column;
@@ -220,19 +213,7 @@ export const StyledOptions = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const StyledItem = styled(Item)`
-  & {
-    .react-contexify__item__content {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      font-size: 0.9rem;
-    }
 
-    .react-contexify {
-      min-width: 20rem;
-    }
-  }
-`;
 export const StyledSearchBarContainer = styled.div`
   height: 3rem;
   width: 100%;
@@ -305,6 +286,7 @@ export const StyledContactsCol = styled.div`
 export const StyledFab = styled.div`
   width: 40px;
   height: 40px;
+  z-index: 1000;
   border-radius: 50%;
   ${"" /* border: 1px solid blue; */}
   position: absolute;
@@ -318,3 +300,5 @@ export const StyledFab = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
+
+// context menu
