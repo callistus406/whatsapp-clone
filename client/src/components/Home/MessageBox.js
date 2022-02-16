@@ -1,4 +1,8 @@
-import { groupDialog, messageDialog } from "../../GlobalVariables/variables";
+import {
+  groupDialog,
+  messageDialog,
+  groupContext,
+} from "../../GlobalVariables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
@@ -27,7 +31,6 @@ import {
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
 } from "./Home.style";
-import { Menu as ContexifyMenu, useContextMenu } from "react-contexify";
 import {
   SearchIcon,
   MsgOptionsIcon,
@@ -105,21 +108,26 @@ function MessageBox(props) {
     setOpen(!open);
   }, [open]);
 
-  let MENU_ID = "qwerty";
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
+  const [contextMenu, setContextMenu] = React.useState(null);
 
-  function handleContextMenu(event) {
+  const handleContextMenu = (event) => {
     event.preventDefault();
-    show(event, {
-      props: {
-        key: "value",
-      },
-    });
-  }
-  const handleItemClick = ({ event, props }) => console.log(event, props);
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX - 2,
+            mouseY: event.clientY - 4,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null
+    );
+  };
 
+  const handleClose = () => {
+    setContextMenu(null);
+  };
   return (
     <StyledOpenChat
       toggle={props.displayMsgSearchLayout || props.displayGroupInfoLayout}
@@ -146,15 +154,32 @@ function MessageBox(props) {
           </div>
           <div className="optionIcon" onClick={handleContextMenu}>
             <MsgOptionsIcon />
-            <ContexifyMenu id={MENU_ID} style={{ width: "12rem" }}>
-              {groupDialog.map((item) => {
+            <StyledContextMenu4MsgSpace
+              PaperProps={{
+                style: {
+                  // maxHeight: "5rem",
+                  height: "auto",
+                  minWidth: "13rem",
+                },
+              }}
+              open={contextMenu !== null}
+              onClose={handleClose}
+              anchorReference="anchorPosition"
+              autoFocus={false}
+              anchorPosition={
+                contextMenu !== null
+                  ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+                  : undefined
+              }
+            >
+              {groupContext.map((item) => {
                 return (
-                  <StyledItem key={item.id} onClick={handleItemClick}>
+                  <StyledContextMenuItem4MsgSpace onClick={handleClose}>
                     {item.text}
-                  </StyledItem>
+                  </StyledContextMenuItem4MsgSpace>
                 );
               })}
-            </ContexifyMenu>
+            </StyledContextMenu4MsgSpace>
           </div>
         </div>
       </div>
@@ -227,27 +252,43 @@ function MessageBox(props) {
 const Message = React.memo(function Message(props) {
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
-  const [isVisible, setIsVisible] = useState(true);
+  const prevHeight = useRef(0);
+  const [height, setHeight] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const scrollToBottom = () => {
     messageScroll.current.scrollIntoView({ behavior: "smooth" });
   };
+  let detect = 0;
 
   const listenToScroll = () => {
-    let heightToHideFrom = 1000;
-    const winScroll = msgSpaceRef.current.scrollTop;
-    console.log(winScroll);
-    if (winScroll > heightToHideFrom) {
-      isVisible && // to limit setting state only the first time
-        setIsVisible(false);
-    } else {
+    const winScroll =
+      document.getElementById("base").scrollTop |
+      document.getElementById("base").scrollTop;
+
+    if (winScroll > detect) {
+      detect = winScroll - 2;
+      setIsVisible(false);
+    } else if (winScroll < detect) {
       setIsVisible(true);
     }
   };
   useEffect(() => {
+    console.log("wewewe");
+    document.getElementById("base").addEventListener("scroll", listenToScroll);
+    return () =>
+      document
+        .getElementById("base")
+        .removeEventListener("scroll", listenToScroll);
+  }, []);
+
+  useEffect(() => {
+    console.log("rendered");
+  }, []);
+  // for scroll to bottom
+
+  useEffect(() => {
     scrollToBottom();
   }, [props.message]);
-  // for scroll to bottom
-  const [height, setHeight] = useState(0);
 
   const [contextMenu, setContextMenu] = React.useState(null);
 
@@ -274,6 +315,7 @@ const Message = React.memo(function Message(props) {
     <StyledMessageSpace
       onContextMenu={handleContextMenu}
       style={{ cursor: "context-menu" }}
+      id="styledMessageSpace"
     >
       <StyledContextMenu4MsgSpace
         PaperProps={{
@@ -293,7 +335,7 @@ const Message = React.memo(function Message(props) {
             : undefined
         }
       >
-        {groupDialog.map((item) => {
+        {groupContext.map((item) => {
           return (
             <StyledContextMenuItem4MsgSpace onClick={handleClose}>
               {item.text}
@@ -302,7 +344,7 @@ const Message = React.memo(function Message(props) {
         })}
       </StyledContextMenu4MsgSpace>
 
-      <StyledMessageCont ref={msgSpaceRef}>
+      <StyledMessageCont ref={msgSpaceRef} id="base">
         <ReceivedMsgs />
 
         <ReceivedMsgs />
@@ -312,18 +354,32 @@ const Message = React.memo(function Message(props) {
           }
           return "";
         })}
-        {/* {isVisible && (
-          <StyledFab>
+        {isVisible && (
+          <StyledFab onClick={scrollToBottom}>
             <KeyboardArrowDownIcon />
           </StyledFab>
-        )} */}
+        )}
 
         <div ref={messageScroll} />
       </StyledMessageCont>
     </StyledMessageSpace>
   );
 });
+
 function ReceivedMsgs() {
+  const msgInfoRef = useRef();
+  const [borderBottom, setBorderBottom] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
+  function addBorderBottom(bool) {
+    setBorderBottom(bool);
+  }
+
+  function hideArrow(value) {
+    setShowArrow(value);
+  }
+  const date = new Date();
+  const mins = date.getMinutes();
+  const hours = date.getHours();
   const [contextMenu, setContextMenu] = React.useState(null);
 
   const handleContextMenu = (event) => {
@@ -344,20 +400,6 @@ function ReceivedMsgs() {
   const handleClose = () => {
     setContextMenu(null);
   };
-
-  const msgInfoRef = useRef();
-  const [borderBottom, setBorderBottom] = useState(false);
-  const [showArrow, setShowArrow] = useState(false);
-  function addBorderBottom(bool) {
-    setBorderBottom(bool);
-  }
-
-  function hideArrow(value) {
-    setShowArrow(value);
-  }
-  const date = new Date();
-  const mins = date.getMinutes();
-  const hours = date.getHours();
 
   return (
     <div
