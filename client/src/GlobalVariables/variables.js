@@ -5,6 +5,13 @@ export const groupDialog = [
   { id: 4, text: "Pin chat" },
   { id: 5, text: "Mark as read" },
 ];
+export const groupContext = [
+  { id: 1, text: "Group info" },
+  { id: 2, text: "Select messages" },
+  { id: 3, text: "Mute notification" },
+  { id: 4, text: "Clear  messages" },
+  { id: 5, text: "Exit group" },
+];
 export const messageDialog = [
   { id: 1, text: "Reply" },
   { id: 2, text: "Reply privately" },
