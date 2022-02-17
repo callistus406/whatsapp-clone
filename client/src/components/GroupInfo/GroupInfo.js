@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useReducer } from "react";
 import { ArrowBack, CancelButton, Avatar, InfoIcon } from "./icons.js";
 import ClearIcon from "@mui/icons-material/Clear";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -58,10 +58,26 @@ function GroupInfo(props) {
   }
   console.log(props);
 
-  const [editInfo, setEditInfo] = useState(false);
+  const [editInfo, setEditInfo] = useState({
+    title: false,
+    info: false,
+  });
 
-  function showIcon(bool) {
-    setEditInfo(bool);
+  function showIcon(prop) {
+    if (prop === "title") {
+      setEditInfo({ ...editInfo, [prop]: true });
+    }
+    if (prop === "info") {
+      setEditInfo({ ...editInfo, [prop]: true });
+    }
+  }
+  function hideIcon(prop) {
+    if (prop === "title") {
+      setEditInfo({ ...editInfo, [prop]: false });
+    }
+    if (prop === "info") {
+      setEditInfo({ ...editInfo, [prop]: false });
+    }
   }
 
   const [open, setOpen] = React.useState(false);
@@ -145,8 +161,8 @@ function GroupInfo(props) {
             <Avatar />
           </div>
           <StyledGroupHeading
-            onMouseEnter={() => showIcon(true)}
-            onMouseLeave={() => showIcon(false)}
+            onMouseEnter={() => showIcon("title")}
+            onMouseLeave={() => hideIcon("title")}
           >
             <span className="groupName">NIGERIA NEWS </span>
             {editInfo ? (
@@ -161,8 +177,8 @@ function GroupInfo(props) {
         </StyledGroupImg>
         <StyledGroupInfo>
           <StyledGroupInstruction
-            onMouseEnter={() => showIcon(true)}
-            onMouseLeave={() => showIcon(false)}
+            onMouseEnter={() => showIcon("info")}
+            onMouseLeave={() => hideIcon("info")}
           >
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.

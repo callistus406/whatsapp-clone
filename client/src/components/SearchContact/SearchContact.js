@@ -10,7 +10,7 @@ import {
   StyledSearchIcon,
   StyledSearchBarContainer,
 } from "./style.js";
-import { DeleteIcon, CancelButton, ContactIcon } from "./icons";
+import { DeleteIcon, CancelButton, ArrowBack } from "./icons";
 import { connect } from "react-redux";
 function SearchContact(props) {
   const countRef = useRef(0);
@@ -47,18 +47,6 @@ function SearchContact(props) {
       setCancel(true);
     }
   };
-  function ArrowBack(props) {
-    return (
-      <div>
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <path
-            fill="currentColor"
-            d="M12 4l1.4 1.4L7.8 11H20v2H7.8l5.6 5.6L12 20l-8-8 8-8z"
-          ></path>
-        </svg>
-      </div>
-    );
-  }
 
   function handleCancel() {
     setHide((prevState) => !prevState);

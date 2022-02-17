@@ -14,66 +14,22 @@ import Tooltip from "@mui/material/Tooltip";
 // speed dial
 import PersonIcon from "@mui/icons-material/Person";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import NewGrp from "../ New Grp/NewGrp";
 import ArchivedChats from "../Archived Chats/ArchivedChats";
 import StarredMsgs from "../StarredMsgs/StarredMsgs";
 import UserSettings from "../Settings/UserSettings";
-import BlockedContacts from "../BlockedContacts/BlockedContacts";
 import Status from "../Status/Status";
 import SearchContact from "../SearchContact/SearchContact";
-import { groupDialog } from "../../GlobalVariables/variables";
 
 import {
-  hideProfile,
-  newChatToggle,
   optionsToggle,
-  newGroupToggle,
-  archiveToggle,
-  starredMsgsToggle,
-  settingsToggle,
-  toggleMsgSearch,
-  logout,
   showGroupInfo,
   displayGrpMsgAction,
 } from "../../Redux-State/action creators/pageActions";
-import {
-  StyledSpeedDial,
-  StyledSpan,
-  StyledIcon,
-  StyledInputSearch,
-  StyledSearchIcon,
-  StyledNotificationIcon,
-  StyledActionIcons,
-  StyledMenuItem,
-  StyledMenuList,
-  StyledMessageSpace,
-  StyledBox,
-  StyledItem,
-  StyledOptions,
-  StyledOpenChat,
-  StyledContactsCol,
-  StyledSearchBarContainer,
-  StyledContextMenu,
-  StyledContextMenuItem,
-  StyledFab,
-  StyledContextMenu4MsgSpace,
-  StyledContextMenuItem4MsgSpace,
-} from "./style";
-import {
-  StatusIcon,
-  MessageIcon,
-  OptionsIcon,
-  SearchIcon,
-  MsgOptionsIcon,
-  EmojiIcon,
-  RecorderIcon,
-  Attachment,
-  StickerIcon,
-  ProfileIcon,
-} from "./HomeIcons";
+import { StyledContactsCol } from "./style";
+import { StickerIcon, ProfileIcon } from "./HomeIcons";
 import GroupInfo from "../GroupInfo/GroupInfo";
 import MessageBox from "./MessageBox";
 import HomeContent from "./HomeComp/HomeContent";
@@ -117,29 +73,7 @@ function Home(props) {
         <ArchivedChats />
         <StarredMsgs />
         <UserSettings />
-        {/*
-        
 
-        <NewGrp
-          toggle={props.displayCreateNewGrp}
-          handleClickAction={props.newGroupToggle}
-        />
-        <ArchivedChats
-          toggle={props.displayArchiveLayout}
-          handleClickAction={props.archiveToggle}
-        />
-        <StarredMsgs
-          toggle={props.displayStarredMgsLayout}
-          handleClickAction={props.starredMsgsToggle}
-        />
-        <UserSettings
-          toggle={props.displaySettingsLayout}
-          handleClickAction={props.settingsToggle}
-        /> */}
-        {/* <GroupInfo
-          toggle={props.displayGroupInfoLayout}
-          handleClickAction={props.showGroupInfo}
-        /> */}
         <SearchContact />
         <GroupInfo />
         <div className="column1">
@@ -161,8 +95,6 @@ function Home(props) {
           </StyledContactsCol>
         </div>
 
-        {/* <div className="chatColCont"> */}
-        {/* here */}
         {props.displayGrpMsgSection ? (
           <MessageBox />
         ) : (
@@ -195,118 +127,18 @@ function Home(props) {
 
 function mapStateToProps(state) {
   return {
-    // displayProfileContainer: state.profile.displayProfileContainer,
-    // displayStatusContainer: state.status.displayStatusContainer,
-    // displayChatContainer: state.newChat.displayChatContainer,
-    // displayOptionsContainer: state.options.displayChatContainer,
-    // search msg state
-    // displayMsgSearchLayout: state.searchMsg.displayMsgSearchLayout,
     // group info state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
-    // options state
-    // displayCreateNewGrp: state.newGroup.displayNewGroup,
-    // displayArchiveLayout: state.archive.displayArchive,
-    // displayStarredMgsLayout: state.starredMsgs.displayStarredMsgs,
-    // displaySettingsLayout: state.settings.displaySettings,
-    // logout: state.options.logout,
-    // settings sub menu
-    // displayNotification: state.notification.displayNotification,
-    // displayTheme: state.theme.displayTheme,
-    // displayWallpaper: state.wallpaper.displayWallpaper,
-    // displayBlockedContacts: state.blockedContacts.displayBlockedContacts,
-    // displayKeyboardShortcuts: state.keyboardShortCuts.displayKeyboardShortcuts,
-    // displayHelp: state.help.displayHelp,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    // profileToggle: () => dispatch(profileToggle()),
-    // newChatToggle: () => dispatch(newChatToggle()),
     optionsToggle: () => dispatch(optionsToggle()),
-    // search msg action
-    // toggleMsgSearch: () => dispatch(toggleMsgSearch()),
     // search group info
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
-    // sub menu actions
-    // newGroupToggle: () => dispatch(newGroupToggle()),
-    // archiveToggle: () => dispatch(archiveToggle()),
-    // starredMsgsToggle: () => dispatch(starredMsgsToggle()),
-    // settingsToggle: () => dispatch(settingsToggle()),
-    // logout: () => dispatch(logout()),
-    // settings sub menu actions
-    // toggleNotification: () => dispatch(toggleNotification()),
-    // toggleTheme: () => dispatch(toggleTheme()),
-    // toggleWallpaper: () => dispatch(toggleWallpaper()),
-    // toggleBlockedContacts: () => dispatch(toggleBlockedContacts()),
-    // toggleKeyboardShortcuts: () => dispatch(toggleKeyboardShortcuts()),
-    // toggleHelp: () => dispatch(toggleHelp()),
   };
-}
-
-function Message(props) {
-  const [contextMenu, setContextMenu] = React.useState(null);
-
-  const handleContextMenu = (event) => {
-    event.preventDefault();
-    setContextMenu(
-      contextMenu === null
-        ? {
-            mouseX: event.clientX - 2,
-            mouseY: event.clientY - 4,
-          }
-        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
-          // Other native context menus might behave different.
-          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
-          null
-    );
-  };
-
-  const handleClose = () => {
-    setContextMenu(null);
-  };
-
-  const handleItemClick = ({ event, props }) => console.log(event, props);
-  return (
-    <StyledMessageSpace onContextMenu={handleContextMenu}>
-      {/* <Menu id={MENU_ID} style={{ width: "12rem" }}>
-        {groupDialog.map((item) => {
-          return (
-            <StyledItem key={item.id} onClick={handleItemClick}>
-              {item.text}
-            </StyledItem>
-          );
-        })}
-      </Menu> */}
-      <StyledContextMenu
-        PaperProps={{
-          style: {
-            // maxHeight: ITEM_HEIGHT * 4.5,
-            minHeight: "16.9rem",
-            width: "auto",
-          },
-        }}
-        open={contextMenu !== null}
-        onClose={handleClose}
-        anchorReference="anchorPosition"
-        autoFocus={false}
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
-        }
-      >
-        {groupDialog.map((item) => {
-          return (
-            <StyledContextMenuItem onClick={handleClose}>
-              {item.text}
-            </StyledContextMenuItem>
-          );
-        })}
-      </StyledContextMenu>
-    </StyledMessageSpace>
-  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));

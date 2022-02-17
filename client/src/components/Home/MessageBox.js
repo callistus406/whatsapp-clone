@@ -1,8 +1,4 @@
-import {
-  groupDialog,
-  messageDialog,
-  groupContext,
-} from "../../GlobalVariables/variables";
+import { messageDialog, groupContext } from "../../GlobalVariables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
@@ -12,13 +8,9 @@ import {
 } from "../../Redux-State/action creators/pageActions";
 import {
   StyledSpeedDial,
-  StyledMenuList,
   StyledMessageSpace,
   StyledBox,
-  StyledItem,
-  StyledOptions,
   StyledOpenChat,
-  StyledContactsCol,
   StyledMessageCont,
   StyledMsgName,
   StyledMsgInfo,
@@ -488,23 +480,6 @@ function SentMsgs(props) {
     </div>
   );
 }
-
-// const Options = React.memo(function Options(props) {
-
-//   return (
-//     <StyledOptions onContextMenu={handleContextMenu}>
-//       <Menu id={MENU_ID} style={{ width: "12rem" }}>
-//         {groupDialog.map((item) => {
-//           return (
-//             <StyledItem key={item.id} onClick={handleItemClick}>
-//               {item.text}
-//             </StyledItem>
-//           );
-//         })}
-//       </Menu>
-//     </StyledOptions>
-//   );
-// });
 
 function mapStateToProps(state) {
   return {
