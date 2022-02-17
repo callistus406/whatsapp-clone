@@ -7,7 +7,7 @@ import UserChat from "../UserChat/UserChat";
 import UserProfile from "../UserProfile/UserProfile";
 import { CenterDivContent } from "../Styles/CustomStyles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
+import image from "../img/MyImage.png";
 // menu
 import NewChat from "../NewChat/NewChat";
 import Tooltip from "@mui/material/Tooltip";
@@ -38,6 +38,7 @@ import {
   toggleMsgSearch,
   logout,
   toggleGroupInfo,
+  displayGrpMsgAction,
 } from "../../Redux-State/action creators/pageActions";
 import {
   StyledSpeedDial,
@@ -163,22 +164,30 @@ function Home(props) {
 
         {/* <div className="chatColCont"> */}
         {/* here */}
-        <MessageBox />
-        <div className="">
-          {/* commented */}
-          {/* <div className="chatColDiv">
-            <div className="imageCont">
-              <img src={image} alt="image" srcset="" className="connectImage" />
+        {props.displayGrpMsgSection ? (
+          <MessageBox />
+        ) : (
+          <div className="chatsCol">
+            {/* commented */}
+            <div className="chatColDiv">
+              <div className="imageCont">
+                <img
+                  src={image}
+                  alt="image"
+                  srcset=""
+                  className="connectImage"
+                />
+              </div>
+              <div className="textContent">
+                <span>Keep Your Phone Connected</span>
+                <p>
+                  Whatsapp Connects to your phone to sync your messages,To
+                  reduce data usage,connect your phone to wifi
+                </p>
+              </div>
             </div>
-            <div className="textContent">
-              <span>Keep Your Phone Connected</span>
-              <p>
-                Whatsapp Connects to your phone to sync your messages,To reduce
-                data usage,connect your phone to wifi
-              </p>
-            </div>
-          </div> */}
-        </div>
+          </div>
+        )}
         {/* </div> */}
       </div>
     </div>
@@ -195,6 +204,7 @@ function mapStateToProps(state) {
     // displayMsgSearchLayout: state.searchMsg.displayMsgSearchLayout,
     // group info state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
+    displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
     // options state
     // displayCreateNewGrp: state.newGroup.displayNewGroup,
     // displayArchiveLayout: state.archive.displayArchive,
@@ -220,6 +230,7 @@ function mapDispatchToProps(dispatch) {
     // toggleMsgSearch: () => dispatch(toggleMsgSearch()),
     // search group info
     toggleGroupInfo: () => dispatch(toggleGroupInfo()),
+    displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
     // sub menu actions
     // newGroupToggle: () => dispatch(newGroupToggle()),
     // archiveToggle: () => dispatch(archiveToggle()),

@@ -43,3 +43,7 @@ export const MARK_AS_READ = "MARK_AS_READ";
 
 export const SELECT_CONTACTS = "SELECT_CONTACTS";
 export const SEARCH_GROUP_PARTICIPANTS = "SEARCH_GROUP_PARTICIPANTS";
+
+// conditional rendering
+
+export const SHOW_GROUP_MSG = "SHOW_GROUP_MSG";

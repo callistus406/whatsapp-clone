@@ -10,7 +10,7 @@ export const StyledContainer = styled.div`
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #fff;
-  ${"" /* overflow-x: hidden; */}
+  overflow-x: hidden;
   transition: 0.5s;
 
   .content {
@@ -48,7 +48,7 @@ export const StyledProfileHeader = styled.div`
   align-items: flex-end;
 `;
 export const StyledProfileContent = styled.div`
-  height: calc(100vh - 6.5rem);
+  height: calc(100vh - 6.6rem);
   width:100%
   ${"" /* background: #ededed; */}
   display: ${(props) => (props.toggle ? "block" : "none")};

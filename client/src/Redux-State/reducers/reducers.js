@@ -19,6 +19,7 @@ import {
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
+  SHOW_GROUP_MSG,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -265,6 +266,7 @@ export function selectContactReducer(
 const groupInitialStates = {
   displayGrpParticipants: false,
   displayStarredGrpMsgs: false,
+  displayGrpMsgSection: false,
 };
 // reducer for group participants
 export function selectGroupParticipantsReducer(
@@ -288,6 +290,21 @@ export function starredGrpMsgReducer(state = groupInitialStates, action) {
       return {
         ...state,
         displayStarredGrpMsgs: !state.displayStarredGrpMsgs,
+      };
+    default:
+      return state;
+  }
+}
+// display group msg
+export function displayGrpMsgSectionReducer(
+  state = groupInitialStates,
+  action
+) {
+  switch (action.type) {
+    case SHOW_GROUP_MSG:
+      return {
+        ...state,
+        displayGrpMsgSection: !state.displayGrpMsgSection,
       };
     default:
       return state;

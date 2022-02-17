@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import { groupDialog } from "../../GlobalVariables/variables";
-
+import { displayGrpMsgAction } from "../../Redux-State/action creators/pageActions";
+import { connect } from "react-redux";
 import {
   StyledUserChatCont,
   StyledUserChatLayout,
@@ -37,7 +38,10 @@ function UserChat(props) {
   // const handleItemClick = ({ event, props }) => console.log(event, props);
 
   return (
-    <StyledUserChatLayout onContextMenu={handleContextMenu}>
+    <StyledUserChatLayout
+      onContextMenu={handleContextMenu}
+      onClick={props.displayGrpMsgAction}
+    >
       <StyledUserChatCont>
         <div className="chatHead">
           <StyledCircle />
@@ -83,7 +87,21 @@ function UserChat(props) {
     </StyledUserChatLayout>
   );
 }
-
-export default React.memo(UserChat);
+function mapStateToProps(state) {
+  return {
+    // search msg state
+    displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    // search msg action
+    displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
+  };
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(React.memo(UserChat));
 
 // EBEBEB
