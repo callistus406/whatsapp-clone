@@ -27,9 +27,8 @@ import SearchContact from "../SearchContact/SearchContact";
 import { groupDialog } from "../../GlobalVariables/variables";
 
 import {
-  profileToggle,
+  hideProfile,
   newChatToggle,
-  statusToggle,
   optionsToggle,
   newGroupToggle,
   archiveToggle,
@@ -37,7 +36,7 @@ import {
   settingsToggle,
   toggleMsgSearch,
   logout,
-  toggleGroupInfo,
+  showGroupInfo,
   displayGrpMsgAction,
 } from "../../Redux-State/action creators/pageActions";
 import {
@@ -139,7 +138,7 @@ function Home(props) {
         /> */}
         {/* <GroupInfo
           toggle={props.displayGroupInfoLayout}
-          handleClickAction={props.toggleGroupInfo}
+          handleClickAction={props.showGroupInfo}
         /> */}
         <SearchContact />
         <GroupInfo />
@@ -223,13 +222,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // profileToggle: () => dispatch(profileToggle()),
-    // statusToggle: () => dispatch(statusToggle()),
     // newChatToggle: () => dispatch(newChatToggle()),
     optionsToggle: () => dispatch(optionsToggle()),
     // search msg action
     // toggleMsgSearch: () => dispatch(toggleMsgSearch()),
     // search group info
-    toggleGroupInfo: () => dispatch(toggleGroupInfo()),
+    showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
     // sub menu actions
     // newGroupToggle: () => dispatch(newGroupToggle()),

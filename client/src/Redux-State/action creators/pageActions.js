@@ -1,6 +1,8 @@
 import {
-  TOGGLE_PROFILE,
-  TOGGLE_STATUS,
+  SHOW_PROFILE,
+  HIDE_PROFILE,
+  SHOW_STATUS,
+  HIDE_STATUS,
   TOGGLE_NEW_CHAT,
   TOGGLE_OPTIONS,
   TOGGLE_NEW_GROUP,
@@ -15,7 +17,8 @@ import {
   TOGGLE_HELP,
   TOGGLE_NOTIFICATION,
   TOGGLE_MSG_SEARCH,
-  TOGGLE_GROUP_INFO,
+  SHOW_GROUP_INFO,
+  HIDE_GROUP_INFO,
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
@@ -23,10 +26,18 @@ import {
 } from "../actions/actionTypes";
 
 // section for status bar action creators
-export function profileToggle() {
+export function showProfile(bool) {
   return {
-    type: TOGGLE_PROFILE,
+    type: SHOW_PROFILE,
+    payload: bool,
     info: "this action  will display the profile slide",
+  };
+}
+export function hideProfile(bool) {
+  return {
+    type: HIDE_PROFILE,
+    payload: bool,
+    info: "this action  will hide the profile slide",
   };
 }
 
@@ -37,10 +48,19 @@ export function newChatToggle() {
   };
 }
 
-export function statusToggle() {
+export function showStatus(bool) {
   return {
-    type: TOGGLE_STATUS,
+    type: SHOW_STATUS,
+    payload: bool,
     info: "this action  will display the status slide",
+  };
+}
+export function hideStatus(bool) {
+  return {
+    type: SHOW_STATUS,
+    payload: bool,
+
+    info: "this action  will hide the status slide",
   };
 }
 
@@ -58,10 +78,18 @@ export function toggleMsgSearch() {
   };
 }
 // ACTION FOR GROUP INFO
-export function toggleGroupInfo() {
+export function showGroupInfo(bool) {
   return {
-    type: TOGGLE_GROUP_INFO,
+    type: SHOW_GROUP_INFO,
+    payload: bool,
     info: "this action  will display the group information ",
+  };
+}
+export function hideGroupInfo(bool) {
+  return {
+    type: HIDE_GROUP_INFO,
+    payload: bool,
+    info: "this action  will hide the group information ",
   };
 }
 
@@ -164,9 +192,10 @@ export function toggleStarredGrpMsgs() {
   };
 }
 // display group message
-export function displayGrpMsgAction() {
+export function displayGrpMsgAction(bool) {
   return {
     type: SHOW_GROUP_MSG,
+    payload: bool,
     info: "this action  will display message",
   };
 }

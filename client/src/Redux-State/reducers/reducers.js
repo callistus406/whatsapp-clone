@@ -1,6 +1,8 @@
 import {
-  TOGGLE_PROFILE,
-  TOGGLE_STATUS,
+  SHOW_PROFILE,
+  HIDE_PROFILE,
+  SHOW_STATUS,
+  HIDE_STATUS,
   TOGGLE_NEW_CHAT,
   TOGGLE_OPTIONS,
   TOGGLE_NEW_GROUP,
@@ -15,7 +17,8 @@ import {
   TOGGLE_CHAT_WALLPAPER,
   TOGGLE_BLOCKED_CONTACTS,
   TOGGLE_MSG_SEARCH,
-  TOGGLE_GROUP_INFO,
+  SHOW_GROUP_INFO,
+  HIDE_GROUP_INFO,
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
@@ -35,10 +38,15 @@ const initialState = {
 
 export function displayProfileReducer(state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_PROFILE:
+    case SHOW_PROFILE:
       return {
         ...state,
-        displayProfileContainer: !state.displayProfileContainer,
+        displayProfileContainer: action.payload,
+      };
+    case HIDE_PROFILE:
+      return {
+        ...state,
+        displayProfileContainer: action.payload,
       };
     default:
       return state;
@@ -46,10 +54,15 @@ export function displayProfileReducer(state = initialState, action) {
 }
 export function displayStatusReducer(state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_STATUS:
+    case SHOW_STATUS:
       return {
         ...state,
-        displayStatusContainer: !state.displayStatusContainer,
+        displayStatusContainer: action.payload,
+      };
+    case HIDE_STATUS:
+      return {
+        ...state,
+        displayStatusContainer: action.payload,
       };
     default:
       return state;
@@ -92,10 +105,15 @@ export function displayMsgSearchBarReducer(state = initialState, action) {
 // reducer for group info
 export function displayGroupInfo(state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_GROUP_INFO:
+    case SHOW_GROUP_INFO:
       return {
         ...state,
-        displayGroupInfoLayout: !state.displayGroupInfoLayout,
+        displayGroupInfoLayout: action.payload,
+      };
+    case HIDE_GROUP_INFO:
+      return {
+        ...state,
+        displayGroupInfoLayout: action.payload,
       };
     default:
       return state;
@@ -304,7 +322,7 @@ export function displayGrpMsgSectionReducer(
     case SHOW_GROUP_MSG:
       return {
         ...state,
-        displayGrpMsgSection: !state.displayGrpMsgSection,
+        displayGrpMsgSection: action.payload,
       };
     default:
       return state;

@@ -37,7 +37,8 @@ import {
   StyledGroupInstruction,
 } from "./style.js";
 import {
-  toggleGroupInfo,
+  showGroupInfo,
+  hideGroupInfo,
   toggleGrpParticipants,
   toggleStarredGrpMsgs,
 } from "../../Redux-State/action creators/pageActions";
@@ -130,7 +131,7 @@ function GroupInfo(props) {
       <StyledMsgSearchHeader>
         <div className="navArrow">
           <StyledNavArrow>
-            <div onClick={props.toggleGroupInfo}>
+            <div onClick={() => props.hideGroupInfo(false)}>
               <CancelButton />
             </div>
             <p>Group info</p>
@@ -303,7 +304,8 @@ function mapDispatchToProps(dispatch) {
     toggleStarredGrpMsgs: () => dispatch(toggleStarredGrpMsgs()),
 
     // search msg action
-    toggleGroupInfo: () => dispatch(toggleGroupInfo()),
+    showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
+    hideGroupInfo: (bool) => dispatch(hideGroupInfo(bool)),
     // action to get group participants
     toggleGrpParticipants: () => dispatch(toggleGrpParticipants()),
   };

@@ -13,7 +13,7 @@ import {
   settingsToggle,
   toggleMsgSearch,
   logout,
-  toggleGroupInfo,
+  showGroupInfo,
 } from "../../../Redux-State/action creators/pageActions";
 function CustomMenu(props) {
   const [anchorEl, setAnchorEl] = useState(null);

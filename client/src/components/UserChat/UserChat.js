@@ -40,7 +40,7 @@ function UserChat(props) {
   return (
     <StyledUserChatLayout
       onContextMenu={handleContextMenu}
-      onClick={props.displayGrpMsgAction}
+      onClick={() => props.displayGrpMsgAction(true)}
     >
       <StyledUserChatCont>
         <div className="chatHead">
@@ -96,7 +96,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // search msg action
-    displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
+    displayGrpMsgAction: (bool) => dispatch(displayGrpMsgAction(bool)),
   };
 }
 export default connect(

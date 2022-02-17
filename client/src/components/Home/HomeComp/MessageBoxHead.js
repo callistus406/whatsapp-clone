@@ -1,10 +1,10 @@
 import React from "react";
 import "../Home.css";
 import { connect } from "react-redux";
-import { toggleGroupInfo } from "../../../Redux-State/action creators/pageActions";
+import { showGroupInfo } from "../../../Redux-State/action creators/pageActions";
 function MessageBoxHead(props) {
   return (
-    <div className="chatHeadInfo" onClick={props.toggleGroupInfo}>
+    <div className="chatHeadInfo" onClick={() => props.showGroupInfo(true)}>
       <div className="title">
         <p>Nigeria News</p>
         <div>
@@ -27,7 +27,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // search msg action
-    toggleGroupInfo: () => dispatch(toggleGroupInfo()),
+    showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
   };
 }
 

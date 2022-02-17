@@ -8,7 +8,7 @@ import React, { useRef, useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   toggleMsgSearch,
-  toggleGroupInfo,
+  showGroupInfo,
 } from "../../Redux-State/action creators/pageActions";
 import {
   StyledSpeedDial,
@@ -133,10 +133,10 @@ function MessageBox(props) {
       toggle={props.displayMsgSearchLayout || props.displayGroupInfoLayout}
     >
       <div className="openChatHead">
-        <div className="imageCont" onClick={props.toggleGroupInfo}>
+        <div className="imageCont" onClick={() => props.showGroupInfo(true)}>
           <div className="image"></div>
         </div>
-        <div className="chatHeadInfo" onClick={props.toggleGroupInfo}>
+        <div className="chatHeadInfo" onClick={() => props.showGroupInfo(true)}>
           <div className="title">
             <p>Nigeria News</p>
             <div>
@@ -515,7 +515,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    toggleGroupInfo: () => dispatch(toggleGroupInfo()),
+    showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
 
     toggleMsgSearch: () => dispatch(toggleMsgSearch()),
   };

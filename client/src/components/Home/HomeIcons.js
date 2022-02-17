@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import {
   toggleMsgSearch,
-  profileToggle,
-  statusToggle,
+  showProfile,
+  showStatus,
   newChatToggle,
 } from "../../Redux-State/action creators/pageActions";
 import "./Home.css";
@@ -12,7 +12,7 @@ export const StatusIcon = connect(
     displayStatusContainer: state.status.displayStatusContainer,
   }),
   (dispatch) => ({
-    statusToggle: () => dispatch(statusToggle()),
+    showStatus: (bool) => dispatch(showStatus(bool)),
   })
 )((props) => {
   return (
@@ -21,7 +21,7 @@ export const StatusIcon = connect(
       viewBox="0 0 24 24"
       width="24"
       height="24"
-      onClick={props.statusToggle}
+      onClick={() => props.showStatus(true)}
     >
       <path
         fill="#51585C"
@@ -95,11 +95,11 @@ export const ProfileIcon = connect(
     displayProfileContainer: state.searchMsg.displayProfileContainer,
   }),
   (dispatch) => ({
-    profileToggle: () => dispatch(profileToggle()),
+    showProfile: (bool) => dispatch(showProfile(bool)),
   })
 )((props) => {
   return (
-    <div className="profileIcon" onClick={props.profileToggle}>
+    <div className="profileIcon" onClick={() => props.showProfile(true)}>
       <img
         className="avatarImage"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTApbxj4499GJJWMYvKUVnzMUBJBt1b_Aob0A&usqp=CAU"

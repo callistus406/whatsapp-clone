@@ -11,7 +11,7 @@ import {
   StyledNavArrow,
   StyledProfileContent,
 } from "./styles";
-import { profileToggle } from "../../Redux-State/action creators/pageActions";
+import { hideProfile } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
 
 function UserProfile(props) {
@@ -27,7 +27,7 @@ function UserProfile(props) {
       <StyledProfileHeader>
         <StyledNavArrow>
           {/* profile toggle */}
-          <StyledArrowBackIcon onClick={props.profileToggle} />
+          <StyledArrowBackIcon onClick={() => props.hideProfile(false)} />
           <p>Profile</p>
         </StyledNavArrow>
       </StyledProfileHeader>
@@ -102,7 +102,7 @@ function UserProfile(props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    profileToggle: () => dispatch(profileToggle()),
+    hideProfile: () => dispatch(hideProfile()),
   };
 }
 

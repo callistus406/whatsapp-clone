@@ -9,7 +9,7 @@ import {
   StyledStatusColTwo,
 } from "./style";
 
-import { statusToggle } from "../../Redux-State/action creators/pageActions";
+import { hideStatus } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
 function Status(props) {
   const countRef = useRef(0);
@@ -76,7 +76,7 @@ function Status(props) {
               viewBox="0 0 24 24"
               width="24"
               height="24"
-              onClick={props.statusToggle}
+              onClick={() => props.hideStatus(false)}
               className="icon"
             >
               <path
@@ -123,6 +123,6 @@ const mapStateToProps = (state) => ({
   displayStatusContainer: state.status.displayStatusContainer,
 });
 const mapDispatchToProps = (dispatch) => ({
-  statusToggle: () => dispatch(statusToggle()),
+  hideStatus: (bool) => dispatch(hideStatus(bool)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Status);
