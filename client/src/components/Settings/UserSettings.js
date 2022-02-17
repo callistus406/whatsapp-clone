@@ -21,11 +21,7 @@ import {
   toggleKeyboardShortcuts,
   toggleHelp,
 } from "../../Redux-State/action creators/pageActions";
-import {
-  StyledContainer,
-  StyledArrowBackIcon,
-  StyledNavArrow,
-} from "./UserSettings.styles";
+import { StyledContainer, StyledArrowBackIcon, StyledNavArrow } from "./styles";
 import {
   Notification,
   Theme,
@@ -34,7 +30,7 @@ import {
   KeyboardShortcuts,
   Help,
   Avatar,
-} from "./settingsIcons";
+} from "./icons";
 
 const optionText = [
   { id: 1, name: "Notification" },

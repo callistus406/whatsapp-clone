@@ -1,6 +1,5 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import { groupDialog } from "../../GlobalVariables/variables";
-import "react-contexify/dist/ReactContexify.css";
 
 import {
   StyledUserChatCont,
@@ -14,19 +13,6 @@ import {
 } from "./styles.js";
 
 function UserChat(props) {
-  // let MENU_ID = props.passMenu;
-  // const { show } = useContextMenu({
-  //   id: MENU_ID,
-  // });
-
-  // function handleContextMenu(event) {
-  //   event.preventDefault();
-  //   show(event, {
-  //     props: {
-  //       key: "value",
-  //     },
-  //   });
-  // }
   const [contextMenu, setContextMenu] = React.useState(null);
 
   const handleContextMenu = (event) => {
@@ -66,11 +52,6 @@ function UserChat(props) {
           </div>
         </StyledUserChatText>
       </StyledUserChatCont>
-      {/* <Menu id={MENU_ID} style={{ width: "12rem" }}>
-        {groupDialog.map((item) => {
-          return <StyledItem key={item.id}>{item.text}</StyledItem>;
-        })}
-      </Menu> */}
 
       <StyledContextMenu
         PaperProps={{

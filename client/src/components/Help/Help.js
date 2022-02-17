@@ -7,7 +7,7 @@ import {
   StyledHelpContent,
   StyledCustomDiv,
   StyledHelpLinksContainer,
-} from "./Help.style.js";
+} from "./style.js";
 export function Help({ handleClickAction, toggle }) {
   return (
     <StyledContainer toggle={toggle} width="28rem">

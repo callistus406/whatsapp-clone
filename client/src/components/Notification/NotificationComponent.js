@@ -9,7 +9,7 @@ import {
   StyledFormHelperText,
   StyledNotificationHeader,
   StyledNotificationContent,
-} from "./Notification.style";
+} from "./style";
 
 import { toggleNotification } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";

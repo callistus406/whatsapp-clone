@@ -7,7 +7,7 @@ import {
   StyledArrowBackIcon,
   StyledArchiveHeader,
   StyledArchiveContent,
-} from "./ArchivedChats.styles";
+} from "./styles";
 import { archiveToggle } from "../../Redux-State/action creators/pageActions.js";
 function ArchivedChats(props) {
   return (

@@ -30,7 +30,7 @@ import {
   StyledFab,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
-} from "./Home.style";
+} from "./style";
 import {
   SearchIcon,
   MsgOptionsIcon,

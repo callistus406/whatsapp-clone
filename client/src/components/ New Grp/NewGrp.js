@@ -9,7 +9,7 @@ import {
   StyledContactHeading,
   StyledContactInfo,
   StyledContactContainer,
-} from "./NewGrp.styles.js";
+} from "./styles.js";
 import { ContactIcon, DeleteIcon } from "./icons.js";
 import { newGroupToggle } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";

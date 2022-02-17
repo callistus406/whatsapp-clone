@@ -13,7 +13,7 @@ import {
   StyledAddContact,
   StyledContactInfo,
   StyledFormHelperText,
-} from "./BlockedContacts.style.js";
+} from "./style.js";
 import { DeleteIcon, AddContactIcon, ContactIcon } from "./icons";
 import { settingsToggle } from "../../Redux-State/action creators/pageActions";
 function BlockedContacts({ handleClickAction, toggle }) {

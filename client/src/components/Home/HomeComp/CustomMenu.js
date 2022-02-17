@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
-import { StyledActionIcons, StyledMenuItem } from "../Home.style";
+import { StyledActionIcons, StyledMenuItem } from "../style";
 import Tooltip from "@mui/material/Tooltip";
 
 import { OptionsIcon } from "../HomeIcons";

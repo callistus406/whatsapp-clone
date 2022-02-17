@@ -11,7 +11,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 // menu
 import NewChat from "../NewChat/NewChat";
 import Tooltip from "@mui/material/Tooltip";
-import "react-contexify/dist/ReactContexify.css";
 // speed dial
 import PersonIcon from "@mui/icons-material/Person";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
@@ -24,7 +23,6 @@ import StarredMsgs from "../StarredMsgs/StarredMsgs";
 import UserSettings from "../Settings/UserSettings";
 import BlockedContacts from "../BlockedContacts/BlockedContacts";
 import Status from "../Status/Status";
-import "react-contexify/dist/ReactContexify.css";
 import SearchContact from "../SearchContact/SearchContact";
 import { groupDialog } from "../../GlobalVariables/variables";
 
@@ -63,7 +61,7 @@ import {
   StyledFab,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
-} from "./Home.style";
+} from "./style";
 import {
   StatusIcon,
   MessageIcon,

@@ -7,9 +7,7 @@ import { CenterDivContent } from "../../Styles/CustomStyles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 // menu
 import NewChat from "../../NewChat/NewChat";
-import "react-contexify/dist/ReactContexify.css";
 
-import "react-contexify/dist/ReactContexify.css";
 import SearchContact from "../../SearchContact/SearchContact";
 import { groupDialog } from "../../../GlobalVariables/variables";
 
@@ -25,7 +23,7 @@ import {
   StyledNotificationIcon,
   StyledActionIcons,
   StyledSearchBarContainer,
-} from "../Home.style";
+} from "../style";
 import CustomMenu from "./CustomMenu";
 function Content(props) {
   const countRef = useRef(0);

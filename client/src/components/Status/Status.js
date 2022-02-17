@@ -7,7 +7,7 @@ import {
   StyledStatusNotification,
   StyledStatusColTwoLayout,
   StyledStatusColTwo,
-} from "./Status.style";
+} from "./style";
 
 import { statusToggle } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";

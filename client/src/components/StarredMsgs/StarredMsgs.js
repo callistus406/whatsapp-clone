@@ -7,7 +7,7 @@ import {
   StyledArrowBackIcon,
   StyledStarredMsgsHeader,
   StyledStarredMsgsContent,
-} from "./StarredMsgs.style.js";
+} from "./style.js";
 function StarredMsgs(props) {
   return (
     <StyledContainer toggle={props.displayStarredMgsLayout} width="28rem">

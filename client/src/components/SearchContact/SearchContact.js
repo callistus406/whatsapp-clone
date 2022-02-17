@@ -9,7 +9,7 @@ import {
   StyledMsgSearchContent,
   StyledSearchIcon,
   StyledSearchBarContainer,
-} from "./SearchContact.style.js";
+} from "./style.js";
 import { DeleteIcon, CancelButton, ContactIcon } from "./icons";
 import { connect } from "react-redux";
 function SearchContact(props) {
