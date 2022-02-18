@@ -39,7 +39,8 @@ import {
 import {
   showGroupInfo,
   hideGroupInfo,
-  toggleGrpParticipants,
+  showGrpParticipants,
+  closeGrpParticipants,
   toggleStarredGrpMsgs,
 } from "../../Redux-State/action creators/pageActions";
 import { connect } from "react-redux";
@@ -89,6 +90,7 @@ function GroupInfo(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
   function AlertDialog() {
     const StyledButton = muiStyled(Button)(({ theme }) => ({
       backgroundColor: "#008069",
@@ -236,9 +238,9 @@ function GroupInfo(props) {
         <StyledMembersLayout ref={membersRef}>
           <StyledMembersHeader>
             <p>254 participants</p>
-            <div onClick={props.toggleGrpParticipants}>
-              <SearchIcon />
-              <SearchParticipants activate={props.displayGrpParticipants} />
+            <div>
+              <SearchIcon onClick={() => props.showGrpParticipants(true)} />
+              <SearchParticipants />
             </div>
           </StyledMembersHeader>
           <Members role="Group admin" />
@@ -323,7 +325,7 @@ function mapDispatchToProps(dispatch) {
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     hideGroupInfo: (bool) => dispatch(hideGroupInfo(bool)),
     // action to get group participants
-    toggleGrpParticipants: () => dispatch(toggleGrpParticipants()),
+    showGrpParticipants: (bool) => dispatch(showGrpParticipants(bool)),
   };
 }
 

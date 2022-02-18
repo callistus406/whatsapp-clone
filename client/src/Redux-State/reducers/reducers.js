@@ -21,6 +21,7 @@ import {
   HIDE_GROUP_INFO,
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
+  CLOSE_SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
   SHOW_GROUP_MSG,
 } from "../actions/actionTypes";
@@ -295,7 +296,12 @@ export function selectGroupParticipantsReducer(
     case SEARCH_GROUP_PARTICIPANTS:
       return {
         ...state,
-        displayGrpParticipants: !state.displayGrpParticipants,
+        displayGrpParticipants: action.payload,
+      };
+    case CLOSE_SEARCH_GROUP_PARTICIPANTS:
+      return {
+        ...state,
+        displayGrpParticipants: action.payload,
       };
     default:
       return state;

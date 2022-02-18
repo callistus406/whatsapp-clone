@@ -6,7 +6,6 @@ import SendIcon from "@mui/icons-material/Send";
 import { styled as muiStyled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import Checkbox from "@mui/material/Checkbox";
-
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -36,7 +35,7 @@ import {
   StyledAlphabeticalHeader,
 } from "./style";
 
-import { toggleGrpParticipants } from "../../Redux-State/action creators/pageActions";
+import { closeGrpParticipants } from "../../Redux-State/action creators/pageActions";
 const BootstrapDialog = muiStyled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     // padding: theme.spacing(2),
@@ -88,14 +87,8 @@ BootstrapDialogTitle.propTypes = {
 
 const SearchParticipants = (props) => {
   useEffect(() => {
-    countRef.current = countRef.current + 1;
-    // console.log(msgCont);
-    console.log(
-      "home content -0-0 rendered..............." +
-        countRef.current +
-        "---times"
-    );
-  });
+    focus();
+  }, []);
 
   //   const [open, setOpen] = React.useState(props.displayGrpParticipants);
   const inputRef = useRef();
@@ -202,21 +195,109 @@ const SearchParticipants = (props) => {
       </div>
     );
   }
+  const StyledButton = muiStyled(Button)(({ theme }) => ({
+    backgroundColor: "#008069",
+    minWidth: "4rem",
+    color: "#fff",
+    "&:hover": {
+      background: "#017561",
+    },
+    marginRight: "1rem",
+    marginBottom: "1rem",
+  }));
+  const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
+    backgroundColor: "#008069",
+    color: "#fff",
+    borderRadius: "none",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "1.1rem",
+  }));
+  const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
+    backgroundColor: "rgba(255,255,255,0.9)",
+    boxShadow: "none",
+  }));
+  const StyledSpace = styled.div`
+    ${"" /* height: 1rem; */}
+    width: 23rem;
+  `;
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    props.closeGrpParticipants(false);
+  };
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open dialog
       </Button> */}
-      <BootstrapDialog
+
+      <StyledDialog
+        open={props.displayGrpParticipants}
         // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <StyledDialogTitle id="alert-dialog-title">
+          <div onClick={handleClose}>
+            <CloseIcon />
+          </div>
+          Only admins can edit this group's info
+        </StyledDialogTitle>
+        <StyledSearchBarContainer ref={divRef}>
+          <span className="searchIconCont">
+            {" "}
+            {focused ? <ArrowBack /> : <StyledSearchIcon />}
+          </span>
+          <span className="clearIconCont">
+            {cancel ? <ClearIcon onClick={handleCancel} /> : ""}
+          </span>
+          <input
+            ref={inputRef}
+            type="text"
+            className="inputSearch"
+            onFocus={focus}
+            onBlur={unfocus}
+            onChange={handleChange}
+            placeholder="Search..."
+          />
+        </StyledSearchBarContainer>
+
+        <StyledDialogContent dividers>
+          <Members role="Group admin" name="Gift" />
+          <Members name="micheal" />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+          <Members />
+        </StyledDialogContent>
+
+        <StyledBottom display={data.length <= 0 ? false : true}>
+          <StyledFloatingActionButtons
+            display={data.length <= 0 ? false : true}
+          >
+            <FloatingActionButtons />
+          </StyledFloatingActionButtons>
+          <div className="names"></div>
+        </StyledBottom>
+      </StyledDialog>
+      {/* <BootstrapDialog
         disableBackdropClick
         aria-labelledby="customized-dialog-title"
         open={props.displayGrpParticipants}
       >
         <StyledBootstrapDialogTitle
           id="customized-dialog-title"
-          //   onClose={handleClose}
         >
           <ClearIcon style={{ marginRight: "1rem", color: "#B2D8D1" }} />
           Search Participants
@@ -237,36 +318,11 @@ const SearchParticipants = (props) => {
             onBlur={unfocus}
             onChange={handleChange}
             placeholder="Search..."
-            // onClick={handleClick("search")}
           />
         </StyledSearchBarContainer>
-        {/* <StyledContactsTitle>
-          <span>CONTACTS</span>
-        </StyledContactsTitle> */}
-        <StyledDialogContent dividers>
-          {/* <ShowContact
-            parentProps={props}
-            role="admin"
-            name="Austin"
-            about="full stack developer"
-          />
-       
-          <ShowContact
-            parentProps={props}
-            name="mack"
-            about=" python  developer"
-          />
-          <ShowContact
-            parentProps={props}
-            name="mack"
-            about=" python  developer"
-          />
-          <ShowContact
-            parentProps={props}
-            name="mack"
-            about=" python  developer"
-          /> */}
 
+        <StyledDialogContent dividers>
+        
           <Members role="Group admin" name="Gift" />
           <Members name="micheal" />
           <Members />
@@ -279,11 +335,7 @@ const SearchParticipants = (props) => {
           <Members />
           <Members />
         </StyledDialogContent>
-        {/* <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Save changes
-            </Button>
-          </DialogActions> */}
+    
         <StyledBottom display={data.length <= 0 ? false : true}>
           <StyledFloatingActionButtons
             display={data.length <= 0 ? false : true}
@@ -291,10 +343,9 @@ const SearchParticipants = (props) => {
             <FloatingActionButtons />
           </StyledFloatingActionButtons>
           <div className="names">
-            {/* {data.length > 0 ? data.map((item) => <p>{item} , </p>) : ""} */}
           </div>
         </StyledBottom>
-      </BootstrapDialog>
+      </BootstrapDialog> */}
     </div>
   );
 };
@@ -353,7 +404,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    toggleGrpParticipants: () => dispatch(toggleGrpParticipants()),
+    closeGrpParticipants: (bool) => dispatch(closeGrpParticipants(bool)),
   };
 }
 

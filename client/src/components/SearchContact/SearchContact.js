@@ -20,7 +20,6 @@ function SearchContact(props) {
     countRef.current = countRef.current + 1;
     console.log("message search rendered " + countRef.current + " times");
 
-    // console.log(document.getElementById("aro"));
   });
   const [searchInput, setSearchInput] = useState(".");
 

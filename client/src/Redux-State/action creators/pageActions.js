@@ -21,6 +21,7 @@ import {
   HIDE_GROUP_INFO,
   SELECT_CONTACTS,
   SEARCH_GROUP_PARTICIPANTS,
+  CLOSE_SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
   SHOW_GROUP_MSG,
 } from "../actions/actionTypes";
@@ -178,10 +179,19 @@ export function toggleSelectContacts(data) {
     info: "this action  will individual contacts",
   };
 }
-export function toggleGrpParticipants() {
+// search participants
+export function showGrpParticipants(bool) {
   return {
     type: SEARCH_GROUP_PARTICIPANTS,
-    info: "this action  will display group participants",
+    payload: bool,
+    info: "this action  will display search  group participants",
+  };
+}
+export function closeGrpParticipants(bool) {
+  return {
+    type: CLOSE_SEARCH_GROUP_PARTICIPANTS,
+    payload: bool,
+    info: "this action  will close search  group participants",
   };
 }
 // starred grp action

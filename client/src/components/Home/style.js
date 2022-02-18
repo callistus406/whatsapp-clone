@@ -274,7 +274,7 @@ export const StyledContactsCol = styled.div`
   /* padding: 4px; */
   /* background-color: green; */
   min-width: ${(props) => (props.toggle ? props.width : "28rem")};
-  height: 65.5vh;
+  height: calc(100vh - (3.7rem + 5.8rem + 3rem));
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
