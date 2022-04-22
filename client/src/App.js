@@ -1,5 +1,5 @@
-import Home from "./components/Home/Home";
-import Whatsapp from "./Whatsapp/Whatsapp";
+import Home from "./Pages/Home/Home";
+import Whatsapp from "./Pages/Main";
 
 function App() {
   return <Whatsapp />;

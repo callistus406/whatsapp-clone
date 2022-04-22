@@ -29,3 +29,66 @@ export const contactDialog = [
   "Pin chat",
   "Mark as read",
 ];
+
+// ...........................................................
+// keyboard shortcuts
+
+export const keyObj = [
+  {
+    //   name:"mark as Unread",
+    keys: ["Ctrl", "Alt", "Shift", "U"],
+  },
+  {
+    //   name:"Archive chat",
+    keys: ["Ctrl", "Alt", "Shift", "E"],
+  },
+  {
+    //   name:"pin chat",
+    keys: ["Ctrl", "Alt", "Shift", "P"],
+  },
+  {
+    //  name: "search chat",
+    keys: ["Ctrl", "Alt", "Shift", "F"],
+  },
+  {
+    //   name:"New group",
+    keys: ["Ctrl", "Alt", "Shift", "N"],
+  },
+  {
+    //  name: "increased speed of Selected Voice Message",
+    keys: ["Ctrl", "."],
+  },
+  {
+    keys: ["Ctrl", "Alt", ","],
+  },
+  {
+    keys: ["Ctrl", "Alt", "G"],
+  },
+];
+
+export const textObj = [
+  {
+    name: "mark as Unread",
+  },
+  {
+    name: "Archive chat",
+  },
+  {
+    name: "pin chat",
+  },
+  {
+    name: "search chat",
+  },
+  {
+    name: "New group",
+  },
+  {
+    name: "increased speed of Selected Voice Message",
+  },
+  {
+    name: "Settings",
+  },
+  {
+    name: "Git Panel",
+  },
+];
