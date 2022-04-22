@@ -1,0 +1,14 @@
+.arrowBackIcon {
+  animation-name: rotate;
+  transform: rotate(-90deg);
+  animation: rotate 1s infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(-45deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
