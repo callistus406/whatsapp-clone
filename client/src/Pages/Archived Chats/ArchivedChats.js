@@ -8,7 +8,7 @@ import {
   StyledArchiveHeader,
   StyledArchiveContent,
 } from "./styles";
-import { archiveToggle } from "../../Redux-State/action creators/pageActions.js";
+import { archiveToggle } from "../../Redux-State/actionCreators/pageActions.js";
 function ArchivedChats(props) {
   return (
     <div>

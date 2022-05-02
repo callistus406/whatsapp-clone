@@ -10,12 +10,13 @@ import {
   newGroupToggle,
   archiveToggle,
   starredMsgsToggle,
-  settingsToggle,
+  displaySettings,
   toggleMsgSearch,
   logout,
   showGroupInfo,
-} from "../../../Redux-State/action creators/pageActions";
+} from "../../../Redux-State/actionCreators/pageActions";
 function CustomMenu(props) {
+  console.log(props);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const onClickHandler = (event) => {
@@ -93,12 +94,15 @@ function CustomMenu(props) {
         <StyledMenuItem onClick={props.starredMsgsToggle}>
           Stared messages
         </StyledMenuItem>
-        <StyledMenuItem onClick={props.settingsToggle}>Settings</StyledMenuItem>
+        <StyledMenuItem onClick={() => props.displaySettings(true)}>
+          Settings
+        </StyledMenuItem>
         <StyledMenuItem onClick={props.logout}>Log out</StyledMenuItem>
       </Menu>
     </>
   );
 }
+
 function mapStateToProps(state) {
   return {
     displayCreateNewGrp: state.newGroup.displayNewGroup,
@@ -114,7 +118,7 @@ function mapDispatchToProps(dispatch) {
     newGroupToggle: () => dispatch(newGroupToggle()),
     archiveToggle: () => dispatch(archiveToggle()),
     starredMsgsToggle: () => dispatch(starredMsgsToggle()),
-    settingsToggle: () => dispatch(settingsToggle()),
+    displaySettings: (bool) => dispatch(displaySettings(bool)),
     logout: () => dispatch(logout()),
   };
 }

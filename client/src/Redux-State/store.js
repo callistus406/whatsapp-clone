@@ -9,7 +9,7 @@ import {
   newGroupReducer,
   archiveReducer,
   starredMsgsReducer,
-  settingsReducer,
+  displaySettingsReducer,
   logoutReducer,
   notificationReducer,
   themeReducer,
@@ -23,6 +23,7 @@ import {
   selectGroupParticipantsReducer,
   starredGrpMsgReducer,
   displayGrpMsgSectionReducer,
+  displaySecurityReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -38,7 +39,7 @@ const rootReducer = combineReducers({
   newGroup: newGroupReducer,
   archive: archiveReducer,
   starredMsgs: starredMsgsReducer,
-  settings: settingsReducer,
+  settings: displaySettingsReducer,
   logout: logoutReducer,
   // from settings
   notification: notificationReducer,
@@ -51,5 +52,6 @@ const rootReducer = combineReducers({
   grpParticipants: selectGroupParticipantsReducer,
   starredGrpMsg: starredGrpMsgReducer,
   grpMsgSection: displayGrpMsgSectionReducer,
+  security: displaySecurityReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(logger));

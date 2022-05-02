@@ -8,7 +8,7 @@ import {
   TOGGLE_NEW_GROUP,
   TOGGLE_ARCHIVE,
   TOGGLE_STARRED_MSGS,
-  TOGGLE_SETTINGS,
+  DISPLAY_SETTINGS,
   LOGOUT,
   TOGGLE_CHAT_WALLPAPER,
   TOGGLE_BLOCKED_CONTACTS,
@@ -24,6 +24,8 @@ import {
   CLOSE_SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
   SHOW_GROUP_MSG,
+  LINK_SETTINGS_AND_PROFILE,
+  DISPLAY_SECURITY,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -41,6 +43,27 @@ export function hideProfile(bool) {
     info: "this action  will hide the profile slide",
   };
 }
+export function displaySettings(bool) {
+  return {
+    type: DISPLAY_SETTINGS,
+    payload: bool,
+    info: "this action  will display the settings slide",
+  };
+}
+export function toggleSecurity(bool) {
+  return {
+    type: DISPLAY_SECURITY,
+    payload: bool,
+    info: "this action  will display the security slide",
+  };
+}
+// export function hideSettings(bool) {
+//   return {
+//     type: HIDE_SETTINGS,
+//     payload: bool,
+//     info: "this action  will hide the settings slide",
+//   };
+// }
 
 export function newChatToggle() {
   return {
@@ -94,6 +117,15 @@ export function hideGroupInfo(bool) {
   };
 }
 
+// component links
+
+export function settingsToProfile(bool) {
+  return {
+    type: LINK_SETTINGS_AND_PROFILE,
+    payload: bool,
+    info: "this action  will display the profile slide from settings component",
+  };
+}
 //ACTIONS CREATORS FOR OPTIONS WHICH IS A CHILD OF IN STATUS BAR ACTIONS
 
 export function newGroupToggle() {
@@ -117,12 +149,12 @@ export function starredMsgsToggle() {
   };
 }
 
-export function settingsToggle() {
-  return {
-    type: TOGGLE_SETTINGS,
-    info: "this action  will display the settings Layout ",
-  };
-}
+// export function settingsToggle() {
+//   return {
+//     type: TOGGLE_SETTINGS,
+//     info: "this action  will display the settings Layout ",
+//   };
+// }
 export function logout() {
   return {
     type: LOGOUT,

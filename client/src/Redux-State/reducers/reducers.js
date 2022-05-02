@@ -8,7 +8,7 @@ import {
   TOGGLE_NEW_GROUP,
   TOGGLE_ARCHIVE,
   TOGGLE_STARRED_MSGS,
-  TOGGLE_SETTINGS,
+  DISPLAY_SETTINGS,
   LOGOUT,
   TOGGLE_HELP,
   TOGGLE_THEME,
@@ -24,6 +24,7 @@ import {
   CLOSE_SEARCH_GROUP_PARTICIPANTS,
   TOGGLE_GRP_STARRED_MSGS,
   SHOW_GROUP_MSG,
+  DISPLAY_SECURITY,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -53,6 +54,23 @@ export function displayProfileReducer(state = initialState, action) {
       return state;
   }
 }
+
+// export function settingsToProfileReducer(state = initialState, action) {
+//   switch (action.type) {
+//     case LINK_SETTINGS_AND_PROFILE:
+//       return {
+//         ...state,
+//         displayProfileContainer: action.payload,
+//       };
+//     case HIDE_PROFILE:
+//       return {
+//         ...state,
+//         displayProfileContainer: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// }
 export function displayStatusReducer(state = initialState, action) {
   switch (action.type) {
     case SHOW_STATUS:
@@ -128,6 +146,7 @@ const optionsInitialState = {
   displayStarredMsgs: false,
   displaySettings: false,
   logout: false,
+  displaySecurity: false,
 };
 
 export function newGroupReducer(state = optionsInitialState, action) {
@@ -163,13 +182,37 @@ export function starredMsgsReducer(state = optionsInitialState, action) {
       return state;
   }
 }
-export function settingsReducer(state = optionsInitialState, action) {
+// export function settingsReducer(state = optionsInitialState, action) {
+//   switch (action.type) {
+//     case TOGGLE_SETTINGS:
+//       return {
+//         ...state,
+//         displaySettings: !state.displaySettings,
+//       };
+//     default:
+//       return state;
+//   }
+// }
+export function displaySettingsReducer(state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_SETTINGS:
+    case DISPLAY_SETTINGS:
       return {
         ...state,
-        displaySettings: !state.displaySettings,
+        displaySettings: action.payload,
       };
+
+    default:
+      return state;
+  }
+}
+export function displaySecurityReducer(state = initialState, action) {
+  switch (action.type) {
+    case DISPLAY_SECURITY:
+      return {
+        ...state,
+        displaySecurity: action.payload,
+      };
+
     default:
       return state;
   }

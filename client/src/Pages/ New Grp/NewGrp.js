@@ -11,7 +11,7 @@ import {
   StyledContactContainer,
 } from "./styles.js";
 import { ContactIcon, DeleteIcon } from "./icons.js";
-import { newGroupToggle } from "../../Redux-State/action creators/pageActions";
+import { newGroupToggle } from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
 function NewGrp(props) {
   const countRef = useRef(0);

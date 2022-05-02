@@ -9,7 +9,7 @@ import {
   StyledStatusColTwo,
 } from "./style";
 
-import { hideStatus } from "../../Redux-State/action creators/pageActions";
+import { hideStatus } from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
 function Status(props) {
   const countRef = useRef(0);

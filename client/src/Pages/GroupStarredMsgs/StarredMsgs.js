@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { toggleStarredGrpMsgs } from "../../Redux-State/action creators/pageActions.js";
+import { toggleStarredGrpMsgs } from "../../Redux-State/actionCreators/pageActions.js";
 import {
   StyledContainer,
   StyledNavArrow,

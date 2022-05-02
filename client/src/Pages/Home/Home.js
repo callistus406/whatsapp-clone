@@ -27,7 +27,7 @@ import {
   optionsToggle,
   showGroupInfo,
   displayGrpMsgAction,
-} from "../../Redux-State/action creators/pageActions";
+} from "../../Redux-State/actionCreators/pageActions";
 import { StyledContactsCol } from "./style";
 import { StickerIcon, ProfileIcon } from "./HomeIcons";
 import GroupInfo from "../GroupInfo/GroupInfo";

@@ -4,7 +4,10 @@ import Checkbox from "@mui/material/Checkbox";
 import DialogContent from "@mui/material/DialogContent";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled as muiStyled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
 
+import DialogTitle from "@mui/material/DialogTitle";
 export const StyledFab = styled(Fab)`
   && {
     position: absolute;
@@ -143,7 +146,7 @@ export const StyledSearchBarContainer = styled.div`
     ${"" /* margin-top: 1rem; */}
 
     width: 27.25rem;
-    height: 2.1rem;
+    height: 2.33rem;
     border: none;
     border-radius: 0.45rem;
     font-size: 0.95rem;
@@ -171,7 +174,7 @@ export const StyledSearchBarContainer = styled.div`
   }
   .clearIconCont {
     position: absolute;
-    margin-left: 21rem;
+    margin-left: 24.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -320,4 +323,31 @@ export const StyledAlphabeticalHeader = styled.div`
     display: flex;
     align-items: center;
   }
+`;
+
+export const StyledButton = muiStyled(Button)(({ theme }) => ({
+  backgroundColor: "#008069",
+  minWidth: "4rem",
+  color: "#fff",
+  "&:hover": {
+    background: "#017561",
+  },
+  marginRight: "1rem",
+  marginBottom: "1rem",
+}));
+export const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
+  backgroundColor: "#008069",
+  color: "#F4FAF8",
+  borderRadius: "none",
+  display: "flex",
+  alignItems: "center",
+  fontSize: "1.1rem",
+}));
+export const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
+  backgroundColor: "rgba(255,255,255,0.9)",
+  boxShadow: "none",
+}));
+export const StyledSpace = styled.div`
+  ${"" /* height: 1rem; */}
+  width: 23rem;
 `;

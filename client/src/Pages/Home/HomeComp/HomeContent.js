@@ -12,9 +12,9 @@ import SearchContact from "../../SearchContact/SearchContact";
 import { groupDialog } from "../../../GlobalVariables/variables";
 
 import {
-  settingsToggle,
+  displaySettings,
   logout,
-} from "../../../Redux-State/action creators/pageActions";
+} from "../../../Redux-State/actionCreators/pageActions";
 import { StatusIcon, MessageIcon, ProfileIcon, ArrowBack } from "../HomeIcons";
 import {
   StyledSpan,
@@ -142,7 +142,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    settingsToggle: () => dispatch(settingsToggle()),
+    displaySettings: (bool) => dispatch(displaySettings(bool)),
     logout: () => dispatch(logout()),
   };
 }

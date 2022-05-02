@@ -31,7 +31,7 @@ import {
   ArrowBack,
   StyledFab,
 } from "./styles";
-import { toggleSelectContacts } from "../../Redux-State/action creators/pageActions";
+import { toggleSelectContacts } from "../../Redux-State/actionCreators/pageActions";
 const BootstrapDialog = muiStyled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),

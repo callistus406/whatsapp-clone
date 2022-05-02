@@ -42,7 +42,7 @@ import {
   showGrpParticipants,
   closeGrpParticipants,
   toggleStarredGrpMsgs,
-} from "../../Redux-State/action creators/pageActions";
+} from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
 import SearchParticipants from "../SearchParticipants/SearchParticipants.js";
 import StarredMsgs from "../GroupStarredMsgs/StarredMsgs";

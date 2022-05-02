@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
 import { styled as muiStyled } from "@mui/material/styles";
@@ -33,9 +32,13 @@ import {
   StyledMembersChatText,
   StyledCircle,
   StyledAlphabeticalHeader,
+  StyledButton,
+  StyledDialogTitle,
+  StyledDialog,
+  StyledSpace,
 } from "./style";
 
-import { closeGrpParticipants } from "../../Redux-State/action creators/pageActions";
+import { closeGrpParticipants } from "../../Redux-State/actionCreators/pageActions";
 const BootstrapDialog = muiStyled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     // padding: theme.spacing(2),
@@ -195,32 +198,7 @@ const SearchParticipants = (props) => {
       </div>
     );
   }
-  const StyledButton = muiStyled(Button)(({ theme }) => ({
-    backgroundColor: "#008069",
-    minWidth: "4rem",
-    color: "#fff",
-    "&:hover": {
-      background: "#017561",
-    },
-    marginRight: "1rem",
-    marginBottom: "1rem",
-  }));
-  const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
-    backgroundColor: "#008069",
-    color: "#fff",
-    borderRadius: "none",
-    display: "flex",
-    alignItems: "center",
-    fontSize: "1.1rem",
-  }));
-  const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
-    backgroundColor: "rgba(255,255,255,0.9)",
-    boxShadow: "none",
-  }));
-  const StyledSpace = styled.div`
-    ${"" /* height: 1rem; */}
-    width: 23rem;
-  `;
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -244,10 +222,10 @@ const SearchParticipants = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <StyledDialogTitle id="alert-dialog-title">
-          <div onClick={handleClose}>
-            <CloseIcon />
+          <div onClick={handleClose} style={{ marginRight: "1.8rem" }}>
+            <CloseIcon style={{ color: "#B2D8D1" }} fontSize="medium" />
           </div>
-          Only admins can edit this group's info
+          Search Participants
         </StyledDialogTitle>
         <StyledSearchBarContainer ref={divRef}>
           <span className="searchIconCont">
@@ -264,7 +242,7 @@ const SearchParticipants = (props) => {
             onFocus={focus}
             onBlur={unfocus}
             onChange={handleChange}
-            placeholder="Search..."
+            placeholder="Search contacts"
           />
         </StyledSearchBarContainer>
 
@@ -291,61 +269,6 @@ const SearchParticipants = (props) => {
           <div className="names"></div>
         </StyledBottom>
       </StyledDialog>
-      {/* <BootstrapDialog
-        disableBackdropClick
-        aria-labelledby="customized-dialog-title"
-        open={props.displayGrpParticipants}
-      >
-        <StyledBootstrapDialogTitle
-          id="customized-dialog-title"
-        >
-          <ClearIcon style={{ marginRight: "1rem", color: "#B2D8D1" }} />
-          Search Participants
-        </StyledBootstrapDialogTitle>
-        <StyledSearchBarContainer ref={divRef}>
-          <span className="searchIconCont">
-            {" "}
-            {focused ? <ArrowBack /> : <StyledSearchIcon />}
-          </span>
-          <span className="clearIconCont">
-            {cancel ? <ClearIcon onClick={handleCancel} /> : ""}
-          </span>
-          <input
-            ref={inputRef}
-            type="text"
-            className="inputSearch"
-            onFocus={focus}
-            onBlur={unfocus}
-            onChange={handleChange}
-            placeholder="Search..."
-          />
-        </StyledSearchBarContainer>
-
-        <StyledDialogContent dividers>
-        
-          <Members role="Group admin" name="Gift" />
-          <Members name="micheal" />
-          <Members />
-          <Members />
-          <Members />
-          <Members />
-          <Members />
-          <Members />
-          <Members />
-          <Members />
-          <Members />
-        </StyledDialogContent>
-    
-        <StyledBottom display={data.length <= 0 ? false : true}>
-          <StyledFloatingActionButtons
-            display={data.length <= 0 ? false : true}
-          >
-            <FloatingActionButtons />
-          </StyledFloatingActionButtons>
-          <div className="names">
-          </div>
-        </StyledBottom>
-      </BootstrapDialog> */}
     </div>
   );
 };
@@ -366,22 +289,6 @@ export function ContactIcon() {
     </svg>
   );
 }
-
-// const ControlledCheckbox = connect(
-//   (state) => ({
-//     displayContactName: state.selectContact.displayContactName,
-//   }),
-//   (dispatch) => ({
-//     toggleSelectContacts: (data) => dispatch(toggleSelectContacts(data)),
-//   })
-// )((props) => {
-
-//   return (
-
-//   );
-// });
-
-// ----------------------------
 
 function FloatingActionButtons() {
   return (

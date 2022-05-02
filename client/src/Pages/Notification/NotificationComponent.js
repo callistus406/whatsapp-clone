@@ -11,7 +11,7 @@ import {
   StyledNotificationContent,
 } from "./style";
 
-import { toggleNotification } from "../../Redux-State/action creators/pageActions";
+import { toggleNotification } from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
 export function NotificationComponent(props) {
   const countRef = useRef(0);

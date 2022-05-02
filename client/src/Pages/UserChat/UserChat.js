@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import { groupDialog } from "../../GlobalVariables/variables";
-import { displayGrpMsgAction } from "../../Redux-State/action creators/pageActions";
+import { displayGrpMsgAction } from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
 import {
   StyledUserChatCont,
@@ -75,9 +75,9 @@ function UserChat(props) {
             : undefined
         }
       >
-        {groupDialog.map((item) => {
+        {groupDialog.map((item, index) => {
           return (
-            <StyledContextMenuItem onClick={handleClose}>
+            <StyledContextMenuItem onClick={handleClose} key={index}>
               {item.text}
             </StyledContextMenuItem>
           );
@@ -103,5 +103,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(React.memo(UserChat));
-
-// EBEBEB

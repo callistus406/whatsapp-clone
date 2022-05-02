@@ -15,7 +15,7 @@ import {
   StyledFormHelperText,
 } from "./style.js";
 import { DeleteIcon, AddContactIcon, ContactIcon } from "./icons";
-import { settingsToggle } from "../../Redux-State/action creators/pageActions";
+import { displaySettings } from "../../Redux-State/actionCreators/pageActions";
 function BlockedContacts({ handleClickAction, toggle }) {
   return (
     <StyledContainer toggle={toggle} width="28rem">
@@ -69,14 +69,12 @@ function BlockedContacts({ handleClickAction, toggle }) {
 
 function mapStateToProps(state) {
   return {
-    // search msg state
     displaySettingsLayout: state.settings.displaySettings,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    // search msg action
-    settingsToggle: () => dispatch(settingsToggle()),
+    displaySettings: (bool) => dispatch(displaySettings(bool)),
   };
 }
 

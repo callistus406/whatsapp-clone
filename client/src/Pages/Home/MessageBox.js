@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   toggleMsgSearch,
   showGroupInfo,
-} from "../../Redux-State/action creators/pageActions";
+} from "../../Redux-State/actionCreators/pageActions";
 import {
   StyledSpeedDial,
   StyledMessageSpace,
@@ -78,15 +78,16 @@ function MessageBox(props) {
   }
   console.log(message);
   useEffect(() => {
+    let documentInput = document.getElementById("input");
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
         // callMyFunction();
-        getMessage(document.getElementById("input"));
+        getMessage(documentInput);
         // console.log(message);
         textMsg.push(message);
-        clearInput(document.getElementById("input"));
+        clearInput(documentInput);
       }
     };
     document.addEventListener("keydown", listener);

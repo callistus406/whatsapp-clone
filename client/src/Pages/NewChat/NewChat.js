@@ -4,7 +4,7 @@ import "./NewChat.css";
 
 import { connect } from "react-redux";
 import ClearIcon from "@mui/icons-material/Clear";
-import { newChatToggle } from "../../Redux-State/action creators/pageActions";
+import { newChatToggle } from "../../Redux-State/actionCreators/pageActions";
 import {
   StyledDiv,
   StyleProfileBox,

@@ -12,7 +12,7 @@ import { Help as HelpComponent } from "../Help/Help";
 import BlockedContacts from "../BlockedContacts/BlockedContacts";
 import SelectTheme from "../SelectTheme/SelectTheme";
 // import {optionTex}
-import { settingsToggle } from "../../Redux-State/action creators/pageActions";
+import { displaySettings } from "../../Redux-State/actionCreators/pageActions";
 import {
   toggleNotification,
   toggleTheme,
@@ -20,7 +20,9 @@ import {
   toggleBlockedContacts,
   toggleKeyboardShortcuts,
   toggleHelp,
-} from "../../Redux-State/action creators/pageActions";
+  showProfile,
+  toggleSecurity,
+} from "../../Redux-State/actionCreators/pageActions";
 import { StyledContainer, StyledArrowBackIcon, StyledNavArrow } from "./styles";
 import {
   Notification,
@@ -31,18 +33,21 @@ import {
   Help,
   Avatar,
 } from "./icons";
+import Security from "../Security/Security";
 
 const optionText = [
   { id: 1, name: "Notification" },
-  { id: 2, name: "Theme" },
-  { id: 3, name: "Chat Wallpaper" },
-  { id: 4, name: "Blocked" },
-  { id: 5, name: "Keyboard shortcuts" },
-  { id: 6, name: "Help" },
+  { id: 2, name: "Security" },
+  { id: 3, name: "Theme" },
+  { id: 4, name: "Chat Wallpaper" },
+  { id: 5, name: "Blocked" },
+  { id: 6, name: "Keyboard shortcuts" },
+  { id: 7, name: "Help" },
 ];
 // const arr = [<Notification />];
 const options = [
   <Notification />,
+  <Security />,
   <Theme />,
   <ChatWallpaper />,
   <Blocked />,
@@ -53,6 +58,7 @@ const options = [
 function UserSettings(props) {
   const actions = [
     props.toggleNotification,
+    () => props.toggleSecurity(true),
     props.toggleTheme,
     props.toggleWallpaper,
     props.toggleBlockedContacts,
@@ -90,7 +96,9 @@ function UserSettings(props) {
           <div className="navArrow">
             <StyledNavArrow display={props.displaySettingsLayout}>
               <div className="">
-                <StyledArrowBackIcon onClick={props.settingsToggle} />
+                <StyledArrowBackIcon
+                  onClick={() => props.displaySettings(false)}
+                />
               </div>
               <p>Settings</p>
             </StyledNavArrow>
@@ -103,7 +111,14 @@ function UserSettings(props) {
                 <Avatar />
               </div>
             </div>
-            <div className="settingsProfileContent">
+            <div
+              className="settingsProfileContent"
+              onClick={() => {
+                props.showProfile(true);
+
+                props.displaySettings(false);
+              }}
+            >
               <p>Callistus</p>
               <span>Loading About...</span>
             </div>
@@ -121,6 +136,10 @@ function UserSettings(props) {
         </div>
       </StyledContainer>
       <NotificationComponent />
+      <Security
+        toggle={props.displaySecurity}
+        handleClickAction={props.toggleSecurity}
+      />
       <BlockedContacts
         toggle={props.displayBlockedContacts}
         handleClickAction={props.toggleBlockedContacts}
@@ -144,6 +163,9 @@ function mapStateToProps(state) {
     displayBlockedContacts: state.blockedContacts.displayBlockedContacts,
     displayKeyboardShortcuts: state.keyboardShortCuts.displayKeyboardShortcuts,
     displayHelp: state.help.displayHelp,
+
+    displayProfileContainer: state.searchMsg.displayProfileContainer,
+    displaySecurity: state.security.displaySecurity,
     // search msg state
     displaySettingsLayout: state.settings.displaySettings,
   };
@@ -156,8 +178,12 @@ function mapDispatchToProps(dispatch) {
     toggleBlockedContacts: () => dispatch(toggleBlockedContacts()),
     toggleKeyboardShortcuts: () => dispatch(toggleKeyboardShortcuts()),
     toggleHelp: () => dispatch(toggleHelp()),
+
+    showProfile: (bool) => dispatch(showProfile(bool)),
+    toggleSecurity: (bool) => dispatch(toggleSecurity(bool)),
+
     // search msg action
-    settingsToggle: () => dispatch(settingsToggle()),
+    displaySettings: (bool) => dispatch(displaySettings(bool)),
   };
 }
 

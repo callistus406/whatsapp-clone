@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import "./style.css";
 import ClearIcon from "@mui/icons-material/Clear";
-import { toggleMsgSearch } from "../../Redux-State/action creators/pageActions";
+import { toggleMsgSearch } from "../../Redux-State/actionCreators/pageActions";
 import {
   StyledContainer,
   StyledNavArrow,

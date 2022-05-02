@@ -11,7 +11,7 @@ import {
   StyledNavArrow,
   StyledProfileContent,
 } from "./styles";
-import { hideProfile } from "../../Redux-State/action creators/pageActions";
+import { hideProfile } from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
 
 function UserProfile(props) {
