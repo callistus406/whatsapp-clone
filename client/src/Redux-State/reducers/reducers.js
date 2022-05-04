@@ -25,6 +25,7 @@ import {
   TOGGLE_GRP_STARRED_MSGS,
   SHOW_GROUP_MSG,
   DISPLAY_SECURITY,
+  DISPLAY_PRIVACY,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -147,6 +148,7 @@ const optionsInitialState = {
   displaySettings: false,
   logout: false,
   displaySecurity: false,
+  displayPrivacyPage: false,
 };
 
 export function newGroupReducer(state = optionsInitialState, action) {
@@ -208,6 +210,18 @@ export function displaySettingsReducer(state = initialState, action) {
 export function displaySecurityReducer(state = initialState, action) {
   switch (action.type) {
     case DISPLAY_SECURITY:
+      return {
+        ...state,
+        displaySecurity: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+export function displayPrivacyReducer(state = initialState, action) {
+  switch (action.type) {
+    case DISPLAY_PRIVACY:
       return {
         ...state,
         displaySecurity: action.payload,

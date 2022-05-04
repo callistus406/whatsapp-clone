@@ -24,6 +24,7 @@ import {
   starredGrpMsgReducer,
   displayGrpMsgSectionReducer,
   displaySecurityReducer,
+  displayPrivacyReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -53,5 +54,6 @@ const rootReducer = combineReducers({
   starredGrpMsg: starredGrpMsgReducer,
   grpMsgSection: displayGrpMsgSectionReducer,
   security: displaySecurityReducer,
+  privacy: displayPrivacyReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(logger));

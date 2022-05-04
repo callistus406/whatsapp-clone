@@ -11,8 +11,13 @@ import NotificationComponent from "../Notification/NotificationComponent";
 import { Help as HelpComponent } from "../Help/Help";
 import BlockedContacts from "../BlockedContacts/BlockedContacts";
 import SelectTheme from "../SelectTheme/SelectTheme";
+import LockIcon from "@mui/icons-material/Lock";
+import Privacy from "../Privacy/Privacy";
 // import {optionTex}
-import { displaySettings } from "../../Redux-State/actionCreators/pageActions";
+import {
+  displaySettings,
+  togglePrivacy,
+} from "../../Redux-State/actionCreators/pageActions";
 import {
   toggleNotification,
   toggleTheme,
@@ -32,22 +37,26 @@ import {
   KeyboardShortcuts,
   Help,
   Avatar,
+  SecurityIcon,
+  PrivacyIcon,
 } from "./icons";
 import Security from "../Security/Security";
 
 const optionText = [
   { id: 1, name: "Notification" },
-  { id: 2, name: "Security" },
-  { id: 3, name: "Theme" },
-  { id: 4, name: "Chat Wallpaper" },
-  { id: 5, name: "Blocked" },
-  { id: 6, name: "Keyboard shortcuts" },
-  { id: 7, name: "Help" },
+  { id: 2, name: "Privacy" },
+  { id: 3, name: "Security" },
+  { id: 4, name: "Theme" },
+  { id: 5, name: "Chat Wallpaper" },
+  { id: 6, name: "Blocked" },
+  { id: 7, name: "Keyboard shortcuts" },
+  { id: 8, name: "Help" },
 ];
 // const arr = [<Notification />];
 const options = [
   <Notification />,
-  <Security />,
+  <LockIcon style={{ color: "#919191" }} />,
+  <SecurityIcon />,
   <Theme />,
   <ChatWallpaper />,
   <Blocked />,
@@ -58,7 +67,10 @@ const options = [
 function UserSettings(props) {
   const actions = [
     props.toggleNotification,
-    () => props.toggleSecurity(true),
+    () => {
+      props.togglePrivacy(true);
+      props.displaySettings(false);
+    },
     props.toggleTheme,
     props.toggleWallpaper,
     props.toggleBlockedContacts,
@@ -140,6 +152,10 @@ function UserSettings(props) {
         toggle={props.displaySecurity}
         handleClickAction={props.toggleSecurity}
       />
+      <Privacy
+        toggle={props.displayPrivacy}
+        handleClickAction={props.togglePrivacy}
+      />
       <BlockedContacts
         toggle={props.displayBlockedContacts}
         handleClickAction={props.toggleBlockedContacts}
@@ -165,7 +181,7 @@ function mapStateToProps(state) {
     displayHelp: state.help.displayHelp,
 
     displayProfileContainer: state.searchMsg.displayProfileContainer,
-    displaySecurity: state.security.displaySecurity,
+    displayPrivacy: state.privacy.displayPrivacyPage,
     // search msg state
     displaySettingsLayout: state.settings.displaySettings,
   };
@@ -181,6 +197,7 @@ function mapDispatchToProps(dispatch) {
 
     showProfile: (bool) => dispatch(showProfile(bool)),
     toggleSecurity: (bool) => dispatch(toggleSecurity(bool)),
+    togglePrivacy: (bool) => dispatch(togglePrivacy(bool)),
 
     // search msg action
     displaySettings: (bool) => dispatch(displaySettings(bool)),

@@ -3,16 +3,15 @@ import {
   StyledContainer,
   StyledNavArrow,
   StyledArrowBackIcon,
-  StyledSecurityHeader,
-  StyledSecurityContent,
-  StyledSecurityLinksContainer,
-  StyledSecurityTextContainer,
-  StyledShowSecurityNotification,
+  StyledPrivacyHeader,
+  StyledPrivacyContent,
+  StyledPrivacyLinksContainer,
+  StyledPrivacyTextContainer,
 } from "./style.js";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-function Security({ handleClickAction, toggle }) {
+function Privacy({ handleClickAction, toggle }) {
   console.log(toggle);
   const [checked, setChecked] = React.useState(false);
 
@@ -21,7 +20,7 @@ function Security({ handleClickAction, toggle }) {
   };
   return (
     <StyledContainer toggle={toggle} width="28rem">
-      <StyledSecurityHeader>
+      <StyledPrivacyHeader>
         <div className="navArrow">
           <StyledNavArrow display={toggle}>
             <div className="">
@@ -30,20 +29,20 @@ function Security({ handleClickAction, toggle }) {
             <p>Security</p>
           </StyledNavArrow>
         </div>
-      </StyledSecurityHeader>
-      <StyledSecurityContent toggle={toggle} width="28rem">
+      </StyledPrivacyHeader>
+      <StyledPrivacyContent toggle={toggle} width="28rem">
         <div className="iconCont">
           <div className="icon"></div>
         </div>
-        <StyledSecurityLinksContainer>
-          <StyledSecurityTextContainer>
+        <StyledPrivacyLinksContainer>
+          <StyledPrivacyTextContainer>
             <p>
               Messages and calls in end-to-end encrypted chats stay between you
               and the people you choose. Not even WhatsApp can read or listen to
               them. <a href="#">Learn More...</a>
             </p>
-          </StyledSecurityTextContainer>
-          <StyledShowSecurityNotification>
+          </StyledPrivacyTextContainer>
+          <StyledPrivacyTextContainer>
             <div>
               <FormControlLabel
                 control={
@@ -62,10 +61,11 @@ function Security({ handleClickAction, toggle }) {
               on each device where you want to get notifications.{" "}
               <a href="#">Learn More...</a>
             </p>
-          </StyledShowSecurityNotification>
-        </StyledSecurityLinksContainer>
-      </StyledSecurityContent>
+          </StyledPrivacyTextContainer>
+        </StyledPrivacyLinksContainer>
+      </StyledPrivacyContent>
     </StyledContainer>
   );
 }
-export default Security;
+
+export default Privacy;

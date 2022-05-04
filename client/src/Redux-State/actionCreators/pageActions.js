@@ -26,6 +26,7 @@ import {
   SHOW_GROUP_MSG,
   LINK_SETTINGS_AND_PROFILE,
   DISPLAY_SECURITY,
+  DISPLAY_PRIVACY,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -55,6 +56,13 @@ export function toggleSecurity(bool) {
     type: DISPLAY_SECURITY,
     payload: bool,
     info: "this action  will display the security slide",
+  };
+}
+export function togglePrivacy(bool) {
+  return {
+    type: DISPLAY_PRIVACY,
+    payload: bool,
+    info: "this action  will display the privacy slide",
   };
 }
 // export function hideSettings(bool) {

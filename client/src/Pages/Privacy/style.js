@@ -34,7 +34,7 @@ export const StyledNavArrow = styled.div`
   }
 `;
 
-export const StyledSecurityHeader = styled.div`
+export const StyledPrivacyHeader = styled.div`
   height: 6.5rem;
   /* border: 1px solid blue; */
   /* position: absolute; */
@@ -43,7 +43,7 @@ export const StyledSecurityHeader = styled.div`
   justify-content: center;
   align-items: flex-end;
 `;
-export const StyledSecurityContent = styled.div`
+export const StyledPrivacyContent = styled.div`
   height: calc(100vh - 6.5rem);
   width: ${(props) => (props.toggle ? props.width : 0)}
   background: #ededed;
@@ -88,7 +88,7 @@ export const StyledSecurityContent = styled.div`
   }
 `;
 
-export const StyledSecurityLinksContainer = styled.div`
+export const StyledPrivacyLinksContainer = styled.div`
   ${"" /* calc 100vh-6.5rem - 200px */}
   height: calc((100vh - 10rem) - 200px);
 
@@ -102,7 +102,7 @@ export const StyledSecurityLinksContainer = styled.div`
   }
 `;
 
-export const StyledSecurityTextContainer = styled.div`
+export const StyledPrivacyTextContainer = styled.div`
   width: 100%;
   height: auto;
   ${"" /* border: 1px solid blue; */}
@@ -113,25 +113,6 @@ export const StyledSecurityTextContainer = styled.div`
     width: 80%;
     color: #3b4a54;
     ${"" /* font-size: 1.1rem; */}
-    a {
-      text-decoration: none;
-      color: #0881b7;
-    }
-  }
-`;
-export const StyledShowSecurityNotification = styled.div`
-  width: 100%;
-  height: auto;
-  ${"" /* border: 1px solid blue; */}
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-  p {
-    width: 80%;
-    color: #93a1aa;
-    margin-left: 3.1rem;
-    font-size: 0.95rem;
     a {
       text-decoration: none;
       color: #0881b7;
