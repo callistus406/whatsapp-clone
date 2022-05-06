@@ -26,6 +26,8 @@ import {
   SHOW_GROUP_MSG,
   DISPLAY_SECURITY,
   DISPLAY_PRIVACY,
+  DISPLAY_CONTACT_INFO,
+  SEARCH_CONTACT_MSG,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -212,7 +214,7 @@ export function displaySecurityReducer(state = initialState, action) {
     case DISPLAY_SECURITY:
       return {
         ...state,
-        displaySecurity: action.payload,
+        displaySecurityPage: action.payload,
       };
 
     default:
@@ -224,7 +226,7 @@ export function displayPrivacyReducer(state = initialState, action) {
     case DISPLAY_PRIVACY:
       return {
         ...state,
-        displaySecurity: action.payload,
+        displayPrivacyPage: action.payload,
       };
 
     default:
@@ -386,6 +388,34 @@ export function displayGrpMsgSectionReducer(
       return {
         ...state,
         displayGrpMsgSection: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
+const contactInfoStates = {
+  displayContactInfo: false,
+  displaySearchContactMsg: false,
+};
+
+export function displayContactInfoReducer(state = contactInfoStates, action) {
+  switch (action.type) {
+    case DISPLAY_CONTACT_INFO:
+      return {
+        ...state,
+        displayContactInfo: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+export function SearchContactMsgReducer(state = contactInfoStates, action) {
+  switch (action.type) {
+    case SEARCH_CONTACT_MSG:
+      return {
+        ...state,
+        displaySearchContactMsg: action.payload,
       };
     default:
       return state;

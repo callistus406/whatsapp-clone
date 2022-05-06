@@ -27,6 +27,8 @@ import {
   LINK_SETTINGS_AND_PROFILE,
   DISPLAY_SECURITY,
   DISPLAY_PRIVACY,
+  DISPLAY_CONTACT_INFO,
+  SEARCH_CONTACT_MSG,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -247,5 +249,21 @@ export function displayGrpMsgAction(bool) {
     type: SHOW_GROUP_MSG,
     payload: bool,
     info: "this action  will display message",
+  };
+}
+
+// contact profile
+export function toggleContactInfo(bool) {
+  return {
+    type: DISPLAY_CONTACT_INFO,
+    payload: bool,
+    info: "this action  will display contact information",
+  };
+}
+export function searchContactMsg(bool) {
+  return {
+    type: SEARCH_CONTACT_MSG,
+    payload: bool,
+    info: "this action  will display search messages",
   };
 }

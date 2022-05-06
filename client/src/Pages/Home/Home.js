@@ -33,6 +33,7 @@ import { StickerIcon, ProfileIcon } from "./HomeIcons";
 import GroupInfo from "../GroupInfo/GroupInfo";
 import MessageBox from "./MessageBox";
 import HomeContent from "./HomeComp/HomeContent";
+import DirectMsg from "../DirectMsg/DirectMsg";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -96,7 +97,7 @@ function Home(props) {
         </div>
 
         {props.displayGrpMsgSection ? (
-          <MessageBox />
+          <DirectMsg />
         ) : (
           <div className="chatsCol">
             {/* commented */}

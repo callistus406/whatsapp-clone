@@ -71,6 +71,11 @@ function UserSettings(props) {
       props.togglePrivacy(true);
       props.displaySettings(false);
     },
+    () => {
+      props.toggleSecurity(true);
+      props.displaySettings(false);
+    },
+
     props.toggleTheme,
     props.toggleWallpaper,
     props.toggleBlockedContacts,
@@ -149,11 +154,11 @@ function UserSettings(props) {
       </StyledContainer>
       <NotificationComponent />
       <Security
-        toggle={props.displaySecurity}
+        toggle={props.displaySecurityPage}
         handleClickAction={props.toggleSecurity}
       />
       <Privacy
-        toggle={props.displayPrivacy}
+        toggle={props.displayPrivacyPage}
         handleClickAction={props.togglePrivacy}
       />
       <BlockedContacts
@@ -181,7 +186,8 @@ function mapStateToProps(state) {
     displayHelp: state.help.displayHelp,
 
     displayProfileContainer: state.searchMsg.displayProfileContainer,
-    displayPrivacy: state.privacy.displayPrivacyPage,
+    displayPrivacyPage: state.privacy.displayPrivacyPage,
+    displaySecurityPage: state.security.displaySecurityPage,
     // search msg state
     displaySettingsLayout: state.settings.displaySettings,
   };

@@ -25,6 +25,8 @@ import {
   displayGrpMsgSectionReducer,
   displaySecurityReducer,
   displayPrivacyReducer,
+  displayContactInfoReducer,
+  SearchContactMsgReducer,
 } from "./reducers/reducers";
 
 const rootReducer = combineReducers({
@@ -55,5 +57,8 @@ const rootReducer = combineReducers({
   grpMsgSection: displayGrpMsgSectionReducer,
   security: displaySecurityReducer,
   privacy: displayPrivacyReducer,
+  // contact information
+  contactInfo: displayContactInfoReducer,
+  searchContactMsg: SearchContactMsgReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(logger));
