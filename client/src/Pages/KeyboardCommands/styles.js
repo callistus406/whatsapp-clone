@@ -46,7 +46,7 @@ export const StyledShortcuts = styled.div`
       ${"" /* border: 1px solid yellow; */}
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
 
       p {
         color: #404e58;
@@ -80,7 +80,7 @@ export const StyledShortcutsCol2 = styled.div`
       ${"" /* border: 1px solid yellow; */}
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       p {
         color: #404e58;
         ${"" /* border: 1px solid blue; */};

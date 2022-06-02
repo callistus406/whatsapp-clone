@@ -47,8 +47,12 @@ export const keyObj = [
     keys: ["Ctrl", "Alt", "Shift", "P"],
   },
   {
-    name: "search chat",
+    name: "Search chat",
     keys: ["Ctrl", "Alt", "Shift", "F"],
+  },
+  {
+    name: "Next chat",
+    keys: ["Ctrl", "Alt", "Tab"],
   },
   {
     name: "New group",
@@ -87,6 +91,10 @@ export const keyObjCol2 = [
   {
     name: "Previous Chat",
     keys: ["Ctrl", "Alt", "Shift", "Tab"],
+  },
+  {
+    name: "Profile and about",
+    keys: ["Ctrl", "Alt", "P"],
   },
   {
     name: "Decrease speed of Selected Voice Message",
