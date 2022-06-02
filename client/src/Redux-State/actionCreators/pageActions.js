@@ -29,6 +29,7 @@ import {
   DISPLAY_PRIVACY,
   DISPLAY_CONTACT_INFO,
   SEARCH_CONTACT_MSG,
+  // SEARCH_CONTACT_MSG,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -260,10 +261,10 @@ export function toggleContactInfo(bool) {
     info: "this action  will display contact information",
   };
 }
-export function searchContactMsg(bool) {
+export function toggleContactMsg(bool) {
   return {
     type: SEARCH_CONTACT_MSG,
     payload: bool,
-    info: "this action  will display search messages",
+    info: "this action  will display search contact messages",
   };
 }

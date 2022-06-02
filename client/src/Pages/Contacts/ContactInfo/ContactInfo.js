@@ -16,13 +16,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled as muiStyled } from "@mui/material/styles";
 import styled from "styled-components";
+import LockIcon from "@mui/icons-material/Lock";
 
 import {
   StyledContainer,
   StyledNavArrow,
   StyledMsgSearchHeader,
   StyledGroupImg,
-  StyledGroupInfo,
+  StyledContactInfo,
   GroupInfoContent,
   GroupInfoLinks,
   StyledStarredMsg,
@@ -35,6 +36,8 @@ import {
   StyledMembersHeader,
   StyledGroupHeading,
   StyledGroupInstruction,
+  StyledDisappearingMsgs,
+  StyledEncryption,
 } from "./style.js";
 import {
   showGroupInfo,
@@ -42,11 +45,12 @@ import {
   showGrpParticipants,
   closeGrpParticipants,
   toggleStarredGrpMsgs,
-} from "../../Redux-State/actionCreators/pageActions";
+  toggleContactInfo,
+} from "../../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
-import SearchParticipants from "../SearchParticipants/SearchParticipants.js";
-import StarredMsgs from "../GroupStarredMsgs/StarredMsgs";
-function GroupInfo(props) {
+import SearchParticipants from "../../SearchParticipants/SearchParticipants.js";
+import StarredMsgs from "../../GroupStarredMsgs/StarredMsgs";
+function ContactInfo(props) {
   const membersRef = useRef();
   const scrollToBottom = () => {
     membersRef.current.scrollIntoView({ behavior: "smooth" });
@@ -143,16 +147,16 @@ function GroupInfo(props) {
   return (
     // <GroupInfoContent>
 
-    <StyledContainer id="mySidenav" toggle={props.displayGroupInfoLayout}>
+    <StyledContainer id="mySidenav" toggle={props.displayContactInfo}>
       <AlertDialog />
       <StarredMsgs toggle={props.displayStarredGrpMsgs} />
       <StyledMsgSearchHeader>
         <div className="navArrow">
           <StyledNavArrow>
-            <div onClick={() => props.hideGroupInfo(false)}>
+            <div onClick={() => props.toggleContactInfo(false)}>
               <CancelButton />
             </div>
-            <p>Group info</p>
+            <p>Contact Info</p>
           </StyledNavArrow>
         </div>
       </StyledMsgSearchHeader>
@@ -166,37 +170,37 @@ function GroupInfo(props) {
             onMouseEnter={() => showIcon("title")}
             onMouseLeave={() => hideIcon("title")}
           >
-            <span className="groupName">NIGERIA NEWS </span>
-            {editInfo ? (
+            <span className="groupName">Generous </span>
+            {/* {editInfo ? (
               <span className="groupInfoIcon" onClick={handleClickOpen}>
                 <InfoIcon />
               </span>
             ) : (
               ""
-            )}
+            )} */}
           </StyledGroupHeading>
-          <p onClick={handleScroll}>Group 173 participants</p>
+          <p onClick={handleScroll}>+2348143568829</p>
         </StyledGroupImg>
-        <StyledGroupInfo>
+        <StyledContactInfo>
           <StyledGroupInstruction
-            onMouseEnter={() => showIcon("info")}
-            onMouseLeave={() => hideIcon("info")}
+          // onMouseEnter={() => showIcon("info")}
+          // onMouseLeave={() => hideIcon("info")}
           >
+            <p className="aboutContact">About</p>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Voluptatem, aspernatur! Lorem ipsum, dolor sit amet consectetur
-              adipisicing elit. Odio, incidunt.
+              Voluptatem, aspernatur!
             </p>
-            {editInfo ? (
+            {/* {editInfo ? (
               <span className="groupInfoIcon" onClick={handleClickOpen}>
                 <InfoIcon />
               </span>
             ) : (
               ""
-            )}
+            )} */}
           </StyledGroupInstruction>
-          <span>Group created by +2348143674356, on 04/06/2018 at 6:10 pm</span>
-        </StyledGroupInfo>
+          {/* <span>Group created by +2348143674356, on 04/06/2018 at 6:10 pm</span> */}
+        </StyledContactInfo>
         <GroupInfoLinks>
           <div className="placeholder">
             <p>Media, Links and docs</p>
@@ -233,6 +237,37 @@ function GroupInfo(props) {
             </span>
           </div>
           <p className="conditional">until tomorrow at 3:22 am</p>
+
+          <StyledDisappearingMsgs>
+            <div className="disappearingMsg">
+              <div className="textCont">
+                <span className="clock">
+                  <ClockIcon />
+                </span>
+                <p lassName="info">Disappearing Messages</p>
+                <span className="arrow">
+                  {" "}
+                  <ArrowForwardIosIcon fontSize="small" />
+                </span>
+              </div>
+
+              <p className="text">off</p>
+            </div>
+          </StyledDisappearingMsgs>
+
+          <StyledEncryption>
+            <div className="encryption">
+              <div className="textCont">
+                <span className="clock">
+                  <LockIcon fontSize="small" />
+                </span>
+                <p lassName="info">Encryption</p>
+              </div>
+              <p className="text">Messages are end-to-end encrypted. </p>
+
+              <p className="text">Click to verify</p>
+            </div>
+          </StyledEncryption>
         </StyledMuteNotification>
 
         <StyledMembersLayout ref={membersRef}>
@@ -248,8 +283,6 @@ function GroupInfo(props) {
           <Members />
           <Members />
           <Members />
-          <Members />
-          <Members role="Group admin" />
         </StyledMembersLayout>
 
         <StyledGroupInfoActions>
@@ -312,9 +345,10 @@ function Members(props) {
 function mapStateToProps(state) {
   return {
     displayStarredGrpMsgs: state.starredGrpMsg.displayStarredGrpMsgs,
+    displayContactInfo: state.contactInfo.displayContactInfo,
 
     // search msg state
-    displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
+    displaySearchContactMsg: state.searchContactMsg.displaySearchContactMsg,
     // get participants state
     displayGrpParticipants: state.grpParticipants.displayGrpParticipants,
   };
@@ -324,11 +358,33 @@ function mapDispatchToProps(dispatch) {
     toggleStarredGrpMsgs: () => dispatch(toggleStarredGrpMsgs()),
 
     // search msg action
-    showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
-    hideGroupInfo: (bool) => dispatch(hideGroupInfo(bool)),
+    toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
     // action to get group participants
     showGrpParticipants: (bool) => dispatch(showGrpParticipants(bool)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactInfo);
+
+function ClockIcon() {
+  return (
+    <svg
+      height="20"
+      viewBox="0 0 36 36"
+      fill="none"
+      preserveAspectRatio="xMidYMid meet"
+      class=""
+    >
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M18 31.5c.09 0 .182 0 .272-.003a1.5 1.5 0 0 0-.06-3c-.07.002-.14.003-.212.003v3Zm0-24c.071 0 .142 0 .213.002a1.5 1.5 0 0 0 .06-3L18 4.5v3Zm6.515-1.326a1.5 1.5 0 0 0-1.45 2.626c.124.068.246.139.367.212a1.5 1.5 0 1 0 1.554-2.566 13.503 13.503 0 0 0-.47-.272Zm5.039 4.84a1.5 1.5 0 0 0-2.566 1.554c.073.12.144.243.212.366a1.5 1.5 0 0 0 2.626-1.45 13.535 13.535 0 0 0-.272-.47Zm1.943 6.714a1.5 1.5 0 0 0-3 .06 10.76 10.76 0 0 1 0 .425 1.5 1.5 0 0 0 3 .06 13.693 13.693 0 0 0 0-.545Zm-1.67 6.787a1.5 1.5 0 0 0-2.627-1.45c-.068.124-.139.246-.212.367a1.5 1.5 0 1 0 2.566 1.554c.094-.155.185-.312.272-.47Zm-4.841 5.039a1.5 1.5 0 0 0-1.554-2.566c-.12.073-.243.144-.366.212a1.5 1.5 0 0 0 1.45 2.626c.158-.087.315-.178.47-.272ZM18 4.5C10.544 4.5 4.5 10.544 4.5 18S10.544 31.5 18 31.5v-3c-5.8 0-10.5-4.701-10.5-10.5S12.2 7.5 18 7.5v-3Z"
+      ></path>
+      <path
+        fill="currentColor"
+        d="M23.325 12.01a.865.865 0 0 1 1.21 1.21l-4.564 6.087a1.951 1.951 0 1 1-2.732-2.732l6.086-4.564Z"
+      ></path>
+    </svg>
+  );
+}

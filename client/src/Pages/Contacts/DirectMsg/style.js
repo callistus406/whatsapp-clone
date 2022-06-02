@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
 import Box from "@mui/material/Box";
 import MenuList from "@mui/material/MenuList";
-import Image from "../../Assets/img/bgDefault2.png";
+import Image from "../../../Assets/img/bgDefault2.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import { styled as muiStyled } from "@mui/material/styles";

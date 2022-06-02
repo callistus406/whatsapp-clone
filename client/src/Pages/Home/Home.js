@@ -33,7 +33,9 @@ import { StickerIcon, ProfileIcon } from "./HomeIcons";
 import GroupInfo from "../GroupInfo/GroupInfo";
 import MessageBox from "./MessageBox";
 import HomeContent from "./HomeComp/HomeContent";
-import DirectMsg from "../DirectMsg/DirectMsg";
+import DirectMsg from "../Contacts/DirectMsg/DirectMsg";
+import ContactInfo from "../Contacts/ContactInfo/ContactInfo";
+import SearchContactMsg from "../Contacts/SearchContactMsg/SearchContactMsg";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -76,6 +78,8 @@ function Home(props) {
         <UserSettings />
 
         <SearchContact />
+        <ContactInfo />
+        <SearchContactMsg />
         <GroupInfo />
         <div className="column1">
           <HomeContent />

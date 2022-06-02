@@ -73,17 +73,21 @@ export const StyledGroupImg = styled.div`
   }
 `;
 
-export const StyledGroupInfo = styled.div`
+export const StyledContactInfo = styled.div`
   width: 100%;
   min-height: 6rem;
   ${"" /* border: 1px solid red; */}
   border-bottom: 10px solid #ededed;
-  color: #909090;
+  color: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 1.2rem 1rem 1.2rem;
+  .aboutContact {
+    color: #829098;
+    font-size: 0.9rem;
+  }
   span {
     ${"" /* width: 90%; */}
     font-size: 0.9rem;
@@ -174,7 +178,6 @@ export const StyledStarredMsg = styled.div`
 export const StyledMuteNotification = styled.div`
   width: 100%;
   min-height: 5rem;
-  ${"" /* border: 1px solid blue; */}
   padding: 0 1.5rem;
   display: flex;
   border-bottom: 10px solid #ededed;
@@ -208,6 +211,77 @@ export const StyledMuteNotification = styled.div`
     color: #8c8c8c;
     font-size: 0.8rem;
     margin-left: 2.3rem;
+  }
+`;
+export const StyledDisappearingMsgs = styled.div`
+  height: 4rem;
+  width: 100%;
+  ${"" /* border: 1px solid blue; */}
+  margin-top: 1rem;
+
+  .disappearingMsg {
+    width: 100%;
+    .text {
+      color: #909fa8;
+      margin-left: 2.1rem;
+    }
+    .textCont {
+      ${"" /* border: 1px solid red; */}
+      display: flex;
+      width: 100%;
+      .arrow {
+        margin-left: auto;
+        color: #667781;
+        font-size: 0.6rem;
+      }
+    }
+    div {
+      ${"" /* display: flex; */}
+      .info {
+        font-size: 1rem;
+        ${"" /* margin-left: 2rem; */}
+      }
+      .clock {
+        color: #949494;
+        font-size: 0.9rem;
+        margin-right: 0.8rem;
+      }
+    }
+  }
+`;
+export const StyledEncryption = styled.div`
+  height: 4rem;
+  width: 100%;
+  ${"" /* border: 1px solid blue; */}
+  margin-top: 1rem;
+
+  .encryption {
+    width: 100%;
+    .textCont {
+      ${"" /* border: 1px solid red; */}
+      display: flex;
+      width: 100%;
+      .arrow {
+        margin-left: auto;
+      }
+    }
+    .text {
+      font-size: 0.9rem;
+      margin-left: 2rem;
+      color: #909fa8;
+    }
+    div {
+      ${"" /* display: flex; */}
+      .info {
+        font-size: 1rem;
+        ${"" /* margin-left: 1.5rem; */}
+      }
+      .clock {
+        color: #949494;
+        font-size: 0rem;
+        margin-right: 0.7rem;
+      }
+    }
   }
 `;
 
@@ -257,7 +331,6 @@ export const StyledMembersLayout = styled.div`
   height: auto;
   width: 100%;
   border-bottom: 10px solid #ededed;
-  border: 1px solid blue;
 `;
 export const StyledCircle = styled.div`
   width: 50px;

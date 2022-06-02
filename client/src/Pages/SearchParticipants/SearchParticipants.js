@@ -223,7 +223,10 @@ const SearchParticipants = (props) => {
       >
         <StyledDialogTitle id="alert-dialog-title">
           <div onClick={handleClose} style={{ marginRight: "1.8rem" }}>
-            <CloseIcon style={{ color: "#B2D8D1" }} fontSize="medium" />
+            <CloseIcon
+              style={{ color: "#B2D8D1", cursor: "pointer" }}
+              fontSize="medium"
+            />
           </div>
           Search Participants
         </StyledDialogTitle>

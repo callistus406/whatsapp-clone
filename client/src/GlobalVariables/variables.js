@@ -35,33 +35,69 @@ export const contactDialog = [
 
 export const keyObj = [
   {
-    //   name:"mark as Unread",
+    name: "mark as Unread",
     keys: ["Ctrl", "Alt", "Shift", "U"],
   },
   {
-    //   name:"Archive chat",
+    name: "Archive chat",
     keys: ["Ctrl", "Alt", "Shift", "E"],
   },
   {
-    //   name:"pin chat",
+    name: "pin chat",
     keys: ["Ctrl", "Alt", "Shift", "P"],
   },
   {
-    //  name: "search chat",
+    name: "search chat",
     keys: ["Ctrl", "Alt", "Shift", "F"],
   },
   {
-    //   name:"New group",
+    name: "New group",
     keys: ["Ctrl", "Alt", "Shift", "N"],
   },
   {
-    //  name: "increased speed of Selected Voice Message",
+    name: "increased speed of Selected Voice Message",
     keys: ["Ctrl", "."],
   },
   {
+    name: "Settings",
     keys: ["Ctrl", "Alt", ","],
   },
   {
+    name: "Git Panel",
+    keys: ["Ctrl", "Alt", "G"],
+  },
+];
+export const keyObjCol2 = [
+  {
+    name: "Mute",
+    keys: ["Ctrl", "Alt", "Shift", "M"],
+  },
+  {
+    name: "Delete Chat",
+    keys: ["Ctrl", "Alt", "Backspace"],
+  },
+  {
+    name: "Search",
+    keys: ["Ctrl", "Alt", "/"],
+  },
+  {
+    name: "New chat",
+    keys: ["Ctrl", "Alt", "N"],
+  },
+  {
+    name: "Previous Chat",
+    keys: ["Ctrl", "Alt", "Shift", "Tab"],
+  },
+  {
+    name: "Decrease speed of Selected Voice Message",
+    keys: ["Shift", ","],
+  },
+  {
+    name: "Emoji Panel",
+    keys: ["Ctrl", "Alt", "E"],
+  },
+  {
+    name: "Sticker Panel",
     keys: ["Ctrl", "Alt", "G"],
   },
 ];
@@ -78,6 +114,9 @@ export const textObj = [
   },
   {
     name: "search chat",
+  },
+  {
+    name: "Next chat",
   },
   {
     name: "New group",

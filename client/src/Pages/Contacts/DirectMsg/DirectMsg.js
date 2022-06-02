@@ -1,11 +1,14 @@
-import { messageDialog, groupContext } from "../../GlobalVariables/variables";
+import {
+  messageDialog,
+  groupContext,
+} from "../../../GlobalVariables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 import {
-  toggleMsgSearch,
+  toggleContactMsg,
   toggleContactInfo,
-} from "../../Redux-State/actionCreators/pageActions";
+} from "../../../Redux-State/actionCreators/pageActions";
 import {
   StyledSpeedDial,
   StyledMessageSpace,
@@ -32,7 +35,7 @@ import {
   Attachment,
   StickerIcon,
   Tick,
-} from "../Home/HomeIcons";
+} from "./icons";
 // import "./Home.css";
 
 // speed dial
@@ -493,7 +496,7 @@ function mapDispatchToProps(dispatch) {
   return {
     toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
 
-    toggleMsgSearch: () => dispatch(toggleMsgSearch()),
+    toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
   };
 }
 export default connect(
