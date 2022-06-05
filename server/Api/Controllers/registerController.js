@@ -1,3 +1,4 @@
+const UserModel = require("../../Model/UserModel");
 const registerController = async (req, res) => {
   const { username, phone } = req.body;
   try {
