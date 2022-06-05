@@ -41,6 +41,7 @@ import {
   PrivacyIcon,
 } from "./icons";
 import Security from "../Security/Security";
+import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
 
 const optionText = [
   { id: 1, name: "Notification" },
@@ -79,7 +80,10 @@ function UserSettings(props) {
     props.toggleTheme,
     props.toggleWallpaper,
     props.toggleBlockedContacts,
-    props.toggleKeyboardShortcuts,
+    () => {
+      props.toggleKeyboardShortcuts(true);
+      props.displaySettings(false);
+    },
     props.toggleHelp,
   ];
   // console.log(props);
@@ -173,6 +177,10 @@ function UserSettings(props) {
         toggle={props.displayTheme}
         handleClickAction={props.toggleTheme}
       />
+      <KeyboardCommands
+        toggle={props.displayKeyboardShortcuts}
+        handleClickAction={props.toggleKeyboardShortcuts}
+      />
     </div>
   );
 }
@@ -198,7 +206,7 @@ function mapDispatchToProps(dispatch) {
     toggleTheme: () => dispatch(toggleTheme()),
     toggleWallpaper: () => dispatch(toggleWallpaper()),
     toggleBlockedContacts: () => dispatch(toggleBlockedContacts()),
-    toggleKeyboardShortcuts: () => dispatch(toggleKeyboardShortcuts()),
+    toggleKeyboardShortcuts: (bool) => dispatch(toggleKeyboardShortcuts(bool)),
     toggleHelp: () => dispatch(toggleHelp()),
 
     showProfile: (bool) => dispatch(showProfile(bool)),

@@ -8,26 +8,50 @@ import {
   StyledMuiButton,
 } from "./styles";
 import Button from "@mui/material/Button";
-
+import { styled as muiStyled } from "@mui/material/styles";
 import { keyObjCol2, keyObj } from "../../GlobalVariables/variables";
-function KeyboardCommands() {
+import Dialog from "@mui/material/Dialog";
+
+import { toggleKeyboardShortcuts } from "../../Redux-State/actionCreators/pageActions";
+import { connect } from "react-redux";
+
+export const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
+  backgroundColor: "rgba(255,255,255,0.9)",
+  boxShadow: "none",
+  border: "2px solid blue",
+  height: "40rem",
+  overflow: "auto",
+  ".MuiPaper-root": {
+    width: "70rem",
+    overflow: "hidden",
+    marginTop: "-20px",
+  },
+}));
+
+function KeyboardCommands(props) {
+  console.log(props.toggle);
   return (
-    <StyledContainer>
-      <StyledHeader>Keyboard shortcuts</StyledHeader>
-      <div className="columnCont">
-        <div className="istContainer">
-          {/* <Buttons /> */}
-          <Shortcuts />
+    <StyledDialog
+      open={true}
+      // onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <StyledContainer>
+        <StyledHeader>Keyboard shortcuts</StyledHeader>
+        <div className="columnCont">
+          <div className="istContainer">
+            {/* <Buttons /> */}
+            <Shortcuts />
+          </div>
+          <div className="secondContainer">
+            <ShortcutsColumn2 />
+          </div>
         </div>
-        <div className="secondContainer">
-          <ShortcutsColumn2 />
-        </div>
-      </div>
-    </StyledContainer>
+      </StyledContainer>
+    </StyledDialog>
   );
 }
-
-export default KeyboardCommands;
 
 function Shortcuts(text, keys) {
   return (
@@ -84,3 +108,16 @@ function Buttons({ text }) {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    displayKeyboardShortcuts: state.keyboardShortCuts.displayKeyboardShortcuts,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleKeyboardShortcuts: (bool) => dispatch(toggleKeyboardShortcuts(bool)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(KeyboardCommands);

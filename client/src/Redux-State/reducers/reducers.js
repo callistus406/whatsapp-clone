@@ -305,7 +305,7 @@ export function keyboardShortcutsReducer(state = settingsInitialState, action) {
     case TOGGLE_KEYBOARD_SHORTCUTS:
       return {
         ...state,
-        displayKeyboardShortcuts: !state.displayKeyboardShortcuts,
+        displayKeyboardShortcuts: action.payload,
       };
     default:
       return state;

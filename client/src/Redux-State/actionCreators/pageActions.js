@@ -194,9 +194,10 @@ export function toggleBlockedContacts() {
   };
 }
 
-export function toggleKeyboardShortcuts() {
+export function toggleKeyboardShortcuts(bool) {
   return {
     type: TOGGLE_KEYBOARD_SHORTCUTS,
+    payload: bool,
     info: "this action  will display keyboardShortcuts",
   };
 }
