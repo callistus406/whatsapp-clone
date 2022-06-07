@@ -1,13 +1,20 @@
 const ConversationModel = require("../../Model/ConversationModel");
 
 const conversationController = async (req, res) => {
-  const { member, channelId, read, numberOfMsgs, visibility } = req.body;
+  const { senderId, receiverId, channelId, read, numberOfMsgs, visibility } =
+    req.body;
+  console.log(senderId, receiverId);
+  const newConversation = new ConversationModel({
+    members: [senderId, receiverId],
+  });
+  //   console.log(senderId);
   try {
-    // const newConversation = new Conversation({
-
-    // });
+    const savedConversation = await newConversation.save();
+    res.status(200).json(savedConversation);
     console.log("still in progress");
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
 };
 
 module.exports = conversationController;
