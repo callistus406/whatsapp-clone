@@ -306,6 +306,8 @@ export const StyledGroupInfoActions = styled.div`
       }
     }
     &:hover {
+      cursor: pointer;
+
       background: #f5f5f5;
     }
   }
@@ -323,6 +325,8 @@ export const StyledGroupInfoActions = styled.div`
       }
     }
     &:hover {
+      cursor: pointer;
+
       background: #f5f5f5;
     }
   }
