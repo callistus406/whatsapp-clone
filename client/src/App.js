@@ -1,8 +1,8 @@
 import Home from "./Pages/Home/Home";
-import Whatsapp from "./Pages/Main";
+import Main from "./Pages/Main";
 
 function App() {
-  return <Whatsapp />;
+  return <Main />;
 }
 
 export default App;

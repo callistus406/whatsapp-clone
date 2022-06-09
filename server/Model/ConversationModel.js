@@ -1,8 +1,8 @@
 const { mongoose, Schema } = require("./getMongoose");
 
-const ConversationSchema = new Schema(
+const ConversationSchema = new mongoose.Schema(
   {
-    member: {
+    members: {
       type: Array,
     },
     channelId: {

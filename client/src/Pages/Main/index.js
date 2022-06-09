@@ -26,7 +26,7 @@ function Whatsapp() {
         <UserChat passMenu="qwerty2" />
         <UserChat passMenu="qwerty3" /> */}
         {/* luxury */}
-        <KeyboardCommands />
+        <Home />
         {/* <FloatingActionButtons /> */}
         {/* <SearchContact /> */}
 

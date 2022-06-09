@@ -1,17 +1,18 @@
 const UserModel = require("../../Model/UserModel");
 const registerController = async (req, res) => {
-  const { username, phone } = req.body;
+  const { username, phone, about } = req.body;
+  console.log(req.body);
+  const newUser = new UserModel({
+    username: username,
+    phone: phone,
+    about: about,
+  });
   try {
-    console.log(req.body);
-    const newUser = new User({
-      username: username,
-      phone: phone,
-    });
     // save user to mongodb
-    await newUser.save();
-    res.status(200).json(req.body);
+    const savedUser = await newUser.save();
+    res.status(200).json(savedUser);
   } catch (err) {
-    res.status(200).json(err.message);
+    res.status(500).json(err.message);
   }
 };
 module.exports = registerController;
