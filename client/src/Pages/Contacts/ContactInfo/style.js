@@ -333,7 +333,7 @@ export const StyledDeleteChat = styled.div`
     color:#D32F2F;
     height: 3rem;
     width: 100%;
-    border: 1px solid blue;
+    ${"" /* border: 1px solid blue; */}
     margin-bottom: 1.5rem;
     display: flex;
     padding-left: 2rem;
@@ -342,6 +342,10 @@ export const StyledDeleteChat = styled.div`
     .deleteText {
       margin-left: 1.5rem;
       color: #d32f2f;
+    }
+    &:hover {
+      cursor: pointer;
+      background: #f5f5f5;
     }
   }
 `;
