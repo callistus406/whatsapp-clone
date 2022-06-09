@@ -120,4 +120,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(KeyboardCommands);
+// export default connect(mapStateToProps, mapDispatchToProps)(KeyboardCommands);

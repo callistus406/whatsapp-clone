@@ -284,20 +284,22 @@ export const StyledEncryption = styled.div`
     }
   }
 `;
+export const StyledSeparator = styled.div`
+  border: 5px solid #ededed;
+`;
 
 export const StyledGroupInfoActions = styled.div`
   ${"" /* border: 1px solid blue; */}
-  border-bottom: 1px solid #ededed;
 
   height: 6rem;
   width: 100%;
+
   .exitCont {
     padding-left: 2rem;
     .exit {
       height: 3rem;
       display: flex;
       align-items: center;
-      ${"" /* border: 1px solid blue; */}
       p {
         margin-left: 2rem;
         color: #d32f2f;
@@ -325,6 +327,25 @@ export const StyledGroupInfoActions = styled.div`
     }
   }
 `;
+export const StyledDeleteChat = styled.div`
+  && {
+    ${"" /* background: blue; */}
+    color:#D32F2F;
+    height: 3rem;
+    width: 100%;
+    border: 1px solid blue;
+    margin-bottom: 1.5rem;
+    display: flex;
+    padding-left: 2rem;
+    align-items: center;
+
+    .deleteText {
+      margin-left: 1.5rem;
+      color: #d32f2f;
+    }
+  }
+`;
+
 // ...........................
 
 export const StyledMembersLayout = styled.div`

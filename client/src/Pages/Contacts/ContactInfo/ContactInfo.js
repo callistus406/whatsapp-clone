@@ -17,7 +17,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { styled as muiStyled } from "@mui/material/styles";
 import styled from "styled-components";
 import LockIcon from "@mui/icons-material/Lock";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   StyledContainer,
   StyledNavArrow,
@@ -38,6 +38,8 @@ import {
   StyledGroupInstruction,
   StyledDisappearingMsgs,
   StyledEncryption,
+  StyledDeleteChat,
+  StyledSeparator,
 } from "./style.js";
 import {
   showGroupInfo,
@@ -52,6 +54,7 @@ import SearchParticipants from "../../SearchParticipants/SearchParticipants.js";
 import StarredMsgs from "../../GroupStarredMsgs/StarredMsgs";
 function ContactInfo(props) {
   const membersRef = useRef();
+  const username = "";
   const scrollToBottom = () => {
     membersRef.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -270,7 +273,7 @@ function ContactInfo(props) {
           </StyledEncryption>
         </StyledMuteNotification>
 
-        <StyledMembersLayout ref={membersRef}>
+        {/* <StyledMembersLayout ref={membersRef}>
           <StyledMembersHeader>
             <p>254 participants</p>
             <div>
@@ -283,7 +286,7 @@ function ContactInfo(props) {
           <Members />
           <Members />
           <Members />
-        </StyledMembersLayout>
+        </StyledMembersLayout> */}
 
         <StyledGroupInfoActions>
           <div className="exitCont">
@@ -291,7 +294,7 @@ function ContactInfo(props) {
               <span className="exitIcon">
                 <LogoutIcon color="error" />
               </span>
-              <p>Exit group</p>
+              <p>Block {username ? username : "joy"}</p>
             </div>
           </div>
           <div className="reportCont">
@@ -299,10 +302,15 @@ function ContactInfo(props) {
               <span className="reportIcon">
                 <ThumbDownAltIcon color="error" />
               </span>
-              <p>Report group</p>
+              <p>Report {username ? username : "joy"}</p>
             </div>
           </div>
         </StyledGroupInfoActions>
+        <StyledSeparator />
+        <StyledDeleteChat>
+          <DeleteIcon />
+          <p className="deleteText">Delete Chat</p>
+        </StyledDeleteChat>
       </GroupInfoContent>
     </StyledContainer>
     // </GroupInfoContent>

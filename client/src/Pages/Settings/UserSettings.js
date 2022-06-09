@@ -177,10 +177,10 @@ function UserSettings(props) {
         toggle={props.displayTheme}
         handleClickAction={props.toggleTheme}
       />
-      <KeyboardCommands
+      {/* <KeyboardCommands
         toggle={props.displayKeyboardShortcuts}
         handleClickAction={props.toggleKeyboardShortcuts}
-      />
+      /> */}
     </div>
   );
 }

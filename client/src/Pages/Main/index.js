@@ -11,7 +11,7 @@ import FloatingActionButtons from "../Tests/Fab";
 import Scroll from "../Tests/Scroll";
 import ConnectionError from "../Interrupts/ConnectionMsg/ConnectionError";
 import { KeyboardShortcuts } from "../Settings/icons";
-import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
+// import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
 
 function Whatsapp() {
   return (

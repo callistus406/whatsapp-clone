@@ -448,10 +448,7 @@ function ReceivedMsgs() {
         </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
-        <p>
-          This one adds a right triangle on the left, flush at the top by using
-          .tri-right and .left-top to specify the location.
-        </p>
+        <p>This one adds a right triangle on the left, flush</p>
         <div className="msgTime">
           <div>
             <span>{hours}:</span>
