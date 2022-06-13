@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import {
   toggleContactMsg,
   toggleContactInfo,
+  toggleConversation,
 } from "../../../Redux-State/actionCreators/pageActions";
 import {
   StyledSpeedDial,
@@ -487,6 +488,7 @@ function mapStateToProps(state) {
   return {
     displaySearchContactMsg: state.searchContactMsg.displaySearchContactMsg,
     displayContactInfo: state.contactInfo.displayContactInfo,
+    // displayConversation: state.conversation.displayConversation,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -494,6 +496,7 @@ function mapDispatchToProps(dispatch) {
     toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
 
     toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
+    // toggleConversation: (bool) => dispatch(toggleConversation(bool)),
   };
 }
 export default connect(

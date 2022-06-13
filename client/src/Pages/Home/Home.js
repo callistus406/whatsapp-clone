@@ -22,12 +22,15 @@ import StarredMsgs from "../StarredMsgs/StarredMsgs";
 import UserSettings from "../Settings/UserSettings";
 import Status from "../Status/Status";
 import SearchContact from "../SearchContact/SearchContact";
-
+import axios from "axios";
 import {
   optionsToggle,
   showGroupInfo,
   displayGrpMsgAction,
+  toggleConversation,
 } from "../../Redux-State/actionCreators/pageActions";
+import { fetchConversations } from "../../Redux-State/actionCreators/fetchRequestActions.js";
+import thunk from "redux-thunk";
 import { StyledContactsCol } from "./style";
 import { StickerIcon, ProfileIcon } from "./HomeIcons";
 import GroupInfo from "../GroupInfo/GroupInfo";
@@ -51,14 +54,10 @@ function Home(props) {
   const countRef = useRef(0);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    countRef.current = countRef.current + 1;
-    msgCont.current = document.getElementById("margin");
-    // console.log(msgCont);
-    console.log(
-      "home -0-0 rendered..............." + countRef.current + "---times"
-    );
-  });
+    props.fetchConversations();
+  }, []);
   function clickHandler() {
     setOpen(!open);
   }
@@ -135,6 +134,7 @@ function mapStateToProps(state) {
     // group info state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
+    displayConversation: state.conversations.displayConversation,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -143,7 +143,7 @@ function mapDispatchToProps(dispatch) {
     // search group info
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
+    fetchConversations: () => dispatch(fetchConversations()),
   };
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));
