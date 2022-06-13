@@ -27,8 +27,10 @@ import {
   displayPrivacyReducer,
   displayContactInfoReducer,
   SearchContactMsgReducer,
+  displayConversationsReducer,
 } from "./reducers/reducers";
-
+import { requestReducer } from "./reducers/requestReducers";
+import thunk from "redux-thunk";
 const rootReducer = combineReducers({
   profile: displayProfileReducer,
   status: displayStatusReducer,
@@ -60,5 +62,7 @@ const rootReducer = combineReducers({
   // contact information
   contactInfo: displayContactInfoReducer,
   searchContactMsg: SearchContactMsgReducer,
+  conversations: requestReducer,
+  // requestReducer: requestReducer,
 });
-export const store = createStore(rootReducer, applyMiddleware(logger));
+export const store = createStore(rootReducer, applyMiddleware(logger, thunk));

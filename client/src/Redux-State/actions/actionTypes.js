@@ -61,3 +61,7 @@ export const LINK_SETTINGS_AND_PROFILE = "LINK_SETTINGS_AND_PROFILE";
 // contact info action types
 export const DISPLAY_CONTACT_INFO = "DISPLAY_CONTACT_INFO";
 export const SEARCH_CONTACT_MSG = "SEARCH_CONTACT_MSG";
+
+// direct messages actions
+
+export const SHOW_CONVERSATIONS = "SHOW_CONVERSATIONS";
