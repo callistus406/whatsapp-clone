@@ -18,10 +18,12 @@ export function fetchConversationFailure(error) {
 }
 
 export const fetchConversations = (data) => {
+  console.log("qwweewewewewwe");
+  console.log(data);
   return async function (dispatch) {
     dispatch(fetchConversationRequest);
     axios
-      .get("http://localhost:3200/api/v1/conversation/629f66f6cd16b099af3c7dda")
+      .get(`http://localhost:3200/api/v1/conversation/629f66f6cd16b099af3c7dda`)
       .then((response) => {
         dispatch(fetchConversationSuccess(response.data));
       })
@@ -31,18 +33,36 @@ export const fetchConversations = (data) => {
   };
 };
 
-// export const fetchConversations = (data) => {
-//   return async function (dispatch) {
-//     dispatch(fetchConversationRequest);
-//     try {
-//       const response = await axios.get("http://localhost:6000/conversations");
-//       if (response) {
-//         dispatch(fetchConversationSuccess(response.data));
-//         console.log(response.data);
-//       }
-//     } catch (error) {
-//       dispatch(fetchConversationFailure(error.message));
-//       console.log(error.message);
-//     }
-//   };
-// };
+// fetch user profile
+
+export function fetchUserRequest() {
+  return {
+    type: "FETCH_USER_REQUEST",
+  };
+}
+export function fetchUserSuccess(data) {
+  return {
+    type: "FETCH_USER_SUCCESS",
+    payload: data,
+  };
+}
+export function fetchUserFailure(error) {
+  return {
+    type: "FETCH_USER_FAILURE",
+    payload: error,
+  };
+}
+
+export const fetchUser = (data) => {
+  return async function (dispatch) {
+    dispatch(fetchUserRequest);
+    axios
+      .get("http://localhost:3200/api/v1/login")
+      .then((response) => {
+        dispatch(fetchUserSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchUserFailure(error));
+      });
+  };
+};
