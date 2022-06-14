@@ -11,7 +11,7 @@ const conversationController = async (req, res) => {
   try {
     const savedConversation = await newConversation.save();
     res.status(200).json(savedConversation);
-    console.log("still in progress");
+    // console.log("still in progress");
   } catch (error) {
     res.status(500).json(error.message);
   }

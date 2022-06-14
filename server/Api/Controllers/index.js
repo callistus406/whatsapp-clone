@@ -1,4 +1,5 @@
 const registerController = require("./registerController");
+const profileController = require("./profileController");
 const loginController = require("./loginController");
 // const profileController = require("./profileController");
 const {
@@ -16,7 +17,7 @@ module.exports = {
   registerController,
   postMessageController,
   getMessageController,
-
+  profileController,
   //   profileController,
   //   deleteController,
 };

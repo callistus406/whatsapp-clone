@@ -29,7 +29,10 @@ import {
   displayGrpMsgAction,
   toggleConversation,
 } from "../../Redux-State/actionCreators/pageActions";
-import { fetchConversations } from "../../Redux-State/actionCreators/fetchRequestActions.js";
+import {
+  fetchConversations,
+  fetchUser,
+} from "../../Redux-State/actionCreators/fetchRequestActions.js";
 import thunk from "redux-thunk";
 import { StyledContactsCol } from "./style";
 import { StickerIcon, ProfileIcon } from "./HomeIcons";
@@ -55,8 +58,14 @@ function Home(props) {
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
 
+  function fetchConversationRequest() {}
   useEffect(() => {
-    props.fetchConversations();
+    props.fetchUser();
+    // console.log(props.getUser.data._id);
+
+    props.fetchConversations(props.getUser.data._id);
+    if (props.getUser.data._id) {
+    }
   }, []);
   function clickHandler() {
     setOpen(!open);
@@ -116,8 +125,8 @@ function Home(props) {
               <div className="textContent">
                 <span>Keep Your Phone Connected</span>
                 <p>
-                  Whatsapp Connects to your phone to sync your messages,To
-                  reduce data usage,connect your phone to wifi
+                  Whatsapp Connects to your phone to props.getUser.data._idsync
+                  your messages,To reduce data usage,connect your phone to wifi
                 </p>
               </div>
             </div>
@@ -135,15 +144,19 @@ function mapStateToProps(state) {
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
     displayConversation: state.conversations.displayConversation,
+    getUser: state.user,
   };
 }
 function mapDispatchToProps(dispatch) {
+  console.log("ttttttttttttttttttttttt");
   return {
     optionsToggle: () => dispatch(optionsToggle()),
     // search group info
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
-    fetchConversations: () => dispatch(fetchConversations()),
+    fetchConversations: (data) =>
+      dispatch(fetchConversations("props.getUser.data._id")),
+    fetchUser: (data) => dispatch(fetchUser(data)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));
