@@ -1,4 +1,5 @@
 import axios from "axios";
+import userId from "../../Pages/Home/Home";
 export function fetchConversationRequest() {
   return {
     type: "FETCH_CONVERSATIONS_REQUEST",
@@ -16,14 +17,16 @@ export function fetchConversationFailure(error) {
     payload: error,
   };
 }
-
+const user = [];
 export const fetchConversations = (data) => {
-  console.log("qwweewewewewwe");
   console.log(data);
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     dispatch(fetchConversationRequest);
+    console.log(getState);
+    const userState = getState();
+    const userId = userState.user.data._id;
     axios
-      .get(`http://localhost:3200/api/v1/conversation/629f66f6cd16b099af3c7dda`)
+      .get(`http://localhost:3200/api/v1/conversation/${userId}`)
       .then((response) => {
         dispatch(fetchConversationSuccess(response.data));
       })

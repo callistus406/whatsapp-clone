@@ -32,6 +32,9 @@ import {
 import {
   fetchConversations,
   fetchUser,
+  fetchConversationRequest,
+  fetchConversationSuccess,
+  fetchConversationFailure,
 } from "../../Redux-State/actionCreators/fetchRequestActions.js";
 import thunk from "redux-thunk";
 import { StyledContactsCol } from "./style";
@@ -60,12 +63,11 @@ function Home(props) {
 
   function fetchConversationRequest() {}
   useEffect(() => {
-    props.fetchUser();
+    const user = props.fetchUser();
     // console.log(props.getUser.data._id);
 
     props.fetchConversations(props.getUser.data._id);
-    if (props.getUser.data._id) {
-    }
+    console.log(props.getUser.data);
   }, []);
   function clickHandler() {
     setOpen(!open);
@@ -148,14 +150,12 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  console.log("ttttttttttttttttttttttt");
   return {
     optionsToggle: () => dispatch(optionsToggle()),
     // search group info
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
-    fetchConversations: (data) =>
-      dispatch(fetchConversations("props.getUser.data._id")),
+    fetchConversations: (data) => dispatch(fetchConversations()),
     fetchUser: (data) => dispatch(fetchUser(data)),
   };
 }
