@@ -22,11 +22,12 @@ export const fetchConversations = (data) => {
   console.log(data);
   return async function (dispatch, getState) {
     dispatch(fetchConversationRequest);
-    console.log(getState);
+
     const userState = getState();
     const userId = userState.user.data._id;
+    console.log(userId);
     axios
-      .get(`http://localhost:3200/api/v1/conversation/${userId}`)
+      .get(`http://localhost:3300/api/v1/conversation/${userId}`)
       .then((response) => {
         dispatch(fetchConversationSuccess(response.data));
       })
@@ -57,10 +58,45 @@ export function fetchUserFailure(error) {
 }
 
 export const fetchUser = (data) => {
+  return async function (dispatch, getState) {
+    dispatch(fetchUserRequest);
+    const userState = getState();
+    const userId = userState.user.data._id;
+    axios
+      .get(`http://localhost:3300/api/v1/users${userId}`)
+      .then((response) => {
+        dispatch(fetchUserSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchUserFailure(error));
+      });
+  };
+};
+// fetch user
+
+export function fetchUserProfileRequest() {
+  return {
+    type: "FETCH_USER_PROFILE_REQUEST",
+  };
+}
+export function fetchUseProfileSuccess(data) {
+  return {
+    type: "FETCH_USER_PROFILE_SUCCESS",
+    payload: data,
+  };
+}
+export function fetchUserProfileFailure(error) {
+  return {
+    type: "FETCH_USER_PROFILE_FAILURE",
+    payload: error,
+  };
+}
+
+export const fetchUserProfile = (data) => {
   return async function (dispatch) {
     dispatch(fetchUserRequest);
     axios
-      .get("http://localhost:3200/api/v1/login")
+      .get("http://localhost:3300/api/v1/login")
       .then((response) => {
         dispatch(fetchUserSuccess(response.data));
       })

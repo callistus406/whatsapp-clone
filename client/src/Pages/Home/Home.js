@@ -57,17 +57,29 @@ const actions = [
 // Menu;
 
 function Home(props) {
+  // const {displayMsgSearchLayout,displayGrpMsgSection,} = props
   const countRef = useRef(0);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
+  const [conversations, setConversations] = useState([]);
+  let currentUser = props.getUser.data._id;
 
-  function fetchConversationRequest() {}
+  function fetchConversationRequest() {
+    try {
+      // props.fetchUser();
+      console.log(props.getUser);
+      props.fetchConversations();
+      // console.log(props.displayConversation.data);
+      setConversations(props.displayConversation.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // const fetchUser = propsmonitor
+
   useEffect(() => {
-    const user = props.fetchUser();
-    // console.log(props.getUser.data._id);
-
-    props.fetchConversations(props.getUser.data._id);
-    console.log(props.getUser.data);
+    fetchConversationRequest();
   }, []);
   function clickHandler() {
     setOpen(!open);
@@ -99,14 +111,22 @@ function Home(props) {
             width="24rem"
             toggle={props.displayMsgSearchLayout}
           >
-            <UserChat passMenu="qwerty" />
-            <UserChat passMenu="qwerty1" />
-            <UserChat passMenu="qwerty2" />
+            {conversations.map((conversation, index) => {
+              return (
+                <UserChat
+                  passMenu={index}
+                  conversation={conversation}
+                  currentUser={props.getUser.data}
+                />
+              );
+            })}
+            {/* <UserChat passMenu="qwerty1" /> */}
+            {/* <UserChat passMenu="qwerty2" />
             <UserChat passMenu="qwerty3" />
             <UserChat passMenu="qwertyy" />
             <UserChat passMenu="qwerty1y" />
             <UserChat passMenu="qwerty2e" />
-            <UserChat passMenu="qwerty3e" />
+            <UserChat passMenu="qwerty3e" /> */}
           </StyledContactsCol>
         </div>
 
@@ -145,7 +165,7 @@ function mapStateToProps(state) {
     // group info state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
-    displayConversation: state.conversations.displayConversation,
+    displayConversation: state.conversations,
     getUser: state.user,
   };
 }

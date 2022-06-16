@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import { groupDialog } from "../../GlobalVariables/variables";
 import { displayGrpMsgAction } from "../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
@@ -14,8 +14,14 @@ import {
 } from "./styles.js";
 
 function UserChat(props) {
-  const [contextMenu, setContextMenu] = React.useState(null);
+  const { conversation, currentUser } = props;
 
+  useEffect(() => {
+    const friendId = props.conversation.member.find(
+      (m) => m !== props.currentUser._id
+    );
+    const user = props.getUser.data;
+  }, [conversation, currentUser]);
   const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenu(
@@ -90,12 +96,16 @@ function UserChat(props) {
 function mapStateToProps(state) {
   return {
     // search msg state
+    getUser: state.user,
+
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     // search msg action
+    fetchUser: (data) => dispatch(fetchUser(data)),
+
     displayGrpMsgAction: (bool) => dispatch(displayGrpMsgAction(bool)),
   };
 }

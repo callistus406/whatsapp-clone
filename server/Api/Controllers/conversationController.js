@@ -26,7 +26,7 @@ const getConversationController = async (req, res) => {
     });
     //   console.log(senderId);
     res.status(200).json(savedConversation);
-    console.log("still in progress");
+    console.log("still fixing");
   } catch (error) {
     res.status(500).json(error.message);
   }
