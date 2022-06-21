@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import "./Home.css";
 import Box from "@mui/material/Box";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import Menu from "@mui/material/Menu";
 import UserChat from "../UserChat/UserChat";
 import UserProfile from "../UserProfile/UserProfile";
@@ -32,9 +32,6 @@ import {
 import {
   fetchConversations,
   fetchUser,
-  fetchConversationRequest,
-  fetchConversationSuccess,
-  fetchConversationFailure,
 } from "../../Redux-State/actionCreators/fetchRequestActions.js";
 import thunk from "redux-thunk";
 import { StyledContactsCol } from "./style";
@@ -57,30 +54,34 @@ const actions = [
 // Menu;
 
 function Home(props) {
-  // const {displayMsgSearchLayout,displayGrpMsgSection,} = props
   const countRef = useRef(0);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
-  const [conversations, setConversations] = useState([]);
-  let currentUser = props.getUser.data._id;
+  const [userConversations, setUserConversations] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
+  const [error, setError] = useState([]);
+  const { user, conversations } = useSelector((state) => state);
+
+  // const getConversations = useSelector((state) => state.conversations.data);
+
+  const dispatch = useDispatch();
 
   function fetchConversationRequest() {
     try {
-      // props.fetchUser();
-      console.log(props.getUser);
-      props.fetchConversations();
-      // console.log(props.displayConversation.data);
-      setConversations(props.displayConversation.data);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   }
 
-  // const fetchUser = propsmonitor
-
   useEffect(() => {
-    fetchConversationRequest();
-  }, []);
+    dispatch(fetchUser());
+    dispatch(fetchConversations(user.data._id));
+
+    setUserConversations(conversations.data);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user._id]);
+
   function clickHandler() {
     setOpen(!open);
   }
@@ -88,8 +89,6 @@ function Home(props) {
   return (
     <div className="homeParentCont">
       <div className="layoutContainer">
-        {/* {props.displayProfileContainer ? ( */}
-
         <UserProfile />
         <Status />
         <NewChat />
@@ -111,12 +110,12 @@ function Home(props) {
             width="24rem"
             toggle={props.displayMsgSearchLayout}
           >
-            {conversations.map((conversation, index) => {
+            {userConversations.map((conversation, index) => {
               return (
                 <UserChat
                   passMenu={index}
                   conversation={conversation}
-                  currentUser={props.getUser.data}
+                  currentUser={user.data._id}
                 />
               );
             })}
@@ -124,8 +123,8 @@ function Home(props) {
             {/* <UserChat passMenu="qwerty2" />
             <UserChat passMenu="qwerty3" />
             <UserChat passMenu="qwertyy" />
-            <UserChat passMenu="qwerty1y" />
-            <UserChat passMenu="qwerty2e" />
+            
+           
             <UserChat passMenu="qwerty3e" /> */}
           </StyledContactsCol>
         </div>

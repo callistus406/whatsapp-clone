@@ -12,16 +12,24 @@ import {
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
 } from "./styles.js";
-
+import {
+  fetchUser,
+  fetchUserProfile,
+} from "../../Redux-State/actionCreators/fetchRequestActions";
 function UserChat(props) {
   const { conversation, currentUser } = props;
+  const [contextMenu, setContextMenu] = React.useState(null);
+  console.log(props.conversation.members);
 
   useEffect(() => {
-    const friendId = props.conversation.member.find(
-      (m) => m !== props.currentUser._id
-    );
+    const friendId = conversation.members.find((m) => m !== props.currentUser);
+    console.log(friendId);
     const user = props.getUser.data;
+
+    fetchUserProfile(props.currentUser._id);
+    // }
   }, [conversation, currentUser]);
+
   const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenu(
@@ -105,6 +113,7 @@ function mapDispatchToProps(dispatch) {
   return {
     // search msg action
     fetchUser: (data) => dispatch(fetchUser(data)),
+    fetchUserProfile: (data) => dispatch(fetchUserProfile(data)),
 
     displayGrpMsgAction: (bool) => dispatch(displayGrpMsgAction(bool)),
   };
