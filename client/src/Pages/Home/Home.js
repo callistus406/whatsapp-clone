@@ -76,12 +76,13 @@ function Home(props) {
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(fetchConversations(user.data._id));
-
+    setCurrentUser(user.data);
     setUserConversations(conversations.data);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user._id]);
 
+  console.log(userConversations);
   function clickHandler() {
     setOpen(!open);
   }
@@ -115,7 +116,7 @@ function Home(props) {
                 <UserChat
                   passMenu={index}
                   conversation={conversation}
-                  currentUser={user.data._id}
+                  currentUser={currentUser._id}
                 />
               );
             })}
