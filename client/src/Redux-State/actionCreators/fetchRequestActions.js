@@ -1,14 +1,14 @@
 import axios from "axios";
-import userId from "../../Pages/Home/Home";
+
 export function fetchConversationRequest() {
   return {
     type: "FETCH_CONVERSATIONS_REQUEST",
   };
 }
-export function fetchConversationSuccess(data) {
+export function fetchConversationSuccess(conversation) {
   return {
     type: "FETCH_CONVERSATIONS_SUCCESS",
-    payload: data,
+    payload: conversation,
   };
 }
 export function fetchConversationFailure(error) {
@@ -18,21 +18,20 @@ export function fetchConversationFailure(error) {
   };
 }
 const user = [];
-export const fetchConversations = (data) => {
-  return async function (dispatch, getState) {
-    dispatch(fetchConversationRequest());
-    console.log(data);
+export const fetchConversations = (id) => {
+  console.log(id);
+  return (dispatch) => {
+    dispatch(fetchConversationRequest);
 
-    // const userState = getState();
-    // // const userId = userState.data._id;
-    // console.log(userState);
     axios
-      .get(`http://localhost:3300/api/v1/conversation/${data}`)
+      .get(`http://localhost:3300/api/v1/conversation/${id}`)
       .then((response) => {
-        dispatch(fetchConversationSuccess(response.data));
+        const conversations = response.data;
+        dispatch(fetchConversationSuccess(conversations));
       })
       .catch((error) => {
-        dispatch(fetchConversationFailure(error));
+        const errorMsg = error.message;
+        dispatch(fetchConversationFailure(errorMsg));
       });
   };
 };
@@ -44,10 +43,10 @@ export function fetchUserRequest() {
     type: "FETCH_USER_REQUEST",
   };
 }
-export function fetchUserSuccess(data) {
+export function fetchUserSuccess(user) {
   return {
     type: "FETCH_USER_SUCCESS",
-    payload: data,
+    payload: user,
   };
 }
 export function fetchUserFailure(error) {
@@ -60,16 +59,18 @@ export function fetchUserFailure(error) {
 export const fetchUser = (userId) => {
   console.log(userId);
 
-  return function (dispatch, getState) {
-    dispatch(fetchUserRequest());
-    const userState = getState();
+  return function (dispatch) {
+    dispatch(fetchUserRequest);
+
     axios
       .get(`http://localhost:3300/api/v1/login`)
       .then((response) => {
-        dispatch(fetchUserSuccess(response.data));
+        const user = response.data;
+        dispatch(fetchUserSuccess(user));
       })
       .catch((error) => {
-        dispatch(fetchUserFailure(error));
+        const errorMsg = error.message;
+        dispatch(fetchUserFailure(errorMsg));
       });
   };
 };
@@ -93,13 +94,12 @@ export function fetchUserProfileFailure(error) {
   };
 }
 
-export const fetchUserProfile = (data) => {
-  console.log(data);
+export const fetchUserProfile = (userId) => {
   return function (dispatch) {
     dispatch(fetchUserProfileRequest());
 
     axios
-      .get(`http://localhost:3300/api/v1/userProfile/${userId}`)
+      .get(`http://localhost:3300/api/v1/user/${userId}`)
       .then((response) => {
         dispatch(fetchUseProfileSuccess(response.data));
       })

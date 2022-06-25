@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import { groupDialog } from "../../GlobalVariables/variables";
 import { displayGrpMsgAction } from "../../Redux-State/actionCreators/pageActions";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import {
   StyledUserChatCont,
   StyledUserChatLayout,
@@ -19,16 +19,20 @@ import {
 function UserChat(props) {
   const { conversation, currentUser } = props;
   const [contextMenu, setContextMenu] = React.useState(null);
+  const [friend, setFriend] = useState(null);
   console.log(props.conversation.members);
+  const { userProfile } = useSelector((state) => state);
 
+  // const getConversations = useSelector((state) => state.conversations.data);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== props.currentUser);
     console.log(friendId);
-    const user = props.getUser.data;
-
-    fetchUserProfile(props.currentUser._id);
+    dispatch(fetchUserProfile(friendId));
+    setFriend(userProfile.data);
     // }
-  }, [conversation, currentUser]);
+  }, [friend]);
 
   const handleContextMenu = (event) => {
     event.preventDefault();

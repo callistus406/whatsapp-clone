@@ -33,6 +33,7 @@ import {
   requestReducer,
   userRequestReducer,
   userProfileRequestReducer,
+  loginReducer,
 } from "./reducers/requestReducers";
 import thunk from "redux-thunk";
 const rootReducer = combineReducers({
@@ -69,6 +70,7 @@ const rootReducer = combineReducers({
   conversations: requestReducer,
   // requestReducer: requestReducer,
   // request user
+  login: loginReducer,
   user: userRequestReducer,
   userProfile: userProfileRequestReducer,
 });

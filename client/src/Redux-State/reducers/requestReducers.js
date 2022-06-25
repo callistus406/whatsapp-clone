@@ -6,6 +6,10 @@ import {
   FETCH_USER_PROFILE_REQUEST,
   FETCH_USER_PROFILE_SUCCESS,
   FETCH_USER_PROFILE_FAILURE,
+  // .................................
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
 } from "../actions/fetchDataActionsTypes";
 
 import {
@@ -95,6 +99,37 @@ export const userProfileRequestReducer = (
         error: "",
       };
     case FETCH_USER_PROFILE_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+// login
+
+const initialLoginState = {
+  loading: false,
+  data: [],
+  error: "",
+};
+
+export const loginReducer = (state = initialLoginState, action) => {
+  switch (action.type) {
+    case USER_LOGIN_REQUEST:
+      return {
+        loading: true,
+      };
+    case USER_LOGIN_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case USER_LOGIN_FAILURE:
       return {
         loading: false,
         data: [],

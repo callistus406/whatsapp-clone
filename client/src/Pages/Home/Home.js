@@ -66,23 +66,35 @@ function Home(props) {
 
   const dispatch = useDispatch();
 
-  function fetchConversationRequest() {
+  function getConversations() {
     try {
+      if (user.data.loading) {
+        console.log("loading********************************");
+      } else {
+        setCurrentUser(user.data);
+
+        console.log(user);
+        dispatch(fetchConversations(currentUser._id));
+      }
+      // return user._
     } catch (error) {
       setError(error);
     }
   }
 
   useEffect(() => {
-    dispatch(fetchUser());
-    dispatch(fetchConversations(user.data._id));
-    setCurrentUser(user.data);
-    setUserConversations(conversations.data);
-
+    getConversations();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user._id]);
+    console.log(user);
+  }, []);
 
-  console.log(userConversations);
+  // useEffect(() => {
+  //   console.log(user);
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [user]);
+
+  // console.log(userConversations);
   function clickHandler() {
     setOpen(!open);
   }

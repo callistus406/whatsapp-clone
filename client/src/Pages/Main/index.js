@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { store } from "../../Redux-State/store";
 import Home from "../Home/Home";
 import SearchContact from "../SearchContact/SearchContact";
@@ -11,6 +11,7 @@ import FloatingActionButtons from "../Tests/Fab";
 import Scroll from "../Tests/Scroll";
 import ConnectionError from "../Interrupts/ConnectionMsg/ConnectionError";
 import { KeyboardShortcuts } from "../Settings/icons";
+import Register from "../Register/Register";
 // import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
 
 function Whatsapp() {
@@ -26,7 +27,7 @@ function Whatsapp() {
         <UserChat passMenu="qwerty2" />
         <UserChat passMenu="qwerty3" /> */}
         {/* luxury */}
-        <Home />
+        <Register />
         {/* <FloatingActionButtons /> */}
         {/* <SearchContact /> */}
 
