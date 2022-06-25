@@ -68,14 +68,12 @@ function Home(props) {
 
   function getConversations() {
     try {
-      if (user.data.loading) {
-        console.log("loading********************************");
-      } else {
-        setCurrentUser(user.data);
+      // if (user.data._id) {
 
-        console.log(user);
-        dispatch(fetchConversations(currentUser._id));
-      }
+      console.log(conversations);
+      dispatch(fetchConversations(props.loggedUser._id));
+      // setCurrentUser(props.);
+
       // return user._
     } catch (error) {
       setError(error);
@@ -187,7 +185,7 @@ function mapDispatchToProps(dispatch) {
     // search group info
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
-    fetchConversations: (data) => dispatch(fetchConversations()),
+    fetchConversations: (data) => dispatch(fetchConversations(data)),
     fetchUser: (data) => dispatch(fetchUser(data)),
   };
 }

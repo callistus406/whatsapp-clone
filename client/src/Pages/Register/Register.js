@@ -4,33 +4,33 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { fetchUser } from "../../Redux-State/actionCreators/fetchRequestActions";
 import HOME from "../Home/Home";
-function Register({ fetchUser, userData }) {
-  const { user } = useSelector((state) => state.user);
+function Register({ userData, fetchUser }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const dispatch = useDispatch();
+  // let dispatch = useDispatch();
+  // const { user } = useSelector((state) => state);
+
   useEffect(() => {
     fetchUser();
-    if (userData) {
-      // console.log(currentUser);
-      setCurrentUser(userData);
-    }
+    // console.log(user.loading);
+
+    // setCurrentUser(userData);
   }, []);
   function clickHandler() {
-    console.log(userData);
+    console.log(userData.error);
   }
-  return (
-    <>
-      {currentUser ? (
-        <HOME />
-      ) : (
-        <StyledRegisterCont>
-          <h1>login</h1>
-          <Button variant="contained" onClick={clickHandler}>
-            Contained
-          </Button>
-        </StyledRegisterCont>
-      )}
-    </>
+  return userData.loading ? (
+    <h1>LOADING</h1>
+  ) : userData.data.error ? (
+    <h1>{userData.error}</h1>
+  ) : userData.data._id ? (
+    <HOME loggedUser={userData.data} />
+  ) : (
+    <StyledRegisterCont>
+      <h1>login</h1>
+      <Button variant="contained" onClick={clickHandler}>
+        Contained
+      </Button>
+    </StyledRegisterCont>
   );
 }
 const mapStateToProps = (state) => {

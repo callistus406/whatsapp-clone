@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
-
+import { composeWithDevTools } from "redux-devtools-extension";
 import {
   displayProfileReducer,
   displayStatusReducer,
@@ -74,4 +74,7 @@ const rootReducer = combineReducers({
   user: userRequestReducer,
   userProfile: userProfileRequestReducer,
 });
-export const store = createStore(rootReducer, applyMiddleware(logger, thunk));
+export const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(logger, thunk))
+);

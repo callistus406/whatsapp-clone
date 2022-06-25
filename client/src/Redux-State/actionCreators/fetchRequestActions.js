@@ -59,8 +59,8 @@ export function fetchUserFailure(error) {
 export const fetchUser = (userId) => {
   console.log(userId);
 
-  return function (dispatch) {
-    dispatch(fetchUserRequest);
+  return (dispatch) => {
+    dispatch(fetchUserRequest());
 
     axios
       .get(`http://localhost:3300/api/v1/login`)
