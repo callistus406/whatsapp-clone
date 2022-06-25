@@ -1,7 +1,7 @@
 const registerController = require("./registerController");
 const profileController = require("./profileController");
 const loginController = require("./loginController");
-const getUserController = require("./getUserController");
+const { getUserController, postUserController } = require("./userController");
 // const profileController = require("./profileController");
 const {
   conversationController,
@@ -20,6 +20,7 @@ module.exports = {
   getMessageController,
   profileController,
   getUserController,
+  postUserController,
   //   profileController,
   //   deleteController,
 };
