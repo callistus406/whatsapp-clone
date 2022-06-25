@@ -57,11 +57,15 @@ function Home(props) {
   const countRef = useRef(0);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
-  const [userConversations, setUserConversations] = useState([]);
+  const [userConversations, setUserConversations] = useState([
+    "hghgh",
+    "iuiu",
+    "hjh",
+  ]);
   const [currentUser, setCurrentUser] = useState([]);
   const [error, setError] = useState([]);
   const { user, conversations } = useSelector((state) => state);
-
+  const { displayConversation, loggedUser } = props;
   // const getConversations = useSelector((state) => state.conversations.data);
 
   const dispatch = useDispatch();
@@ -70,9 +74,8 @@ function Home(props) {
     try {
       // if (user.data._id) {
 
-      console.log(conversations);
-      dispatch(fetchConversations(props.loggedUser._id));
-      // setCurrentUser(props.);
+      dispatch(fetchConversations(loggedUser._id));
+      // setUserConversations(displayConversation.data);
 
       // return user._
     } catch (error) {
@@ -82,6 +85,8 @@ function Home(props) {
 
   useEffect(() => {
     getConversations();
+    console.log(conversations);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log(user);
   }, []);
@@ -121,15 +126,32 @@ function Home(props) {
             width="24rem"
             toggle={props.displayMsgSearchLayout}
           >
-            {userConversations.map((conversation, index) => {
+            {conversations.data.map((conversation, index) => {
               return (
                 <UserChat
                   passMenu={index}
                   conversation={conversation}
-                  currentUser={currentUser._id}
+                  currentUser={loggedUser._id}
                 />
               );
             })}
+
+            {/* displayConversation.loading ? (
+              <h1>Loading</h1>
+            ) : displayConversation.data._id ? (
+              userConversations.map((conversation, index) => {
+                return (
+                  <UserChat
+                    passMenu={index}
+                    conversation={conversation}
+                    currentUser={loggedUser._id}
+                  />
+                );
+              })
+            ) : (
+              <h1>{displayConversation.error}</h1>
+            )} */}
+
             {/* <UserChat passMenu="qwerty1" /> */}
             {/* <UserChat passMenu="qwerty2" />
             <UserChat passMenu="qwerty3" />

@@ -30,9 +30,9 @@ function UserChat(props) {
     const friendId = conversation.members.find((m) => m !== props.currentUser);
     console.log(friendId);
     dispatch(fetchUserProfile(friendId));
-    setFriend(userProfile.data);
+    // setFriend(userProfile.data);
     // }
-  }, [friend]);
+  }, []);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
