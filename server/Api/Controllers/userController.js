@@ -14,7 +14,7 @@ const getUserController = async (req, res) => {
 
   try {
     const user = await UserModel.findOne({
-      _id: "629ccb139cc7b37b4630750d",
+      _id: req.params.userId,
     });
     res.status(200).json(user);
   } catch (error) {

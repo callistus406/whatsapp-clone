@@ -28,7 +28,7 @@ function UserChat(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== props.currentUser);
-    console.log(friendId);
+    console.log(props.userProfile.data.username);
     dispatch(fetchUserProfile(friendId));
     // setFriend(userProfile.data);
     // }
@@ -66,7 +66,7 @@ function UserChat(props) {
         </div>
         <StyledUserChatText>
           <div className="chatName">
-            <span className="spanHeading">WebMentor Freshers...</span>
+            <span className="spanHeading">WebMentor</span>
             <span className="spansTime">6:37pm</span>
           </div>
           <div className="msgPreview">
@@ -109,6 +109,7 @@ function mapStateToProps(state) {
   return {
     // search msg state
     getUser: state.user,
+    userProfile: state.userProfile,
 
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
   };
