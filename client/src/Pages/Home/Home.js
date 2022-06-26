@@ -32,6 +32,7 @@ import {
 import {
   fetchConversations,
   fetchUser,
+  fetchMessages,
 } from "../../Redux-State/actionCreators/fetchRequestActions.js";
 import thunk from "redux-thunk";
 import { StyledContactsCol } from "./style";
@@ -57,15 +58,11 @@ function Home(props) {
   const countRef = useRef(0);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
-  const [userConversations, setUserConversations] = useState([
-    "hghgh",
-    "iuiu",
-    "hjh",
-  ]);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [userConversations, setUserConversations] = useState([]);
+  const [currentChat, setCurrentChat] = useState([]);
   const [error, setError] = useState([]);
   const { user, conversations } = useSelector((state) => state);
-  const { displayConversation, loggedUser } = props;
+  const { displayConversation, loggedUser, fetchMessages } = props;
   // const getConversations = useSelector((state) => state.conversations.data);
 
   const dispatch = useDispatch();
@@ -91,13 +88,18 @@ function Home(props) {
     console.log(user);
   }, []);
 
-  // useEffect(() => {
-  //   console.log(user);
+  useEffect(() => {
+    try {
+      fetchMessages(currentChat?._id);
+      console.log(currentChat);
+    } catch (error) {
+      console.log(error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentChat]);
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user]);
+  console.log(currentChat);
 
-  // console.log(userConversations);
   function clickHandler() {
     setOpen(!open);
   }
@@ -132,6 +134,7 @@ function Home(props) {
                   passMenu={index}
                   conversation={conversation}
                   currentUser={loggedUser._id}
+                  onClick={() => setCurrentChat(conversation)}
                 />
               );
             })}
@@ -199,6 +202,7 @@ function mapStateToProps(state) {
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
     displayConversation: state.conversations,
     getUser: state.user,
+    messages: state.messages,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -209,6 +213,7 @@ function mapDispatchToProps(dispatch) {
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
     fetchConversations: (data) => dispatch(fetchConversations(data)),
     fetchUser: (data) => dispatch(fetchUser(data)),
+    fetchMessages: (data) => dispatch(fetchMessages(data)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));

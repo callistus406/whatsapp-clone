@@ -10,6 +10,7 @@ import {
   toggleContactInfo,
   toggleConversation,
 } from "../../../Redux-State/actionCreators/pageActions";
+import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
 import {
   StyledSpeedDial,
   StyledMessageSpace,
@@ -488,13 +489,14 @@ function mapStateToProps(state) {
   return {
     displaySearchContactMsg: state.searchContactMsg.displaySearchContactMsg,
     displayContactInfo: state.contactInfo.displayContactInfo,
+    messages: state.messages,
     // displayConversation: state.conversation.displayConversation,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
-
+    fetchMessages: (data) => dispatch(fetchMessages(data)),
     toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
     // toggleConversation: (bool) => dispatch(toggleConversation(bool)),
   };

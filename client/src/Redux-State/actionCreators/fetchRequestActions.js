@@ -93,6 +93,40 @@ export function fetchUserProfileFailure(error) {
     payload: error,
   };
 }
+// fetch message
+
+export function fetchMessagesRequest() {
+  return {
+    type: "FETCH_CURRENT_CHAT_REQUEST",
+  };
+}
+export function fetchMessagesSuccess(currentChat) {
+  return {
+    type: "FETCH_CURRENT_CHAT_SUCCESS",
+    payload: currentChat,
+  };
+}
+export function fetchMessagesFailure(error) {
+  return {
+    type: "FETCH_CURRENT_CHAT_FAILURE",
+    payload: error,
+  };
+}
+
+export const fetchMessages = (conversationId) => {
+  return function (dispatch) {
+    dispatch(fetchMessagesRequest());
+
+    axios
+      .get(`http://localhost:3300/api/v1/message/${conversationId}`)
+      .then((response) => {
+        dispatch(fetchMessagesSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchMessagesFailure(error));
+      });
+  };
+};
 
 export const fetchUserProfile = (userId) => {
   return function (dispatch) {

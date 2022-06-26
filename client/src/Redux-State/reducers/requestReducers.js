@@ -10,6 +10,10 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
+  // ............................
+  FETCH_CURRENT_CHAT_REQUEST,
+  FETCH_CURRENT_CHAT_SUCCESS,
+  FETCH_CURRENT_CHAT_FAILURE,
 } from "../actions/fetchDataActionsTypes";
 
 import {
@@ -130,6 +134,35 @@ export const loginReducer = (state = initialLoginState, action) => {
         error: "",
       };
     case USER_LOGIN_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+// message
+const initialMessageState = {
+  loading: false,
+  data: [],
+  error: "",
+};
+export const currentChatReducer = (state = initialMessageState, action) => {
+  switch (action.type) {
+    case FETCH_CURRENT_CHAT_REQUEST:
+      return {
+        loading: true,
+      };
+    case FETCH_CURRENT_CHAT_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case FETCH_CURRENT_CHAT_FAILURE:
       return {
         loading: false,
         data: [],

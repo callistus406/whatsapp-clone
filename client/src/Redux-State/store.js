@@ -34,6 +34,8 @@ import {
   userRequestReducer,
   userProfileRequestReducer,
   loginReducer,
+  messageReducer,
+  currentChatReducer,
 } from "./reducers/requestReducers";
 import thunk from "redux-thunk";
 const rootReducer = combineReducers({
@@ -73,6 +75,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   user: userRequestReducer,
   userProfile: userProfileRequestReducer,
+  currentChat: currentChatReducer,
 });
 export const store = createStore(
   rootReducer,
