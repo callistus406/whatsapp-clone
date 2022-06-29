@@ -20,7 +20,7 @@ function Register({ userData, fetchUser }) {
   }
   return userData.loading ? (
     <h1>LOADING</h1>
-  ) : userData.data.error ? (
+  ) : userData.error ? (
     <h1>{userData.error}</h1>
   ) : userData.data._id ? (
     <HOME loggedUser={userData.data} />

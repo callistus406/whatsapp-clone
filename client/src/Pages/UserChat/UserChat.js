@@ -88,9 +88,11 @@ function UserChat(props) {
         anchorReference="anchorPosition"
         autoFocus={false}
         anchorPosition={
+
           contextMenu !== null
             ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
             : undefined
+            
         }
       >
         {groupDialog.map((item, index) => {
