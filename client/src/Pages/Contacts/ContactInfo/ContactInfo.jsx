@@ -50,7 +50,7 @@ import {
   toggleContactInfo,
 } from "../../../Redux-State/actionCreators/pageActions";
 import { connect } from "react-redux";
-import SearchParticipants from "../../SearchParticipants/SearchParticipants.js";
+import SearchParticipants from "../../SearchParticipants/SearchParticipants.jsx";
 import StarredMsgs from "../../GroupStarredMsgs/StarredMsgs";
 function ContactInfo(props) {
   const membersRef = useRef();
