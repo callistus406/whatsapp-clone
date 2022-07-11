@@ -22,6 +22,10 @@ import {
   StyledFab,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
+  StyledOpenChatHead,
+  StyledChatHeadInfo,
+  StyledMsgInputCont,
+  StyledMsgBar,
 } from "./style";
 import {
   SearchIcon,
@@ -125,11 +129,11 @@ function MessageBox(props) {
     <StyledOpenChat
       toggle={props.displayMsgSearchLayout || props.displayGroupInfoLayout}
     >
-      <div className="openChatHead">
+      <StyledOpenChatHead>
         <div className="imageCont" onClick={() => props.showGroupInfo(true)}>
           <div className="image"></div>
         </div>
-        <div className="chatHeadInfo" onClick={() => props.showGroupInfo(true)}>
+        <StyledChatHeadInfo onClick={() => props.showGroupInfo(true)}>
           <div className="title">
             <p>Nigeria News</p>
             <div>
@@ -140,7 +144,7 @@ function MessageBox(props) {
               <span> friend 5</span> <span> friend 1</span>{" "}
             </div>
           </div>
-        </div>
+        </StyledChatHeadInfo>
         <div className="icons">
           <div className="searchIcon">
             <SearchIcon margin={msgCont} />
@@ -175,9 +179,9 @@ function MessageBox(props) {
             </StyledContextMenu4MsgSpace>
           </div>
         </div>
-      </div>
-      <Message id="qwerty" message={message} />
-      <div className="msgBar">
+      </StyledOpenChatHead>
+      <Message id="qwerty" key="qwerty" message={message} />
+      <StyledMsgBar>
         <div className="emojiIcons">
           <div className="emojiCont">
             <div className="emoji">
@@ -221,7 +225,7 @@ function MessageBox(props) {
           </div>
         </div>
 
-        <div className="msgInputCont">
+        <StyledMsgInputCont>
           <input
             type="text"
             id="input"
@@ -230,14 +234,14 @@ function MessageBox(props) {
             // onChange={(e) => setMessage(e.target.value)}
             // onKeyPress={getMessage}
           />
-        </div>
+        </StyledMsgInputCont>
 
         <div className="recorderCont">
           <div className="recorder">
             <RecorderIcon />
           </div>
         </div>
-      </div>
+      </StyledMsgBar>
     </StyledOpenChat>
   );
 }

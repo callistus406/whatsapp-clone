@@ -35,7 +35,7 @@ import {
   fetchMessages,
 } from "../../Redux-State/actionCreators/fetchRequestActions.js";
 import thunk from "redux-thunk";
-import { StyledContactsCol } from "./style";
+import { StyledContactsCol, StyledChatsCol } from "./style";
 import { StickerIcon, ProfileIcon } from "./HomeIcons";
 import GroupInfo from "../GroupInfo/GroupInfo";
 import MessageBox from "./MessageBox";
@@ -62,7 +62,7 @@ function Home(props) {
   const [currentChat, setCurrentChat] = useState([]);
   const [error, setError] = useState([]);
   const { user, conversations } = useSelector((state) => state);
-  const { displayConversation, loggedUser, fetchMessages } = props;
+  const { displayConversation, loggedUser, fetchMessages, messages } = props;
   // const getConversations = useSelector((state) => state.conversations.data);
 
   const dispatch = useDispatch();
@@ -82,11 +82,13 @@ function Home(props) {
 
   useEffect(() => {
     getConversations();
+    fetchMessages(currentChat?._id);
+
     console.log(conversations);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log(user);
-  }, []);
+  }, [loggedUser._id]);
 
   useEffect(() => {
     try {
@@ -98,7 +100,17 @@ function Home(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentChat]);
 
-  console.log(currentChat);
+  function getMsgs() {
+    try {
+      fetchMessages(currentChat?._id);
+      // setUserConversations(messages);
+      console.log(displayConversation);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(userConversations);
 
   function clickHandler() {
     setOpen(!open);
@@ -130,12 +142,18 @@ function Home(props) {
           >
             {conversations.data.map((conversation, index) => {
               return (
-                <UserChat
-                  passMenu={index}
-                  conversation={conversation}
-                  currentUser={loggedUser._id}
-                  onClick={() => setCurrentChat(conversation)}
-                />
+                <div
+                  onClick={() => {
+                    setCurrentChat(conversation);
+                  }}
+                >
+                  <UserChat
+                    passMenu={index}
+                    conversation={conversation}
+                    currentUser={loggedUser._id}
+                    mack={messages.data}
+                  />
+                </div>
               );
             })}
 
@@ -166,9 +184,9 @@ function Home(props) {
         </div>
 
         {props.displayGrpMsgSection ? (
-          <DirectMsg />
+          <DirectMsg userMsg={messages} />
         ) : (
-          <div className="chatsCol">
+          <StyledChatsCol>
             {/* commented */}
             <div className="chatColDiv">
               <div className="imageCont">
@@ -187,7 +205,7 @@ function Home(props) {
                 </p>
               </div>
             </div>
-          </div>
+          </StyledChatsCol>
         )}
         {/* </div> */}
       </div>
@@ -202,7 +220,7 @@ function mapStateToProps(state) {
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
     displayConversation: state.conversations,
     getUser: state.user,
-    messages: state.messages,
+    messages: state,
   };
 }
 function mapDispatchToProps(dispatch) {

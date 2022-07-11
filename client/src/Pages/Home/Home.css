@@ -45,30 +45,26 @@
   height: 100vh;
   /* border: 1px solid rgb(104, 24, 35); */
 }
-.chatsCol {
+/* .chatsCol {
   width: 100%;
-  /* background-color: rgb(106, 43, 43); */
   height: 100vh;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
   background: #f8f9fa;
-}
-.chatsCol .chatColDiv {
+} */
+/* .chatsCol .chatColDiv {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 74%;
-  /* border: 1px solid blue; */
 }
 .chatsCol .chatColDiv .textContent {
   display: flex;
   flex-direction: column;
   text-align: center;
   height: 7rem;
-  /* border: 1px solid blue; */
   justify-content: space-around;
 }
 .chatsCol .chatColDiv .connectImage {
@@ -78,7 +74,6 @@
 .chatsCol .chatColDiv .imageCont {
   width: 250px;
   height: 250px;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,15 +81,12 @@
 }
 .chatsCol .chatColDiv .textContent span {
   font-size: 32px;
-  /* display: flex;
-  flex-direction: column;
-  text-align: center; */
   color: #525252;
 }
 .chatsCol .chatColDiv .textContent p {
   font-size: 15px;
   color: #a0a1a2;
-}
+} */
 .topHeader {
   width: 100%;
   height: 200px;
@@ -275,88 +267,6 @@
   height: 100vh;
 } */
 
-.openChatHead {
-  background: #ededed;
-  width: 100%;
-  height: 3.6rem;
-  /* border: 1px solid blue; */
-  display: flex;
-  padding-left: 1rem;
-  cursor: pointer;
-
-  align-items: center;
-}
-
-.openChatHead .imageCont {
-  width: 50px;
-  height: 50px;
-  /* border: 1px solid blue; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* flex: 0.2; */
-}
-.openChatHead .imageCont .image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  /* border: 1px solid blue; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: aliceblue;
-}
-.openChatHead .chatHeadInfo {
-  /* border: 1px solid blue; */
-  width: 100%;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  height: 3.5rem;
-}
-.openChatHead .chatHeadInfo .title {
-  display: flex;
-  flex-direction: column;
-  /* border: 1px solid blue; */
-  width: 100%;
-  justify-content: space-between;
-  height: 3rem;
-  margin-left: 1rem;
-  /* flex: 100%; */
-}
-.openChatHead .chatHeadInfo .title p {
-}
-.openChatHead .chatHeadInfo .title div {
-  font-size: 0.8rem;
-}
-.openChatHead .icons {
-  width: 7rem;
-  height: 3.5rem;
-  /* border: 1px solid rgb(79, 79, 99); */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /* flex: 5%; */
-  /* margin-left: auto; */
-}
-.openChatHead .icons .searchIcon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  /* border: 1px solid blue; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.openChatHead .icons .optionIcon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  /* border: 1px solid blue; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 /* message */
 /* 
  .msgSpace {
@@ -365,20 +275,18 @@
   background-color: #e3e3e3;
   background-image: url("../img/bgDefault2.png");
 } */
-.msgBar {
+/* .msgBar {
   width: 100%;
   height: 3.875rem;
   background-color: #f0f0f0;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* margin-top: 1rem; */
 }
 
 .msgBar .emojiIcons {
   width: 5.7rem;
   height: 3rem;
-  /* border: 1px solid blue; */
   display: flex;
   display: flex;
   justify-content: space-between;
@@ -388,7 +296,6 @@
 .msgBar .emojiIcons .emojiCont {
   width: 50px;
   height: 50px;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -397,7 +304,6 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -405,7 +311,6 @@
 .msgBar .emojiIcons .attachmentCont {
   width: 50px;
   height: 50px;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -416,7 +321,6 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -425,7 +329,6 @@
 .msgBar .msgInputCont {
   width: 80%;
   height: 50px;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -446,11 +349,11 @@
 }
 .msgBar .msgInput:focus {
   outline: none;
-}
-.msgBar .recorderCont {
+} */
+/* .msgBar .recorderCont {
   width: 50px;
   height: 50px;
-  /* border: 1px solid blue; */
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -460,11 +363,10 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 /* speed dial */
 

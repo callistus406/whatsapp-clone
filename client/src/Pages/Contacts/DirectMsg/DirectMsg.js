@@ -57,6 +57,7 @@ const actions = [
 ];
 const textMsg = [];
 function DirectMsg(props) {
+  const { userMsg, fetchMessages } = props;
   const [message, setMessage] = useState([]);
   const countRef = useRef(1);
   const msgCont = useRef();
@@ -83,7 +84,7 @@ function DirectMsg(props) {
   function clearInput(element) {
     return (element.value = "");
   }
-  console.log(message);
+  console.log(userMsg);
   useEffect(() => {
     let documentInput = document.getElementById("input");
     const listener = (event) => {
@@ -103,7 +104,10 @@ function DirectMsg(props) {
     };
   });
   // console.log(props.displayMsgSearchLayout);
+  // useEffect(() => {
+  //   fetchMessages()
 
+  // }, []);
   const clickHandler = useCallback(() => {
     setOpen(!open);
   }, [open]);
@@ -280,9 +284,7 @@ const Message = React.memo(function Message(props) {
         .removeEventListener("scroll", listenToScroll);
   }, []);
 
-  useEffect(() => {
-    console.log("rendered");
-  }, []);
+  useEffect(() => {}, []);
   // for scroll to bottom
 
   useEffect(() => {
@@ -344,12 +346,12 @@ const Message = React.memo(function Message(props) {
       </StyledContextMenu4MsgSpace>
 
       <StyledMessageCont ref={msgSpaceRef} id="base">
-        <ReceivedMsgs />
+        <ReceivedMsgs key="qwerty" />
 
-        <ReceivedMsgs />
-        {props.message.map(function (msg) {
+        <ReceivedMsgs key="qwerty2" />
+        {props.message.map(function (msg, idx) {
           if (msg.from === "sender") {
-            return <SentMsgs message={msg.msg} />;
+            return <SentMsgs message={msg.msg} key={idx} />;
           }
           return "";
         })}

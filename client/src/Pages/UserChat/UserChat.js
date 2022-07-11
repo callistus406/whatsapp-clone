@@ -17,10 +17,10 @@ import {
   fetchUserProfile,
 } from "../../Redux-State/actionCreators/fetchRequestActions";
 function UserChat(props) {
-  const { conversation, currentUser } = props;
+  const { conversation, currentUser, mack } = props;
   const [contextMenu, setContextMenu] = React.useState(null);
   const [friend, setFriend] = useState(null);
-  console.log(props.conversation.members);
+
   const { userProfile } = useSelector((state) => state);
 
   // const getConversations = useSelector((state) => state.conversations.data);
@@ -28,12 +28,13 @@ function UserChat(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== props.currentUser);
-    console.log(props.userProfile.data.username);
+    console.log(friendId);
     dispatch(fetchUserProfile(friendId));
     // setFriend(userProfile.data);
     // }
-  }, []);
+  }, [conversation, currentUser]);
 
+  // console.log(userProfile.data);
   const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenu(
@@ -66,11 +67,11 @@ function UserChat(props) {
         </div>
         <StyledUserChatText>
           <div className="chatName">
-            <span className="spanHeading">WebMentor</span>
+            <span className="spanHeading">{userProfile.data?.username}</span>
             <span className="spansTime">6:37pm</span>
           </div>
           <div className="msgPreview">
-            <p>emma: this is just a preview...</p>
+            <p>{userProfile.data?.text}</p>
           </div>
         </StyledUserChatText>
       </StyledUserChatCont>
@@ -88,11 +89,9 @@ function UserChat(props) {
         anchorReference="anchorPosition"
         autoFocus={false}
         anchorPosition={
-
           contextMenu !== null
             ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
             : undefined
-            
         }
       >
         {groupDialog.map((item, index) => {

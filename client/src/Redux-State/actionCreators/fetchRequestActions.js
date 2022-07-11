@@ -18,13 +18,13 @@ export function fetchConversationFailure(error) {
   };
 }
 const user = [];
-export const fetchConversations = (id) => {
-  console.log(id);
+export const fetchConversations = (conversation_id) => {
+  console.log(conversation_id);
   return (dispatch) => {
     dispatch(fetchConversationRequest);
 
     axios
-      .get(`http://localhost:3300/api/v1/conversation/${id}`)
+      .get(`http://localhost:3300/api/v1/conversation/${conversation_id}`)
       .then((response) => {
         const conversations = response.data;
         dispatch(fetchConversationSuccess(conversations));
@@ -97,26 +97,26 @@ export function fetchUserProfileFailure(error) {
 
 export function fetchMessagesRequest() {
   return {
-    type: "FETCH_CURRENT_CHAT_REQUEST",
+    type: "FETCH_MESSAGES_REQUEST",
   };
 }
 export function fetchMessagesSuccess(currentChat) {
   return {
-    type: "FETCH_CURRENT_CHAT_SUCCESS",
+    type: "FETCH_MESSAGES_SUCCESS",
     payload: currentChat,
   };
 }
 export function fetchMessagesFailure(error) {
   return {
-    type: "FETCH_CURRENT_CHAT_FAILURE",
+    type: "FETCH_MESSAGES_FAILURE",
     payload: error,
   };
 }
 
 export const fetchMessages = (conversationId) => {
+  console.log(conversationId);
   return function (dispatch) {
     dispatch(fetchMessagesRequest());
-
     axios
       .get(`http://localhost:3300/api/v1/message/${conversationId}`)
       .then((response) => {

@@ -11,9 +11,9 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
   // ............................
-  FETCH_CURRENT_CHAT_REQUEST,
-  FETCH_CURRENT_CHAT_SUCCESS,
-  FETCH_CURRENT_CHAT_FAILURE,
+  FETCH_MESSAGE_REQUEST,
+  FETCH_MESSAGE_SUCCESS,
+  FETCH_MESSAGE_FAILURE,
 } from "../actions/fetchDataActionsTypes";
 
 import {
@@ -150,19 +150,19 @@ const initialMessageState = {
   data: [],
   error: "",
 };
-export const currentChatReducer = (state = initialMessageState, action) => {
+export const currentMessageReducer = (state = initialMessageState, action) => {
   switch (action.type) {
-    case FETCH_CURRENT_CHAT_REQUEST:
+    case FETCH_MESSAGE_REQUEST:
       return {
         loading: true,
       };
-    case FETCH_CURRENT_CHAT_SUCCESS:
+    case FETCH_MESSAGE_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_CURRENT_CHAT_FAILURE:
+    case FETCH_MESSAGE_FAILURE:
       return {
         loading: false,
         data: [],
