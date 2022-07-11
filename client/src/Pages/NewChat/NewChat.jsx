@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import "./NewChat.css";
-
 import { connect } from "react-redux";
 import ClearIcon from "@mui/icons-material/Clear";
 import { newChatToggle } from "../../Redux-State/actionCreators/pageActions";

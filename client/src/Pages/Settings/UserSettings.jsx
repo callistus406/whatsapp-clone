@@ -1,5 +1,4 @@
 import React from "react";
-import "./UserSettings.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -28,7 +27,14 @@ import {
   showProfile,
   toggleSecurity,
 } from "../../Redux-State/actionCreators/pageActions";
-import { StyledContainer, StyledArrowBackIcon, StyledNavArrow } from "./styles";
+import {
+  StyledContainer,
+  StyledArrowBackIcon,
+  StyledNavArrow,
+  StyledSettingsOption,
+  StyledSettingsContent,
+  StyledSettings,
+} from "./styles";
 import {
   Notification,
   Theme,
@@ -102,16 +108,16 @@ function UserSettings(props) {
   }
   function SettingsOptions(props) {
     return (
-      <div className="settingsOption" onClick={props.clickAction}>
+      <StyledSettingsOption onClick={props.clickAction}>
         <div className="icon">{props.icon}</div>
         <div className="textCont">
           <p>{props.text}</p>
         </div>
-      </div>
+      </StyledSettingsOption>
     );
   }
   return (
-    <div className="settings">
+    <StyledSettings>
       <StyledContainer toggle={props.displaySettingsLayout} width="28rem">
         <div className="settingsHeader">
           <div className="navArrow">
@@ -125,7 +131,7 @@ function UserSettings(props) {
             </StyledNavArrow>
           </div>
         </div>
-        <div className="settingsContent">
+        <StyledSettingsContent>
           <div className="settingsProfileCont">
             <div className="settingsProfilePicCont">
               <div className="settingsProfilePic">
@@ -154,7 +160,7 @@ function UserSettings(props) {
               />
             );
           })}
-        </div>
+        </StyledSettingsContent>
       </StyledContainer>
       <NotificationComponent />
       <Security
@@ -181,7 +187,7 @@ function UserSettings(props) {
         toggle={props.displayKeyboardShortcuts}
         handleClickAction={props.toggleKeyboardShortcuts}
       /> */}
-    </div>
+    </StyledSettings>
   );
 }
 function mapStateToProps(state) {
