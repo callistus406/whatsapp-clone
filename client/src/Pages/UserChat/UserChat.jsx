@@ -1,4 +1,10 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, {
+  useRef,
+  useCallback,
+  useEffect,
+  useState,
+  useReducer,
+} from "react";
 import { groupDialog } from "../../GlobalVariables/variables";
 import { displayGrpMsgAction } from "../../Redux-State/actionCreators/pageActions";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -15,26 +21,37 @@ import {
 import {
   fetchUser,
   fetchUserProfile,
+  fetchMessages,
 } from "../../Redux-State/actionCreators/fetchRequestActions";
+import axios from "axios";
 function UserChat(props) {
   const { conversation, currentUser, mack } = props;
   const [contextMenu, setContextMenu] = React.useState(null);
-  const [friend, setFriend] = useState(null);
+  const [getUserProfile, setUserProfile] = useState([]);
 
-  const { userProfile } = useSelector((state) => state);
-
-  // const getConversations = useSelector((state) => state.conversations.data);
-
-  const dispatch = useDispatch();
   useEffect(() => {
-    const friendId = conversation.members.find((m) => m !== props.currentUser);
-    console.log(friendId);
-    dispatch(fetchUserProfile(friendId));
-    // setFriend(userProfile.data);
-    // }
-  }, [conversation, currentUser]);
+    console.log(
+      "Usaer chat rendered____________________________________________"
+    );
+    const getProfile = async () => {
+      try {
+        const friendId = props.conversation.members.find(
+          (m) => m !== props.currentUser
+        );
+        const res = await axios.get(
+          `http://localhost:3300/api/v1/user/${friendId}`
+        );
+        setUserProfile(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  // console.log(userProfile.data);
+    getProfile();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenu(
@@ -59,21 +76,16 @@ function UserChat(props) {
   return (
     <StyledUserChatLayout
       onContextMenu={handleContextMenu}
-      onClick={() => props.displayGrpMsgAction(true)}
+      onClick={() => {
+        props.displayGrpMsgAction(true);
+        props.fetchMessages(conversation._id);
+      }}
     >
       <StyledUserChatCont>
         <div className="chatHead">
           <StyledCircle />
         </div>
-        <StyledUserChatText>
-          <div className="chatName">
-            <span className="spanHeading">{userProfile.data?.username}</span>
-            <span className="spansTime">6:37pm</span>
-          </div>
-          <div className="msgPreview">
-            <p>{userProfile.data?.text}</p>
-          </div>
-        </StyledUserChatText>
+        <StyledUserChatText>{getUserProfile.username}</StyledUserChatText>
       </StyledUserChatCont>
 
       <StyledContextMenu
@@ -111,6 +123,7 @@ function mapStateToProps(state) {
     // search msg state
     getUser: state.user,
     userProfile: state.userProfile,
+    messages: state.messages,
 
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
   };
@@ -120,6 +133,7 @@ function mapDispatchToProps(dispatch) {
     // search msg action
     fetchUser: (data) => dispatch(fetchUser(data)),
     fetchUserProfile: (data) => dispatch(fetchUserProfile(data)),
+    fetchMessages: (data) => dispatch(fetchMessages(data)),
 
     displayGrpMsgAction: (bool) => dispatch(displayGrpMsgAction(bool)),
   };

@@ -28,6 +28,7 @@ import {
   displayContactInfoReducer,
   SearchContactMsgReducer,
   displayConversationsReducer,
+  displayMessageReducer,
 } from "./reducers/reducers";
 import {
   requestReducer,
@@ -76,8 +77,14 @@ const rootReducer = combineReducers({
   user: userRequestReducer,
   userProfile: userProfileRequestReducer,
   messages: currentMessageReducer,
+  displayCurrentChat: displayMessageReducer,
+});
+
+const composeEnhancers = composeWithDevTools({
+  trace: true,
+  traceLimit: 25,
 });
 export const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(logger, thunk))
+  composeEnhancers(applyMiddleware(logger, thunk))
 );

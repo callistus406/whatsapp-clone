@@ -29,6 +29,7 @@ import {
   DISPLAY_CONTACT_INFO,
   SEARCH_CONTACT_MSG,
   SHOW_CONVERSATIONS,
+  SHOW_MESSAGE,
 } from "../actions/actionTypes";
 const initialState = {
   displayProfileContainer: false,
@@ -424,6 +425,7 @@ export function SearchContactMsgReducer(state = contactInfoStates, action) {
 
 const directMsgsInitialStates = {
   displayConversation: false,
+  displayMessage: false,
 };
 
 // display user conversations
@@ -436,6 +438,19 @@ export function displayConversationsReducer(
       return {
         ...state,
         displayConversation: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+// display user conversations
+
+export function displayMessageReducer(state = directMsgsInitialStates, action) {
+  switch (action.type) {
+    case SHOW_MESSAGE:
+      return {
+        ...state,
+        displayConversation: !state.displayMessage,
       };
     default:
       return state;

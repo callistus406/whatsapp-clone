@@ -65,3 +65,5 @@ export const SEARCH_CONTACT_MSG = "SEARCH_CONTACT_MSG";
 // direct messages actions
 
 export const SHOW_CONVERSATIONS = "SHOW_CONVERSATIONS";
+
+export const SHOW_MESSAGE = "SHOW_MESSAGE";

@@ -31,6 +31,7 @@ import {
   SEARCH_CONTACT_MSG,
   // SEARCH_CONTACT_MSG,
   SHOW_CONVERSATIONS,
+  SHOW_MESSAGE,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -278,5 +279,12 @@ export function toggleConversation(bool) {
     type: SHOW_CONVERSATIONS,
     payload: bool,
     info: "this action  will display conversations ",
+  };
+}
+
+export function showMessage() {
+  return {
+    type: SHOW_MESSAGE,
+    info: "this action  will display message ",
   };
 }

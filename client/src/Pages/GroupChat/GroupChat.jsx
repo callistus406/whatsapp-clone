@@ -1,16 +1,11 @@
-import {
-  messageDialog,
-  groupContext,
-} from "../../../GlobalVariables/variables";
+import { messageDialog, groupContext } from "../../GlobalVariables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 import {
-  toggleContactMsg,
-  toggleContactInfo,
-  toggleConversation,
-} from "../../../Redux-State/actionCreators/pageActions";
-import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
+  toggleMsgSearch,
+  showGroupInfo,
+} from "../../Redux-State/actionCreators/pageActions";
 import {
   StyledSpeedDial,
   StyledMessageSpace,
@@ -28,6 +23,9 @@ import {
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
   StyledOpenChatHead,
+  StyledChatHeadInfo,
+  StyledMsgInputCont,
+  StyledMsgBar,
 } from "./style";
 import {
   SearchIcon,
@@ -37,8 +35,8 @@ import {
   Attachment,
   StickerIcon,
   Tick,
-} from "./icons";
-// import "./Home.css";
+} from "./HomeIcons";
+import "./Home.css";
 
 // speed dial
 import PersonIcon from "@mui/icons-material/Person";
@@ -56,8 +54,7 @@ const actions = [
   { icon: <PersonIcon />, name: "contact", class: "speedDial-photo" },
 ];
 const textMsg = [];
-function DirectMsg(props) {
-  const { userMsg, fetchMessages } = props;
+function Message(props) {
   const [message, setMessage] = useState([]);
   const countRef = useRef(1);
   const msgCont = useRef();
@@ -65,7 +62,6 @@ function DirectMsg(props) {
   const [open, setOpen] = useState(false);
   let msgStr = "";
   const date = new Date();
-
   function getMessage(element) {
     setMessage([
       ...message,
@@ -84,7 +80,7 @@ function DirectMsg(props) {
   function clearInput(element) {
     return (element.value = "");
   }
-  console.log(userMsg);
+  console.log(message);
   useEffect(() => {
     let documentInput = document.getElementById("input");
     const listener = (event) => {
@@ -103,6 +99,7 @@ function DirectMsg(props) {
       document.removeEventListener("keydown", listener);
     };
   });
+  // console.log(props.displayMsgSearchLayout);
 
   const clickHandler = useCallback(() => {
     setOpen(!open);
@@ -130,23 +127,24 @@ function DirectMsg(props) {
   };
   return (
     <StyledOpenChat
-      toggle={props.displaySearchContactMsg || props.displayContactInfo}
+      toggle={props.displayMsgSearchLayout || props.displayGroupInfoLayout}
     >
       <StyledOpenChatHead>
-        <div
-          className="imageCont"
-          onClick={() => props.toggleContactInfo(true)}
-        >
+        <div className="imageCont" onClick={() => props.showGroupInfo(true)}>
           <div className="image"></div>
         </div>
-        <div
-          className="chatHeadInfo"
-          onClick={() => props.toggleContactInfo(true)}
-        >
+        <StyledChatHeadInfo onClick={() => props.showGroupInfo(true)}>
           <div className="title">
-            <p>+2348143568829</p>
+            <p>Nigeria News</p>
+            <div>
+              {" "}
+              <span> friend 1</span> <span> friend 2</span>{" "}
+              <span> friend 3</span>
+              <span> friend 4</span>
+              <span> friend 5</span> <span> friend 1</span>{" "}
+            </div>
           </div>
-        </div>
+        </StyledChatHeadInfo>
         <div className="icons">
           <div className="searchIcon">
             <SearchIcon margin={msgCont} />
@@ -182,8 +180,8 @@ function DirectMsg(props) {
           </div>
         </div>
       </StyledOpenChatHead>
-      <Message id="qwerty" message={message} />
-      <div className="msgBar">
+      <Message id="qwerty" key="qwerty" message={message} />
+      <StyledMsgBar>
         <div className="emojiIcons">
           <div className="emojiCont">
             <div className="emoji">
@@ -227,21 +225,23 @@ function DirectMsg(props) {
           </div>
         </div>
 
-        <div className="msgInputCont">
+        <StyledMsgInputCont>
           <input
             type="text"
             id="input"
             className="msgInput"
             placeholder="Type a message"
+            // onChange={(e) => setMessage(e.target.value)}
+            // onKeyPress={getMessage}
           />
-        </div>
+        </StyledMsgInputCont>
 
         <div className="recorderCont">
           <div className="recorder">
             <RecorderIcon />
           </div>
         </div>
-      </div>
+      </StyledMsgBar>
     </StyledOpenChat>
   );
 }
@@ -278,7 +278,9 @@ const Message = React.memo(function Message(props) {
         .removeEventListener("scroll", listenToScroll);
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("rendered");
+  }, []);
   // for scroll to bottom
 
   useEffect(() => {
@@ -340,12 +342,12 @@ const Message = React.memo(function Message(props) {
       </StyledContextMenu4MsgSpace>
 
       <StyledMessageCont ref={msgSpaceRef} id="base">
-        <ReceivedMsgs key="qwerty" />
+        <ReceivedMsgs />
 
-        <ReceivedMsgs key="qwerty2" />
-        {props.message.map(function (msg, idx) {
+        <ReceivedMsgs />
+        {props.message.map(function (msg) {
           if (msg.from === "sender") {
-            return <SentMsgs message={msg.msg} key={idx} />;
+            return <SentMsgs message={msg.msg} />;
           }
           return "";
         })}
@@ -446,7 +448,10 @@ function ReceivedMsgs() {
         </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
-        <p>This one adds a right triangle on the left, flush</p>
+        <p>
+          This one adds a right triangle on the left, flush at the top by using
+          .tri-right and .left-top to specify the location.
+        </p>
         <div className="msgTime">
           <div>
             <span>{hours}:</span>
@@ -483,21 +488,19 @@ function SentMsgs(props) {
 
 function mapStateToProps(state) {
   return {
-    displaySearchContactMsg: state.searchContactMsg.displaySearchContactMsg,
-    displayContactInfo: state.contactInfo.displayContactInfo,
-    messages: state.messages,
-    // displayConversation: state.conversation.displayConversation,
+    displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
+
+    displayMsgSearchLayout: state.searchMsg.displayMsgSearchLayout,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
-    fetchMessages: (data) => dispatch(fetchMessages(data)),
-    toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
-    // toggleConversation: (bool) => dispatch(toggleConversation(bool)),
+    showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
+
+    toggleMsgSearch: () => dispatch(toggleMsgSearch()),
   };
 }
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(React.memo(DirectMsg));
+)(React.memo(Message));

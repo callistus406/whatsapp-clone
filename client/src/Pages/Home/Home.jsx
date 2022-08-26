@@ -28,11 +28,13 @@ import {
   showGroupInfo,
   displayGrpMsgAction,
   toggleConversation,
+  showMessage,
 } from "../../Redux-State/actionCreators/pageActions";
 import {
   fetchConversations,
   fetchUser,
   fetchMessages,
+  fetchUserProfile,
 } from "../../Redux-State/actionCreators/fetchRequestActions.js";
 import thunk from "redux-thunk";
 import { StyledContactsCol, StyledChatsCol } from "./style";
@@ -62,55 +64,21 @@ function Home(props) {
   const [currentChat, setCurrentChat] = useState([]);
   const [error, setError] = useState([]);
   const { user, conversations } = useSelector((state) => state);
-  const { displayConversation, loggedUser, fetchMessages, messages } = props;
+  const { displayConversation, loggedUser, messages } = props;
   // const getConversations = useSelector((state) => state.conversations.data);
 
   const dispatch = useDispatch();
 
-  function getConversations() {
-    try {
-      // if (user.data._id) {
-
-      dispatch(fetchConversations(loggedUser._id));
-      // setUserConversations(displayConversation.data);
-
-      // return user._
-    } catch (error) {
-      setError(error);
-    }
-  }
-
   useEffect(() => {
-    getConversations();
-    fetchMessages(currentChat?._id);
+    console.log(loggedUser._id);
 
-    console.log(conversations);
+    console.log("Home rendered____________________________________________");
+
+    props.fetchConversations(loggedUser._id);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log(user);
   }, [loggedUser._id]);
-
-  useEffect(() => {
-    try {
-      fetchMessages(currentChat?._id);
-      console.log(currentChat);
-    } catch (error) {
-      console.log(error);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentChat]);
-
-  function getMsgs() {
-    try {
-      fetchMessages(currentChat?._id);
-      // setUserConversations(messages);
-      console.log(displayConversation);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  console.log(userConversations);
 
   function clickHandler() {
     setOpen(!open);
@@ -140,22 +108,24 @@ function Home(props) {
             width="24rem"
             toggle={props.displayMsgSearchLayout}
           >
-            {conversations.data.map((conversation, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    setCurrentChat(conversation);
-                  }}
-                >
-                  <UserChat
-                    passMenu={index}
-                    conversation={conversation}
-                    currentUser={loggedUser._id}
-                    mack={messages.data}
-                  />
-                </div>
-              );
-            })}
+            {!displayConversation.loading
+              ? displayConversation.data.map((conversation, index) => {
+                  console.log("qwerty");
+                  return (
+                    <div
+                      onClick={() => {
+                        setCurrentChat(conversation);
+                      }}
+                    >
+                      <UserChat
+                        passMenu={index}
+                        conversation={conversation}
+                        currentUser={loggedUser._id}
+                      />
+                    </div>
+                  );
+                })
+              : " "}
 
             {/* displayConversation.loading ? (
               <h1>Loading</h1>
@@ -184,7 +154,7 @@ function Home(props) {
         </div>
 
         {props.displayGrpMsgSection ? (
-          <DirectMsg userMsg={messages} />
+          <DirectMsg userMsg={messages} key={"index"} />
         ) : (
           <StyledChatsCol>
             {/* commented */}
@@ -218,15 +188,20 @@ function mapStateToProps(state) {
     // group info state
     displayGroupInfoLayout: state.groupInfo.displayGroupInfoLayout,
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
+    displayMessage: state.displayCurrentChat.displayMessage,
     displayConversation: state.conversations,
     getUser: state.user,
-    messages: state,
+    messages: state.messages,
+    userProfile: state.userProfile,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     optionsToggle: () => dispatch(optionsToggle()),
+    fetchUserProfile: (data) => dispatch(fetchUserProfile(data)),
+
     // search group info
+    showMessage: () => dispatch(showMessage()),
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
     fetchConversations: (data) => dispatch(fetchConversations(data)),
