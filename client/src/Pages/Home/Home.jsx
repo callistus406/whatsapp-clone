@@ -154,7 +154,11 @@ function Home(props) {
         </div>
 
         {props.displayGrpMsgSection ? (
-          <DirectMsg userMsg={messages} key={"index"} />
+          <DirectMsg
+            userMsg={messages}
+            key={"index"}
+            currentUser={loggedUser._id}
+          />
         ) : (
           <StyledChatsCol>
             {/* commented */}

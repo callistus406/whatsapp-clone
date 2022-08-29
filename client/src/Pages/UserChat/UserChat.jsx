@@ -28,7 +28,7 @@ function UserChat(props) {
   const { conversation, currentUser, mack } = props;
   const [contextMenu, setContextMenu] = React.useState(null);
   const [getUserProfile, setUserProfile] = useState([]);
-
+  console.log(props.messages);
   useEffect(() => {
     console.log(
       "Usaer chat rendered____________________________________________"
@@ -85,9 +85,11 @@ function UserChat(props) {
         <div className="chatHead">
           <StyledCircle />
         </div>
-        <StyledUserChatText>{getUserProfile.username}</StyledUserChatText>
+        <StyledUserChatText>
+          <h3>{getUserProfile.username}</h3>
+          <p>qwerty</p>
+        </StyledUserChatText>
       </StyledUserChatCont>
-
       <StyledContextMenu
         PaperProps={{
           style: {

@@ -13,18 +13,8 @@ import {
 import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
 import {
   StyledSpeedDial,
-  StyledMessageSpace,
   StyledBox,
   StyledOpenChat,
-  StyledMessageCont,
-  StyledMsgName,
-  StyledMsgInfo,
-  StyledMsgNumber,
-  StyledMsgInfoIcon,
-  StyledKeyBoardArrow,
-  StyledContextMenu,
-  StyledContextMenuItem,
-  StyledFab,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
   StyledOpenChatHead,
@@ -36,7 +26,6 @@ import {
   RecorderIcon,
   Attachment,
   StickerIcon,
-  Tick,
 } from "./icons";
 // import "./Home.css";
 
@@ -46,7 +35,7 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Messages from "../../Home/Conversation/Messages";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -57,6 +46,8 @@ const actions = [
 ];
 const textMsg = [];
 function DirectMsg(props) {
+  console.log(props);
+
   const { userMsg, fetchMessages } = props;
   const [message, setMessage] = useState([]);
   const countRef = useRef(1);
@@ -84,7 +75,7 @@ function DirectMsg(props) {
   function clearInput(element) {
     return (element.value = "");
   }
-  console.log(userMsg);
+  console.log(userMsg.data);
   useEffect(() => {
     let documentInput = document.getElementById("input");
     const listener = (event) => {
@@ -182,7 +173,7 @@ function DirectMsg(props) {
           </div>
         </div>
       </StyledOpenChatHead>
-      <Message id="qwerty" message={message} />
+      <Messages id="qwerty" message={userMsg.data} />
       <div className="msgBar">
         <div className="emojiIcons">
           <div className="emojiCont">
@@ -243,241 +234,6 @@ function DirectMsg(props) {
         </div>
       </div>
     </StyledOpenChat>
-  );
-}
-
-const Message = React.memo(function Message(props) {
-  const messageScroll = useRef();
-  const msgSpaceRef = useRef();
-  const prevHeight = useRef(0);
-  const [height, setHeight] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const scrollToBottom = () => {
-    messageScroll.current.scrollIntoView({ behavior: "smooth" });
-  };
-  let detect = 0;
-
-  const listenToScroll = () => {
-    const winScroll =
-      document.getElementById("base").scrollTop |
-      document.getElementById("base").scrollTop;
-
-    if (winScroll > detect) {
-      detect = winScroll - 2;
-      setIsVisible(false);
-    } else if (winScroll < detect) {
-      setIsVisible(true);
-    }
-  };
-  useEffect(() => {
-    console.log("wewewe");
-    document.getElementById("base").addEventListener("scroll", listenToScroll);
-    return () =>
-      document
-        .getElementById("base")
-        .removeEventListener("scroll", listenToScroll);
-  }, []);
-
-  useEffect(() => {}, []);
-  // for scroll to bottom
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [props.message]);
-
-  const [contextMenu, setContextMenu] = React.useState(null);
-
-  const handleContextMenu = (event) => {
-    event.preventDefault();
-    setContextMenu(
-      contextMenu === null
-        ? {
-            mouseX: event.clientX - 2,
-            mouseY: event.clientY - 4,
-          }
-        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
-          // Other native context menus might behave different.
-          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
-          null
-    );
-  };
-
-  const handleClose = () => {
-    setContextMenu(null);
-  };
-
-  return (
-    <StyledMessageSpace
-      onContextMenu={handleContextMenu}
-      style={{ cursor: "context-menu" }}
-      id="styledMessageSpace"
-    >
-      <StyledContextMenu4MsgSpace
-        PaperProps={{
-          style: {
-            // maxHeight: "5rem",
-            height: "auto",
-            minWidth: "13rem",
-          },
-        }}
-        open={contextMenu !== null}
-        onClose={handleClose}
-        anchorReference="anchorPosition"
-        autoFocus={false}
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
-        }
-      >
-        {groupContext.map((item) => {
-          return (
-            <StyledContextMenuItem4MsgSpace onClick={handleClose}>
-              {item.text}
-            </StyledContextMenuItem4MsgSpace>
-          );
-        })}
-      </StyledContextMenu4MsgSpace>
-
-      <StyledMessageCont ref={msgSpaceRef} id="base">
-        <ReceivedMsgs key="qwerty" />
-
-        <ReceivedMsgs key="qwerty2" />
-        {props.message.map(function (msg, idx) {
-          if (msg.from === "sender") {
-            return <SentMsgs message={msg.msg} key={idx} />;
-          }
-          return "";
-        })}
-        {isVisible && (
-          <StyledFab onClick={scrollToBottom}>
-            <KeyboardArrowDownIcon />
-          </StyledFab>
-        )}
-
-        <div ref={messageScroll} />
-      </StyledMessageCont>
-    </StyledMessageSpace>
-  );
-});
-
-function ReceivedMsgs() {
-  const msgInfoRef = useRef();
-  const [borderBottom, setBorderBottom] = useState(false);
-  const [showArrow, setShowArrow] = useState(false);
-  function addBorderBottom(bool) {
-    setBorderBottom(bool);
-  }
-
-  function hideArrow(value) {
-    setShowArrow(value);
-  }
-  const date = new Date();
-  const mins = date.getMinutes();
-  const hours = date.getHours();
-  const [contextMenu, setContextMenu] = React.useState(null);
-
-  const handleContextMenu = (event) => {
-    event.preventDefault();
-    setContextMenu(
-      contextMenu === null
-        ? {
-            mouseX: event.clientX - 2,
-            mouseY: event.clientY - 4,
-          }
-        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
-          // Other native context menus might behave different.
-          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
-          null
-    );
-  };
-
-  const handleClose = () => {
-    setContextMenu(null);
-  };
-
-  return (
-    <div
-      onContextMenu={handleClose}
-      class="talk-bubble tri-right left-top"
-      onMouseEnter={() => hideArrow(true)}
-      onMouseLeave={() => hideArrow(false)}
-    >
-      <StyledMsgInfo>
-        <div
-          className=""
-          onMouseEnter={() => addBorderBottom(true)}
-          onMouseLeave={() => addBorderBottom(false)}
-        >
-          <StyledMsgNumber border={borderBottom}>
-            +2349034543567
-          </StyledMsgNumber>{" "}
-          <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName>
-        </div>
-
-        <StyledKeyBoardArrow hide={showArrow} onClick={handleContextMenu}>
-          <StyledMsgInfoIcon fontSize="medium" />
-        </StyledKeyBoardArrow>
-        <StyledContextMenu
-          PaperProps={{
-            style: {
-              // maxHeight: ITEM_HEIGHT * 4.5,
-              minHeight: "16.9rem",
-              width: "auto",
-            },
-          }}
-          open={contextMenu !== null}
-          onClose={handleClose}
-          anchorReference="anchorPosition"
-          autoFocus={false}
-          anchorPosition={
-            contextMenu !== null
-              ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-              : undefined
-          }
-        >
-          {messageDialog.map((item) => {
-            return (
-              <StyledContextMenuItem onClick={handleClose}>
-                {item.text}
-              </StyledContextMenuItem>
-            );
-          })}
-        </StyledContextMenu>
-      </StyledMsgInfo>
-      <div class="talktext">
-        <p>This one adds a right triangle on the left, flush</p>
-        <div className="msgTime">
-          <div>
-            <span>{hours}:</span>
-            <span>{mins}</span>
-            <span className="timeZo">
-              {date.getHours() >= 12 ? "pm" : "am"}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-function SentMsgs(props) {
-  return (
-    <div class="talk-bubble-sent tri-right-send right-top alignSentMsgs">
-      {/* replies */}
-      <div class="talktext-sent">
-        <p>
-          {props.message
-            ? props.message
-            : "This one adds a right triangle on the left, flush at the top by using .tri-right and .left-top to specify the location"}
-        </p>
-        <div className="msgTime">
-          <div>
-            <span>2:29 pm </span>
-            <Tick />
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
