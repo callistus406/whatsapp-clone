@@ -28,7 +28,6 @@ import {
   StickerIcon,
 } from "./icons";
 // import "./Home.css";
-
 // speed dial
 import PersonIcon from "@mui/icons-material/Person";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
@@ -57,25 +56,25 @@ function DirectMsg(props) {
   let msgStr = "";
   const date = new Date();
 
-  function getMessage(element) {
-    setMessage([
-      ...message,
-      {
-        from: "sender",
-        msg: element.value,
-        time:
-          date.getHours() +
-          ":" +
-          date.getMinutes() +
-          "" +
-          (date.getHours() >= 12 ? "pm" : "am"),
-      },
-    ]);
-  }
+  // function getMessage(element) {
+  //   setMessage([
+  //     ...message,
+  //     {
+  //       from: "sender",
+  //       msg: element.value,
+  //       time:
+  //         date.getHours() +
+  //         ":" +
+  //         date.getMinutes() +
+  //         "" +
+  //         (date.getHours() >= 12 ? "pm" : "am"),
+  //     },
+  //   ]);
+  // }
   function clearInput(element) {
     return (element.value = "");
   }
-  console.log(userMsg.data);
+  console.log(userMsg);
   useEffect(() => {
     let documentInput = document.getElementById("input");
     const listener = (event) => {
@@ -83,7 +82,7 @@ function DirectMsg(props) {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
         // callMyFunction();
-        getMessage(documentInput);
+        // getMessage(documentInput);
         // console.log(message);
         textMsg.push(message);
         clearInput(documentInput);
@@ -119,6 +118,8 @@ function DirectMsg(props) {
   const handleClose = () => {
     setContextMenu(null);
   };
+
+  // if (
   return (
     <StyledOpenChat
       toggle={props.displaySearchContactMsg || props.displayContactInfo}
@@ -173,7 +174,7 @@ function DirectMsg(props) {
           </div>
         </div>
       </StyledOpenChatHead>
-      <Messages id="qwerty" message={userMsg.data} />
+      {!userMsg.loading ? <Messages id="qwerty" message={userMsg.data} /> : ""}
       <div className="msgBar">
         <div className="emojiIcons">
           <div className="emojiCont">
@@ -235,6 +236,9 @@ function DirectMsg(props) {
       </div>
     </StyledOpenChat>
   );
+  // } else {
+  //   return <h1>loading</h1>;
+  // }
 }
 
 function mapStateToProps(state) {

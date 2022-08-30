@@ -30,8 +30,10 @@ import {
 } from "../../../Redux-State/actionCreators/pageActions";
 import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
 import { ListItem } from "@mui/material";
-function Messages({ messages }) {
-  console.log(messages);
+import { format } from "timeago.js";
+
+function Messages({ messages, getUser }) {
+  console.log(getUser.data._id);
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
   const prevHeight = useRef(0);
@@ -54,22 +56,24 @@ function Messages({ messages }) {
       setIsVisible(true);
     }
   };
-  useEffect(() => {
-    console.log("wewewe");
-    document.getElementById("base").addEventListener("scroll", listenToScroll);
-    return () =>
-      document
-        .getElementById("base")
-        .removeEventListener("scroll", listenToScroll);
-  }, []);
-
-  useEffect(() => {}, []);
-  // for scroll to bottom
-
   // review this code
   // useEffect(() => {
-  //   scrollToBottom();
-  // }, [props.message]);
+  //   document.getElementById("base").addEventListener("scroll", listenToScroll);
+  //   console.log(document.getElementById("base"));
+  //   return () =>
+  //     document
+  //       .getElementById("base")
+  //       .removeEventListener("scroll", listenToScroll);
+  // }, []);
+
+  useEffect(() => {
+    console.log("Messages rendered.........................");
+  });
+  // for scroll to bottom
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const [contextMenu, setContextMenu] = React.useState(null);
 
@@ -128,20 +132,29 @@ function Messages({ messages }) {
       <StyledMessageCont ref={msgSpaceRef} id="base">
         {!messages.loading
           ? messages.data.map((item, index) => {
-              console.log(item.text);
-              return (
-                <ReceivedMsgs
-                  key={index}
-                  msgText={item.text}
-                  msgTime={item.createdAt}
-                />
-              );
+              if (item.sender !== getUser.data._id) {
+                return (
+                  <ReceivedMsgs
+                    key={index}
+                    msgText={item.text}
+                    msgTime={item.createdAt}
+                  />
+                );
+              } else {
+                return (
+                  <SentMsgs
+                    key={index}
+                    msgText={item.text}
+                    msgTime={item.createdAt}
+                  />
+                );
+              }
             })
           : "loading"}
         {/* {message.map((item, index) => {
           return <ReceivedMsgs key={index} msg={item} />;
         })} */}
-        <ReceivedMsgs key="qwerty2" />
+        {/* <ReceivedMsgs key="qwerty2" /> */}
         {/* {props.message.map(function (msg, idx) {
             if (msg.from === "sender") {
               return <SentMsgs message={msg.msg} key={idx} />;
@@ -209,10 +222,10 @@ function ReceivedMsgs({ msgText, msgTime }) {
           onMouseEnter={() => addBorderBottom(true)}
           onMouseLeave={() => addBorderBottom(false)}
         >
-          <StyledMsgNumber border={borderBottom}>
+          {/* <StyledMsgNumber border={borderBottom}>
             +2349034543567
-          </StyledMsgNumber>{" "}
-          <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName>
+          </StyledMsgNumber>{" "} */}
+          {/* <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName> */}
         </div>
 
         <StyledKeyBoardArrow hide={showArrow} onClick={handleContextMenu}>
@@ -246,33 +259,27 @@ function ReceivedMsgs({ msgText, msgTime }) {
         </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
-        <p>This one adds a right triangle on the left, flush</p>
+        <p>{msgText}</p>
         <div className="msgTime">
           <div>
-            <span>{hours}:</span>
-            <span>{mins}</span>
-            <span className="timeZo">
-              {date.getHours() >= 12 ? "pm" : "am"}
-            </span>
+            {/* <span>{hours}:</span>
+            <span>{mins}</span> */}
+            <span className="timeZo">{format(msgTime)}</span>
           </div>
         </div>
       </div>
     </div>
   );
 }
-function SentMsgs(props) {
+function SentMsgs({ msgText, msgTime }) {
   return (
     <div class="talk-bubble-sent tri-right-send right-top alignSentMsgs">
       {/* replies */}
       <div class="talktext-sent">
-        <p>
-          {props.message
-            ? props.message
-            : "This one adds a right triangle on the left, flush at the top by using .tri-right and .left-top to specify the location"}
-        </p>
+        <p>{msgText}</p>
         <div className="msgTime">
           <div>
-            <span>2:29 pm </span>
+            <span>{format(msgTime)}</span>
             <Tick />
           </div>
         </div>
@@ -295,6 +302,8 @@ function mapStateToProps(state) {
   return {
     displayContactInfo: state.contactInfo.displayContactInfo,
     messages: state.messages,
+    getUser: state.user,
+
     // displayConversation: state.conversation.displayConversation,
   };
 }

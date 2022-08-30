@@ -14,6 +14,10 @@ import {
   FETCH_MESSAGE_REQUEST,
   FETCH_MESSAGE_SUCCESS,
   FETCH_MESSAGE_FAILURE,
+  // .................................
+  SEND_MESSAGE_REQUEST,
+  SEND_MESSAGE_SUCCESS,
+  SEND_MESSAGE_FAILURE,
 } from "../actions/fetchDataActionsTypes";
 
 import {
