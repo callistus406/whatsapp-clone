@@ -112,6 +112,25 @@ export function fetchMessagesFailure(error) {
     payload: error,
   };
 }
+// send message
+
+export function sendMessagesRequest() {
+  return {
+    type: "SEND_MESSAGE_REQUEST",
+  };
+}
+export function sendMessagesSuccess(message) {
+  return {
+    type: "SEND_MESSAGE_SUCCESS",
+    payload: message,
+  };
+}
+export function sendMessagesFailure(error) {
+  return {
+    type: "SEND_MESSAGE_FAILURE",
+    payload: error,
+  };
+}
 
 export const fetchMessages = (conversationId) => {
   console.log(conversationId);
@@ -139,6 +158,21 @@ export const fetchUserProfile = (userId) => {
       })
       .catch((error) => {
         dispatch(fetchUserProfileFailure(error));
+      });
+  };
+};
+
+export const sendMessages = (conversationId) => {
+  console.log(conversationId);
+  return function (dispatch) {
+    dispatch(fetchMessagesRequest());
+    axios
+      .get(`http://localhost:3300/api/v1/message/${conversationId}`)
+      .then((response) => {
+        dispatch(fetchMessagesSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchMessagesFailure(error));
       });
   };
 };

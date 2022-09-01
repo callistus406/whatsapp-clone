@@ -45,7 +45,7 @@ const actions = [
 ];
 const textMsg = [];
 function DirectMsg(props) {
-  console.log(props);
+  console.log(props.displayConversation);
 
   const { userMsg, fetchMessages } = props;
   const [message, setMessage] = useState([]);
@@ -75,6 +75,7 @@ function DirectMsg(props) {
     return (element.value = "");
   }
   console.log(userMsg);
+  // send message on click of the enter key
   useEffect(() => {
     let documentInput = document.getElementById("input");
     const listener = (event) => {
@@ -84,7 +85,8 @@ function DirectMsg(props) {
         // callMyFunction();
         // getMessage(documentInput);
         // console.log(message);
-        textMsg.push(message);
+        setMessage(documentInput.value);
+
         clearInput(documentInput);
       }
     };
@@ -94,6 +96,7 @@ function DirectMsg(props) {
     };
   });
 
+  console.log(message);
   const clickHandler = useCallback(() => {
     setOpen(!open);
   }, [open]);
@@ -246,6 +249,8 @@ function mapStateToProps(state) {
     displaySearchContactMsg: state.searchContactMsg.displaySearchContactMsg,
     displayContactInfo: state.contactInfo.displayContactInfo,
     messages: state.messages,
+    displayConversation: state.conversations,
+
     // displayConversation: state.conversation.displayConversation,
   };
 }
