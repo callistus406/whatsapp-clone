@@ -1,16 +1,12 @@
-import {
-  messageDialog,
-  groupContext,
-} from "../../../GlobalVariables/variables";
+import { groupContext } from "../../GlobalVariables/variables";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 import {
   toggleContactMsg,
   toggleContactInfo,
-  toggleConversation,
-} from "../../../Redux-State/actionCreators/pageActions";
-import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
+} from "../../Redux-State/actionCreators/pageActions";
+import { fetchMessages } from "../../Redux-State/actionCreators/fetchRequestActions";
 import {
   StyledSpeedDial,
   StyledBox,
@@ -34,7 +30,9 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import Messages from "../../Home/Conversation/Messages";
+import Message from "./Message/Message";
+// import { axios } from "axios";
+// import { text } from "stream/consumers";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -43,11 +41,12 @@ const actions = [
   { icon: <InsertDriveFileIcon />, name: "file", class: "speedDial-document " },
   { icon: <PersonIcon />, name: "contact", class: "speedDial-photo" },
 ];
-const textMsg = [];
-function DirectMsg(props) {
+
+function Messages(props) {
   console.log(props.displayConversation);
 
   const { userMsg, fetchMessages } = props;
+  const [newMessage, setNewMessage] = useState([]);
   const [message, setMessage] = useState([]);
   const countRef = useRef(1);
   const msgCont = useRef();
@@ -55,22 +54,9 @@ function DirectMsg(props) {
   const [open, setOpen] = useState(false);
   let msgStr = "";
   const date = new Date();
-
-  // function getMessage(element) {
-  //   setMessage([
-  //     ...message,
-  //     {
-  //       from: "sender",
-  //       msg: element.value,
-  //       time:
-  //         date.getHours() +
-  //         ":" +
-  //         date.getMinutes() +
-  //         "" +
-  //         (date.getHours() >= 12 ? "pm" : "am"),
-  //     },
-  //   ]);
-  // }
+  // useEffect(() => {
+  //   fetchMessages(props.displayChatId);
+  // }, [props.displayChatId]);
   function clearInput(element) {
     return (element.value = "");
   }
@@ -82,10 +68,13 @@ function DirectMsg(props) {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
-        // callMyFunction();
-        // getMessage(documentInput);
-        // console.log(message);
-        setMessage(documentInput.value);
+        console.log(documentInput.value);
+        // try {
+        //   props.sendMessages(props.displayChatId, props.getUser.data._id, documentInput.);
+        //   // setMessage(...message, res.data);
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
         clearInput(documentInput);
       }
@@ -96,9 +85,10 @@ function DirectMsg(props) {
     };
   });
 
-  console.log(message);
+  console.log(props.getUser.data._id);
   const clickHandler = useCallback(() => {
     setOpen(!open);
+    // props.displayChatId;
   }, [open]);
 
   const [contextMenu, setContextMenu] = React.useState(null);
@@ -122,7 +112,6 @@ function DirectMsg(props) {
     setContextMenu(null);
   };
 
-  // if (
   return (
     <StyledOpenChat
       toggle={props.displaySearchContactMsg || props.displayContactInfo}
@@ -177,7 +166,7 @@ function DirectMsg(props) {
           </div>
         </div>
       </StyledOpenChatHead>
-      {!userMsg.loading ? <Messages id="qwerty" message={userMsg.data} /> : ""}
+      {!userMsg.loading ? <Message id="qwerty" message={userMsg.data} /> : ""}
       <div className="msgBar">
         <div className="emojiIcons">
           <div className="emojiCont">
@@ -239,9 +228,6 @@ function DirectMsg(props) {
       </div>
     </StyledOpenChat>
   );
-  // } else {
-  //   return <h1>loading</h1>;
-  // }
 }
 
 function mapStateToProps(state) {
@@ -250,6 +236,8 @@ function mapStateToProps(state) {
     displayContactInfo: state.contactInfo.displayContactInfo,
     messages: state.messages,
     displayConversation: state.conversations,
+    displayChatId: state.displayConversationId.displayChatId,
+    getUser: state.user,
 
     // displayConversation: state.conversation.displayConversation,
   };
@@ -265,4 +253,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(React.memo(DirectMsg));
+)(React.memo(Messages));

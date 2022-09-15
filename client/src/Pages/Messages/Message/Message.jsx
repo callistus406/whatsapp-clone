@@ -4,9 +4,7 @@ import {
   StyledBox,
   StyledOpenChat,
   StyledMessageCont,
-  StyledMsgName,
   StyledMsgInfo,
-  StyledMsgNumber,
   StyledMsgInfoIcon,
   StyledKeyBoardArrow,
   StyledContextMenu,
@@ -14,8 +12,7 @@ import {
   StyledFab,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
-  StyledOpenChatHead,
-} from "../../Contacts/DirectMsg/style";
+} from "../style";
 import {
   messageDialog,
   groupContext,
@@ -23,16 +20,12 @@ import {
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { connect } from "react-redux";
-import {
-  toggleContactMsg,
-  toggleContactInfo,
-  toggleConversation,
-} from "../../../Redux-State/actionCreators/pageActions";
+import { toggleContactMsg } from "../../../Redux-State/actionCreators/pageActions";
 import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
 import { ListItem } from "@mui/material";
 import { format } from "timeago.js";
 
-function Messages({ messages, getUser }) {
+function Message({ messages, getUser }) {
   console.log(getUser.data._id);
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
@@ -67,7 +60,7 @@ function Messages({ messages, getUser }) {
   // }, []);
 
   useEffect(() => {
-    console.log("Messages rendered.........................");
+    console.log("Message rendered.........................");
   });
   // for scroll to bottom
 
@@ -314,4 +307,4 @@ function mapDispatchToProps(dispatch) {
     // toggleConversation: (bool) => dispatch(toggleConversation(bool)),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Messages);
+export default connect(mapStateToProps, mapDispatchToProps)(Message);

@@ -162,12 +162,17 @@ export const fetchUserProfile = (userId) => {
   };
 };
 
-export const sendMessages = (conversationId) => {
+export const sendMessages = (conversationId, sender, text) => {
   console.log(conversationId);
   return function (dispatch) {
     dispatch(fetchMessagesRequest());
+    const message = {
+      conversationId,
+      sender,
+      text,
+    };
     axios
-      .get(`http://localhost:3300/api/v1/message/${conversationId}`)
+      .get(`http://localhost:3300/api/v1/message`, message)
       .then((response) => {
         dispatch(fetchMessagesSuccess(response.data));
       })

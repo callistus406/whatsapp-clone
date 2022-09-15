@@ -30,6 +30,7 @@ import {
   SEARCH_CONTACT_MSG,
   SHOW_CONVERSATIONS,
   SHOW_MESSAGE,
+  SHOW_CONVERSATION_ID,
 } from "../actions/actionTypes";
 const initialState = {
   displayProfileContainer: false,
@@ -373,7 +374,7 @@ export function starredGrpMsgReducer(state = groupInitialStates, action) {
     case TOGGLE_GRP_STARRED_MSGS:
       return {
         ...state,
-        displayStarredGrpMsgs: !state.displayStarredGrpMsgs,
+        displaySconversationIdStatetarredGrpMsgs: !state.displayStarredGrpMsgs,
       };
     default:
       return state;
@@ -451,6 +452,22 @@ export function displayMessageReducer(state = directMsgsInitialStates, action) {
       return {
         ...state,
         displayConversation: !state.displayMessage,
+      };
+    default:
+      return state;
+  }
+}
+const conversationIdState = {
+  displayChatId: "",
+};
+export function displayConversationIdReducer(
+  state = conversationIdState,
+  action
+) {
+  switch (action.type) {
+    case SHOW_CONVERSATION_ID:
+      return {
+        displayChatId: action.payload,
       };
     default:
       return state;

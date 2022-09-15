@@ -23,16 +23,23 @@ import {
   fetchUserProfile,
   fetchMessages,
 } from "../../Redux-State/actionCreators/fetchRequestActions";
+import { getConversationId } from "../../Redux-State/actionCreators/pageActions";
 import axios from "axios";
-function UserChat(props) {
-  const { conversation, currentUser, mack } = props;
+// import Messages from "../Messages/Messages";
+function Conversation(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
   const [getUserProfile, setUserProfile] = useState([]);
-  console.log(props.messages);
+  // console.log(props.conversation._id);
+  const { conversation, displayChatId } = props;
+  // useEffect(() => {
+  //   props.getConversationId(conversation._id);
+  // }, []);
+
   useEffect(() => {
     console.log(
-      "Usaer chat rendered____________________________________________"
+      "User chat rendered____________________________________________"
     );
+
     const getProfile = async () => {
       try {
         const friendId = props.conversation.members.find(
@@ -51,7 +58,6 @@ function UserChat(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenu(
@@ -79,6 +85,7 @@ function UserChat(props) {
       onClick={() => {
         props.displayGrpMsgAction(true);
         props.fetchMessages(conversation._id);
+        props.getConversationId(conversation._id);
       }}
     >
       <StyledUserChatCont>
@@ -87,7 +94,8 @@ function UserChat(props) {
         </div>
         <StyledUserChatText>
           <h3>{getUserProfile.username}</h3>
-          <p>qwerty</p>
+
+          {/* <Messages /> */}
         </StyledUserChatText>
       </StyledUserChatCont>
       <StyledContextMenu
@@ -126,6 +134,7 @@ function mapStateToProps(state) {
     getUser: state.user,
     userProfile: state.userProfile,
     messages: state.messages,
+    displayChatId: state.displayConversationId.displayChatId,
 
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
   };
@@ -138,9 +147,10 @@ function mapDispatchToProps(dispatch) {
     fetchMessages: (data) => dispatch(fetchMessages(data)),
 
     displayGrpMsgAction: (bool) => dispatch(displayGrpMsgAction(bool)),
+    getConversationId: (arg) => dispatch(getConversationId(arg)),
   };
 }
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(React.memo(UserChat));
+)(React.memo(Conversation));

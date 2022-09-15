@@ -29,8 +29,7 @@ function Whatsapp() {
         {/* luxury */}
         <Register />
         {/* <FloatingActionButtons /> */}
-        {/* <SearchContact /> */}
-
+        https://reactjs.org/link/switch-to-createroot {/* <SearchContact /> */}
         {/* <MenuListComposition /> */}
       </div>
     </Provider>

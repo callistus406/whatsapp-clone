@@ -29,6 +29,7 @@ import {
   SearchContactMsgReducer,
   displayConversationsReducer,
   displayMessageReducer,
+  displayConversationIdReducer,
 } from "./reducers/reducers";
 import {
   requestReducer,
@@ -78,6 +79,7 @@ const rootReducer = combineReducers({
   userProfile: userProfileRequestReducer,
   messages: currentMessageReducer,
   displayCurrentChat: displayMessageReducer,
+  displayConversationId: displayConversationIdReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

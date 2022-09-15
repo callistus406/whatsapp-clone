@@ -67,3 +67,7 @@ export const SEARCH_CONTACT_MSG = "SEARCH_CONTACT_MSG";
 export const SHOW_CONVERSATIONS = "SHOW_CONVERSATIONS";
 
 export const SHOW_MESSAGE = "SHOW_MESSAGE";
+
+// current chat
+
+export const SHOW_CONVERSATION_ID = "SHOW_CONVERSATION_ID";

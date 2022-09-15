@@ -4,7 +4,7 @@ import {
   showProfile,
   showStatus,
   newChatToggle,
-} from "../../../Redux-State/actionCreators/pageActions";
+} from "../../Redux-State/actionCreators/pageActions";
 import "./Home.css";
 
 export const StatusIcon = connect(
