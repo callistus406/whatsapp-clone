@@ -46,14 +46,14 @@ function Message({ message, getUser, displayMessage, newMessage }) {
     }
   };
   // review this code
-  // useEffect(() => {
-  //   document.getElementById("base").addEventListener("scroll", listenToScroll);
-  //   console.log(document.getElementById("base"));
-  //   return () =>
-  //     document
-  //       .getElementById("base")
-  //       .removeEventListener("scroll", listenToScroll);
-  // }, []);
+  useEffect(() => {
+    document.getElementById("base").addEventListener("scroll", listenToScroll);
+    console.log(document.getElementById("base"));
+    return () =>
+      document
+        .getElementById("base")
+        .removeEventListener("scroll", listenToScroll);
+  }, []);
 
   // for scroll to bottom
 
