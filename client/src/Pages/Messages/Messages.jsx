@@ -27,7 +27,6 @@ import {
   Attachment,
   StickerIcon,
 } from "./icons";
-// import "./Home.css";
 // speed dial
 import PersonIcon from "@mui/icons-material/Person";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
@@ -36,7 +35,6 @@ import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import Message from "./Message/Message";
 import axios from "axios";
-// import { text } from "stream/consumers";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -49,15 +47,11 @@ const actions = [
 function Messages(props) {
   console.log(props.displayChatId);
 
-  const { userMsg, fetchMessages, displayMessage, displayChatId } = props;
-  const [newMessage, setNewMessage] = useState([]);
+  const { displayChatId } = props;
   const [messages, setMessages] = useState([]);
-  const countRef = useRef(1);
   const msgCont = useRef();
-  const inputRef = useRef();
   const [open, setOpen] = useState(false);
-  let msgStr = "";
-  const date = new Date();
+
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -75,29 +69,27 @@ function Messages(props) {
   function clearInput(element) {
     return (element.value = "");
   }
-  // send message on click of the enter key
+
   useEffect(() => {
     let documentInput = document.getElementById("input");
-    console.log(messages);
+    // send message on click of the enter key
 
     const listener = async (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
-        // setNewMessage([...newMessage, messages.data]);
-
+        // this makes a post request with the message written
         try {
           const msg = {
             conversationId: props.displayChatId,
             sender: props.getUser.data._id,
             text: documentInput.value,
           };
-          //   // s
+          // axios call
           const res = await axios.post(
             `http://localhost:3300/api/v1/message`,
             msg
           );
-          console.log(res);
           setMessages([...messages, res.data]);
         } catch (error) {
           console.log(error.message);
@@ -112,12 +104,11 @@ function Messages(props) {
     };
   });
 
-  console.log(props.getUser.data._id);
   const clickHandler = useCallback(() => {
     setOpen(!open);
-    // props.displayChatId;
   }, [open]);
 
+  // context menu
   const [contextMenu, setContextMenu] = React.useState(null);
 
   const handleContextMenu = (event) => {
@@ -138,7 +129,9 @@ function Messages(props) {
   const handleClose = () => {
     setContextMenu(null);
   };
+  // end of context menu function
 
+  // messages component
   return (
     <StyledOpenChat
       toggle={props.displaySearchContactMsg || props.displayContactInfo}
@@ -193,12 +186,10 @@ function Messages(props) {
           </div>
         </div>
       </StyledOpenChatHead>
-      {/* {!userMsg.loading ? ( */}
+
+      {/* message component */}
       <Message id="qwerty" message={messages} />
-      {/* ) : (
-        "<h2>Loading</h2>"
-      ) */}
-      {/* } */}
+
       <div className="msgBar">
         <div className="emojiIcons">
           <div className="emojiCont">
