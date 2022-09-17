@@ -165,19 +165,19 @@ export const fetchUserProfile = (userId) => {
 export const sendMessages = (conversationId, sender, text) => {
   console.log(conversationId);
   return function (dispatch) {
-    dispatch(fetchMessagesRequest());
+    dispatch(sendMessagesRequest());
     const message = {
       conversationId,
       sender,
       text,
     };
     axios
-      .get(`http://localhost:3300/api/v1/message`, message)
+      .post(`http://localhost:3300/api/v1/message`, message)
       .then((response) => {
-        dispatch(fetchMessagesSuccess(response.data));
+        dispatch(sendMessagesSuccess(response.data));
       })
       .catch((error) => {
-        dispatch(fetchMessagesFailure(error));
+        dispatch(sendMessagesFailure(error));
       });
   };
 };

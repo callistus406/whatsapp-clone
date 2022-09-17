@@ -71,3 +71,6 @@ export const SHOW_MESSAGE = "SHOW_MESSAGE";
 // current chat
 
 export const SHOW_CONVERSATION_ID = "SHOW_CONVERSATION_ID";
+// current message
+
+export const GET_MESSAGE = "GET_MESSAGE";

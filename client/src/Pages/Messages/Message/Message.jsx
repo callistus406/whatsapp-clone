@@ -1,8 +1,5 @@
 import {
-  StyledSpeedDial,
   StyledMessageSpace,
-  StyledBox,
-  StyledOpenChat,
   StyledMessageCont,
   StyledMsgInfo,
   StyledMsgInfoIcon,
@@ -17,15 +14,14 @@ import {
   messageDialog,
   groupContext,
 } from "../../../GlobalVariables/variables";
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { connect } from "react-redux";
 import { toggleContactMsg } from "../../../Redux-State/actionCreators/pageActions";
 import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
-import { ListItem } from "@mui/material";
 import { format } from "timeago.js";
 
-function Message({ messages, getUser }) {
+function Message({ message, getUser, displayMessage, newMessage }) {
   console.log(getUser.data._id);
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
@@ -36,7 +32,7 @@ function Message({ messages, getUser }) {
     messageScroll.current.scrollIntoView({ behavior: "smooth" });
   };
   let detect = 0;
-
+  console.log(newMessage);
   const listenToScroll = () => {
     const winScroll =
       document.getElementById("base").scrollTop |
@@ -59,14 +55,11 @@ function Message({ messages, getUser }) {
   //       .removeEventListener("scroll", listenToScroll);
   // }, []);
 
-  useEffect(() => {
-    console.log("Message rendered.........................");
-  });
   // for scroll to bottom
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [message]);
 
   const [contextMenu, setContextMenu] = React.useState(null);
 
@@ -123,37 +116,26 @@ function Message({ messages, getUser }) {
       </StyledContextMenu4MsgSpace>
 
       <StyledMessageCont ref={msgSpaceRef} id="base">
-        {!messages.loading
-          ? messages.data.map((item, index) => {
-              if (item.sender !== getUser.data._id) {
-                return (
-                  <ReceivedMsgs
-                    key={index}
-                    msgText={item.text}
-                    msgTime={item.createdAt}
-                  />
-                );
-              } else {
-                return (
-                  <SentMsgs
-                    key={index}
-                    msgText={item.text}
-                    msgTime={item.createdAt}
-                  />
-                );
-              }
-            })
-          : "loading"}
-        {/* {message.map((item, index) => {
-          return <ReceivedMsgs key={index} msg={item} />;
-        })} */}
-        {/* <ReceivedMsgs key="qwerty2" /> */}
-        {/* {props.message.map(function (msg, idx) {
-            if (msg.from === "sender") {
-              return <SentMsgs message={msg.msg} key={idx} />;
-            }
-            return "";
-          })} */}
+        {message.map((item, index) => {
+          if (item.sender !== getUser.data._id) {
+            return (
+              <ReceivedMsgs
+                key={index}
+                msgText={item.text}
+                msgTime={item.createdAt}
+              />
+            );
+          } else {
+            return (
+              <SentMsgs
+                key={index}
+                msgText={item.text}
+                msgTime={item.createdAt}
+              />
+            );
+          }
+        })}
+        {}
         {isVisible && (
           <StyledFab onClick={scrollToBottom}>
             <KeyboardArrowDownIcon />
@@ -296,6 +278,7 @@ function mapStateToProps(state) {
     displayContactInfo: state.contactInfo.displayContactInfo,
     messages: state.messages,
     getUser: state.user,
+    displayMessage: state.displayMessage.getMessage,
 
     // displayConversation: state.conversation.displayConversation,
   };

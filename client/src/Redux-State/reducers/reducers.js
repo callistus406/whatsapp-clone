@@ -31,6 +31,7 @@ import {
   SHOW_CONVERSATIONS,
   SHOW_MESSAGE,
   SHOW_CONVERSATION_ID,
+  GET_MESSAGE,
 } from "../actions/actionTypes";
 const initialState = {
   displayProfileContainer: false,
@@ -468,6 +469,20 @@ export function displayConversationIdReducer(
     case SHOW_CONVERSATION_ID:
       return {
         displayChatId: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+const messageState = {
+  getMessage: null,
+};
+export function getMessageReducer(state = messageState, action) {
+  switch (action.type) {
+    case GET_MESSAGE:
+      return {
+        ...state,
+        getMessage: action.payload,
       };
     default:
       return state;

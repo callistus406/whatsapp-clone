@@ -33,6 +33,7 @@ import {
   SHOW_CONVERSATIONS,
   SHOW_MESSAGE,
   SHOW_CONVERSATION_ID,
+  GET_MESSAGE,
 } from "../actions/actionTypes";
 
 // section for status bar action creators
@@ -295,5 +296,15 @@ export function getConversationId(chatId) {
     type: SHOW_CONVERSATION_ID,
     payload: chatId,
     info: "this action  will display current chat id ",
+  };
+}
+
+// current message
+
+export function getMessage(info) {
+  return {
+    type: GET_MESSAGE,
+    payload: info,
+    info: "this action  will display current message ",
   };
 }

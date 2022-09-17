@@ -5,8 +5,12 @@ import { connect } from "react-redux";
 import {
   toggleContactMsg,
   toggleContactInfo,
+  getMessage,
 } from "../../Redux-State/actionCreators/pageActions";
-import { fetchMessages } from "../../Redux-State/actionCreators/fetchRequestActions";
+import {
+  fetchMessages,
+  sendMessages,
+} from "../../Redux-State/actionCreators/fetchRequestActions";
 import {
   StyledSpeedDial,
   StyledBox,
@@ -31,7 +35,7 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import Message from "./Message/Message";
-// import { axios } from "axios";
+import axios from "axios";
 // import { text } from "stream/consumers";
 const actions = [
   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
@@ -43,38 +47,61 @@ const actions = [
 ];
 
 function Messages(props) {
-  console.log(props.displayConversation);
+  console.log(props.displayChatId);
 
-  const { userMsg, fetchMessages } = props;
+  const { userMsg, fetchMessages, displayMessage, displayChatId } = props;
   const [newMessage, setNewMessage] = useState([]);
-  const [message, setMessage] = useState([]);
+  const [messages, setMessages] = useState([]);
   const countRef = useRef(1);
   const msgCont = useRef();
   const inputRef = useRef();
   const [open, setOpen] = useState(false);
   let msgStr = "";
   const date = new Date();
-  // useEffect(() => {
-  //   fetchMessages(props.displayChatId);
-  // }, [props.displayChatId]);
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:3300/api/v1/message/${displayChatId}`
+        );
+        console.log(res.data);
+        setMessages(res.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getMessages();
+  }, [displayChatId]);
   function clearInput(element) {
     return (element.value = "");
   }
-  console.log(userMsg);
   // send message on click of the enter key
   useEffect(() => {
     let documentInput = document.getElementById("input");
-    const listener = (event) => {
+    console.log(messages);
+
+    const listener = async (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
-        console.log(documentInput.value);
-        // try {
-        //   props.sendMessages(props.displayChatId, props.getUser.data._id, documentInput.);
-        //   // setMessage(...message, res.data);
-        // } catch (error) {
-        //   console.log(error);
-        // }
+        // setNewMessage([...newMessage, messages.data]);
+
+        try {
+          const msg = {
+            conversationId: props.displayChatId,
+            sender: props.getUser.data._id,
+            text: documentInput.value,
+          };
+          //   // s
+          const res = await axios.post(
+            `http://localhost:3300/api/v1/message`,
+            msg
+          );
+          console.log(res);
+          setMessages([...messages, res.data]);
+        } catch (error) {
+          console.log(error.message);
+        }
 
         clearInput(documentInput);
       }
@@ -166,7 +193,12 @@ function Messages(props) {
           </div>
         </div>
       </StyledOpenChatHead>
-      {!userMsg.loading ? <Message id="qwerty" message={userMsg.data} /> : ""}
+      {/* {!userMsg.loading ? ( */}
+      <Message id="qwerty" message={messages} />
+      {/* ) : (
+        "<h2>Loading</h2>"
+      ) */}
+      {/* } */}
       <div className="msgBar">
         <div className="emojiIcons">
           <div className="emojiCont">
@@ -238,7 +270,7 @@ function mapStateToProps(state) {
     displayConversation: state.conversations,
     displayChatId: state.displayConversationId.displayChatId,
     getUser: state.user,
-
+    displayMessage: state.displayMessage.getMessage,
     // displayConversation: state.conversation.displayConversation,
   };
 }
@@ -247,6 +279,9 @@ function mapDispatchToProps(dispatch) {
     toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
     fetchMessages: (data) => dispatch(fetchMessages(data)),
     toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
+    getMessage: (info) => dispatch(getMessage(info)),
+    sendMessages: (conversationId, sender, text) =>
+      dispatch(sendMessages(conversationId, sender, text)),
     // toggleConversation: (bool) => dispatch(toggleConversation(bool)),
   };
 }
