@@ -150,7 +150,6 @@ function Message({ message, getUser, displayMessage, newMessage }) {
 
 function ReceivedMsgs({ msgText, msgTime }) {
   console.log(msgText, msgTime);
-  const msgInfoRef = useRef();
   const [borderBottom, setBorderBottom] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   function addBorderBottom(bool) {
