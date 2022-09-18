@@ -40,15 +40,15 @@ export const StyledMsgSearchHeader = styled.div`
 `;
 export const StyledMsgSearchContent = styled.div`
   height: calc(100vh - (3.625rem + 3rem));
-  width: ${(props) => (props.toggle ? props.width : 0)}
-  ${"" /* background: #ededed; */}
+  width: ${(props) => (props.toggle ? props.width : 0)};
   display: ${(props) => (props.toggle ? "block" : "none")};
   margin: 4px, 4px;
-  transition:0.1s;
+  transition: 0.1s;
   min-width: 28rem;
   overflow-x: hidden;
   overflow-y: auto;
-   border: 1px solid blue; 
+  border: 1px solid blue;
+  background: #ededed;
 
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -68,7 +68,6 @@ export const StyledMsgSearchContent = styled.div`
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #bfbfbf;
   }
-  
 `;
 
 export const StyledContactContainer = styled.div`
