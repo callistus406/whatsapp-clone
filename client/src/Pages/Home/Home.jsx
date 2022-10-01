@@ -32,7 +32,7 @@ import {
 } from "../../Redux-State/actionCreators/pageActions";
 import {
   fetchConversations,
-  fetchUser,
+  login,
   fetchMessages,
   fetchUserProfile,
 } from "../../Redux-State/actionCreators/fetchRequestActions.js";
@@ -188,7 +188,7 @@ function mapDispatchToProps(dispatch) {
     showGroupInfo: (bool) => dispatch(showGroupInfo(bool)),
     displayGrpMsgAction: () => dispatch(displayGrpMsgAction()),
     fetchConversations: (data) => dispatch(fetchConversations(data)),
-    fetchUser: (data) => dispatch(fetchUser(data)),
+    login: (data) => dispatch(login(data)),
     fetchMessages: (data) => dispatch(fetchMessages(data)),
 
     getConversationId: (arg) => dispatch(getConversationId(arg)),

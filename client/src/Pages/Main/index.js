@@ -13,6 +13,7 @@ import ConnectionError from "../Interrupts/ConnectionMsg/ConnectionError";
 import { KeyboardShortcuts } from "../Settings/icons";
 import Register from "../Register/Register";
 // import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
+import Login from "../Login/Login";
 
 function Whatsapp() {
   return (
@@ -27,9 +28,9 @@ function Whatsapp() {
         <UserChat passMenu="qwerty2" />
         <UserChat passMenu="qwerty3" /> */}
         {/* luxury */}
-        <Register />
+        <Login />
         {/* <FloatingActionButtons /> */}
-        https://reactjs.org/link/switch-to-createroot {/* <SearchContact /> */}
+        {/* <SearchContact /> */}
         {/* <MenuListComposition /> */}
       </div>
     </Provider>
