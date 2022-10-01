@@ -21,9 +21,9 @@ import {
 } from "../actions/fetchDataActionsTypes";
 
 import {
-  FETCH_USER_FAILURE,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_REQUEST,
+  LOGIN_USER_FAILURE,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_REQUEST,
 } from "../actions/fetchDataActionsTypes";
 const initialStateOfConversation = {
   loading: false,
@@ -62,17 +62,17 @@ const initialStateOfUser = {
 
 export const userRequestReducer = (state = initialStateOfUser, action) => {
   switch (action.type) {
-    case FETCH_USER_REQUEST:
+    case LOGIN_USER_REQUEST:
       return {
         loading: true,
       };
-    case FETCH_USER_SUCCESS:
+    case LOGIN_USER_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_USER_FAILURE:
+    case LOGIN_USER_FAILURE:
       return {
         loading: false,
         data: [],
