@@ -94,7 +94,7 @@ function ContactInfo(props) {
           />
         </StyledSearchBarContainer>
 
-        <StyledMsgSearchContent></StyledMsgSearchContent>
+        <StyledMsgSearchContent>{/* <h1>hello</h1> */}</StyledMsgSearchContent>
       </StyledContainer>
     </div>
   );

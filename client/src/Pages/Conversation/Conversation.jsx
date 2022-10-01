@@ -19,7 +19,7 @@ import {
   StyledContextMenuItem4MsgSpace,
 } from "./styles.js";
 import {
-  fetchUser,
+  login,
   fetchUserProfile,
   fetchMessages,
 } from "../../Redux-State/actionCreators/fetchRequestActions";
@@ -142,7 +142,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // search msg action
-    fetchUser: (data) => dispatch(fetchUser(data)),
+    login: (data) => dispatch(login(data)),
     fetchUserProfile: (data) => dispatch(fetchUserProfile(data)),
     fetchMessages: (data) => dispatch(fetchMessages(data)),
 

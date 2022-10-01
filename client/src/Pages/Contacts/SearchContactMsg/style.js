@@ -48,7 +48,7 @@ export const StyledMsgSearchContent = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid blue;
-  background: #ededed;
+  ${"" /* background: red; */}
 
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
