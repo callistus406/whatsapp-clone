@@ -1,13 +1,16 @@
 const UserModel = require("../../Model/UserModel");
 const loginController = async (req, res) => {
   try {
+    const { username, phone } = req.body;
     // logged in as splunk
+    console.log(req.body);
     const user = await UserModel.findOne({
-      _id: "629ccb139cc7b37b4630750d",
+      username,
+      phone,
     });
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json(error);
+    res.status(500).json(error);
   }
 };
 module.exports = loginController;
