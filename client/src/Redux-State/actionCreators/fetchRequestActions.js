@@ -38,27 +38,27 @@ export const fetchConversations = (conversation_id) => {
 
 // fetch user profile
 
-export function fetchUserRequest() {
+export function userLoginRequest() {
   return {
     type: "LOGIN_USER_REQUEST",
   };
 }
-export function fetchUserSuccess(loginData) {
+export function userLoginSuccess(loginData) {
   return {
     type: "LOGIN_USER_SUCCESS",
     payload: loginData,
   };
 }
-export function fetchUserFailure(error) {
+export function userLoginFailure(error) {
   return {
     type: "LOGIN_USER_FAILURE",
     payload: error,
   };
 }
 
-export const login = (username, phone) => {
+export const userLogin = (username, phone) => {
   return (dispatch) => {
-    dispatch(fetchUserRequest());
+    dispatch(userLoginRequest());
     // const { username, phone } = loginData;
     axios
       .post(`http://localhost:3300/api/v1/login`, {
@@ -68,11 +68,11 @@ export const login = (username, phone) => {
       .then((response) => {
         const user = response.data;
         console.log(user);
-        dispatch(fetchUserSuccess(user));
+        dispatch(userLoginSuccess(user));
       })
       .catch((error) => {
         const errorMsg = error.message;
-        dispatch(fetchUserFailure(errorMsg));
+        dispatch(userLoginFailure(errorMsg));
       });
   };
 };

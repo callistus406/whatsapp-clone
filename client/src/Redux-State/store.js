@@ -75,13 +75,15 @@ const rootReducer = combineReducers({
   conversations: requestReducer,
   // requestReducer: requestReducer,
   // request user
-  login: loginReducer,
+
   user: userRequestReducer,
   userProfile: userProfileRequestReducer,
   messages: currentMessageReducer,
   displayCurrentChat: displayMessageReducer,
   displayConversationId: displayConversationIdReducer,
   displayMessage: getMessageReducer,
+
+  login: loginReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

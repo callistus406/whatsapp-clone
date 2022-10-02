@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyledRegisterCont } from "./style";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { login } from "../../Redux-State/actionCreators/fetchRequestActions";
+// import { login } from "../../Redux-State/actionCreators/fetchRequestActions";
 import HOME from "../Home/Home";
 function Register({ userData, login }) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: () => dispatch(login()),
+    // login: () => dispatch(login()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
