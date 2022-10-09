@@ -1,4 +1,4 @@
-const UserModel = require("../../Model/UserModel");
+const UserModel = require('../../Model/UserModel');
 const loginController = async (req, res) => {
   try {
     const { username, phone } = req.body;
@@ -8,7 +8,7 @@ const loginController = async (req, res) => {
       username,
       phone,
     });
-    res.status(200).json(user);
+    res.status(200).json({ success: true, user });
   } catch (error) {
     res.status(500).json(error);
   }
