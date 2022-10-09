@@ -1,16 +1,16 @@
-import { groupContext } from "../../GlobalVariables/variables";
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import { groupContext } from '../../GlobalVariables/variables';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   toggleContactMsg,
   toggleContactInfo,
   getMessage,
-} from "../../Redux-State/actionCreators/pageActions";
+} from '../../Redux-State/actionCreators/pageActions';
 import {
   fetchMessages,
   sendMessages,
-} from "../../Redux-State/actionCreators/fetchRequestActions";
+} from '../../Redux-State/actionCreators/fetchRequestActions';
 import {
   StyledSpeedDial,
   StyledBox,
@@ -18,7 +18,7 @@ import {
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
   StyledOpenChatHead,
-} from "./style";
+} from './style';
 import {
   SearchIcon,
   MsgOptionsIcon,
@@ -26,22 +26,22 @@ import {
   RecorderIcon,
   Attachment,
   StickerIcon,
-} from "./icons";
+} from './icons';
 // speed dial
-import PersonIcon from "@mui/icons-material/Person";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import Message from "./Message/Message";
-import axios from "axios";
+import PersonIcon from '@mui/icons-material/Person';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import Message from './Message/Message';
+import axios from 'axios';
 const actions = [
-  { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
+  { icon: <InsertPhotoIcon />, name: 'photo', class: 'speedDial-contact' },
 
-  { icon: <StickerIcon />, name: "sicker", class: "speedDial-sticker" },
-  { icon: <CameraAltIcon />, name: "camera", class: "speedDial-camera" },
-  { icon: <InsertDriveFileIcon />, name: "file", class: "speedDial-document " },
-  { icon: <PersonIcon />, name: "contact", class: "speedDial-photo" },
+  { icon: <StickerIcon />, name: 'sicker', class: 'speedDial-sticker' },
+  { icon: <CameraAltIcon />, name: 'camera', class: 'speedDial-camera' },
+  { icon: <InsertDriveFileIcon />, name: 'file', class: 'speedDial-document ' },
+  { icon: <PersonIcon />, name: 'contact', class: 'speedDial-photo' },
 ];
 
 function Messages(props) {
@@ -67,16 +67,16 @@ function Messages(props) {
     getMessages();
   }, [displayChatId]);
   function clearInput(element) {
-    return (element.value = "");
+    return (element.value = '');
   }
 
   useEffect(() => {
-    let documentInput = document.getElementById("input");
+    let documentInput = document.getElementById('input');
     // send message on click of the enter key
 
     const listener = async (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        console.log("Enter key was pressed. Run your function.");
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        console.log('Enter key was pressed. Run your function.');
         event.preventDefault();
         // this makes a post request with the message written
         try {
@@ -98,9 +98,9 @@ function Messages(props) {
         clearInput(documentInput);
       }
     };
-    document.addEventListener("keydown", listener);
+    document.addEventListener('keydown', listener);
     return () => {
-      document.removeEventListener("keydown", listener);
+      document.removeEventListener('keydown', listener);
     };
   });
 
@@ -161,8 +161,8 @@ function Messages(props) {
               PaperProps={{
                 style: {
                   // maxHeight: "5rem",
-                  height: "auto",
-                  minWidth: "13rem",
+                  height: 'auto',
+                  minWidth: '13rem',
                 },
               }}
               open={contextMenu !== null}
@@ -188,7 +188,7 @@ function Messages(props) {
       </StyledOpenChatHead>
 
       {/* message component */}
-      <Message id="qwerty" message={messages} />
+      {messages ? <Message id="qwerty" message={messages} /> : ''}
 
       <div className="msgBar">
         <div className="emojiIcons">
@@ -201,17 +201,17 @@ function Messages(props) {
             <StyledBox
               sx={{
                 // height: 350,
-                transform: "translateZ(0px)",
+                transform: 'translateZ(0px)',
                 flexGrow: 1,
               }}
             >
               <StyledSpeedDial
                 ariaLabel="SpeedDial openIcon example"
                 sx={{
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: -25,
                   left: -9,
-                  boxShadow: "none",
+                  boxShadow: 'none',
                 }}
                 icon={<Attachment />}
                 onClick={clickHandler}

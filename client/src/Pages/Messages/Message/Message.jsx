@@ -9,17 +9,17 @@ import {
   StyledFab,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
-} from "../style";
+} from '../style';
 import {
   messageDialog,
   groupContext,
-} from "../../../GlobalVariables/variables";
-import React, { useRef, useEffect, useState } from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { connect } from "react-redux";
-import { toggleContactMsg } from "../../../Redux-State/actionCreators/pageActions";
-import { fetchMessages } from "../../../Redux-State/actionCreators/fetchRequestActions";
-import { format } from "timeago.js";
+} from '../../../GlobalVariables/variables';
+import React, { useRef, useEffect, useState } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { connect } from 'react-redux';
+import { toggleContactMsg } from '../../../Redux-State/actionCreators/pageActions';
+import { fetchMessages } from '../../../Redux-State/actionCreators/fetchRequestActions';
+import { format } from 'timeago.js';
 
 function Message({ message, getUser, displayMessage, newMessage }) {
   console.log(getUser.data._id);
@@ -29,14 +29,14 @@ function Message({ message, getUser, displayMessage, newMessage }) {
   const [height, setHeight] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const scrollToBottom = () => {
-    messageScroll.current.scrollIntoView({ behavior: "smooth" });
+    messageScroll.current.scrollIntoView({ behavior: 'smooth' });
   };
   let detect = 0;
   console.log(newMessage);
   const listenToScroll = () => {
     const winScroll =
-      document.getElementById("base").scrollTop |
-      document.getElementById("base").scrollTop;
+      document.getElementById('base').scrollTop |
+      document.getElementById('base').scrollTop;
 
     if (winScroll > detect) {
       detect = winScroll - 2;
@@ -47,12 +47,12 @@ function Message({ message, getUser, displayMessage, newMessage }) {
   };
   // review this code
   useEffect(() => {
-    document.getElementById("base").addEventListener("scroll", listenToScroll);
-    console.log(document.getElementById("base"));
+    document.getElementById('base').addEventListener('scroll', listenToScroll);
+    console.log(getUser.data);
     return () =>
       document
-        .getElementById("base")
-        .removeEventListener("scroll", listenToScroll);
+        .getElementById('base')
+        .removeEventListener('scroll', listenToScroll);
   }, []);
 
   // for scroll to bottom
@@ -85,15 +85,15 @@ function Message({ message, getUser, displayMessage, newMessage }) {
   return (
     <StyledMessageSpace
       onContextMenu={handleContextMenu}
-      style={{ cursor: "context-menu" }}
+      style={{ cursor: 'context-menu' }}
       id="styledMessageSpace"
     >
       <StyledContextMenu4MsgSpace
         PaperProps={{
           style: {
             // maxHeight: "5rem",
-            height: "auto",
-            minWidth: "13rem",
+            height: 'auto',
+            minWidth: '13rem',
           },
         }}
         open={contextMenu !== null}
@@ -116,25 +116,30 @@ function Message({ message, getUser, displayMessage, newMessage }) {
       </StyledContextMenu4MsgSpace>
 
       <StyledMessageCont ref={msgSpaceRef} id="base">
-        {message.map((item, index) => {
-          if (item.sender !== getUser.data._id) {
-            return (
-              <ReceivedMsgs
-                key={index}
-                msgText={item.text}
-                msgTime={item.createdAt}
-              />
-            );
-          } else {
-            return (
-              <SentMsgs
-                key={index}
-                msgText={item.text}
-                msgTime={item.createdAt}
-              />
-            );
-          }
-        })}
+        {getUser.loading ? (
+          <h1>Loading</h1>
+        ) : (
+          message.map((item, index) => {
+            console.log(item.sender, getUser.data.user._id);
+            if (item.sender !== getUser.data.user_id) {
+              return (
+                <ReceivedMsgs
+                  key={index}
+                  msgText={item.text}
+                  msgTime={item.createdAt}
+                />
+              );
+            } else {
+              return (
+                <SentMsgs
+                  key={index}
+                  msgText={item.text}
+                  msgTime={item.createdAt}
+                />
+              );
+            }
+          })
+        )}
         {}
         {isVisible && (
           <StyledFab onClick={scrollToBottom}>
@@ -209,8 +214,8 @@ function ReceivedMsgs({ msgText, msgTime }) {
           PaperProps={{
             style: {
               // maxHeight: ITEM_HEIGHT * 4.5,
-              minHeight: "16.9rem",
-              width: "auto",
+              minHeight: '16.9rem',
+              width: 'auto',
             },
           }}
           open={contextMenu !== null}
