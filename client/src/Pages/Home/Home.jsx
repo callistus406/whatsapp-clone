@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import "./Home.css";
-import { connect, useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import './Home.css';
+import { connect, useSelector, useDispatch } from 'react-redux';
 // import Menu from "@mui/material/Menu";
 
-import UserProfile from "../UserProfile/UserProfile";
+import UserProfile from '../UserProfile/UserProfile';
 // import { CenterDivContent } from "../Styles/CustomStyles";
 // import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import image from "../../Assets/img/MyImage.png";
+import image from '../../Assets/img/MyImage.png';
 // menu
-import NewChat from "../NewChat/NewChat";
+import NewChat from '../NewChat/NewChat';
 // import Tooltip from "@mui/material/Tooltip";
 // speed dial
 // import PersonIcon from "@mui/icons-material/Person";
 // import CameraAltIcon from "@mui/icons-material/CameraAlt";
 // import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 // import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import NewGrp from "../ New Grp/NewGrp";
-import ArchivedChats from "../Archived Chats/ArchivedChats";
-import StarredMsgs from "../StarredMsgs/StarredMsgs";
-import UserSettings from "../Settings/UserSettings";
-import Status from "../Status/Status";
-import SearchContact from "../SearchContact/SearchContact";
+import NewGrp from '../ New Grp/NewGrp';
+import ArchivedChats from '../Archived Chats/ArchivedChats';
+import StarredMsgs from '../StarredMsgs/StarredMsgs';
+import UserSettings from '../Settings/UserSettings';
+import Status from '../Status/Status';
+import SearchContact from '../SearchContact/SearchContact';
 // import axios from "axios";
 import {
   optionsToggle,
@@ -29,24 +29,24 @@ import {
   // toggleConversation,
   showMessage,
   getConversationId,
-} from "../../Redux-State/actionCreators/pageActions";
+} from '../../Redux-State/actionCreators/pageActions';
 import {
   fetchConversations,
   // login,
   fetchMessages,
   fetchUserProfile,
-} from "../../Redux-State/actionCreators/fetchRequestActions.js";
+} from '../../Redux-State/actionCreators/fetchRequestActions.js';
 // import thunk from "redux-thunk";
-import { StyledContactsCol, StyledChatsCol } from "./style";
+import { StyledContactsCol, StyledChatsCol } from './style';
 // import { StickerIcon } from "./HomeIcons";
-import GroupInfo from "../GroupInfo/GroupInfo";
+import GroupInfo from '../GroupInfo/GroupInfo';
 // import MessageBox from "./MessageBox";
-import HomeContent from "./HomeComp/HomeContent";
+import HomeContent from './HomeComp/HomeContent';
 // import DirectMsg from "../Contacts/DirectMsg/DirectMsg";
-import ContactInfo from "../Contacts/ContactInfo/ContactInfo";
-import SearchContactMsg from "../Contacts/SearchContactMsg/SearchContactMsg";
-import Conversation from "../Conversation/Conversation";
-import Messages from "../Messages/Messages";
+import ContactInfo from '../Contacts/ContactInfo/ContactInfo';
+import SearchContactMsg from '../Contacts/SearchContactMsg/SearchContactMsg';
+import Conversation from '../Conversation/Conversation';
+import Messages from '../Messages/Messages';
 // const actions = [
 //   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -69,12 +69,10 @@ function Home(props) {
   const { displayConversation, loggedUser, messages } = props;
   // const getConversations = useSelector((state) => state.conversations.data);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    console.log(loggedUser._id);
+    console.log(loggedUser);
 
-    console.log("Home rendered____________________________________________");
+    console.log('Home rendered____________________________________________');
 
     props.fetchConversations(loggedUser._id);
 
@@ -112,7 +110,7 @@ function Home(props) {
           >
             {!displayConversation.loading
               ? displayConversation.data.map((conversation, index) => {
-                  console.log("qwerty");
+                  console.log('qwerty');
                   return (
                     <div
                       onClick={() => {
@@ -127,14 +125,14 @@ function Home(props) {
                     </div>
                   );
                 })
-              : " "}
+              : ' '}
           </StyledContactsCol>
         </div>
 
         {props.displayGrpMsgSection ? (
           <Messages
             userMsg={messages}
-            key={"index"}
+            key={'index'}
             currentUser={loggedUser._id}
           />
         ) : (
