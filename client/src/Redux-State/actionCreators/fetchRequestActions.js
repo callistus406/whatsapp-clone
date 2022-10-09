@@ -1,23 +1,23 @@
-import axios from "axios";
+import axios from 'axios';
 
 export function fetchConversationRequest() {
   return {
-    type: "FETCH_CONVERSATIONS_REQUEST",
+    type: 'FETCH_CONVERSATIONS_REQUEST',
   };
 }
 export function fetchConversationSuccess(conversation) {
   return {
-    type: "FETCH_CONVERSATIONS_SUCCESS",
+    type: 'FETCH_CONVERSATIONS_SUCCESS',
     payload: conversation,
   };
 }
 export function fetchConversationFailure(error) {
   return {
-    type: "FETCH_CONVERSATIONS_FAILURE",
+    type: 'FETCH_CONVERSATIONS_FAILURE',
     payload: error,
   };
 }
-const user = [];
+// const user = [];
 export const fetchConversations = (conversation_id) => {
   console.log(conversation_id);
   return (dispatch) => {
@@ -40,25 +40,25 @@ export const fetchConversations = (conversation_id) => {
 
 export function userLoginRequest() {
   return {
-    type: "LOGIN_USER_REQUEST",
+    type: 'LOGIN_USER_REQUEST',
   };
 }
 export function userLoginSuccess(loginData) {
   return {
-    type: "LOGIN_USER_SUCCESS",
+    type: 'LOGIN_USER_SUCCESS',
     payload: loginData,
   };
 }
 export function userLoginFailure(error) {
   return {
-    type: "LOGIN_USER_FAILURE",
+    type: 'LOGIN_USER_FAILURE',
     payload: error,
   };
 }
 
 export const userLogin = (username, phone) => {
   return (dispatch) => {
-    dispatch(userLoginRequest());
+    dispatch(userLoginRequest);
     // const { username, phone } = loginData;
     axios
       .post(`http://localhost:3300/api/v1/login`, {
@@ -66,13 +66,10 @@ export const userLogin = (username, phone) => {
         phone,
       })
       .then((response) => {
-        const user = response.data;
-        console.log(user);
-        dispatch(userLoginSuccess(user));
+        dispatch(userLoginSuccess(response.data));
       })
       .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(userLoginFailure(errorMsg));
+        dispatch(userLoginFailure(error.message));
       });
   };
 };
@@ -80,18 +77,18 @@ export const userLogin = (username, phone) => {
 
 export function fetchUserProfileRequest() {
   return {
-    type: "FETCH_USER_PROFILE_REQUEST",
+    type: 'FETCH_USER_PROFILE_REQUEST',
   };
 }
 export function fetchUseProfileSuccess(data) {
   return {
-    type: "FETCH_USER_PROFILE_SUCCESS",
+    type: 'FETCH_USER_PROFILE_SUCCESS',
     payload: data,
   };
 }
 export function fetchUserProfileFailure(error) {
   return {
-    type: "FETCH_USER_PROFILE_FAILURE",
+    type: 'FETCH_USER_PROFILE_FAILURE',
     payload: error,
   };
 }
@@ -99,18 +96,18 @@ export function fetchUserProfileFailure(error) {
 
 export function fetchMessagesRequest() {
   return {
-    type: "FETCH_MESSAGE_REQUEST",
+    type: 'FETCH_MESSAGE_REQUEST',
   };
 }
 export function fetchMessagesSuccess(currentChat) {
   return {
-    type: "FETCH_MESSAGE_SUCCESS",
+    type: 'FETCH_MESSAGE_SUCCESS',
     payload: currentChat,
   };
 }
 export function fetchMessagesFailure(error) {
   return {
-    type: "FETCH_MESSAGE_FAILURE",
+    type: 'FETCH_MESSAGE_FAILURE',
     payload: error,
   };
 }
@@ -118,18 +115,18 @@ export function fetchMessagesFailure(error) {
 
 export function sendMessagesRequest() {
   return {
-    type: "SEND_MESSAGE_REQUEST",
+    type: 'SEND_MESSAGE_REQUEST',
   };
 }
 export function sendMessagesSuccess(message) {
   return {
-    type: "SEND_MESSAGE_SUCCESS",
+    type: 'SEND_MESSAGE_SUCCESS',
     payload: message,
   };
 }
 export function sendMessagesFailure(error) {
   return {
-    type: "SEND_MESSAGE_FAILURE",
+    type: 'SEND_MESSAGE_FAILURE',
     payload: error,
   };
 }

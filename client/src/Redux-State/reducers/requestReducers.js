@@ -18,17 +18,17 @@ import {
   SEND_MESSAGE_REQUEST,
   SEND_MESSAGE_SUCCESS,
   SEND_MESSAGE_FAILURE,
-} from "../actions/fetchDataActionsTypes";
+} from '../actions/fetchDataActionsTypes';
 
 import {
   LOGIN_USER_FAILURE,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_REQUEST,
-} from "../actions/fetchDataActionsTypes";
+} from '../actions/fetchDataActionsTypes';
 const initialStateOfConversation = {
   loading: false,
   data: [],
-  error: "",
+  error: '',
 };
 
 export const requestReducer = (state = initialStateOfConversation, action) => {
@@ -41,7 +41,7 @@ export const requestReducer = (state = initialStateOfConversation, action) => {
       return {
         loading: false,
         data: action.payload,
-        error: "",
+        error: '',
       };
     case FETCH_CONVERSATIONS_FAILURE:
       return {
@@ -57,7 +57,7 @@ export const requestReducer = (state = initialStateOfConversation, action) => {
 const initialStateOfUser = {
   loading: false,
   data: [],
-  error: "",
+  error: '',
 };
 
 export const userRequestReducer = (state = initialStateOfUser, action) => {
@@ -70,7 +70,7 @@ export const userRequestReducer = (state = initialStateOfUser, action) => {
       return {
         loading: false,
         data: action.payload,
-        error: "",
+        error: '',
       };
     case LOGIN_USER_FAILURE:
       return {
@@ -88,7 +88,7 @@ export const userRequestReducer = (state = initialStateOfUser, action) => {
 const initialStateOfUserProfile = {
   loading: false,
   data: [],
-  error: "",
+  error: '',
 };
 
 export const userProfileRequestReducer = (
@@ -104,7 +104,7 @@ export const userProfileRequestReducer = (
       return {
         loading: false,
         data: action.payload,
-        error: "",
+        error: '',
       };
     case FETCH_USER_PROFILE_FAILURE:
       return {
@@ -122,22 +122,21 @@ export const userProfileRequestReducer = (
 const initialLoginState = {
   loading: false,
   data: [],
-  error: "",
+  error: '',
 };
-
 export const loginReducer = (state = initialLoginState, action) => {
   switch (action.type) {
-    case USER_LOGIN_REQUEST:
+    case LOGIN_USER_REQUEST:
       return {
         loading: true,
       };
-    case USER_LOGIN_SUCCESS:
+    case LOGIN_USER_SUCCESS:
       return {
         loading: false,
         data: action.payload,
-        error: "",
+        error: '',
       };
-    case USER_LOGIN_FAILURE:
+    case LOGIN_USER_FAILURE:
       return {
         loading: false,
         data: [],
@@ -152,7 +151,7 @@ export const loginReducer = (state = initialLoginState, action) => {
 const initialMessageState = {
   loading: false,
   data: [],
-  error: "",
+  error: '',
 };
 export const currentMessageReducer = (state = initialMessageState, action) => {
   switch (action.type) {
@@ -164,7 +163,7 @@ export const currentMessageReducer = (state = initialMessageState, action) => {
       return {
         loading: false,
         data: action.payload,
-        error: "",
+        error: '',
       };
     case FETCH_MESSAGE_FAILURE:
       return {
