@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import { toggleContactMsg } from '../../../Redux-State/actionCreators/pageActions';
 import { fetchMessages } from '../../../Redux-State/actionCreators/fetchRequestActions';
 import { format } from 'timeago.js';
-
+import '../Home.css';
 function Message({ message, getUser, displayMessage, newMessage }) {
   console.log(getUser.data._id);
   const messageScroll = useRef();
@@ -32,7 +32,9 @@ function Message({ message, getUser, displayMessage, newMessage }) {
     messageScroll.current.scrollIntoView({ behavior: 'smooth' });
   };
   let detect = 0;
-  console.log(newMessage);
+  useEffect(() => {
+    console.log('messages loaded......................................');
+  });
   const listenToScroll = () => {
     const winScroll =
       document.getElementById('base').scrollTop |
@@ -116,31 +118,23 @@ function Message({ message, getUser, displayMessage, newMessage }) {
       </StyledContextMenu4MsgSpace>
 
       <StyledMessageCont ref={msgSpaceRef} id="base">
-        {getUser.loading ? (
-          <h1>Loading</h1>
-        ) : (
-          message.map((item, index) => {
-            console.log(item.sender, getUser.data.user._id);
-            if (item.sender !== getUser.data.user_id) {
-              return (
-                <ReceivedMsgs
-                  key={index}
-                  msgText={item.text}
-                  msgTime={item.createdAt}
-                />
-              );
-            } else {
-              return (
-                <SentMsgs
-                  key={index}
-                  msgText={item.text}
-                  msgTime={item.createdAt}
-                />
-              );
-            }
-          })
-        )}
-        {}
+        {message.map((item, index) => {
+          {
+            /* console.log(item.sender, getUser.data.user._id);
+          
+            console.log('yee'); */
+          }
+
+          return (
+            <ReceivedMsgs
+              classValue={item.sender === getUser.data.user._id ? 'left' : ''}
+              name={item.sender}
+              key={index}
+              msgText={item.text}
+              msgTime={item.createdAt}
+            />
+          );
+        })}
         {isVisible && (
           <StyledFab onClick={scrollToBottom}>
             <KeyboardArrowDownIcon />
@@ -153,7 +147,7 @@ function Message({ message, getUser, displayMessage, newMessage }) {
   );
 }
 
-function ReceivedMsgs({ msgText, msgTime }) {
+function ReceivedMsgs({ classValue, name, msgText, msgTime }) {
   console.log(msgText, msgTime);
   const [borderBottom, setBorderBottom] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
@@ -191,7 +185,7 @@ function ReceivedMsgs({ msgText, msgTime }) {
   return (
     <div
       onContextMenu={handleClose}
-      class="talk-bubble tri-right left-top"
+      className={`talk-bubble tri-right  ${classValue}`}
       onMouseEnter={() => hideArrow(true)}
       onMouseLeave={() => hideArrow(false)}
     >
@@ -238,6 +232,7 @@ function ReceivedMsgs({ msgText, msgTime }) {
         </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
+        <div>{name}</div>
         <p>{msgText}</p>
         <div className="msgTime">
           <div>
@@ -250,10 +245,14 @@ function ReceivedMsgs({ msgText, msgTime }) {
     </div>
   );
 }
-function SentMsgs({ msgText, msgTime }) {
+function SentMsgs({ name, msgText, msgTime }) {
   return (
-    <div class="talk-bubble-sent tri-right-send right-top alignSentMsgs">
+    <div
+      class="talk-bubble-sent tri-right-send right-top alignSentMsgs"
+      // style={{ marginLeft: '500px' }}
+    >
       {/* replies */}
+      <div>{name}</div>
       <div class="talktext-sent">
         <p>{msgText}</p>
         <div className="msgTime">
