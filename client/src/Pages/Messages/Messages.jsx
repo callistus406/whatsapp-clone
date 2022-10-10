@@ -82,7 +82,7 @@ function Messages(props) {
         try {
           const msg = {
             conversationId: props.displayChatId,
-            sender: props.getUser.data._id,
+            sender: props.getUser.data.user._id,
             text: documentInput.value,
           };
           // axios call
