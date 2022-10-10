@@ -491,8 +491,8 @@
 }
 
 /* Right triangle placed top left flush. */
-.tri-right.border.left-top:before {
-  content: "";
+/* .tri-right.border.left-top:before {
+  content: '';
   position: absolute;
   width: -0;
   height: 0;
@@ -502,9 +502,9 @@
   bottom: auto;
   border: 32px solid;
   border-color: #666 transparent transparent transparent;
-}
-.tri-right.left-top:after {
-  content: "";
+} */
+/* .tri-right.left-top:after {
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
@@ -514,10 +514,10 @@
   bottom: auto;
   border: 10px solid;
   border-color: #fff transparent transparent transparent;
-}
+} */
 /* sent */
 .tri-right-send.border.right-top:before {
-  content: " ";
+  content: ' ';
   position: absolute;
   width: 0;
   height: 0;
@@ -529,7 +529,7 @@
   border-color: #d9fdd3 transparent transparent transparent;
 }
 .tri-right-send.right-top:after {
-  content: " ";
+  content: ' ';
   position: absolute;
   width: 0;
   height: 0;
@@ -542,8 +542,38 @@
   border-color: #d9fdd3 transparent transparent transparent;
 }
 
+.left {
+  background-color: red;
+  margin-left: auto;
+}
+/* .left:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -15px;
+  top: -8px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: #d9fdd3 transparent transparent transparent;
+} */
+.left:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -10px;
+  top: 0px;
+  bottom: auto;
+  border: 10px solid;
+
+  border-color: #d9fdd3 transparent transparent transparent;
+}
 .alignSentMsgs {
   margin-left: auto;
+  /* background-color: #0063cb; */
 }
 .msgTime {
   display: flex;
