@@ -34,6 +34,8 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import Message from './Message/Message';
+import io from 'socket.io-client';
+
 import axios from 'axios';
 const actions = [
   { icon: <InsertPhotoIcon />, name: 'photo', class: 'speedDial-contact' },
@@ -45,13 +47,24 @@ const actions = [
 ];
 
 function Messages(props) {
-  console.log(props.displayChatId);
+  const { getUser } = props;
+  const socket = useRef();
 
   const { displayChatId } = props;
   const [messages, setMessages] = useState([]);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
-
+  useEffect(() => {
+    socket.current = io('ws://localhost:8900');
+  }, []);
+  console.log(getUser);
+  useEffect(() => {
+    console.log('socket rendered____________________________________________');
+    socket.current.emit('addUser', getUser.data._id);
+    socket.current.on('getUsers', (users) => {
+      console.log(users);
+    });
+  }, [getUser.data._id]);
   useEffect(() => {
     const getMessages = async () => {
       try {
