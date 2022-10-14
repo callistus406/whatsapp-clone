@@ -4,11 +4,22 @@ import { useEffect, useRef, useState } from 'react';
 import { userLogin } from '../../Redux-State/actionCreators/fetchRequestActions';
 import Home from '../Home/Home';
 import axios from 'axios';
+// import io from 'socket.io-client';
 
 function Login(props) {
   // const [userInfo, setUserData] = useState([]);
-  const [error, setError] = useState([]);
+  // const [socket, setSocket] = useState(null);
 
+  // const [error, setError] = useState([]);
+  // useEffect(() => {
+  //   setSocket(io('ws://localhost:8900'));
+  // }, []);
+
+  // useEffect(() => {
+  //   socket.on('welcome', (message) => {
+  //     console.log(message);
+  //   });
+  // }, []);
   // useEffect(() => {
   //   props.userLogin('general admin', '2345433264321');
   // }, []);
