@@ -47,7 +47,6 @@ import ContactInfo from '../Contacts/ContactInfo/ContactInfo';
 import SearchContactMsg from '../Contacts/SearchContactMsg/SearchContactMsg';
 import Conversation from '../Conversation/Conversation';
 import Messages from '../Messages/Messages';
-import io from 'socket.io-client';
 // const actions = [
 //   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
 
@@ -66,7 +65,6 @@ function Home(props) {
   // const [userConversations, setUserConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
   // const [socket, setSocket] = useState(null);
-  const socket = useRef(io('ws://localhost:8900'));
   const { user } = useSelector((state) => state);
   const { displayConversation, loggedUser, messages } = props;
 
@@ -84,14 +82,6 @@ function Home(props) {
   function clickHandler() {
     setOpen(!open);
   }
-
-  useEffect(() => {
-    console.log('socket rendered____________________________________________');
-    socket.current.emit('addUser', loggedUser._id);
-    socket.current.on('getUsers', (users) => {
-      console.log(users);
-    });
-  }, [loggedUser._id]);
 
   // console.log(socket);
   // useEffect(() => {
