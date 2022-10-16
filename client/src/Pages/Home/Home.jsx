@@ -140,6 +140,7 @@ function Home(props) {
             userMsg={messages}
             key={'index'}
             currentUser={loggedUser._id}
+            currentChat={currentChat}
           />
         ) : (
           <StyledChatsCol>

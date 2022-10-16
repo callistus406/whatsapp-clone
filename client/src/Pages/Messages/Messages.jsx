@@ -1,6 +1,6 @@
 import { groupContext } from '../../GlobalVariables/variables';
 import React, { useRef, useCallback, useEffect, useState } from 'react';
-
+import jwt_decode from 'jwt-decode';
 import { connect } from 'react-redux';
 import {
   toggleContactMsg,
@@ -47,24 +47,40 @@ const actions = [
 ];
 
 function Messages(props) {
-  const { getUser } = props;
+  const { getUser, currentChat } = props;
   const socket = useRef();
 
   const { displayChatId } = props;
   const [messages, setMessages] = useState([]);
+  const [arrivedMessage, setArrivedMessage] = useState(null);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
   useEffect(() => {
     socket.current = io('ws://localhost:8900');
+    socket.current.on('getMessage', (data) => {
+      setArrivedMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
   }, []);
-  console.log(getUser);
+
+  //
+  useEffect(() => {
+    arrivedMessage &&
+      currentChat?.members.includes(arrivedMessage.sender) &&
+      setMessages((prev) => [...prev, arrivedMessage]);
+  }, [arrivedMessage, currentChat]);
+
+  console.log(getUser.data.user._id);
   useEffect(() => {
     console.log('socket rendered____________________________________________');
-    socket.current.emit('addUser', getUser.data._id);
+    socket.current.emit('addUser', getUser.data.user._id);
     socket.current.on('getUsers', (users) => {
       console.log(users);
     });
-  }, [getUser.data._id]);
+  }, [getUser.data.user]);
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -98,6 +114,16 @@ function Messages(props) {
             sender: props.getUser.data.user._id,
             text: documentInput.value,
           };
+          console.log(currentChat);
+          const receiverId = currentChat.members.find(
+            (member) => member !== getUser.data.user._id
+          );
+          console.log(receiverId, getUser.data.user._id, documentInput.value);
+          socket.current.emit('sendMessage', {
+            senderId: getUser.data.user._id,
+            receiverId: receiverId,
+            text: documentInput.value,
+          });
           // axios call
           const res = await axios.post(
             `http://localhost:3300/api/v1/message`,
