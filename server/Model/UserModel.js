@@ -1,4 +1,4 @@
-const { mongoose, Schema } = require("./getMongoose");
+const { mongoose, Schema } = require('./getMongoose');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -6,13 +6,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       maxLength: 20,
       minLength: 3,
-      required: true,
+      required: [true, 'This field is required'],
     },
     phone: {
       type: Number,
       maxLength: 12,
       minLength: 10,
-      required: true,
+      required: [true, 'this field is required'],
     },
     profilePic: {
       type: String,
@@ -24,4 +24,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);
