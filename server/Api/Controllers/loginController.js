@@ -12,11 +12,15 @@ const loginController = async (req, res) => {
     });
     const accessToken = generateJwtAccessToken(user);
     const refreshToken = generateJwtRefreshToken(user);
-    // console.log(refreshToken, accessToken);
+    console.log(user._id);
 
-    const dbTokenStore = await RefreshTokenModel.findOne({
-      user_id: user._id,
-    });
+    const dbTokenStore = await RefreshTokenModel.findOneAndUpdate(
+      {
+        user_id: user._id,
+      },
+      { refreshToken: refreshToken },
+      { new: true, runValidators: true }
+    );
 
     console.log(dbTokenStore);
 
