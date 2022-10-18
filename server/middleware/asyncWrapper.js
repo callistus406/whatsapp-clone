@@ -10,3 +10,9 @@ const asyncWrapper = (callback) => {
 };
 
 module.exports = asyncWrapper;
+/**
+ *
+ * callback = controller fn
+ * the callback fn is executed here
+ * and any error that is thrown will be caught in the catch block
+ */
