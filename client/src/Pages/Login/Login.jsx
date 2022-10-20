@@ -6,7 +6,7 @@ import Home from '../Home/Home';
 import axios from 'axios';
 // import io from 'socket.io-client';
 
-function Login(props) {
+function Login({ userLogin, userInfo }) {
   // const [userInfo, setUserData] = useState([]);
   // const [socket, setSocket] = useState(null);
 
@@ -21,23 +21,23 @@ function Login(props) {
   //   });
   // }, []);
   // useEffect(() => {
-  //   props.userLogin('general admin', '2345433264321');
+  //   userLogin('general admin', '2345433264321');
   // }, []);
 
   const inputUsername = useRef(null);
   const inputPhone = useRef(null);
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.userLogin(inputUsername.current.value, inputPhone.current.value);
-    console.log(props.userInfo.data);
+    userLogin(inputUsername.current.value, inputPhone.current.value);
   };
+  // console.log(userInfo.data.payload.user);
 
-  return props.userInfo.loading ? (
+  return userInfo.loading ? (
     <h1>LOADING</h1>
-  ) : props.userInfo.error ? (
+  ) : userInfo.error ? (
     <h1>ERROR OCCURRED</h1>
-  ) : props.userInfo.data.success ? (
-    <Home loggedUser={props.userInfo.data.user} />
+  ) : userInfo.data.success ? (
+    <Home loggedUser={userInfo.data.payload.user} />
   ) : (
     <div>
       <div className="center">
