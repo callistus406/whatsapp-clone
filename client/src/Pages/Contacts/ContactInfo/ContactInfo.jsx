@@ -1,23 +1,23 @@
-import React, { useEffect, useState, useRef, useReducer } from "react";
-import { ArrowBack, CancelButton, Avatar, InfoIcon } from "./icons.js";
-import ClearIcon from "@mui/icons-material/Clear";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useEffect, useState, useRef, useReducer } from 'react';
+import { ArrowBack, CancelButton, Avatar, InfoIcon } from './icons.js';
+import ClearIcon from '@mui/icons-material/Clear';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
+import SearchIcon from '@mui/icons-material/Search';
 // switch
-import Switch from "@mui/material/Switch";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
-import LogoutIcon from "@mui/icons-material/Logout";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { styled as muiStyled } from "@mui/material/styles";
-import styled from "styled-components";
-import LockIcon from "@mui/icons-material/Lock";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Switch from '@mui/material/Switch';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components';
+import LockIcon from '@mui/icons-material/Lock';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   StyledContainer,
   StyledNavArrow,
@@ -40,23 +40,24 @@ import {
   StyledEncryption,
   StyledDeleteChat,
   StyledSeparator,
-} from "./style.js";
+} from './style.js';
 import {
+  toggleContactMsg,
   showGroupInfo,
   hideGroupInfo,
   showGrpParticipants,
   closeGrpParticipants,
   toggleStarredGrpMsgs,
   toggleContactInfo,
-} from "../../../Redux-State/actionCreators/pageActions";
-import { connect } from "react-redux";
-import SearchParticipants from "../../SearchParticipants/SearchParticipants.jsx";
-import StarredMsgs from "../../GroupStarredMsgs/StarredMsgs";
+} from '../../../Redux-State/actionCreators/pageActions';
+import { connect } from 'react-redux';
+import SearchParticipants from '../../SearchParticipants/SearchParticipants.jsx';
+import StarredMsgs from '../../GroupStarredMsgs/StarredMsgs';
 function ContactInfo(props) {
   const membersRef = useRef();
-  const username = "";
+  const username = '';
   const scrollToBottom = () => {
-    membersRef.current.scrollIntoView({ behavior: "smooth" });
+    membersRef.current.scrollIntoView({ behavior: 'smooth' });
   };
   // useEffect(() => {
   //   scrollToBottom();
@@ -72,18 +73,18 @@ function ContactInfo(props) {
   });
 
   function showIcon(prop) {
-    if (prop === "title") {
+    if (prop === 'title') {
       setEditInfo({ ...editInfo, [prop]: true });
     }
-    if (prop === "info") {
+    if (prop === 'info') {
       setEditInfo({ ...editInfo, [prop]: true });
     }
   }
   function hideIcon(prop) {
-    if (prop === "title") {
+    if (prop === 'title') {
       setEditInfo({ ...editInfo, [prop]: false });
     }
-    if (prop === "info") {
+    if (prop === 'info') {
       setEditInfo({ ...editInfo, [prop]: false });
     }
   }
@@ -100,25 +101,25 @@ function ContactInfo(props) {
 
   function AlertDialog() {
     const StyledButton = muiStyled(Button)(({ theme }) => ({
-      backgroundColor: "#008069",
-      minWidth: "4rem",
-      color: "#fff",
-      "&:hover": {
-        background: "#017561",
+      backgroundColor: '#008069',
+      minWidth: '4rem',
+      color: '#fff',
+      '&:hover': {
+        background: '#017561',
       },
-      marginRight: "1rem",
-      marginBottom: "1rem",
+      marginRight: '1rem',
+      marginBottom: '1rem',
     }));
     const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
-      color: "#55626A",
-      fontSize: "0.9rem",
+      color: '#55626A',
+      fontSize: '0.9rem',
     }));
     const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
-      backgroundColor: "rgba(255,255,255,0.9)",
-      boxShadow: "none",
+      backgroundColor: 'rgba(255,255,255,0.9)',
+      boxShadow: 'none',
     }));
     const StyledSpace = styled.div`
-      ${"" /* height: 1rem; */}
+      ${'' /* height: 1rem; */}
       width: 23rem;
     `;
     return (
@@ -170,8 +171,8 @@ function ContactInfo(props) {
             <Avatar />
           </div>
           <StyledGroupHeading
-            onMouseEnter={() => showIcon("title")}
-            onMouseLeave={() => hideIcon("title")}
+            onMouseEnter={() => showIcon('title')}
+            onMouseLeave={() => hideIcon('title')}
           >
             <span className="groupName">Generous </span>
             {/* {editInfo ? (
@@ -208,7 +209,7 @@ function ContactInfo(props) {
           <div className="placeholder">
             <p>Media, Links and docs</p>
             <span>
-              {" "}
+              {' '}
               <ArrowForwardIosIcon fontSize="small" />
             </span>
           </div>
@@ -249,7 +250,7 @@ function ContactInfo(props) {
                 </span>
                 <p lassName="info">Disappearing Messages</p>
                 <span className="arrow">
-                  {" "}
+                  {' '}
                   <ArrowForwardIosIcon fontSize="small" />
                 </span>
               </div>
@@ -294,7 +295,7 @@ function ContactInfo(props) {
               <span className="exitIcon">
                 <LogoutIcon color="error" />
               </span>
-              <p>Block {username ? username : "joy"}</p>
+              <p>Block {username ? username : 'joy'}</p>
             </div>
           </div>
           <div className="reportCont">
@@ -302,7 +303,7 @@ function ContactInfo(props) {
               <span className="reportIcon">
                 <ThumbDownAltIcon color="error" />
               </span>
-              <p>Report {username ? username : "joy"}</p>
+              <p>Report {username ? username : 'joy'}</p>
             </div>
           </div>
         </StyledGroupInfoActions>
@@ -327,7 +328,7 @@ function Mute() {
     <Switch
       checked={checked}
       onChange={handleChange}
-      inputProps={{ "aria-label": "controlled" }}
+      inputProps={{ 'aria-label': 'controlled' }}
     />
   );
 }
@@ -341,7 +342,7 @@ function Members(props) {
       <StyledMembersChatText>
         <div className="chatName">
           <span className="spanHeading">+2348109364893</span>
-          <span className={props.role ? "role" : ""}>{props.role}</span>
+          <span className={props.role ? 'role' : ''}>{props.role}</span>
         </div>
         <div className="msgPreview">
           <p>Loading about...</p>
@@ -367,6 +368,8 @@ function mapDispatchToProps(dispatch) {
 
     // search msg action
     toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
+    toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
+
     // action to get group participants
     showGrpParticipants: (bool) => dispatch(showGrpParticipants(bool)),
   };
