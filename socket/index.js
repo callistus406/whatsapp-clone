@@ -27,8 +27,8 @@ const removeUser = (socketId) => {
 };
 
 const getUser = (receiverId) => {
-  users.find((user) => console.log(user.userId !== receiverId));
-  return users.find((user) => user.userId !== receiverId);
+  users.find((user) => console.log(user.userId === receiverId));
+  return users.find((user) => user.userId === receiverId);
 };
 
 io.on('connection', (socket) => {
