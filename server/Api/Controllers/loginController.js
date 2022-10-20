@@ -22,7 +22,7 @@ const loginController = async (req, res) => {
       { new: true, runValidators: true }
     );
 
-    console.log(dbTokenStore);
+    // console.log(dbTokenStore);
 
     res.status(200).json({
       success: true,
@@ -34,7 +34,7 @@ const loginController = async (req, res) => {
 };
 
 const generateJwtAccessToken = (user) => {
-  // console.log(user);
+  console.log(user._id);
   return jwt.sign(
     {
       id: user._id,
