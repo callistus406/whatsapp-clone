@@ -49,7 +49,6 @@ const actions = [
 function Messages(props) {
   const { getUser, currentChat } = props;
   const socket = useRef();
-
   const { displayChatId } = props;
   const [messages, setMessages] = useState([]);
   const [arrivedMessage, setArrivedMessage] = useState(null);
@@ -65,6 +64,7 @@ function Messages(props) {
       });
     });
   }, []);
+  console.log(arrivedMessage);
 
   //
   useEffect(() => {
@@ -73,14 +73,14 @@ function Messages(props) {
       setMessages((prev) => [...prev, arrivedMessage]);
   }, [arrivedMessage, currentChat]);
 
-  console.log(getUser.data.user._id);
+  console.log(getUser.data.payload.user._id);
   useEffect(() => {
     console.log('socket rendered____________________________________________');
-    socket.current.emit('addUser', getUser.data.user._id);
+    socket.current.emit('addUser', getUser.data.payload.user._id);
     socket.current.on('getUsers', (users) => {
       console.log(users);
     });
-  }, [getUser.data.user]);
+  }, [getUser.data.payload.user]);
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -111,16 +111,20 @@ function Messages(props) {
         try {
           const msg = {
             conversationId: props.displayChatId,
-            sender: props.getUser.data.user._id,
+            sender: props.getUser.data.payload.user._id,
             text: documentInput.value,
           };
           console.log(currentChat);
           const receiverId = currentChat.members.find(
-            (member) => member !== getUser.data.user._id
+            (member) => member !== getUser.data.payload.user._id
           );
-          console.log(receiverId, getUser.data.user._id, documentInput.value);
+          console.log(
+            receiverId,
+            getUser.data.payload.user._id,
+            documentInput.value
+          );
           socket.current.emit('sendMessage', {
-            senderId: getUser.data.user._id,
+            senderId: getUser.data.payload.user._id,
             receiverId: receiverId,
             text: documentInput.value,
           });
