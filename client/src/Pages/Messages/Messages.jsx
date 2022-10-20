@@ -189,7 +189,11 @@ function Messages(props) {
         </div>
         <div
           className="chatHeadInfo"
-          onClick={() => props.toggleContactInfo(true)}
+          onClick={() => {
+            props.toggleContactMsg(false);
+
+            props.toggleContactInfo(true);
+          }}
         >
           <div className="title">
             <p>+2348143568829</p>
@@ -315,6 +319,7 @@ function mapDispatchToProps(dispatch) {
     fetchMessages: (data) => dispatch(fetchMessages(data)),
     toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
     getMessage: (info) => dispatch(getMessage(info)),
+
     sendMessages: (conversationId, sender, text) =>
       dispatch(sendMessages(conversationId, sender, text)),
     // toggleConversation: (bool) => dispatch(toggleConversation(bool)),

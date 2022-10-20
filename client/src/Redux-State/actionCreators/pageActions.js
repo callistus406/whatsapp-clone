@@ -34,42 +34,42 @@ import {
   SHOW_MESSAGE,
   SHOW_CONVERSATION_ID,
   GET_MESSAGE,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 // section for status bar action creators
 export function showProfile(bool) {
   return {
     type: SHOW_PROFILE,
     payload: bool,
-    info: "this action  will display the profile slide",
+    info: 'this action  will display the profile slide',
   };
 }
 export function hideProfile(bool) {
   return {
     type: HIDE_PROFILE,
     payload: bool,
-    info: "this action  will hide the profile slide",
+    info: 'this action  will hide the profile slide',
   };
 }
 export function displaySettings(bool) {
   return {
     type: DISPLAY_SETTINGS,
     payload: bool,
-    info: "this action  will display the settings slide",
+    info: 'this action  will display the settings slide',
   };
 }
 export function toggleSecurity(bool) {
   return {
     type: DISPLAY_SECURITY,
     payload: bool,
-    info: "this action  will display the security slide",
+    info: 'this action  will display the security slide',
   };
 }
 export function togglePrivacy(bool) {
   return {
     type: DISPLAY_PRIVACY,
     payload: bool,
-    info: "this action  will display the privacy slide",
+    info: 'this action  will display the privacy slide',
   };
 }
 // export function hideSettings(bool) {
@@ -83,7 +83,7 @@ export function togglePrivacy(bool) {
 export function newChatToggle() {
   return {
     type: TOGGLE_NEW_CHAT,
-    info: "this action  will display the new chat slide",
+    info: 'this action  will display the new chat slide',
   };
 }
 
@@ -91,7 +91,7 @@ export function showStatus(bool) {
   return {
     type: SHOW_STATUS,
     payload: bool,
-    info: "this action  will display the status slide",
+    info: 'this action  will display the status slide',
   };
 }
 export function hideStatus(bool) {
@@ -99,21 +99,21 @@ export function hideStatus(bool) {
     type: SHOW_STATUS,
     payload: bool,
 
-    info: "this action  will hide the status slide",
+    info: 'this action  will hide the status slide',
   };
 }
 
 export function optionsToggle() {
   return {
     type: TOGGLE_OPTIONS,
-    info: "this action  will display the options dropdown slide",
+    info: 'this action  will display the options dropdown slide',
   };
 }
 // ACTION FOR MSG SEARCH BAR
 export function toggleMsgSearch() {
   return {
     type: TOGGLE_MSG_SEARCH,
-    info: "this action  will display the message search slide ",
+    info: 'this action  will display the message search slide ',
   };
 }
 // ACTION FOR GROUP INFO
@@ -121,14 +121,14 @@ export function showGroupInfo(bool) {
   return {
     type: SHOW_GROUP_INFO,
     payload: bool,
-    info: "this action  will display the group information ",
+    info: 'this action  will display the group information ',
   };
 }
 export function hideGroupInfo(bool) {
   return {
     type: HIDE_GROUP_INFO,
     payload: bool,
-    info: "this action  will hide the group information ",
+    info: 'this action  will hide the group information ',
   };
 }
 
@@ -138,7 +138,7 @@ export function settingsToProfile(bool) {
   return {
     type: LINK_SETTINGS_AND_PROFILE,
     payload: bool,
-    info: "this action  will display the profile slide from settings component",
+    info: 'this action  will display the profile slide from settings component',
   };
 }
 //ACTIONS CREATORS FOR OPTIONS WHICH IS A CHILD OF IN STATUS BAR ACTIONS
@@ -146,21 +146,21 @@ export function settingsToProfile(bool) {
 export function newGroupToggle() {
   return {
     type: TOGGLE_NEW_GROUP,
-    info: "this action  will display the new group layout",
+    info: 'this action  will display the new group layout',
   };
 }
 
 export function archiveToggle() {
   return {
     type: TOGGLE_ARCHIVE,
-    info: "this action  will display the archive layout",
+    info: 'this action  will display the archive layout',
   };
 }
 
 export function starredMsgsToggle() {
   return {
     type: TOGGLE_STARRED_MSGS,
-    info: "this action  will display the starred messages",
+    info: 'this action  will display the starred messages',
   };
 }
 
@@ -173,7 +173,7 @@ export function starredMsgsToggle() {
 export function logout() {
   return {
     type: LOGOUT,
-    info: "this action  will log the user out of the system",
+    info: 'this action  will log the user out of the system',
   };
 }
 
@@ -181,20 +181,20 @@ export function logout() {
 export function toggleNotification() {
   return {
     type: TOGGLE_NOTIFICATION,
-    info: "this action  will display archived messages",
+    info: 'this action  will display archived messages',
   };
 }
 export function toggleWallpaper() {
   return {
     type: TOGGLE_CHAT_WALLPAPER,
-    info: "this action  will display system wallpapers",
+    info: 'this action  will display system wallpapers',
   };
 }
 
 export function toggleBlockedContacts() {
   return {
     type: TOGGLE_BLOCKED_CONTACTS,
-    info: "this action  will display blocked contacts",
+    info: 'this action  will display blocked contacts',
   };
 }
 
@@ -202,21 +202,21 @@ export function toggleKeyboardShortcuts(bool) {
   return {
     type: TOGGLE_KEYBOARD_SHORTCUTS,
     payload: bool,
-    info: "this action  will display keyboardShortcuts",
+    info: 'this action  will display keyboardShortcuts',
   };
 }
 
 export function toggleTheme() {
   return {
     type: TOGGLE_THEME,
-    info: "this action  will display the system themes ",
+    info: 'this action  will display the system themes ',
   };
 }
 
 export function toggleHelp() {
   return {
     type: TOGGLE_HELP,
-    info: "this action  will display help",
+    info: 'this action  will display help',
   };
 }
 // THIS WILL SELECT CONTACTS
@@ -224,7 +224,7 @@ export function toggleSelectContacts(data) {
   return {
     type: SELECT_CONTACTS,
     payload: data,
-    info: "this action  will individual contacts",
+    info: 'this action  will individual contacts',
   };
 }
 // search participants
@@ -232,21 +232,21 @@ export function showGrpParticipants(bool) {
   return {
     type: SEARCH_GROUP_PARTICIPANTS,
     payload: bool,
-    info: "this action  will display search  group participants",
+    info: 'this action  will display search  group participants',
   };
 }
 export function closeGrpParticipants(bool) {
   return {
     type: CLOSE_SEARCH_GROUP_PARTICIPANTS,
     payload: bool,
-    info: "this action  will close search  group participants",
+    info: 'this action  will close search  group participants',
   };
 }
 // starred grp action
 export function toggleStarredGrpMsgs() {
   return {
     type: TOGGLE_GRP_STARRED_MSGS,
-    info: "this action  will display group participants",
+    info: 'this action  will display group participants',
   };
 }
 // display group message
@@ -254,7 +254,7 @@ export function displayGrpMsgAction(bool) {
   return {
     type: SHOW_GROUP_MSG,
     payload: bool,
-    info: "this action  will display message",
+    info: 'this action  will display message',
   };
 }
 
@@ -263,14 +263,14 @@ export function toggleContactInfo(bool) {
   return {
     type: DISPLAY_CONTACT_INFO,
     payload: bool,
-    info: "this action  will display contact information",
+    info: 'this action  will display contact information',
   };
 }
 export function toggleContactMsg(bool) {
   return {
     type: SEARCH_CONTACT_MSG,
     payload: bool,
-    info: "this action  will display search contact messages",
+    info: 'this action  will  search contact messages',
   };
 }
 
@@ -280,14 +280,14 @@ export function toggleConversation(bool) {
   return {
     type: SHOW_CONVERSATIONS,
     payload: bool,
-    info: "this action  will display conversations ",
+    info: 'this action  will display conversations ',
   };
 }
 
 export function showMessage() {
   return {
     type: SHOW_MESSAGE,
-    info: "this action  will display message ",
+    info: 'this action  will display message ',
   };
 }
 // current chat
@@ -295,7 +295,7 @@ export function getConversationId(chatId) {
   return {
     type: SHOW_CONVERSATION_ID,
     payload: chatId,
-    info: "this action  will display current chat id ",
+    info: 'this action  will display current chat id ',
   };
 }
 
@@ -305,6 +305,6 @@ export function getMessage(info) {
   return {
     type: GET_MESSAGE,
     payload: info,
-    info: "this action  will display current message ",
+    info: 'this action  will display current message ',
   };
 }

@@ -1,11 +1,12 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   toggleContactMsg,
   showProfile,
   showStatus,
   newChatToggle,
-} from "../../Redux-State/actionCreators/pageActions";
-import "./Home.css";
+  toggleContactInfo,
+} from '../../Redux-State/actionCreators/pageActions';
+import './Home.css';
 
 export const StatusIcon = connect(
   (state) => ({
@@ -71,6 +72,7 @@ export const SearchIcon = connect(
   }),
   (dispatch) => ({
     toggleContactMsg: (bool) => dispatch(toggleContactMsg(bool)),
+    toggleContactInfo: (bool) => dispatch(toggleContactInfo(bool)),
   })
 )((props) => {
   // console.log(props);
@@ -80,7 +82,11 @@ export const SearchIcon = connect(
       width="24"
       height="24"
       className=""
-      onClick={() => props.toggleContactMsg(true)}
+      onClick={() => {
+        props.toggleContactInfo(false);
+
+        props.toggleContactMsg(true);
+      }}
     >
       <path
         fill="#51585C"
