@@ -127,7 +127,9 @@ function Message({ message, getUser, displayMessage, newMessage }) {
 
           return (
             <ReceivedMsgs
-              classValue={item.sender === getUser.data.user._id ? 'left' : ''}
+              classValue={
+                item.sender === getUser.data.payload.user._id ? 'left' : ''
+              }
               name={item.sender}
               key={index}
               msgText={item.text}
