@@ -54,6 +54,7 @@ function Messages(props) {
   const [arrivedMessage, setArrivedMessage] = useState(null);
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
     socket.current = io('ws://localhost:8900');
     socket.current.on('getMessage', (data) => {
@@ -108,27 +109,27 @@ function Messages(props) {
         console.log('Enter key was pressed. Run your function.');
         event.preventDefault();
         // this makes a post request with the message written
+        const msg = {
+          conversationId: props.displayChatId,
+          sender: props.getUser.data.payload.user._id,
+          text: documentInput.value,
+        };
+        console.log(currentChat);
+        const receiverId = currentChat.members.find(
+          (member) => member !== getUser.data.payload.user._id
+        );
+        console.log(
+          receiverId,
+          getUser.data.payload.user._id,
+          documentInput.value
+        );
+        socket.current.emit('sendMessage', {
+          senderId: getUser.data.payload.user._id,
+          receiverId: receiverId,
+          text: documentInput.value,
+        });
+        // axios call
         try {
-          const msg = {
-            conversationId: props.displayChatId,
-            sender: props.getUser.data.payload.user._id,
-            text: documentInput.value,
-          };
-          console.log(currentChat);
-          const receiverId = currentChat.members.find(
-            (member) => member !== getUser.data.payload.user._id
-          );
-          console.log(
-            receiverId,
-            getUser.data.payload.user._id,
-            documentInput.value
-          );
-          socket.current.emit('sendMessage', {
-            senderId: getUser.data.payload.user._id,
-            receiverId: receiverId,
-            text: documentInput.value,
-          });
-          // axios call
           const res = await axios.post(
             `http://localhost:3300/api/v1/message`,
             msg
