@@ -1,19 +1,20 @@
-import { Provider } from "react-redux";
-import React, { useEffect, useRef, useState } from "react";
-import { store } from "../../Redux-State/store";
-import Home from "../Home/Home";
-import SearchContact from "../SearchContact/SearchContact";
+import { Provider } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { store } from '../../Redux-State/store';
+import Home from '../Home/Home';
+import SearchContact from '../SearchContact/SearchContact';
 // import ContextMenu from "../components/Tests/Context";
-import ContextMenuHoc from "../ContextMenu/ContextMenuHoc";
+import ContextMenuHoc from '../ContextMenu/ContextMenuHoc';
 // import
-import { CustomizedDialogs } from "../Tests/Contacts";
-import FloatingActionButtons from "../Tests/Fab";
-import Scroll from "../Tests/Scroll";
-import ConnectionError from "../Interrupts/ConnectionMsg/ConnectionError";
-import { KeyboardShortcuts } from "../Settings/icons";
-import Register from "../Register/Register";
+import { CustomizedDialogs } from '../Tests/Contacts';
+import FloatingActionButtons from '../Tests/Fab';
+import Scroll from '../Tests/Scroll';
+import ConnectionError from '../Interrupts/ConnectionMsg/ConnectionError';
+import { KeyboardShortcuts } from '../Settings/icons';
+import Register from '../Register/Register';
 // import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
-import Login from "../Login/Login";
+import Login from '../Login/Login';
+import Chat from '../../components/Chat';
 
 function Whatsapp() {
   return (
@@ -28,7 +29,7 @@ function Whatsapp() {
         <UserChat passMenu="qwerty2" />
         <UserChat passMenu="qwerty3" /> */}
         {/* luxury */}
-        <Login />
+        <Chat />
         {/* <FloatingActionButtons /> */}
         {/* <SearchContact /> */}
         {/* <MenuListComposition /> */}
