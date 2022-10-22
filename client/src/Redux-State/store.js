@@ -1,6 +1,6 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
-import logger from "redux-logger";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   displayProfileReducer,
   displayStatusReducer,
@@ -31,7 +31,7 @@ import {
   displayMessageReducer,
   displayConversationIdReducer,
   getMessageReducer,
-} from "./reducers/reducers";
+} from './reducers/reducers';
 import {
   requestReducer,
   userRequestReducer,
@@ -39,8 +39,9 @@ import {
   loginReducer,
   currentMessageReducer,
   currentChatReducer,
-} from "./reducers/requestReducers";
-import thunk from "redux-thunk";
+  refreshTokenReducer,
+} from './reducers/requestReducers';
+import thunk from 'redux-thunk';
 const rootReducer = combineReducers({
   profile: displayProfileReducer,
   status: displayStatusReducer,
@@ -84,6 +85,7 @@ const rootReducer = combineReducers({
   displayMessage: getMessageReducer,
 
   login: loginReducer,
+  jwtRefresh: refreshTokenReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

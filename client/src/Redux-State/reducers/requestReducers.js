@@ -24,6 +24,9 @@ import {
   LOGIN_USER_FAILURE,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_REQUEST,
+  SEND_REFRESH_TOKEN_SUCCESS,
+  SEND_REFRESH_TOKEN_REQUEST,
+  SEND_REFRESH_TOKEN_FAILURE,
 } from '../actions/fetchDataActionsTypes';
 const initialStateOfConversation = {
   loading: false,
@@ -166,6 +169,37 @@ export const currentMessageReducer = (state = initialMessageState, action) => {
         error: '',
       };
     case FETCH_MESSAGE_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+// refresh token reducer
+const initialRefreshTokenState = {
+  loading: false,
+  data: [],
+  error: '',
+};
+export const refreshTokenReducer = (
+  state = initialRefreshTokenState,
+  action
+) => {
+  switch (action.type) {
+    case SEND_REFRESH_TOKEN_REQUEST:
+      return {
+        loading: true,
+      };
+    case SEND_REFRESH_TOKEN_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: '',
+      };
+    case SEND_REFRESH_TOKEN_FAILURE:
       return {
         loading: false,
         data: [],

@@ -130,6 +130,25 @@ export function sendMessagesFailure(error) {
     payload: error,
   };
 }
+// send refresh token
+
+export function sendRefreshTokenRequest() {
+  return {
+    type: 'SEND_REFRESH_TOKEN_REQUEST',
+  };
+}
+export function sendRefreshTokenSuccess(message) {
+  return {
+    type: 'SEND_REFRESH_TOKEN_SUCCESS',
+    payload: message,
+  };
+}
+export function sendRefreshTokenFailure(error) {
+  return {
+    type: 'SEND_REFRESH_TOKEN_FAILURE',
+    payload: error,
+  };
+}
 
 export const fetchMessages = (conversationId) => {
   console.log(conversationId);
@@ -172,6 +191,24 @@ export const sendMessages = (conversationId, sender, text) => {
     };
     axios
       .post(`http://localhost:3300/api/v1/message`, message)
+      .then((response) => {
+        dispatch(sendMessagesSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(sendMessagesFailure(error));
+      });
+  };
+};
+
+// get refresh token
+
+export const getRefreshToken = (data) => {
+  console.log(data);
+  return function (dispatch) {
+    dispatch(sendMessagesRequest());
+
+    axios
+      .post(`http://localhost:3300/api/v1/refresh`, data.refreshToken)
       .then((response) => {
         dispatch(sendMessagesSuccess(response.data));
       })
