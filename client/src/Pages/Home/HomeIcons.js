@@ -1,11 +1,11 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   toggleMsgSearch,
   showProfile,
   showStatus,
   newChatToggle,
-} from "../../Redux-State/actionCreators/pageActions";
-import "./Home.css";
+} from '../../Redux-State/actionCreators/pageActions';
+import './Home.css';
 
 export const StatusIcon = connect(
   (state) => ({
@@ -110,16 +110,16 @@ export const ProfileIcon = connect(
   );
 });
 
-export function MsgOptionsIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" width="24" height="24" className="">
-      <path
-        fill="#51585C"
-        d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
-      ></path>
-    </svg>
-  );
-}
+// export function MsgOptionsIcon(props) {
+//   return (
+//     <svg viewBox="0 0 24 24" width="24" height="24" className="">
+//       <path
+//         fill="#51585C"
+//         d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
+//       ></path>
+//     </svg>
+//   );
+// }
 export function EmojiIcon(props) {
   return (
     <svg

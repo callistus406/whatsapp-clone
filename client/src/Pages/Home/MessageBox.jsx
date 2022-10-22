@@ -1,11 +1,11 @@
-import { messageDialog, groupContext } from "../../GlobalVariables/variables";
-import React, { useRef, useCallback, useEffect, useState } from "react";
-
-import { connect } from "react-redux";
+import { messageDialog, groupContext } from '../../GlobalVariables/variables';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { connect } from 'react-redux';
 import {
   toggleMsgSearch,
   showGroupInfo,
-} from "../../Redux-State/actionCreators/pageActions";
+} from '../../Redux-State/actionCreators/pageActions';
 import {
   StyledSpeedDial,
   StyledMessageSpace,
@@ -26,32 +26,31 @@ import {
   StyledChatHeadInfo,
   StyledMsgInputCont,
   StyledMsgBar,
-} from "./style";
+} from './style';
 import {
   SearchIcon,
-  MsgOptionsIcon,
   EmojiIcon,
   RecorderIcon,
   Attachment,
   StickerIcon,
   Tick,
-} from "./HomeIcons";
-import "./Home.css";
-
+} from './HomeIcons';
+import './Home.css';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 // speed dial
-import PersonIcon from "@mui/icons-material/Person";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import PersonIcon from '@mui/icons-material/Person';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const actions = [
-  { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
+  { icon: <InsertPhotoIcon />, name: 'photo', class: 'speedDial-contact' },
 
-  { icon: <StickerIcon />, name: "sicker", class: "speedDial-sticker" },
-  { icon: <CameraAltIcon />, name: "camera", class: "speedDial-camera" },
-  { icon: <InsertDriveFileIcon />, name: "file", class: "speedDial-document " },
-  { icon: <PersonIcon />, name: "contact", class: "speedDial-photo" },
+  { icon: <StickerIcon />, name: 'sicker', class: 'speedDial-sticker' },
+  { icon: <CameraAltIcon />, name: 'camera', class: 'speedDial-camera' },
+  { icon: <InsertDriveFileIcon />, name: 'file', class: 'speedDial-document ' },
+  { icon: <PersonIcon />, name: 'contact', class: 'speedDial-photo' },
 ];
 const textMsg = [];
 function MessageBox(props) {
@@ -60,32 +59,32 @@ function MessageBox(props) {
   const msgCont = useRef();
   const inputRef = useRef();
   const [open, setOpen] = useState(false);
-  let msgStr = "";
+  let msgStr = '';
   const date = new Date();
   function getMessage(element) {
     setMessage([
       ...message,
       {
-        from: "sender",
+        from: 'sender',
         msg: element.value,
         time:
           date.getHours() +
-          ":" +
+          ':' +
           date.getMinutes() +
-          "" +
-          (date.getHours() >= 12 ? "pm" : "am"),
+          '' +
+          (date.getHours() >= 12 ? 'pm' : 'am'),
       },
     ]);
   }
   function clearInput(element) {
-    return (element.value = "");
+    return (element.value = '');
   }
   console.log(message);
   useEffect(() => {
-    let documentInput = document.getElementById("input");
+    let documentInput = document.getElementById('input');
     const listener = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        console.log("Enter key was pressed. Run your function.");
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        console.log('Enter key was pressed. Run your function.');
         event.preventDefault();
         // callMyFunction();
         getMessage(documentInput);
@@ -94,9 +93,9 @@ function MessageBox(props) {
         clearInput(documentInput);
       }
     };
-    document.addEventListener("keydown", listener);
+    document.addEventListener('keydown', listener);
     return () => {
-      document.removeEventListener("keydown", listener);
+      document.removeEventListener('keydown', listener);
     };
   });
   // console.log(props.displayMsgSearchLayout);
@@ -137,11 +136,11 @@ function MessageBox(props) {
           <div className="title">
             <p>Nigeria News</p>
             <div>
-              {" "}
-              <span> friend 1</span> <span> friend 2</span>{" "}
+              {' '}
+              <span> friend 1</span> <span> friend 2</span>{' '}
               <span> friend 3</span>
               <span> friend 4</span>
-              <span> friend 5</span> <span> friend 1</span>{" "}
+              <span> friend 5</span> <span> friend 1</span>{' '}
             </div>
           </div>
         </StyledChatHeadInfo>
@@ -150,13 +149,13 @@ function MessageBox(props) {
             <SearchIcon margin={msgCont} />
           </div>
           <div className="optionIcon" onClick={handleContextMenu}>
-            <MsgOptionsIcon />
+            <MoreVertIcon />
             <StyledContextMenu4MsgSpace
               PaperProps={{
                 style: {
                   // maxHeight: "5rem",
-                  height: "auto",
-                  minWidth: "13rem",
+                  height: 'auto',
+                  minWidth: '13rem',
                 },
               }}
               open={contextMenu !== null}
@@ -185,24 +184,24 @@ function MessageBox(props) {
         <div className="emojiIcons">
           <div className="emojiCont">
             <div className="emoji">
-              <EmojiIcon />
+              <InsertEmoticonIcon />{' '}
             </div>
           </div>
           <div className="attachmentCont">
             <StyledBox
               sx={{
                 // height: 350,
-                transform: "translateZ(0px)",
+                transform: 'translateZ(0px)',
                 flexGrow: 1,
               }}
             >
               <StyledSpeedDial
                 ariaLabel="SpeedDial openIcon example"
                 sx={{
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: -25,
                   left: -9,
-                  boxShadow: "none",
+                  boxShadow: 'none',
                 }}
                 icon={<Attachment />}
                 onClick={clickHandler}
@@ -253,14 +252,14 @@ const Message = React.memo(function Message(props) {
   const [height, setHeight] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const scrollToBottom = () => {
-    messageScroll.current.scrollIntoView({ behavior: "smooth" });
+    messageScroll.current.scrollIntoView({ behavior: 'smooth' });
   };
   let detect = 0;
 
   const listenToScroll = () => {
     const winScroll =
-      document.getElementById("base").scrollTop |
-      document.getElementById("base").scrollTop;
+      document.getElementById('base').scrollTop |
+      document.getElementById('base').scrollTop;
 
     if (winScroll > detect) {
       detect = winScroll - 2;
@@ -270,16 +269,16 @@ const Message = React.memo(function Message(props) {
     }
   };
   useEffect(() => {
-    console.log("wewewe");
-    document.getElementById("base").addEventListener("scroll", listenToScroll);
+    console.log('wewewe');
+    document.getElementById('base').addEventListener('scroll', listenToScroll);
     return () =>
       document
-        .getElementById("base")
-        .removeEventListener("scroll", listenToScroll);
+        .getElementById('base')
+        .removeEventListener('scroll', listenToScroll);
   }, []);
 
   useEffect(() => {
-    console.log("rendered");
+    console.log('rendered');
   }, []);
   // for scroll to bottom
 
@@ -311,15 +310,15 @@ const Message = React.memo(function Message(props) {
   return (
     <StyledMessageSpace
       onContextMenu={handleContextMenu}
-      style={{ cursor: "context-menu" }}
+      style={{ cursor: 'context-menu' }}
       id="styledMessageSpace"
     >
       <StyledContextMenu4MsgSpace
         PaperProps={{
           style: {
             // maxHeight: "5rem",
-            height: "auto",
-            minWidth: "13rem",
+            height: 'auto',
+            minWidth: '13rem',
           },
         }}
         open={contextMenu !== null}
@@ -346,10 +345,10 @@ const Message = React.memo(function Message(props) {
 
         <ReceivedMsgs />
         {props.message.map(function (msg) {
-          if (msg.from === "sender") {
+          if (msg.from === 'sender') {
             return <SentMsgs message={msg.msg} />;
           }
-          return "";
+          return '';
         })}
         {isVisible && (
           <StyledFab onClick={scrollToBottom}>
@@ -413,7 +412,7 @@ function ReceivedMsgs() {
         >
           <StyledMsgNumber border={borderBottom}>
             +2349034543567
-          </StyledMsgNumber>{" "}
+          </StyledMsgNumber>{' '}
           <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName>
         </div>
 
@@ -424,8 +423,8 @@ function ReceivedMsgs() {
           PaperProps={{
             style: {
               // maxHeight: ITEM_HEIGHT * 4.5,
-              minHeight: "16.9rem",
-              width: "auto",
+              minHeight: '16.9rem',
+              width: 'auto',
             },
           }}
           open={contextMenu !== null}
@@ -457,7 +456,7 @@ function ReceivedMsgs() {
             <span>{hours}:</span>
             <span>{mins}</span>
             <span className="timeZo">
-              {date.getHours() >= 12 ? "pm" : "am"}
+              {date.getHours() >= 12 ? 'pm' : 'am'}
             </span>
           </div>
         </div>
@@ -473,7 +472,7 @@ function SentMsgs(props) {
         <p>
           {props.message
             ? props.message
-            : "This one adds a right triangle on the left, flush at the top by using .tri-right and .left-top to specify the location"}
+            : 'This one adds a right triangle on the left, flush at the top by using .tri-right and .left-top to specify the location'}
         </p>
         <div className="msgTime">
           <div>
