@@ -6,6 +6,7 @@ import {
   StyledChatLayoutCont,
   StyledUserChatText,
   StyledCircle,
+  StyledCaret,
 } from './styles.js';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -42,11 +43,12 @@ function Index() {
       </div>
       {dummyData.map((data, index) => {
         return (
-          <StyledChatLayoutCont key={index}>
-            <StyledUserChatCont
-              onMouseEnter={() => toggleCaret(true)}
-              onMouseLeave={() => toggleCaret(false)}
-            >
+          <StyledChatLayoutCont
+            key={index}
+            onMouseEnter={() => toggleCaret(false)}
+            onMouseLeave={() => toggleCaret(true)}
+          >
+            <StyledUserChatCont>
               <div className="chatHead">
                 <StyledCircle>
                   <PeopleAltIcon style={{ color: '#fff' }} />
@@ -62,9 +64,9 @@ function Index() {
                 </div>
                 {/* <Messages /> */}
               </StyledUserChatText>
-              <div ref={caretRef} className={caret ? 'hide' : 'caret'}>
+              <StyledCaret hide={caret}>
                 <KeyboardArrowDownIcon />
-              </div>
+              </StyledCaret>
             </StyledUserChatCont>
           </StyledChatLayoutCont>
         );

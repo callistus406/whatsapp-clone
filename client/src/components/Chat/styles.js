@@ -25,7 +25,7 @@ export const StyledChatLayoutCont = styled.div`
   /* border-bottom: 1px solid #f2f2f2; */
   /* border-bottom-height: 70%; */
   cursor: pointer;
-
+  margin-bottom: 1rem;
   .borderBottom {
     /* height: 3px; */
     border-bottom: 1px solid #e3e3e3;
@@ -50,13 +50,11 @@ export const StyledUserChatCont = styled.div`
   .caret {
     margin-right: 2rem;
     color: #667781;
-    display: block;
+    ${'' /* display: ${(props) => (props.hide ? 'none' : 'block')}; */}
   }
-  .hide {
-    display: none;
-    margin-right: 2rem;
-    color: #667781;
-  }
+`;
+export const StyledCaret = styled.div`
+  display: ${(props) => (props.hide ? 'none' : 'block')};
 `;
 
 export const StyledCircle = styled.div`
