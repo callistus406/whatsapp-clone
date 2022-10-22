@@ -20,9 +20,9 @@ function Login({ userLogin, userInfo }) {
   //     console.log(message);
   //   });
   // }, []);
-  useEffect(() => {
-    userLogin('general admin', '2345433264321');
-  }, []);
+  // useEffect(() => {
+  //   userLogin('splunk admin', '2345433264321');
+  // }, []);
 
   const inputUsername = useRef(null);
   const inputPhone = useRef(null);
