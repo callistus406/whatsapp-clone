@@ -1,15 +1,15 @@
-import styled from "styled-components";
-import SpeedDial from "@mui/material/SpeedDial";
-import SearchIcon from "@mui/icons-material/Search";
+import styled from 'styled-components';
+import SpeedDial from '@mui/material/SpeedDial';
+import SearchIcon from '@mui/icons-material/Search';
 
-import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
-import Box from "@mui/material/Box";
-import MenuList from "@mui/material/MenuList";
-import Image from "../../Assets/img/bgDefault2.png";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Menu from "@mui/material/Menu";
-import { styled as muiStyled } from "@mui/material/styles";
-import MenuItem from "@mui/material/MenuItem";
+import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
+import Box from '@mui/material/Box';
+import MenuList from '@mui/material/MenuList';
+import Image from '../../Assets/img/bgDefault2.png';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Menu from '@mui/material/Menu';
+import { styled as muiStyled } from '@mui/material/styles';
+import MenuItem from '@mui/material/MenuItem';
 
 export const StyledSpeedDial = styled(SpeedDial)`
   && {
@@ -26,7 +26,7 @@ export const StyledSpan = styled.span`
 
   color: #404b4f;
   ${
-    "" /* display: flex;
+    '' /* display: flex;
   align-items: center;
   flex-direction: column; */
   }
@@ -34,10 +34,10 @@ export const StyledSpan = styled.span`
 
 export const StyledIcon = {
   smallIcon: {
-    width: "13px",
-    height: "13px",
+    width: '13px',
+    height: '13px',
     // marginLeft: "1px",
-    marginTop: "5px",
+    marginTop: '5px',
   },
 };
 
@@ -68,7 +68,7 @@ export const StyledNotificationIcon = styled(NotificationsOffIcon)`
   }
 `;
 export const StyledActionIcons = styled.div`
-  background-color: ${(props) => (props.toggle ? "#D5D5D5" : "#EDEDED")};
+  background-color: ${(props) => (props.toggle ? '#D5D5D5' : '#EDEDED')};
   cursor: pointer;
   height: 40px;
   width: 40px;
@@ -83,7 +83,7 @@ export const StyledMenuItem = styled(MenuItem)`
   && {
     width: 100%;
     font-size: 0.9rem;
-    ${"" /* margin-bottom: 0.5rem; */}
+    ${'' /* margin-bottom: 0.5rem; */}
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
   }
@@ -98,20 +98,20 @@ export const StyledMenuList = styled(MenuList)`
 `;
 
 export const StyledContextMenu = muiStyled(Menu)(({ theme }) => ({
-  fontSize: "0.8rem",
+  fontSize: '0.8rem',
 }));
 export const StyledContextMenu4MsgSpace = muiStyled(Menu)(({ theme }) => ({
-  fontSize: "1rem",
+  fontSize: '1rem',
 }));
 export const StyledContextMenuItem4MsgSpace = muiStyled(MenuItem)(
   ({ theme }) => ({
-    fontSize: "0.9rem",
-    color: "#48565F",
-    height: "2.5rem",
+    fontSize: '0.9rem',
+    color: '#48565F',
+    height: '2.5rem',
   })
 );
 export const StyledContextMenuItem = muiStyled(MenuItem)(({ theme }) => ({
-  fontSize: "0.9rem",
+  fontSize: '0.9rem',
 }));
 
 export const StyledBox = styled(Box)`
@@ -124,8 +124,8 @@ export const StyledMessageSpace = styled.div`
   height: calc(100vh - (3.6rem + 3.875rem));
    position: relative; 
   background-image: url(${Image});
-${"" /* z-index:-1; */}
-  ${"" /* .......................... */}
+${'' /* z-index:-1; */}
+  ${'' /* .......................... */}
 
   }
 `;
@@ -133,7 +133,7 @@ ${"" /* z-index:-1; */}
 export const StyledMessageCont = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
-  ${"" /* position: absolute; */}
+  ${'' /* position: absolute; */}
   border: 1px solid blue;
   display: flex;
   flex-direction: column;
@@ -143,8 +143,8 @@ export const StyledMessageCont = styled.div`
   overflow-x: hidden;
 
   &::-webkit-scrollbar-track {
-    ${"" /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
-    ${"" /* border-radius: 10px; */}
+    ${'' /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
+    ${'' /* border-radius: 10px; */}
     background-color: #eae6df transparent transparent transparentt;
   }
 
@@ -157,7 +157,7 @@ export const StyledMessageCont = styled.div`
     height: 10px;
 
     border-radius: 10px;
-    ${"" /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
+    ${'' /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
     background-color: #BDBCB8;
   }
 `;
@@ -168,21 +168,27 @@ export const StyledMsgInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-right: 0.5rem;
+  border: 1px solid blue;
+
+  position: relative;
   div {
     width: 40%;
-    ${"" /* border: 1px solid blue; */}
   }
   .arrowCont {
     border: 1px solid blue;
     position: relative;
     .keyBoardArrow {
-      ${"" /* position: absolute; */}
+      ${'' /* position: absolute; */}
     }
   }
 `;
 
 export const StyledKeyBoardArrow = styled.span`
-  display: ${(props) => (props.hide ? "flex" : "none")};
+  margin-top: 1rem;
+  margin-left: 2rem;
+  border: 1px solid blue;
+  ${'' /* position: absolute; */}
+  display: ${(props) => (props.hide ? 'flex' : 'none')};
 `;
 export const StyledMsgInfoIcon = styled(KeyboardArrowDownIcon)`
   && {
@@ -196,13 +202,13 @@ export const StyledMsgName = styled.span`
   font-size: 0.8rem;
   color: #acafb1;
   margin-left: 0.5rem;
-  border-bottom: ${(props) => (props.border ? " 1px solid #363a3c" : "none")};
+  border-bottom: ${(props) => (props.border ? ' 1px solid #363a3c' : 'none')};
 `;
 export const StyledMsgNumber = styled.span`
   font-size: 0.8rem;
   color: #acafb1;
   margin-left: 0.5rem;
-  border-bottom: ${(props) => (props.border ? " 1px solid #363a3c" : "none")};
+  border-bottom: ${(props) => (props.border ? ' 1px solid #363a3c' : 'none')};
 `;
 export const StyledOptions = styled.div`
   width: 30px;
@@ -270,8 +276,8 @@ export const StyledSearchBarContainer = styled.div`
 export const StyledOpenChat = styled.div`
   width: 100%;
   height: 100vh;
-  margin-right: ${(props) => (props.toggle ? "23rem" : "0rem")};
-  ${"" /* border: 1px solid blue; */}
+  margin-right: ${(props) => (props.toggle ? '23rem' : '0rem')};
+  ${'' /* border: 1px solid blue; */}
   transition: 0.2s;
 `;
 export const StyledOpenChatHead = styled.div`
@@ -315,7 +321,7 @@ export const StyledOpenChatHead = styled.div`
       /* border: 1px solid blue; */
       width: 100%;
       justify-content: center;
-      ${"" /* align-items: ; */}
+      ${'' /* align-items: ; */}
       height: 3rem;
       margin-left: 1rem;
       div {
@@ -351,11 +357,11 @@ export const StyledOpenChatHead = styled.div`
   }
 `;
 export const StyledContactsCol = styled.div`
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   margin: 4px, 4px;
   /* padding: 4px; */
   /* background-color: green; */
-  min-width: ${(props) => (props.toggle ? props.width : "28rem")};
+  min-width: ${(props) => (props.toggle ? props.width : '28rem')};
   height: calc(100vh - (3.7rem + 5.8rem + 3rem));
   overflow-x: hidden;
   overflow-y: auto;
@@ -370,7 +376,7 @@ export const StyledFab = styled.div`
   height: 40px;
   z-index: 1000;
   border-radius: 50%;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   position: absolute;
   right: 1rem;
   bottom: 1rem;

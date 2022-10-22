@@ -52,6 +52,8 @@ function Messages(props) {
   const { displayChatId } = props;
   const [messages, setMessages] = useState([]);
   const [arrivedMessage, setArrivedMessage] = useState(null);
+  const [userProfile, setUserProfile] = useState();
+
   const msgCont = useRef();
   const [open, setOpen] = useState(false);
 
@@ -64,6 +66,8 @@ function Messages(props) {
         createdAt: Date.now(),
       });
     });
+
+    // console.log(props.userProfile.data.username);
   }, []);
   console.log(arrivedMessage);
 
@@ -310,6 +314,8 @@ function mapStateToProps(state) {
     displayChatId: state.displayConversationId.displayChatId,
     getUser: state.user,
     displayMessage: state.displayMessage.getMessage,
+    userProfile: state.userProfile,
+
     // displayConversation: state.conversation.displayConversation,
   };
 }

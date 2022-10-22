@@ -21,8 +21,14 @@ import { toggleContactMsg } from '../../../Redux-State/actionCreators/pageAction
 import { fetchMessages } from '../../../Redux-State/actionCreators/fetchRequestActions';
 import { format } from 'timeago.js';
 import '../Home.css';
-function Message({ message, getUser, displayMessage, newMessage }) {
-  console.log(getUser.data._id);
+function Message({
+  message,
+  getUser,
+  displayMessage,
+  newMessage,
+  userProfile,
+}) {
+  // console.log(getUser.data._id);
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
   const prevHeight = useRef(0);
@@ -50,7 +56,7 @@ function Message({ message, getUser, displayMessage, newMessage }) {
   // review this code
   useEffect(() => {
     document.getElementById('base').addEventListener('scroll', listenToScroll);
-    console.log(getUser.data);
+    // console.log(getUser.data);
     return () =>
       document
         .getElementById('base')
@@ -130,7 +136,11 @@ function Message({ message, getUser, displayMessage, newMessage }) {
               classValue={
                 item.sender === getUser.data.payload.user._id ? 'left' : ''
               }
-              name={item.sender}
+              username={
+                item.sender !== getUser.data.payload.user._id
+                  ? userProfile.data.username
+                  : 'you'
+              }
               key={index}
               msgText={item.text}
               msgTime={item.createdAt}
@@ -149,8 +159,8 @@ function Message({ message, getUser, displayMessage, newMessage }) {
   );
 }
 
-function ReceivedMsgs({ classValue, name, msgText, msgTime }) {
-  console.log(msgText, msgTime);
+function ReceivedMsgs({ classValue, username, msgText, msgTime }) {
+  // console.log(username);
   const [borderBottom, setBorderBottom] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   function addBorderBottom(bool) {
@@ -197,7 +207,9 @@ function ReceivedMsgs({ classValue, name, msgText, msgTime }) {
           onMouseEnter={() => addBorderBottom(true)}
           onMouseLeave={() => addBorderBottom(false)}
         >
-          {/* <StyledMsgNumber border={borderBottom}>
+          {/* <con fontSize="medium" />
+        </StyledKeyBoardArrow> fontSize="medium" />
+        </StyledKeyBoardArrow>umber border={borderBottom}>
             +2349034543567
           </StyledMsgNumber>{" "} */}
           {/* <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName> */}
@@ -234,7 +246,7 @@ function ReceivedMsgs({ classValue, name, msgText, msgTime }) {
         </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
-        <div>{name}</div>
+        <div>{username}</div>
         <p>{msgText}</p>
         <div className="msgTime">
           <div>
@@ -281,6 +293,8 @@ export function Tick(props) {
 function mapStateToProps(state) {
   return {
     displayContactInfo: state.contactInfo.displayContactInfo,
+    userProfile: state.userProfile,
+
     messages: state.messages,
     getUser: state.user,
     displayMessage: state.displayMessage.getMessage,
