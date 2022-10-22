@@ -4,10 +4,10 @@ import React, {
   useEffect,
   useState,
   useReducer,
-} from "react";
-import { groupDialog } from "../../GlobalVariables/variables";
-import { displayGrpMsgAction } from "../../Redux-State/actionCreators/pageActions";
-import { connect, useDispatch, useSelector } from "react-redux";
+} from 'react';
+import { groupDialog } from '../../GlobalVariables/variables';
+import { displayGrpMsgAction } from '../../Redux-State/actionCreators/pageActions';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import {
   StyledUserChatCont,
   StyledUserChatLayout,
@@ -17,14 +17,14 @@ import {
   StyledContextMenuItem,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
-} from "./styles.js";
+} from './styles.js';
 import {
   // login,
   fetchUserProfile,
   fetchMessages,
-} from "../../Redux-State/actionCreators/fetchRequestActions";
-import { getConversationId } from "../../Redux-State/actionCreators/pageActions";
-import axios from "axios";
+} from '../../Redux-State/actionCreators/fetchRequestActions';
+import { getConversationId } from '../../Redux-State/actionCreators/pageActions';
+import axios from 'axios';
 // import Messages from "../Messages/Messages";
 function Conversation(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
@@ -37,7 +37,7 @@ function Conversation(props) {
 
   useEffect(() => {
     console.log(
-      "User chat rendered____________________________________________"
+      'User chat rendered____________________________________________'
     );
 
     const getProfile = async () => {
@@ -48,6 +48,7 @@ function Conversation(props) {
         const res = await axios.get(
           `http://localhost:3300/api/v1/user/${friendId}`
         );
+        props.fetchUserProfile(friendId);
         setUserProfile(res.data);
       } catch (error) {
         console.log(error);
@@ -102,8 +103,8 @@ function Conversation(props) {
         PaperProps={{
           style: {
             // maxHeight: ITEM_HEIGHT * 4.5,
-            height: "13rem",
-            width: "12rem",
+            height: '13rem',
+            width: '12rem',
           },
         }}
         open={contextMenu !== null}

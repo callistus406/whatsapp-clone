@@ -1,27 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import './Home.css';
-import { connect, useSelector, useDispatch } from 'react-redux';
-// import Menu from "@mui/material/Menu";
+import { connect, useSelector } from 'react-redux';
 
 import UserProfile from '../UserProfile/UserProfile';
-// import { CenterDivContent } from "../Styles/CustomStyles";
-// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 import image from '../../Assets/img/MyImage.png';
 // menu
 import NewChat from '../NewChat/NewChat';
-// import Tooltip from "@mui/material/Tooltip";
-// speed dial
-// import PersonIcon from "@mui/icons-material/Person";
-// import CameraAltIcon from "@mui/icons-material/CameraAlt";
-// import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-// import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+
 import NewGrp from '../ New Grp/NewGrp';
 import ArchivedChats from '../Archived Chats/ArchivedChats';
 import StarredMsgs from '../StarredMsgs/StarredMsgs';
 import UserSettings from '../Settings/UserSettings';
 import Status from '../Status/Status';
 import SearchContact from '../SearchContact/SearchContact';
-// import axios from "axios";
+import axios from 'axios';
 import {
   optionsToggle,
   showGroupInfo,
@@ -35,6 +28,7 @@ import {
   // login,
   fetchMessages,
   fetchUserProfile,
+  getRefreshToken,
 } from '../../Redux-State/actionCreators/fetchRequestActions.js';
 // import thunk from "redux-thunk";
 import { StyledContactsCol, StyledChatsCol } from './style';
@@ -47,29 +41,54 @@ import ContactInfo from '../Contacts/ContactInfo/ContactInfo';
 import SearchContactMsg from '../Contacts/SearchContactMsg/SearchContactMsg';
 import Conversation from '../Conversation/Conversation';
 import Messages from '../Messages/Messages';
-// const actions = [
-//   { icon: <InsertPhotoIcon />, name: "photo", class: "speedDial-contact" },
-
-//   { icon: <StickerIcon />, name: "sicker", class: "speedDial-sticker" },
-//   { icon: <CameraAltIcon />, name: "camera", class: "speedDial-camera" },
-//   { icon: <InsertDriveFileIcon />, name: "file", class: "speedDial-document " },
-//   { icon: <PersonIcon />, name: "contact", class: "speedDial-photo" },
-// ];
+import jwtDecode from 'jwt-decode';
 
 // Menu;
 
 function Home(props) {
-  // const countRef = useRef(0);
+  const countRef = useRef(0);
   // const msgCont = useRef();
   const [open, setOpen] = useState(false);
   // const [userConversations, setUserConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
+
   // const [socket, setSocket] = useState(null);
   const { user } = useSelector((state) => state);
   const { displayConversation, loggedUser, messages } = props;
 
+  // const refreshToken = async ()=>{
+  //   try {
+
+  //     const response = await axios.post("/refresh",{token:props.userInfo.payload.refreshToken});
+
+  //   } catch (error) {
+
+  //   }
+  // }
+  const jwtAxiosInterceptor = axios.create();
+
+  // const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
+  console.log(jwtAxiosInterceptor);
+
+  jwtAxiosInterceptor.interceptors.request.use(
+    async (config) => {
+      let currentDate = new Date();
+      const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        props.getRefreshToken(props.userInfo.payload);
+        config.headers['authorization'] =
+          'Bearer ' + props.userInfo.payload.accessToken;
+      }
+      console.log(props.jwtRefreshToken);
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
   useEffect(() => {
-    console.log(loggedUser);
+    console.log(props.userInfo.payload.refreshToken);
 
     console.log('Home rendered____________________________________________');
 
@@ -82,13 +101,6 @@ function Home(props) {
   function clickHandler() {
     setOpen(!open);
   }
-
-  // console.log(socket);
-  // useEffect(() => {
-  //   socket?.on('welcome', (message) => {
-  //     console.log(message);
-  //   });
-  // }, [socket]);
 
   return (
     <div className="homeParentCont">
@@ -116,7 +128,6 @@ function Home(props) {
           >
             {!displayConversation.loading
               ? displayConversation.data.map((conversation, index) => {
-                  console.log('qwerty');
                   return (
                     <div
                       onClick={() => {
@@ -180,7 +191,9 @@ function mapStateToProps(state) {
     getUser: state.user,
     messages: state.messages,
     userProfile: state.userProfile,
+    userInfo: state.login.data,
     displayChatId: state.displayConversationId.displayChatId,
+    jwtRefreshToken: state.jwtRefresh.data,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -197,6 +210,7 @@ function mapDispatchToProps(dispatch) {
     fetchMessages: (data) => dispatch(fetchMessages(data)),
 
     getConversationId: (arg) => dispatch(getConversationId(arg)),
+    fetchRefreshToken: (data) => dispatch(getRefreshToken(data)),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Home));
