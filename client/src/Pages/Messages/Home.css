@@ -454,6 +454,7 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+  border: 1px solid yellow;
 }
 
 /* .talk-bubble .msgInfo:hover {
