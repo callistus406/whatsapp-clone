@@ -12,7 +12,7 @@ const loginController = async (req, res) => {
     });
     const accessToken = generateJwtAccessToken(user);
     const refreshToken = generateJwtRefreshToken(user);
-    console.log(user._id);
+    // console.log(user._id);
 
     const dbTokenStore = await RefreshTokenModel.findOneAndUpdate(
       {
@@ -22,7 +22,7 @@ const loginController = async (req, res) => {
       { new: true, runValidators: true }
     );
 
-    console.log(dbTokenStore);
+    // console.log(dbTokenStore);
 
     res.status(200).json({
       success: true,
@@ -34,12 +34,12 @@ const loginController = async (req, res) => {
 };
 
 const generateJwtAccessToken = (user) => {
-  console.log(user._id);
+  // console.log(user._id);
   return jwt.sign(
     {
       id: user._id,
-      user_type: user.username,
-      email: user.phone,
+      username: user.username,
+      phone: user.phone,
     },
     process.env.JWT_SECRETE,
     { expiresIn: process.env.JWT_EXPIRE }
@@ -51,8 +51,8 @@ const generateJwtRefreshToken = (user) => {
   return jwt.sign(
     {
       id: user._id,
-      user_type: user.username,
-      email: user.phone,
+      username: user.username,
+      phone: user.phone,
     },
     process.env.JWT_REFRESH_SECRETE
   );
@@ -72,7 +72,6 @@ const userRefreshToken = async (req, res) => {
   })
 
     .then((result) => {
-      // console.log(result);
       if (!result)
         return res
           .status(404)
@@ -82,13 +81,15 @@ const userRefreshToken = async (req, res) => {
           .status(403)
           .json({ success: false, payload: 'refresh token is not valid..!' });
       // decode jwt token
+      console.log(refreshToken);
+
       jwt.verify(
         refreshToken,
         process.env.JWT_REFRESH_SECRETE,
         (error, user) => {
           // logs error msg to the console if error occurs
           error && console.log(error.message);
-
+          console.log(user);
           // generate new tokens
           const newJwtAccessToken = generateJwtAccessToken(user);
           const newJwtRefreshAccessToken = generateJwtRefreshToken(user);
