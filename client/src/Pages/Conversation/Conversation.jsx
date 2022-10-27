@@ -45,9 +45,7 @@ function Conversation(props) {
         const friendId = props.conversation.members.find(
           (m) => m !== props.currentUser
         );
-        const res = await axios.get(
-          `http://localhost:3300/api/v1/user/${friendId}`
-        );
+        const res = await axios.get(`/user/${friendId}`);
         props.fetchUserProfile(friendId);
         setUserProfile(res.data);
       } catch (error) {
