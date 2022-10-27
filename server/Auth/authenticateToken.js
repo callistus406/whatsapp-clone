@@ -4,6 +4,7 @@ require('dotenv').config();
 const authenticateToken = async (req, res, next) => {
   // get token from header
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
 
   let token = null;
   // check if header starts with auth header
