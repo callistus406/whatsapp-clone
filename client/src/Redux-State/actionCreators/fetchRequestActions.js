@@ -1,5 +1,25 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import axiosJWT from '../../utils/axiosInstance';
+// const jwtAxiosInterceptor = axios.create();
 
+// jwtAxiosInterceptor.interceptors.request.use(
+//   async (config) => {
+//     console.log(config);
+
+//     let currentDate = new Date();
+//     // const decodedToken = jwtDecode(props.userInfo.payload.accessToken);
+//     //.exp * 1000 < currentDate.getTime()
+//     if (decodedToken) {
+//       getRefreshToken();
+//       config.headers['authorization'] = 'Bearer ' + data.accessToken;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 export function fetchConversationRequest() {
   return {
     type: 'FETCH_CONVERSATIONS_REQUEST',
@@ -20,11 +40,16 @@ export function fetchConversationFailure(error) {
 // const user = [];
 export const fetchConversations = (conversation_id) => {
   console.log(conversation_id);
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(fetchConversationRequest());
 
     axios
-      .get(`http://localhost:3300/api/v1/conversation/${conversation_id}`)
+      .get(`/conversation/${conversation_id}`, {
+        withCredentials: true,
+        headers: {
+          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
+        },
+      })
       .then((response) => {
         const conversations = response.data;
         dispatch(fetchConversationSuccess(conversations));
@@ -60,13 +85,21 @@ export const userLogin = (username, phone) => {
   return (dispatch) => {
     dispatch(userLoginRequest);
     // const { username, phone } = loginData;
-    axios
-      .post(`http://localhost:3300/api/v1/login`, {
+    console.log(username, phone);
+    axiosJWT
+      .post(`/login`, {
         username,
         phone,
       })
       .then((response) => {
-        dispatch(userLoginSuccess(response.data));
+        const data = response.data;
+        dispatch(userLoginSuccess(data));
+        const decoded = jwtDecode(data.payload.accessToken);
+        // if (decoded) {
+        // response.headers['authorization'] =
+        //   'Bearer ' + data.payload.accessToken;
+        // console.log(respo);
+        // }
       })
       .catch((error) => {
         dispatch(userLoginFailure(error.message));
@@ -152,10 +185,15 @@ export function sendRefreshTokenFailure(error) {
 
 export const fetchMessages = (conversationId) => {
   console.log(conversationId);
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(fetchMessagesRequest());
-    axios
-      .get(`http://localhost:3300/api/v1/message/${conversationId}`)
+    axiosJWT
+      .get(`/message/${conversationId}`, {
+        withCredentials: true,
+        headers: {
+          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
+        },
+      })
       .then((response) => {
         dispatch(fetchMessagesSuccess(response.data));
       })
@@ -166,11 +204,16 @@ export const fetchMessages = (conversationId) => {
 };
 
 export const fetchUserProfile = (userId) => {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(fetchUserProfileRequest);
 
-    axios
-      .get(`http://localhost:3300/api/v1/user/${userId}`)
+    axiosJWT
+      .get(`/user/${userId}`, {
+        withCredentials: true,
+        headers: {
+          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
+        },
+      })
       .then((response) => {
         dispatch(fetchUseProfileSuccess(response.data));
       })
@@ -182,15 +225,20 @@ export const fetchUserProfile = (userId) => {
 
 export const sendMessages = (conversationId, sender, text) => {
   console.log(conversationId);
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(sendMessagesRequest());
     const message = {
       conversationId,
       sender,
       text,
     };
-    axios
-      .post(`http://localhost:3300/api/v1/message`, message)
+    axiosJWT
+      .post(`/message`, message, {
+        withCredentials: true,
+        headers: {
+          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
+        },
+      })
       .then((response) => {
         dispatch(sendMessagesSuccess(response.data));
       })
@@ -203,12 +251,25 @@ export const sendMessages = (conversationId, sender, text) => {
 // get refresh token
 
 export const getRefreshToken = (data) => {
-  console.log(data);
-  return function (dispatch) {
+  // console.log(data);
+  return function (dispatch, getState) {
     dispatch(sendMessagesRequest());
+    // console.log(getState().login.data.payload.refreshToken));
 
-    axios
-      .post(`http://localhost:3300/api/v1/refresh`, data.refreshToken)
+    axiosJWT
+      .post(
+        `/refresh`,
+        {
+          token: getState().login.data.payload.refreshToken,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            authorization:
+              'Bearer ' + getState().login.data.payload.accessToken,
+          },
+        }
+      )
       .then((response) => {
         dispatch(sendMessagesSuccess(response.data));
       })
