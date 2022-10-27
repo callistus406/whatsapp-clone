@@ -20,17 +20,18 @@ function Login({ userLogin, userInfo }) {
   //     console.log(message);
   //   });
   // }, []);
-  // useEffect(() => {
-  //   userLogin('splunk admin', '2345433264321');
-  // }, []);
+  useEffect(() => {
+    userLogin('splunk admin', '2345433264321');
+    console.log(userInfo.data.payload);
+  }, []);
 
   const inputUsername = useRef(null);
   const inputPhone = useRef(null);
   const handleSubmit = (e) => {
     e.preventDefault();
     userLogin(inputUsername.current.value, inputPhone.current.value);
+    // console.log(userInfo.data.payload);
   };
-  // console.log(userInfo.data.payload.user);
 
   return userInfo.loading ? (
     <h1>LOADING</h1>
