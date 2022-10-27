@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, memo } from 'react';
 import './Home.css';
 import { connect, useSelector } from 'react-redux';
-
+import axiosJWT from '../../utils/axiosInstance';
 import UserProfile from '../UserProfile/UserProfile';
 
 import image from '../../Assets/img/MyImage.png';
@@ -51,44 +51,58 @@ function Home(props) {
   const [open, setOpen] = useState(false);
   // const [userConversations, setUserConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
-
+  const [appUser, setAppUser] = useState(null);
   // const [socket, setSocket] = useState(null);
   const { user } = useSelector((state) => state);
   const { displayConversation, loggedUser, messages } = props;
 
-  // const refreshToken = async ()=>{
-  //   try {
+  const refreshToken = async () => {
+    try {
+      const response = await axiosJWT.post('/refresh', {
+        token: props.userInfo.payload.refreshToken,
+      });
+      setAppUser({
+        response: response.data.payload,
+        ...appUser,
+        accessToken: response.data.payload.accessToken,
+        refreshToken: response.data.payload.refreshToken,
+      });
+      console.log(response.data.payload);
+      return response.data.payload;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
 
-  //     const response = await axios.post("/refresh",{token:props.userInfo.payload.refreshToken});
-
-  //   } catch (error) {
-
-  //   }
-  // }
-  const jwtAxiosInterceptor = axios.create();
-
-  // const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
-  console.log(jwtAxiosInterceptor);
-
-  jwtAxiosInterceptor.interceptors.request.use(
+  axiosJWT.interceptors.request.use(
     async (config) => {
-      let currentDate = new Date();
-      const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        props.getRefreshToken(props.userInfo.payload);
-        config.headers['authorization'] =
-          'Bearer ' + props.userInfo.payload.accessToken;
-      }
-      console.log(props.jwtRefreshToken);
+      console.log(config);
+
+      // let currentDate = new Date();
+      // const decodedToken = jwtDecode(props.userInfo.payload.accessToken);
+
+      // if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
+      //   const data = await refreshToken();
+      //   console.log(data);
+
+      //   config.headers['authorization'] = 'Bearer ' + data.accessToken;
+      // }
       return config;
     },
     (error) => {
       return Promise.reject(error);
     }
   );
-
+  // console.log(ans);
+  async function now() {
+    // const data = await refreshToken();
+  }
   useEffect(() => {
-    console.log(props.userInfo.payload.refreshToken);
+    // now();
+    // props.fetchRefreshToken(props.userInfo.payload);
+
+    // console.log(props.userInfo.payload.accessToken);
 
     console.log('Home rendered____________________________________________');
 
