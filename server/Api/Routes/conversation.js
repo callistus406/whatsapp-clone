@@ -1,10 +1,19 @@
-const router = require("express").Router();
-
+const router = require('express').Router();
+const authenticateToken = require('../../Auth/authenticateToken');
 const {
   conversationController,
   getConversationController,
-} = require("../Controllers");
+} = require('../Controllers');
 
-router.post("/conversation", conversationController);
-router.get("/conversation/:userId", getConversationController);
+router.post(
+  '/conversation',
+  authenticateToken,
+
+  conversationController
+);
+router.get(
+  '/conversation/:userId',
+  authenticateToken,
+  getConversationController
+);
 module.exports = router;
