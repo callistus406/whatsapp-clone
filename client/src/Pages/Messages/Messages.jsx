@@ -35,7 +35,7 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import Message from './Message/Message';
 import io from 'socket.io-client';
-
+import axiosJWT from '../../utils/axiosInstance';
 import axios from 'axios';
 const actions = [
   { icon: <InsertPhotoIcon />, name: 'photo', class: 'speedDial-contact' },
@@ -89,9 +89,12 @@ function Messages(props) {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:3300/api/v1/message/${displayChatId}`
-        );
+        const res = await axios.get(`/message/${displayChatId}`, {
+          withCredentials: true,
+          headers: {
+            authorization: 'Bearer ' + props.userInfo.payload.accessToken,
+          },
+        });
         console.log(res.data);
         setMessages(res.data);
       } catch (error) {
@@ -132,12 +135,9 @@ function Messages(props) {
           receiverId: receiverId,
           text: documentInput.value,
         });
-        // axios call
+        // axiosJWT call
         try {
-          const res = await axios.post(
-            `http://localhost:3300/api/v1/message`,
-            msg
-          );
+          const res = await axios.post(`/message`, msg);
           setMessages([...messages, res.data]);
         } catch (error) {
           console.log(error.message);
@@ -315,6 +315,7 @@ function mapStateToProps(state) {
     getUser: state.user,
     displayMessage: state.displayMessage.getMessage,
     userProfile: state.userProfile,
+    userInfo: state.login.data,
 
     // displayConversation: state.conversation.displayConversation,
   };
