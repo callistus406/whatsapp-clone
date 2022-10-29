@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useRef, useReducer } from "react";
-import { ArrowBack, CancelButton, Avatar, InfoIcon } from "./icons.js";
-import ClearIcon from "@mui/icons-material/Clear";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useEffect, useState, useRef, useReducer } from 'react';
+import { ArrowBack, CancelButton, Avatar, InfoIcon } from './icons.js';
+import ClearIcon from '@mui/icons-material/Clear';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
+import SearchIcon from '@mui/icons-material/Search';
 // switch
-import Switch from "@mui/material/Switch";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
-import LogoutIcon from "@mui/icons-material/Logout";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { styled as muiStyled } from "@mui/material/styles";
-import styled from "styled-components";
+import Switch from '@mui/material/Switch';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components';
 
 import {
   StyledContainer,
@@ -35,21 +35,23 @@ import {
   StyledMembersHeader,
   StyledGroupHeading,
   StyledGroupInstruction,
-} from "./style.js";
+} from './style.js';
 import {
   showGroupInfo,
   hideGroupInfo,
   showGrpParticipants,
   closeGrpParticipants,
   toggleStarredGrpMsgs,
-} from "../../Redux-State/actionCreators/pageActions";
-import { connect } from "react-redux";
-import SearchParticipants from "../SearchParticipants/SearchParticipants.jsx";
-import StarredMsgs from "../GroupStarredMsgs/StarredMsgs";
+} from '../../Redux-State/actionCreators/pageActions';
+import { connect } from 'react-redux';
+import SearchParticipants from '../SearchParticipants/SearchParticipants.jsx';
+import StarredMsgs from '../GroupStarredMsgs/StarredMsgs';
+import { AlertDialog } from '../../components/AlertDialog';
+
 function GroupInfo(props) {
   const membersRef = useRef();
   const scrollToBottom = () => {
-    membersRef.current.scrollIntoView({ behavior: "smooth" });
+    membersRef.current.scrollIntoView({ behavior: 'smooth' });
   };
   // useEffect(() => {
   //   scrollToBottom();
@@ -65,18 +67,18 @@ function GroupInfo(props) {
   });
 
   function showIcon(prop) {
-    if (prop === "title") {
+    if (prop === 'title') {
       setEditInfo({ ...editInfo, [prop]: true });
     }
-    if (prop === "info") {
+    if (prop === 'info') {
       setEditInfo({ ...editInfo, [prop]: true });
     }
   }
   function hideIcon(prop) {
-    if (prop === "title") {
+    if (prop === 'title') {
       setEditInfo({ ...editInfo, [prop]: false });
     }
-    if (prop === "info") {
+    if (prop === 'info') {
       setEditInfo({ ...editInfo, [prop]: false });
     }
   }
@@ -90,55 +92,6 @@ function GroupInfo(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  function AlertDialog() {
-    const StyledButton = muiStyled(Button)(({ theme }) => ({
-      backgroundColor: "#008069",
-      minWidth: "4rem",
-      color: "#fff",
-      "&:hover": {
-        background: "#017561",
-      },
-      marginRight: "1rem",
-      marginBottom: "1rem",
-    }));
-    const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
-      color: "#55626A",
-      fontSize: "0.9rem",
-    }));
-    const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
-      backgroundColor: "rgba(255,255,255,0.9)",
-      boxShadow: "none",
-    }));
-    const StyledSpace = styled.div`
-      ${"" /* height: 1rem; */}
-      width: 23rem;
-    `;
-    return (
-      <div>
-        <StyledDialog
-          open={open}
-          // onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <StyledDialogTitle id="alert-dialog-title">
-            Only admins can edit this group's info
-          </StyledDialogTitle>
-          <DialogContent>
-            <StyledSpace>
-              {/* Only admins can edit this group's info */}
-            </StyledSpace>
-          </DialogContent>
-          <DialogActions>
-            <StyledButton onClick={handleClose} autoFocus>
-              OK
-            </StyledButton>
-          </DialogActions>
-        </StyledDialog>
-      </div>
-    );
-  }
 
   return (
     // <GroupInfoContent>
@@ -163,8 +116,8 @@ function GroupInfo(props) {
             <Avatar />
           </div>
           <StyledGroupHeading
-            onMouseEnter={() => showIcon("title")}
-            onMouseLeave={() => hideIcon("title")}
+            onMouseEnter={() => showIcon('title')}
+            onMouseLeave={() => hideIcon('title')}
           >
             <span className="groupName">NIGERIA NEWS </span>
             {editInfo ? (
@@ -172,15 +125,15 @@ function GroupInfo(props) {
                 <InfoIcon />
               </span>
             ) : (
-              ""
+              ''
             )}
           </StyledGroupHeading>
           <p onClick={handleScroll}>Group 173 participants</p>
         </StyledGroupImg>
         <StyledGroupInfo>
           <StyledGroupInstruction
-            onMouseEnter={() => showIcon("info")}
-            onMouseLeave={() => hideIcon("info")}
+            onMouseEnter={() => showIcon('info')}
+            onMouseLeave={() => hideIcon('info')}
           >
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -192,7 +145,7 @@ function GroupInfo(props) {
                 <InfoIcon />
               </span>
             ) : (
-              ""
+              ''
             )}
           </StyledGroupInstruction>
           <span>Group created by +2348143674356, on 04/06/2018 at 6:10 pm</span>
@@ -201,7 +154,7 @@ function GroupInfo(props) {
           <div className="placeholder">
             <p>Media, Links and docs</p>
             <span>
-              {" "}
+              {' '}
               <ArrowForwardIosIcon fontSize="small" />
             </span>
           </div>
@@ -286,7 +239,7 @@ function Mute() {
     <Switch
       checked={checked}
       onChange={handleChange}
-      inputProps={{ "aria-label": "controlled" }}
+      inputProps={{ 'aria-label': 'controlled' }}
     />
   );
 }
@@ -300,7 +253,7 @@ function Members(props) {
       <StyledMembersChatText>
         <div className="chatName">
           <span className="spanHeading">+2348109364893</span>
-          <span className={props.role ? "role" : ""}>{props.role}</span>
+          <span className={props.role ? 'role' : ''}>{props.role}</span>
         </div>
         <div className="msgPreview">
           <p>Loading about...</p>
