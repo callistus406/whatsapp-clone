@@ -34,6 +34,7 @@ import {
   SHOW_MESSAGE,
   SHOW_CONVERSATION_ID,
   GET_MESSAGE,
+  GET_TOKEN,
 } from '../actions/actionTypes';
 
 // section for status bar action creators
@@ -305,6 +306,15 @@ export function getMessage(info) {
   return {
     type: GET_MESSAGE,
     payload: info,
+    info: 'this action  will display current message ',
+  };
+}
+// getToken message
+
+export function getToken(accessToken, refreshToken) {
+  return {
+    type: GET_TOKEN,
+    payload: [accessToken, refreshToken],
     info: 'this action  will display current message ',
   };
 }
