@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import axiosJWT from '../../utils/axiosInstance';
+import { getToken } from './pageActions';
 // const jwtAxiosInterceptor = axios.create();
 
 // jwtAxiosInterceptor.interceptors.request.use(
@@ -86,15 +87,17 @@ export const userLogin = (username, phone) => {
     dispatch(userLoginRequest);
     // const { username, phone } = loginData;
     console.log(username, phone);
-    axiosJWT
+    axios
       .post(`/login`, {
         username,
         phone,
       })
       .then((response) => {
         const data = response.data;
+        dispatch(getToken(data.payload.accessToken, data.payload.refreshToken));
         dispatch(userLoginSuccess(data));
-        const decoded = jwtDecode(data.payload.accessToken);
+
+        // const decoded = jwtDecode(data.payload.accessToken);
         // if (decoded) {
         // response.headers['authorization'] =
         //   'Bearer ' + data.payload.accessToken;
@@ -187,7 +190,7 @@ export const fetchMessages = (conversationId) => {
   console.log(conversationId);
   return function (dispatch, getState) {
     dispatch(fetchMessagesRequest());
-    axiosJWT
+    axios
       .get(`/message/${conversationId}`, {
         withCredentials: true,
         headers: {
@@ -207,7 +210,7 @@ export const fetchUserProfile = (userId) => {
   return function (dispatch, getState) {
     dispatch(fetchUserProfileRequest);
 
-    axiosJWT
+    axios
       .get(`/user/${userId}`, {
         withCredentials: true,
         headers: {
@@ -232,7 +235,7 @@ export const sendMessages = (conversationId, sender, text) => {
       sender,
       text,
     };
-    axiosJWT
+    axios
       .post(`/message`, message, {
         withCredentials: true,
         headers: {
@@ -256,7 +259,7 @@ export const getRefreshToken = (data) => {
     dispatch(sendMessagesRequest());
     // console.log(getState().login.data.payload.refreshToken));
 
-    axiosJWT
+    axios
       .post(
         `/refresh`,
         {
@@ -278,3 +281,33 @@ export const getRefreshToken = (data) => {
       });
   };
 };
+// get  token
+
+// export const getToken = (data) => {
+//   // console.log(data);
+//   return function (dispatch, getState) {
+//     dispatch(sendMessagesRequest());
+//     // console.log(getState().login.data.payload.refreshToken));
+
+//     axios
+//       .post(
+//         `/refresh`,
+//         {
+//           token: getState().login.data.payload.refreshToken,
+//         },
+//         {
+//           withCredentials: true,
+//           headers: {
+//             authorization:
+//               'Bearer ' + getState().login.data.payload.accessToken,
+//           },
+//         }
+//       )
+//       .then((response) => {
+//         dispatch(sendMessagesSuccess(response.data));
+//       })
+//       .catch((error) => {
+//         dispatch(sendMessagesFailure(error));
+//       });
+//   };
+// };
