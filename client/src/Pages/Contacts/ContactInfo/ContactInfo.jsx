@@ -53,6 +53,8 @@ import {
 import { connect } from 'react-redux';
 import SearchParticipants from '../../SearchParticipants/SearchParticipants.jsx';
 import StarredMsgs from '../../GroupStarredMsgs/StarredMsgs';
+import { AlertDialog } from '../../../components/AlertDialog';
+
 function ContactInfo(props) {
   const membersRef = useRef();
   const username = '';
@@ -87,65 +89,6 @@ function ContactInfo(props) {
     if (prop === 'info') {
       setEditInfo({ ...editInfo, [prop]: false });
     }
-  }
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  function AlertDialog() {
-    const StyledButton = muiStyled(Button)(({ theme }) => ({
-      backgroundColor: '#008069',
-      minWidth: '4rem',
-      color: '#fff',
-      '&:hover': {
-        background: '#017561',
-      },
-      marginRight: '1rem',
-      marginBottom: '1rem',
-    }));
-    const StyledDialogTitle = muiStyled(DialogTitle)(({ theme }) => ({
-      color: '#55626A',
-      fontSize: '0.9rem',
-    }));
-    const StyledDialog = muiStyled(Dialog)(({ theme }) => ({
-      backgroundColor: 'rgba(255,255,255,0.9)',
-      boxShadow: 'none',
-    }));
-    const StyledSpace = styled.div`
-      ${'' /* height: 1rem; */}
-      width: 23rem;
-    `;
-    return (
-      <div>
-        <StyledDialog
-          open={open}
-          // onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <StyledDialogTitle id="alert-dialog-title">
-            Only admins can edit this group's info
-          </StyledDialogTitle>
-          <DialogContent>
-            <StyledSpace>
-              {/* Only admins can edit this group's info */}
-            </StyledSpace>
-          </DialogContent>
-          <DialogActions>
-            <StyledButton onClick={handleClose} autoFocus>
-              OK
-            </StyledButton>
-          </DialogActions>
-        </StyledDialog>
-      </div>
-    );
   }
 
   return (
