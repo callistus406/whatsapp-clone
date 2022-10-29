@@ -53,7 +53,10 @@ function Home(props) {
   const [open, setOpen] = useState(false);
   // const [userConversations, setUserConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
-  const [token, setToken] = useState({ refresh: props.authToken[1] });
+  const [token, setToken] = useState({
+    refresh: props.authToken[1],
+    access: props.authToken[0],
+  });
   // const [socket, setSocket] = useState(null);
 
   const { displayConversation, loggedUser, messages } = props;
@@ -71,7 +74,11 @@ function Home(props) {
       // );
       console.log(response.data.payload.refreshToken);
 
-      setToken({ ...token, refresh: response.data.payload.refreshToken });
+      setToken({
+        ...token,
+        refresh: response.data.payload.refreshToken,
+        access: response.data.payload.accessToken,
+      });
       return response.data;
     } catch (err) {
       console.log(err);
@@ -80,14 +87,13 @@ function Home(props) {
 
   axiosJWT.interceptors.request.use(
     async (config) => {
-      console.log(config);
-
       let currentDate = new Date();
-      const decodedToken = jwtDecode(token.refresh);
+      const decodedToken = jwtDecode(token.access);
+      console.log(decodedToken);
 
       if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
         const data = await refreshToken();
-        console.log(token.refresh);
+        console.log(data.payload);
 
         config.headers['authorization'] = 'Bearer ' + data.payload.accessToken;
       }
