@@ -81,6 +81,7 @@ function Messages(props) {
   console.log(getUser.data.payload.user._id);
   useEffect(() => {
     console.log('socket rendered____________________________________________');
+    console.log(props.authToken);
     socket.current.emit('addUser', getUser.data.payload.user._id);
     socket.current.on('getUsers', (users) => {
       console.log(users);
@@ -316,6 +317,7 @@ function mapStateToProps(state) {
     displayMessage: state.displayMessage.getMessage,
     userProfile: state.userProfile,
     userInfo: state.login.data,
+    authToken: state.jwtToken,
 
     // displayConversation: state.conversation.displayConversation,
   };
