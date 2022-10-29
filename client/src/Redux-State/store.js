@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { useEffect } from 'react';
 import {
   displayProfileReducer,
   displayStatusReducer,
@@ -31,6 +32,7 @@ import {
   displayMessageReducer,
   displayConversationIdReducer,
   getMessageReducer,
+  getTokenReducer,
 } from './reducers/reducers';
 import {
   requestReducer,
@@ -86,6 +88,7 @@ const rootReducer = combineReducers({
 
   login: loginReducer,
   jwtRefresh: refreshTokenReducer,
+  jwtToken: getTokenReducer,
 });
 
 const composeEnhancers = composeWithDevTools({
