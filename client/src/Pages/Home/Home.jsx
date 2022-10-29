@@ -83,12 +83,9 @@ function Home(props) {
       console.log(config);
 
       let currentDate = new Date();
-      const decodedToken = jwtDecode();
+      const decodedToken = jwtDecode(token.refresh);
 
-      if (
-        decodedToken &&
-        decodedToken.exp * 1000 < currentDate.getTime(token.refresh)
-      ) {
+      if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
         const data = await refreshToken();
         console.log(token.refresh);
 
