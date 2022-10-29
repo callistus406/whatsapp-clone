@@ -26,6 +26,7 @@ import {
 import { getConversationId } from '../../Redux-State/actionCreators/pageActions';
 import axios from 'axios';
 // import Messages from "../Messages/Messages";
+import axiosJWT from '../../utils/axiosInstance';
 function Conversation(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
   const [getUserProfile, setUserProfile] = useState([]);

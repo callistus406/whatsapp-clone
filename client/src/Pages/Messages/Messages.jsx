@@ -90,7 +90,7 @@ function Messages(props) {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get(`/message/${displayChatId}`, {
+        const res = await axiosJWT.get(`/message/${displayChatId}`, {
           withCredentials: true,
           headers: {
             authorization: 'Bearer ' + props.userInfo.payload.accessToken,

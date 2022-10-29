@@ -190,7 +190,7 @@ export const fetchMessages = (conversationId) => {
   console.log(conversationId);
   return function (dispatch, getState) {
     dispatch(fetchMessagesRequest());
-    axios
+    axiosJWT
       .get(`/message/${conversationId}`, {
         withCredentials: true,
         headers: {
