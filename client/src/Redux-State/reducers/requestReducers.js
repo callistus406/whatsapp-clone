@@ -209,3 +209,32 @@ export const refreshTokenReducer = (
       return state;
   }
 };
+
+// get token
+const initialTokenState = {
+  loading: false,
+  data: [],
+  error: '',
+};
+// export const getTokenReducer = (state = initialTokenState, action) => {
+//   switch (action.type) {
+//     case GET_TOKEN_REQUEST:
+//       return {
+//         loading: true,
+//       };
+//     case GET_TOKEN_SUCCESS:
+//       return {
+//         loading: false,
+//         data: action.payload,
+//         error: '',
+//       };
+//     case GET_TOKEN_FAILURE:
+//       return {
+//         loading: false,
+//         data: [],
+//         error: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// };
