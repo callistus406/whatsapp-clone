@@ -32,7 +32,8 @@ import {
   SHOW_MESSAGE,
   SHOW_CONVERSATION_ID,
   GET_MESSAGE,
-} from "../actions/actionTypes";
+  GET_TOKEN,
+} from '../actions/actionTypes';
 const initialState = {
   displayProfileContainer: false,
   displayStatusContainer: false,
@@ -459,7 +460,7 @@ export function displayMessageReducer(state = directMsgsInitialStates, action) {
   }
 }
 const conversationIdState = {
-  displayChatId: "",
+  displayChatId: '',
 };
 export function displayConversationIdReducer(
   state = conversationIdState,
@@ -483,6 +484,21 @@ export function getMessageReducer(state = messageState, action) {
       return {
         ...state,
         getMessage: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+// get Token
+const tokenState = {
+  data: [],
+};
+export function getTokenReducer(state = tokenState, action) {
+  switch (action.type) {
+    case GET_TOKEN:
+      return {
+        ...state,
+        data: action.payload,
       };
     default:
       return state;
