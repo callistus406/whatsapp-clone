@@ -22,6 +22,7 @@ import {
   // toggleConversation,
   showMessage,
   getConversationId,
+  getToken,
 } from '../../Redux-State/actionCreators/pageActions';
 import {
   fetchConversations,
@@ -41,6 +42,7 @@ import ContactInfo from '../Contacts/ContactInfo/ContactInfo';
 import SearchContactMsg from '../Contacts/SearchContactMsg/SearchContactMsg';
 import Conversation from '../Conversation/Conversation';
 import Messages from '../Messages/Messages';
+
 import jwtDecode from 'jwt-decode';
 
 // Menu;
@@ -51,54 +53,99 @@ function Home(props) {
   const [open, setOpen] = useState(false);
   // const [userConversations, setUserConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
-  const [appUser, setAppUser] = useState(null);
+  const [token, setToken] = useState({
+    refresh: props.authToken[1],
+    access: null,
+  });
   // const [socket, setSocket] = useState(null);
   const { user } = useSelector((state) => state);
   const { displayConversation, loggedUser, messages } = props;
 
-  const refreshToken = async () => {
+  const refreshToken = async (data) => {
+    console.log(data ? data : props.authToken[1]);
     try {
-      const response = await axiosJWT.post('/refresh', {
-        token: props.userInfo.payload.refreshToken,
+      const response = await axios.post('/refresh', {
+        token: data ? data : props.authToken[1],
       });
-      setAppUser({
-        response: response.data.payload,
-        ...appUser,
-        accessToken: response.data.payload.accessToken,
-        refreshToken: response.data.payload.refreshToken,
-      });
-      console.log(response.data.payload);
+      console.log(response);
+      let currentDate = new Date();
+      const decodedToken = jwtDecode(props.userInfo.payload.accessToken);
+      console.log(decodedToken);
+
+      props.getToken(
+        response.data.payload.accessToken,
+        response.data.payload.refreshToken
+      );
+      // setToken({
+      //   refresh: response.data.payload.refreshToken,
+      //   access: response.data.payload.accessToken,
+      // });
+      setTimeout(() => {
+        console.log(token);
+        console.log(response.data.payload.refreshToken);
+
+        refreshToken(response.data.payload.refreshToken);
+        console.log(props.authToken[1]);
+        // axios.config.headers['authorization'] =
+        //   'Bearer ' + response.data.payload.accessToken;
+      }, 59000);
+      // if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
+      //   // const data = await refreshToken();
+
+      //   axios.config.headers['authorization'] =
+      //     'Bearer ' + response.data.payload.accessToken;
+      // }
+      console.log(response.data.payload.accessToken);
+
+      // setAppUser({
+      //   response: response.data.payload,
+      //   ...appUser,
+      //   accessToken: response.data.payload.accessToken,
+      //   refreshToken: response.data.payload.refreshToken,
+      // });
+
+      console.log();
       return response.data.payload;
     } catch (error) {
       console.log(error.message);
     }
   };
-  const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
 
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      console.log(config);
+  async function getToken(token) {}
+  // const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
 
-      // let currentDate = new Date();
-      // const decodedToken = jwtDecode(props.userInfo.payload.accessToken);
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     console.log(config);
 
-      // if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
-      //   const data = await refreshToken();
-      //   console.log(data);
+  //     let currentDate = new Date();
+  //     const decodedToken = jwtDecode(props.userInfo.payload.accessToken);
 
-      //   config.headers['authorization'] = 'Bearer ' + data.accessToken;
-      // }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  //     if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       const data = await refreshToken();
+  //       console.log(data);
+
+  //       config.headers['authorization'] = 'Bearer ' + data.accessToken;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
   // console.log(ans);
+
+  useEffect(() => {
+    refreshToken();
+  }, []);
   async function now() {
     // const data = await refreshToken();
   }
   useEffect(() => {
+    // props.getToken(
+    //   props.userInfo.payload.accessToken,
+    //   props.userInfo.payload.refreshToken
+    // );
     // now();
     // props.fetchRefreshToken(props.userInfo.payload);
 
@@ -109,7 +156,6 @@ function Home(props) {
     props.fetchConversations(loggedUser._id);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(user);
   }, [loggedUser._id]);
 
   function clickHandler() {
@@ -208,6 +254,7 @@ function mapStateToProps(state) {
     userInfo: state.login.data,
     displayChatId: state.displayConversationId.displayChatId,
     jwtRefreshToken: state.jwtRefresh.data,
+    authToken: state.jwtToken.data,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -225,6 +272,8 @@ function mapDispatchToProps(dispatch) {
 
     getConversationId: (arg) => dispatch(getConversationId(arg)),
     fetchRefreshToken: (data) => dispatch(getRefreshToken(data)),
+    getToken: (accessToken, refreshToken) =>
+      dispatch(getToken(accessToken, refreshToken)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(memo(Home));
