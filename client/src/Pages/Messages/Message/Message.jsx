@@ -21,6 +21,7 @@ import { toggleContactMsg } from '../../../Redux-State/actionCreators/pageAction
 import { fetchMessages } from '../../../Redux-State/actionCreators/fetchRequestActions';
 import { format } from 'timeago.js';
 import '../Home.css';
+import { GrpContextMenu } from '../../../components/GrpContextMenu';
 function Message({
   message,
   getUser,
@@ -96,6 +97,7 @@ function Message({
       style={{ cursor: 'context-menu' }}
       id="styledMessageSpace"
     >
+      {/* <GrpContextMenu /> */}
       <StyledContextMenu4MsgSpace
         PaperProps={{
           style: {
