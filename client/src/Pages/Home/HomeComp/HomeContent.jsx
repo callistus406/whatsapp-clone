@@ -1,21 +1,17 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
-import "../Home.css";
-import { connect } from "react-redux";
-import ClearIcon from "@mui/icons-material/Clear";
+import React, { useRef, useCallback, useEffect, useState } from 'react';
+import '../Home.css';
+import { connect } from 'react-redux';
+import ClearIcon from '@mui/icons-material/Clear';
 
-import { CenterDivContent } from "../../Styles/CustomStyles";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { CenterDivContent } from '../../Styles/CustomStyles';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // menu
-import NewChat from "../../NewChat/NewChat";
-
-import SearchContact from "../../SearchContact/SearchContact";
-import { groupDialog } from "../../../GlobalVariables/variables";
 
 import {
   displaySettings,
   logout,
-} from "../../../Redux-State/actionCreators/pageActions";
-import { StatusIcon, MessageIcon, ProfileIcon, ArrowBack } from "../HomeIcons";
+} from '../../../Redux-State/actionCreators/pageActions';
+import { StatusIcon, MessageIcon, ProfileIcon, ArrowBack } from '../HomeIcons';
 import {
   StyledSpan,
   StyledIcon,
@@ -23,8 +19,8 @@ import {
   StyledNotificationIcon,
   StyledActionIcons,
   StyledSearchBarContainer,
-} from "../style";
-import CustomMenu from "./CustomMenu";
+} from '../style';
+import CustomMenu from './CustomMenu';
 function Content(props) {
   const countRef = useRef(0);
 
@@ -32,12 +28,12 @@ function Content(props) {
     countRef.current = countRef.current + 1;
     // console.log(msgCont);
     console.log(
-      "home content -0-0 rendered..............." +
+      'home content -0-0 rendered...............' +
         countRef.current +
-        "---times"
+        '---times'
     );
   });
-  const [searchInput, setSearchInput] = useState(".");
+  const [searchInput, setSearchInput] = useState('.');
   const inputRef = useRef();
 
   //
@@ -65,7 +61,7 @@ function Content(props) {
 
   function handleCancel() {
     // setHide((prevState) => !prevState);
-    inputRef.current.value = "";
+    inputRef.current.value = '';
     setCancel(false);
   }
 
@@ -92,12 +88,12 @@ function Content(props) {
           <div className="notificationContent">
             <div className="iconCont">
               <div className="icon">
-                <StyledNotificationIcon />{" "}
+                <StyledNotificationIcon />{' '}
               </div>
             </div>
             <div className="notificationsText">
               {/* <div className="notificationMsg" </div> */}
-              <div style={{ position: "relative" }} className="notificationMsg">
+              <div style={{ position: 'relative' }} className="notificationMsg">
                 <p>Get notification of new messages </p>
                 <span>Turn on desktop notifications</span>
                 <StyledSpan>
@@ -110,16 +106,16 @@ function Content(props) {
         <CenterDivContent height="3.2rem">
           <StyledSearchBarContainer ref={divRef}>
             <span className="searchIconCont">
-              {" "}
+              {' '}
               {focused ? <ArrowBack /> : <StyledSearchIcon />}
             </span>
             <span className="clearIconCont">
-              {cancel ? <ClearIcon onClick={handleCancel} /> : ""}
+              {cancel ? <ClearIcon onClick={handleCancel} /> : ''}
             </span>
             <input
               ref={inputRef}
               type="text"
-              placeholder={!focused ? "Search or start new chat" : ""}
+              placeholder={!focused ? 'Search or start new chat' : ''}
               className="inputSearch"
               onFocus={focus}
               onBlur={unfocus}
