@@ -2,6 +2,7 @@ import './Login.css';
 import { connect } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { userLogin } from '../../Redux-State/actionCreators/fetchRequestActions';
+import { getToken } from '../../Redux-State/actionCreators/pageActions';
 import Home from '../Home/Home';
 import axios from 'axios';
 // import io from 'socket.io-client';
@@ -22,7 +23,7 @@ function Login({ userLogin, userInfo }) {
   // }, []);
   useEffect(() => {
     userLogin('splunk admin', '2345433264321');
-    console.log(userInfo.data.payload);
+    console.log(userInfo.data?.payload);
   }, []);
 
   const inputUsername = useRef(null);
@@ -30,7 +31,6 @@ function Login({ userLogin, userInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     userLogin(inputUsername.current.value, inputPhone.current.value);
-    // console.log(userInfo.data.payload);
   };
 
   return userInfo.loading ? (
@@ -69,11 +69,14 @@ function Login({ userLogin, userInfo }) {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.login,
+    authToken: state.jwtToken.data,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     userLogin: (username, phone) => dispatch(userLogin(username, phone)),
+    getToken: (accessToken, refreshToken) =>
+      dispatch(getToken(accessToken, refreshToken)),
   };
 };
 
