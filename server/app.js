@@ -1,18 +1,47 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 require('dotenv').config();
 const connect = require('./db/connect');
 const routes = require('./Api');
 const error404 = require('./middleware/error404');
 const errorHandler = require('./middleware/errorHandler');
+const passport = require('./middleware/passport');
+const cookieParser = require('cookie-parser');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
+// const initializePassport = require('./middleware/passportConfig');
+const app = express();
+
+const UserModel = require('./Model/UserModel');
 
 const port = process.env.PORT || 3000;
 // middleWares
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRETE,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true },
+  })
+);
+app.use(cookieParser(process.env.SESSION_SECRETE));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./middleware/passportConfig')(passport);
+
+// re;
+app.use(methodOverride('_method'));
 app.use('/api/v1', routes);
+
 app.use(error404);
 app.use(errorHandler);
 const start = async (url) => {
