@@ -166,25 +166,6 @@ export function sendMessagesFailure(error) {
     payload: error,
   };
 }
-// send refresh token
-
-export function sendRefreshTokenRequest() {
-  return {
-    type: 'SEND_REFRESH_TOKEN_REQUEST',
-  };
-}
-export function sendRefreshTokenSuccess(message) {
-  return {
-    type: 'SEND_REFRESH_TOKEN_SUCCESS',
-    payload: message,
-  };
-}
-export function sendRefreshTokenFailure(error) {
-  return {
-    type: 'SEND_REFRESH_TOKEN_FAILURE',
-    payload: error,
-  };
-}
 
 export const fetchMessages = (conversationId) => {
   console.log(conversationId);
@@ -251,33 +232,71 @@ export const sendMessages = (conversationId, sender, text) => {
   };
 };
 
+// send refresh token
+
+export function sendRefreshTokenRequest() {
+  return {
+    type: 'SEND_REFRESH_TOKEN_REQUEST',
+  };
+}
+export function sendRefreshTokenSuccess(message) {
+  return {
+    type: 'SEND_REFRESH_TOKEN_SUCCESS',
+    payload: message,
+  };
+}
+export function sendRefreshTokenFailure(error) {
+  return {
+    type: 'SEND_REFRESH_TOKEN_FAILURE',
+    payload: error,
+  };
+}
+
 // get refresh token
 
 export const getRefreshToken = (data) => {
   // console.log(data);
   return function (dispatch, getState) {
-    dispatch(sendMessagesRequest());
+    dispatch(sendRefreshTokenRequest());
     // console.log(getState().login.data.payload.refreshToken));
 
     axios
       .post(
         `/refresh`,
         {
-          token: getState().login.data.payload.refreshToken,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            authorization:
-              'Bearer ' + getState().login.data.payload.accessToken,
-          },
+          token: getState().jwtToken.data[1],
         }
+        // {
+        //   withCredentials: true,
+        //   headers: {
+        //     authorization:
+        //       'Bearer ' + getState().login.data.payload.accessToken,
+        //   },
+        // }
       )
       .then((response) => {
-        dispatch(sendMessagesSuccess(response.data));
+        const { accessToken, refreshToken } = response.data.payload;
+        dispatch(getToken(accessToken, refreshToken));
+        dispatch(sendRefreshTokenSuccess(response.data));
+        let currentDate = new Date();
+        const decodedToken = jwtDecode(accessToken);
+        // if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
+        //   getRefreshToken();
+        console.log(decodedToken);
+
+        //   axios.defaults.config.headers['authorization'] =
+        //     'Bearer ' + accessToken;
+        // }
+        setTimeout(() => {
+          getRefreshToken();
+          axios.defaults.headers.common['authorization'] =
+            'Bearer ' + accessToken;
+        }, 58000);
+
+        // console.log(axios.defaults.headers)
       })
       .catch((error) => {
-        dispatch(sendMessagesFailure(error));
+        dispatch(sendRefreshTokenFailure(error));
       });
   };
 };
