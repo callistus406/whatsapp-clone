@@ -136,6 +136,7 @@ function Home(props) {
   // console.log(ans);
   // let auth = props.authToken[1];
   useEffect(() => {
+    console.log(props.userInfo.payload);
     props.fetchRefreshToken();
   }, []);
   async function now() {
@@ -149,14 +150,14 @@ function Home(props) {
     // now();
     // props.fetchRefreshToken(props.userInfo.payload);
 
-    // console.log(props.userInfo.payload.accessToken);
+    console.log(loggedUser.payload._id);
 
     console.log('Home rendered____________________________________________');
 
-    props.fetchConversations(loggedUser._id);
+    props.fetchConversations(loggedUser.payload._id);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedUser._id]);
+  }, [loggedUser.payload._id]);
 
   function clickHandler() {
     setOpen(!open);

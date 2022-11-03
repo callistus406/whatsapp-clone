@@ -26,7 +26,7 @@ import {
 import { getConversationId } from '../../Redux-State/actionCreators/pageActions';
 import axios from 'axios';
 // import Messages from "../Messages/Messages";
-import axiosJWT from '../../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance';
 function Conversation(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
   const [getUserProfile, setUserProfile] = useState([]);
@@ -46,7 +46,7 @@ function Conversation(props) {
         const friendId = props.conversation.members.find(
           (m) => m !== props.currentUser
         );
-        const res = await axios.get(`/user/${friendId}`);
+        const res = await axiosInstance.get(`/user/${friendId}`);
         props.fetchUserProfile(friendId);
         setUserProfile(res.data);
       } catch (error) {

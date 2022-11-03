@@ -38,7 +38,7 @@ function Login({ userLogin, userInfo }) {
   ) : userInfo.error ? (
     <h1>ERROR OCCURRED</h1>
   ) : userInfo.data.success ? (
-    <Home loggedUser={userInfo.data.payload.user} />
+    <Home loggedUser={userInfo.data} />
   ) : (
     <div>
       <div className="center">
