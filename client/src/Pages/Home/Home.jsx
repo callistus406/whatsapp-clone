@@ -54,55 +54,63 @@ function Home(props) {
   // const [userConversations, setUserConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
   const [token, setToken] = useState({
-    refresh: props.authToken[1],
-    access: props.authToken[0],
+    refresh: props.userInfo.payload.refreshToken,
+    access: props.userInfo.payload.accessToken,
   });
   // const [socket, setSocket] = useState(null);
 
   const { displayConversation, loggedUser, messages } = props;
 
-  const refreshToken = async () => {
-    console.log(token);
-    try {
-      const response = await axios.post('/refresh', {
-        token: token.refresh,
-      });
+  // const refreshToken = async () => {
+  //   try {
+  //     const response = await axios.post('/refresh', {
+  //       token: token.refresh,
+  //     });
 
-      // props.getToken(
-      //   response.data.payload.accessToken,
-      //   response.data.payload.refreshToken
-      // );
-      console.log(response.data.payload.refreshToken);
+  //     setTimeout(() => {
+  //       refreshToken();
+  //     }, 58000);
+  //     props.getToken(
+  //       response.data.payload.accessToken,
+  //       response.data.payload.refreshToken
+  //     );
 
-      setToken({
-        ...token,
-        refresh: response.data.payload.refreshToken,
-        access: response.data.payload.accessToken,
-      });
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     setToken({
+  //       refresh: response.data.payload.refreshToken,
+  //       access: response.data.payload.accessToken,
+  //     });
+  //     console.log(token);
+  //     console.log(token, props.authToken);
 
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let currentDate = new Date();
-      const decodedToken = jwtDecode(token.access);
-      console.log(decodedToken);
+  //     return response.data;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-      if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
-        const data = await refreshToken();
-        console.log(data.payload);
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     let currentDate = new Date();
+  //     console.log(token);
 
-        config.headers['authorization'] = 'Bearer ' + data.payload.accessToken;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  //     const decodedToken = jwtDecode(token.access);
+  //     console.log(
+  //       decodedToken && decodedToken.exp * 1000 < currentDate.getTime()
+  //     );
+
+  //     if (decodedToken && decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       const data = await refreshToken();
+  //       console.log(data.payload);
+  //       console.log(token);
+
+  //       config.headers['authorization'] = 'Bearer ' + data.payload.accessToken;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   // const decodedToken = jwtDecode(props.userInfo.payload.refreshToken);
 
@@ -126,10 +134,10 @@ function Home(props) {
   //   }
   // );
   // console.log(ans);
-  let auth = props.authToken[1];
+  // let auth = props.authToken[1];
   useEffect(() => {
-    // refreshToken();
-  }, [auth]);
+    props.fetchRefreshToken();
+  }, []);
   async function now() {
     // const data = await refreshToken();
   }
@@ -268,4 +276,4 @@ function mapDispatchToProps(dispatch) {
       dispatch(getToken(accessToken, refreshToken)),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Home));
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
