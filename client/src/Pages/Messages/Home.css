@@ -454,7 +454,7 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 }
 
 /* .talk-bubble .msgInfo:hover {
@@ -476,7 +476,7 @@
   z-index: 1000;
   display: inline-block;
   position: relative;
-  max-width: 70%;
+  max-width: 50%;
   height: auto;
   background-color: #d9fdd3;
   border-radius: 8px;
@@ -543,8 +543,21 @@
   border-color: #d9fdd3 transparent transparent transparent;
 }
 
+.right:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: auto;
+  left: -10px;
+  top: 0px;
+  bottom: auto;
+  border: 10px solid;
+
+  border-color: #ffffff transparent transparent transparent;
+}
 .left {
-  background-color: red;
+  /* background-color: red; */
   margin-left: auto;
 }
 /* .left:before {
@@ -570,7 +583,7 @@
   bottom: auto;
   border: 10px solid;
 
-  border-color: #d9fdd3 transparent transparent transparent;
+  border-color: #ffffff transparent transparent transparent;
 }
 .alignSentMsgs {
   margin-left: auto;
