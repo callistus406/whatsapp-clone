@@ -8,9 +8,9 @@ const {
   getMessageController,
 } = require('../Controllers');
 // post
-router.post('/message', authenticateToken, postMessageController);
+router.post('/message', postMessageController);
 // get
-router.get('/message/:conversationId', authenticateToken, getMessageController);
+router.get('/message/:conversationId', getMessageController);
 
 module.exports = router;
 module.exports = router;
