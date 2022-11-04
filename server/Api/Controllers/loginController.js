@@ -7,13 +7,12 @@ const initializePassport = require('../../middleware/passportConfig');
 
 const loginController = async (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
-    // console.log(info);
     if (err) throw err;
     if (!user) res.send('No User Exists');
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
-        res.status(200).json(user);
+        res.status(200).json({ success: true, payload: user });
         // console.log(req.user);
       });
     }
