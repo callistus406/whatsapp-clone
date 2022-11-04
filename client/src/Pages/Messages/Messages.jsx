@@ -78,23 +78,23 @@ function Messages(props) {
       setMessages((prev) => [...prev, arrivedMessage]);
   }, [arrivedMessage, currentChat]);
 
-  console.log(getUser.data.payload.user._id);
+  console.log(getUser.data.payload._id);
   useEffect(() => {
     console.log('socket rendered____________________________________________');
     console.log(props.authToken);
-    socket.current.emit('addUser', getUser.data.payload.user._id);
+    socket.current.emit('addUser', getUser.data.payload._id);
     socket.current.on('getUsers', (users) => {
       console.log(users);
     });
-  }, [getUser.data.payload.user]);
+  }, [getUser.data.payload]);
   useEffect(() => {
     const getMessages = async () => {
       try {
         const res = await axiosInstance.get(`/message/${displayChatId}`, {
-          withCredentials: true,
-          headers: {
-            authorization: 'Bearer ' + props.userInfo.payload.accessToken,
-          },
+          // withCredentials: true,
+          // headers: {
+          //   authorization: 'Bearer ' + props.userInfo.payload.accessToken,
+          // },
         });
         console.log(res.data);
         setMessages(res.data);
@@ -119,20 +119,16 @@ function Messages(props) {
         // this makes a post request with the message written
         const msg = {
           conversationId: props.displayChatId,
-          sender: props.getUser.data.payload.user._id,
+          sender: props.getUser.data.payload._id,
           text: documentInput.value,
         };
         console.log(currentChat);
         const receiverId = currentChat.members.find(
-          (member) => member !== getUser.data.payload.user._id
+          (member) => member !== getUser.data.payload._id
         );
-        console.log(
-          receiverId,
-          getUser.data.payload.user._id,
-          documentInput.value
-        );
+        console.log(receiverId, getUser.data.payload._id, documentInput.value);
         socket.current.emit('sendMessage', {
-          senderId: getUser.data.payload.user._id,
+          senderId: getUser.data.payload._id,
           receiverId: receiverId,
           text: documentInput.value,
         });
