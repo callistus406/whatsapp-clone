@@ -165,17 +165,18 @@ export const StyledMessageCont = styled.div`
 export const StyledMsgInfo = styled.div`
   margin-left: 0.8rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${'' /* flex-direction:flexen */}
+  ${'' /* justify-content: space-between; */}
+  ${'' /* align-items: center; */}
   padding-right: 0.5rem;
-  border: 1px solid blue;
+  ${'' /* border: 1px solid blue; */}
 
   position: relative;
   div {
     width: 40%;
   }
   .arrowCont {
-    border: 1px solid blue;
+    ${'' /* border: 1px solid blue; */}
     position: relative;
     .keyBoardArrow {
       ${'' /* position: absolute; */}
@@ -185,17 +186,22 @@ export const StyledMsgInfo = styled.div`
 
 export const StyledKeyBoardArrow = styled.span`
   margin-top: 1rem;
-  margin-left: 2rem;
-  border: 1px solid blue;
-  ${'' /* position: absolute; */}
+  height: 1rem;
+  width: 100%;
+  ${'' /* margin-left: 0; */}
+  ${'' /* border: 1px solid red; */}
+  position: absolute;
   display: ${(props) => (props.hide ? 'flex' : 'none')};
+  flex-direction: column;
+  align-items: flex-end;
 `;
 export const StyledMsgInfoIcon = styled(KeyboardArrowDownIcon)`
   && {
     position: absolute;
-    margin-left: -1.2rem;
+    ${'' /* margin-left: -1.2rem; */}
     margin-top: -0.6rem;
-    color: #a4b0b8;
+
+    ${'' /* color: red; */}
   }
 `;
 export const StyledMsgName = styled.span`
