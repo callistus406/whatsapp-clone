@@ -1,4 +1,4 @@
-const MessageModel = require("../../Model/MessageModel");
+const MessageModel = require('../../Model/MessageModel');
 
 const postMessageController = async (req, res) => {
   const { conversationId, sender, text } = req.body;
@@ -19,7 +19,7 @@ const postMessageController = async (req, res) => {
 
 const getMessageController = async (req, res) => {
   try {
-    console.log(req.params);
+    console.log(req);
     const messages = await MessageModel.find({
       conversationId: req.params.conversationId,
     });
