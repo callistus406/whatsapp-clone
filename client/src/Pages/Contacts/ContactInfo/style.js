@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import SearchIcon from "@mui/icons-material/Search";
+import styled from 'styled-components';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SearchIcon from '@mui/icons-material/Search';
 
 export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
-  width: ${(props) => (props.toggle ? "23rem" : "0rem")};
+  width: ${(props) => (props.toggle ? '23rem' : '0rem')};
   position: fixed;
   z-index: 1;
   top: 0;
@@ -18,12 +18,12 @@ export const StyledContainer = styled.div`
 export const StyledNavArrow = styled.div`
   width: 22rem;
   height: 3rem;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   display: flex;
   align-items: center;
-  ${"" /* justify-content: center; */}
+  ${'' /* justify-content: center; */}
   margin-left:1rem;
-  display: "flex";
+  display: 'flex';
 
   p {
     color: #0c0c0c;
@@ -35,7 +35,7 @@ export const StyledNavArrow = styled.div`
 export const StyledMsgSearchHeader = styled.div`
   height: 3.625rem;
   /* border: 1px solid blue; */
-  ${"" /* position: absolute; */}
+  ${'' /* position: absolute; */}
 
   background: #ededed;
   display: flex;
@@ -47,7 +47,7 @@ export const StyledGroupImg = styled.div`
   width: 100%;
   height: 20rem;
   text-align: center;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,7 +64,7 @@ export const StyledGroupImg = styled.div`
   }
   .groupName {
     font-size: 1.5rem;
-    ${"" /* margin-top: 1rem; */}
+    ${'' /* margin-top: 1rem; */}
   }
   p {
     color: #909090;
@@ -76,7 +76,7 @@ export const StyledGroupImg = styled.div`
 export const StyledContactInfo = styled.div`
   width: 100%;
   min-height: 6rem;
-  ${"" /* border: 1px solid red; */}
+  ${'' /* border: 1px solid red; */}
   border-bottom: 10px solid #ededed;
   color: #000;
   display: flex;
@@ -89,7 +89,7 @@ export const StyledContactInfo = styled.div`
     font-size: 0.9rem;
   }
   span {
-    ${"" /* width: 90%; */}
+    ${'' /* width: 90%; */}
     font-size: 0.9rem;
   }
 `;
@@ -105,8 +105,8 @@ export const GroupInfoContent = styled.div`
   overflow-x: hidden;
 
   &::-webkit-scrollbar-track {
-    ${"" /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
-    ${"" /* border-radius: 10px; */}
+    ${'' /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
+    ${'' /* border-radius: 10px; */}
     background-color: #ededed;
   }
 
@@ -119,7 +119,7 @@ export const GroupInfoContent = styled.div`
     height: 10px;
 
     border-radius: 10px;
-    ${"" /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
+    ${'' /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */}
     background-color: #bfbfbf;
   }
 `;
@@ -132,7 +132,7 @@ export const GroupInfoLinks = styled.div`
 
   .placeholder {
     width: 100%;
-    ${"" /* border: 1px solid blue; */}
+    ${'' /* border: 1px solid blue; */}
     height: 2rem;
     display: flex;
     justify-content: space-between;
@@ -148,7 +148,7 @@ export const GroupInfoLinks = styled.div`
 export const StyledStarredMsg = styled.div`
   width: 100%;
   height: 4rem;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   padding: 0 1.5rem;
   display: flex;
   border-bottom: 10px solid #ededed;
@@ -178,18 +178,21 @@ export const StyledStarredMsg = styled.div`
 export const StyledMuteNotification = styled.div`
   width: 100%;
   min-height: 5rem;
-  padding: 0 1.5rem;
   display: flex;
   border-bottom: 10px solid #ededed;
   flex-direction: column;
   padding-top: 0.4rem;
-  ${"" /* align-items: center; */}
+  ${'' /* align-items: center; */}
+  .cont {
+    padding: 0 1.5rem;
+    border-bottom: 3px solid #fcfcfc;
+  }
   .starredMsg {
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    ${"" /* border: 1px solid blue; */}
+    ${'' /* border: 1px solid blue; */}
     div {
       display: flex;
 
@@ -207,7 +210,7 @@ export const StyledMuteNotification = styled.div`
     }
   }
   .conditional {
-    ${"" /* border: 1px solid blue; */}
+    ${'' /* border: 1px solid blue; */}
     color: #8c8c8c;
     font-size: 0.8rem;
     margin-left: 2.3rem;
@@ -216,7 +219,7 @@ export const StyledMuteNotification = styled.div`
 export const StyledDisappearingMsgs = styled.div`
   height: 4rem;
   width: 100%;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   margin-top: 1rem;
 
   .disappearingMsg {
@@ -226,7 +229,7 @@ export const StyledDisappearingMsgs = styled.div`
       margin-left: 2.1rem;
     }
     .textCont {
-      ${"" /* border: 1px solid red; */}
+      ${'' /* border: 1px solid red; */}
       display: flex;
       width: 100%;
       .arrow {
@@ -236,10 +239,10 @@ export const StyledDisappearingMsgs = styled.div`
       }
     }
     div {
-      ${"" /* display: flex; */}
+      ${'' /* display: flex; */}
       .info {
         font-size: 1rem;
-        ${"" /* margin-left: 2rem; */}
+        ${'' /* margin-left: 2rem; */}
       }
       .clock {
         color: #949494;
@@ -252,13 +255,13 @@ export const StyledDisappearingMsgs = styled.div`
 export const StyledEncryption = styled.div`
   height: 4rem;
   width: 100%;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   margin-top: 1rem;
 
   .encryption {
     width: 100%;
     .textCont {
-      ${"" /* border: 1px solid red; */}
+      ${'' /* border: 1px solid red; */}
       display: flex;
       width: 100%;
       .arrow {
@@ -271,10 +274,10 @@ export const StyledEncryption = styled.div`
       color: #909fa8;
     }
     div {
-      ${"" /* display: flex; */}
+      ${'' /* display: flex; */}
       .info {
         font-size: 1rem;
-        ${"" /* margin-left: 1.5rem; */}
+        ${'' /* margin-left: 1.5rem; */}
       }
       .clock {
         color: #949494;
@@ -289,7 +292,7 @@ export const StyledSeparator = styled.div`
 `;
 
 export const StyledGroupInfoActions = styled.div`
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
 
   height: 6rem;
   width: 100%;
@@ -333,11 +336,11 @@ export const StyledGroupInfoActions = styled.div`
 `;
 export const StyledDeleteChat = styled.div`
   && {
-    ${"" /* background: blue; */}
+    ${'' /* background: blue; */}
     color:#D32F2F;
     height: 3rem;
     width: 100%;
-    ${"" /* border: 1px solid blue; */}
+    ${'' /* border: 1px solid blue; */}
     margin-bottom: 1.5rem;
     display: flex;
     padding-left: 2rem;
@@ -392,7 +395,7 @@ export const StyledMembersChatText = styled.div`
     .role {
       font-size: 0.7rem;
       margin-right: 1.5rem;
-      ${"" /* font-size: 0.9rem; */}
+      ${'' /* font-size: 0.9rem; */}
       border: 1px solid #1fa855;
       display: flex;
       align-items: center;
@@ -462,7 +465,7 @@ export const StyledGroupInstruction = styled(StyledGroupHeading)`
   margin-bottom: 1rem;
   width: 100%;
   color: #3b4a54;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   .groupInfoIcon {
     margin-left: 1rem;
   }
