@@ -198,7 +198,7 @@ function Home(props) {
                       <Conversation
                         passMenu={index}
                         conversation={conversation}
-                        currentUser={loggedUser._id}
+                        currentUser={loggedUser.payload._id}
                       />
                     </div>
                   );
