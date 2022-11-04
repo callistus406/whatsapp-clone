@@ -18,6 +18,7 @@ import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 import LockIcon from '@mui/icons-material/Lock';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BlockIcon from '@mui/icons-material/Block';
 import {
   StyledContainer,
   StyledNavArrow,
@@ -54,7 +55,7 @@ import { connect } from 'react-redux';
 import SearchParticipants from '../../SearchParticipants/SearchParticipants.jsx';
 import StarredMsgs from '../../GroupStarredMsgs/StarredMsgs';
 import { AlertDialog } from '../../../components/AlertDialog';
-
+import Chat from '../../../components/Chat';
 function ContactInfo(props) {
   const membersRef = useRef();
   const username = '';
@@ -172,49 +173,52 @@ function ContactInfo(props) {
         </StyledStarredMsg>
 
         <StyledMuteNotification>
-          <div className="starredMsg">
-            <div>
-              <span className="bell">
-                <NotificationsRoundedIcon fontSize="small" />
+          <div className="cont">
+            <div className="starredMsg">
+              <div>
+                <span className="bell">
+                  <NotificationsRoundedIcon fontSize="small" />
+                </span>
+                <p className="text">Mute notification</p>
+              </div>
+              <span className="switch">
+                <Mute fontSize="small" />
               </span>
-              <p className="text">Mute notification</p>
             </div>
-            <span className="switch">
-              <Mute fontSize="small" />
-            </span>
+            <p className="conditional">until tomorrow at 3:22 am</p>
+
+            <StyledDisappearingMsgs>
+              <div className="disappearingMsg">
+                <div className="textCont">
+                  <span className="clock">
+                    <ClockIcon />
+                  </span>
+                  <p lassName="info">Disappearing Messages</p>
+                  <span className="arrow">
+                    {' '}
+                    <ArrowForwardIosIcon fontSize="small" />
+                  </span>
+                </div>
+
+                <p className="text">off</p>
+              </div>
+            </StyledDisappearingMsgs>
+
+            <StyledEncryption>
+              <div className="encryption">
+                <div className="textCont">
+                  <span className="clock">
+                    <LockIcon fontSize="small" />
+                  </span>
+                  <p lassName="info">Encryption</p>
+                </div>
+                <p className="text">Messages are end-to-end encrypted. </p>
+
+                <p className="text">Click to verify</p>
+              </div>
+            </StyledEncryption>
           </div>
-          <p className="conditional">until tomorrow at 3:22 am</p>
-
-          <StyledDisappearingMsgs>
-            <div className="disappearingMsg">
-              <div className="textCont">
-                <span className="clock">
-                  <ClockIcon />
-                </span>
-                <p lassName="info">Disappearing Messages</p>
-                <span className="arrow">
-                  {' '}
-                  <ArrowForwardIosIcon fontSize="small" />
-                </span>
-              </div>
-
-              <p className="text">off</p>
-            </div>
-          </StyledDisappearingMsgs>
-
-          <StyledEncryption>
-            <div className="encryption">
-              <div className="textCont">
-                <span className="clock">
-                  <LockIcon fontSize="small" />
-                </span>
-                <p lassName="info">Encryption</p>
-              </div>
-              <p className="text">Messages are end-to-end encrypted. </p>
-
-              <p className="text">Click to verify</p>
-            </div>
-          </StyledEncryption>
+          <Chat />
         </StyledMuteNotification>
 
         {/* <StyledMembersLayout ref={membersRef}>
@@ -236,7 +240,7 @@ function ContactInfo(props) {
           <div className="exitCont">
             <div className="exit">
               <span className="exitIcon">
-                <LogoutIcon color="error" />
+                <BlockIcon color="error" />
               </span>
               <p>Block {username ? username : 'joy'}</p>
             </div>

@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 export const StyledChatContainer = styled.div`
-  height: 500px;
-  width: 50%;
-  border: 1px solid blue;
+  height: auto;
+  width: 100%;
+  ${'' /* border: 1px solid blue; */}
 
   margin: auto;
   .title {
     ${'' /* margin-left: 1rem; */}
     margin: 1rem 1rem;
-    color: #cea285;
+    color: #ab8a81;
+    font-size: 0.9rem;
+    ${'' /* font-weight: 100; */}
   }
 `;
 
@@ -25,7 +27,7 @@ export const StyledChatLayoutCont = styled.div`
   /* border-bottom: 1px solid #f2f2f2; */
   /* border-bottom-height: 70%; */
   cursor: pointer;
-  margin-bottom: 1rem;
+  ${'' /* margin-bottom: 1rem; */}
   .borderBottom {
     /* height: 3px; */
     border-bottom: 1px solid #e3e3e3;
@@ -41,7 +43,7 @@ export const StyledChatLayoutCont = styled.div`
   }
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: #f5f6f6;
   }
 `;
 export const StyledUserChatCont = styled.div`
