@@ -47,7 +47,8 @@ function Conversation(props) {
           (m) => m !== props.currentUser
         );
         const res = await axiosInstance.get(`/user/${friendId}`);
-        props.fetchUserProfile(friendId);
+        console.log(props.currentUser);
+
         setUserProfile(res.data);
       } catch (error) {
         console.log(error);
