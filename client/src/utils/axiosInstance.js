@@ -1,9 +1,9 @@
 import axios from 'axios';
-const axiosJWT = axios.create({
-  //   baseURL: 'http://localhost:3000',
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:3300/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
-export default axiosJWT;
+export default axiosInstance;
