@@ -1,6 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import axiosJWT from '../../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance';
 import { getToken } from './pageActions';
 // const jwtAxiosInterceptor = axios.create();
 
@@ -44,13 +44,8 @@ export const fetchConversations = (conversation_id) => {
   return (dispatch, getState) => {
     dispatch(fetchConversationRequest());
 
-    axios
-      .get(`/conversation/${conversation_id}`, {
-        withCredentials: true,
-        headers: {
-          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
-        },
-      })
+    axiosInstance
+      .get(`/conversation/${conversation_id}`)
       .then((response) => {
         const conversations = response.data;
         dispatch(fetchConversationSuccess(conversations));
@@ -87,7 +82,7 @@ export const userLogin = (username, phone) => {
     dispatch(userLoginRequest);
     // const { username, phone } = loginData;
     console.log(username, phone);
-    axios
+    axiosInstance
       .post(`/login`, {
         username,
         phone,
@@ -171,13 +166,8 @@ export const fetchMessages = (conversationId) => {
   console.log(conversationId);
   return function (dispatch, getState) {
     dispatch(fetchMessagesRequest());
-    axiosJWT
-      .get(`/message/${conversationId}`, {
-        withCredentials: true,
-        headers: {
-          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
-        },
-      })
+    axiosInstance
+      .get(`/message/${conversationId}`)
       .then((response) => {
         dispatch(fetchMessagesSuccess(response.data));
       })
@@ -191,12 +181,12 @@ export const fetchUserProfile = (userId) => {
   return function (dispatch, getState) {
     dispatch(fetchUserProfileRequest);
 
-    axios
+    axiosInstance
       .get(`/user/${userId}`, {
-        withCredentials: true,
-        headers: {
-          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
-        },
+        // withCredentials: true,
+        // headers: {
+        //   authorization: 'Bearer ' + getState().login.data.payload.accessToken,
+        // },
       })
       .then((response) => {
         dispatch(fetchUseProfileSuccess(response.data));
@@ -216,13 +206,8 @@ export const sendMessages = (conversationId, sender, text) => {
       sender,
       text,
     };
-    axios
-      .post(`/message`, message, {
-        withCredentials: true,
-        headers: {
-          authorization: 'Bearer ' + getState().login.data.payload.accessToken,
-        },
-      })
+    axiosInstance
+      .post(`/message`, message)
       .then((response) => {
         dispatch(sendMessagesSuccess(response.data));
       })
@@ -260,7 +245,7 @@ export const getRefreshToken = (data) => {
     dispatch(sendRefreshTokenRequest());
     // console.log(getState().login.data.payload.refreshToken));
 
-    axios
+    axiosInstance
       .post(
         `/refresh`,
         {
@@ -284,12 +269,12 @@ export const getRefreshToken = (data) => {
         //   getRefreshToken();
         console.log(decodedToken);
 
-        //   axios.defaults.config.headers['authorization'] =
+        //   axiosInstance.defaults.config.headers['authorization'] =
         //     'Bearer ' + accessToken;
         // }
         setTimeout(() => {
           getRefreshToken();
-          axios.defaults.headers.common['authorization'] =
+          axiosInstance.defaults.headers.common['authorization'] =
             'Bearer ' + accessToken;
         }, 58000);
 
