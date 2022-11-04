@@ -27,9 +27,8 @@ const dummyData = [
   },
 ];
 
-function Index() {
-  const caretRef = useRef();
-  const [caret, setCaret] = useState(false);
+function ChatLayout({ data, index }) {
+  const [caret, setCaret] = useState(true);
   const toggleCaret = (bool) => {
     console.log(bool);
     setCaret(bool);
@@ -37,39 +36,44 @@ function Index() {
     // caretRef.current
   };
   return (
+    <StyledChatLayoutCont
+      key={index}
+      onMouseEnter={() => toggleCaret(false)}
+      onMouseLeave={() => toggleCaret(true)}
+    >
+      <StyledUserChatCont>
+        <div className="chatHead">
+          <StyledCircle>
+            <PeopleAltIcon style={{ color: '#fff' }} />
+          </StyledCircle>
+        </div>
+
+        <StyledUserChatText>
+          <h3>{data.name}</h3>
+
+          <div className="members">
+            {' '}
+            <p> {data.members} </p>
+          </div>
+          {/* <Messages /> */}
+        </StyledUserChatText>
+        <StyledCaret hide={caret}>
+          <KeyboardArrowDownIcon />
+        </StyledCaret>
+      </StyledUserChatCont>
+    </StyledChatLayoutCont>
+  );
+}
+function Index() {
+  const caretRef = useRef();
+
+  return (
     <StyledChatContainer>
       <div className="title">
-        <h5>4 groups in common</h5>
+        <>4 groups in common</>
       </div>
       {dummyData.map((data, index) => {
-        return (
-          <StyledChatLayoutCont
-            key={index}
-            onMouseEnter={() => toggleCaret(false)}
-            onMouseLeave={() => toggleCaret(true)}
-          >
-            <StyledUserChatCont>
-              <div className="chatHead">
-                <StyledCircle>
-                  <PeopleAltIcon style={{ color: '#fff' }} />
-                </StyledCircle>
-              </div>
-
-              <StyledUserChatText>
-                <h3>{data.name}</h3>
-
-                <div className="members">
-                  {' '}
-                  <p> {data.members} </p>
-                </div>
-                {/* <Messages /> */}
-              </StyledUserChatText>
-              <StyledCaret hide={caret}>
-                <KeyboardArrowDownIcon />
-              </StyledCaret>
-            </StyledUserChatCont>
-          </StyledChatLayoutCont>
-        );
+        return <ChatLayout data={data} index={index} />;
       })}
     </StyledChatContainer>
   );
