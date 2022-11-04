@@ -1,4 +1,4 @@
-const ConversationModel = require("../../Model/ConversationModel");
+const ConversationModel = require('../../Model/ConversationModel');
 
 const conversationController = async (req, res) => {
   const { senderId, receiverId, channelId, read, numberOfMsgs, visibility } =
@@ -19,14 +19,14 @@ const conversationController = async (req, res) => {
 const getConversationController = async (req, res) => {
   const { senderId, receiverId, channelId, read, numberOfMsgs, visibility } =
     req.body;
-  console.log(senderId, receiverId);
+  console.log(req.user);
   try {
     const savedConversation = await ConversationModel.find({
       members: { $in: [req.params.userId] },
     });
     //   console.log(senderId);
     res.status(200).json(savedConversation);
-    console.log("still fixing");
+    console.log('still fixing');
   } catch (error) {
     res.status(500).json(error.message);
   }
