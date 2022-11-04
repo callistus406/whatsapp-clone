@@ -136,10 +136,10 @@ function Message({
           return (
             <ReceivedMsgs
               classValue={
-                item.sender === getUser.data.payload.user._id ? 'left' : ''
+                item.sender === getUser.data.payload._id ? 'left' : 'right'
               }
               username={
-                item.sender !== getUser.data.payload.user._id
+                item.sender !== getUser.data.payload._id
                   ? userProfile.data.username
                   : 'you'
               }
@@ -254,7 +254,7 @@ function ReceivedMsgs({ classValue, username, msgText, msgTime }) {
           <div>
             {/* <span>{hours}:</span>
             <span>{mins}</span> */}
-            <span className="timeZo">{format(msgTime)}</span>
+            <span className="timeZone">{format(msgTime)}</span>
           </div>
         </div>
       </div>
