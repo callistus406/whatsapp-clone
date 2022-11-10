@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import SearchIcon from "@mui/icons-material/Search";
+import styled from 'styled-components';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SearchIcon from '@mui/icons-material/Search';
 
 export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
-  width: ${(props) => (props.toggle ? "23rem" : "0rem")};
+  width: ${(props) => (props.toggle ? '23rem' : '0rem')};
   position: fixed;
   z-index: 1;
   top: 0;
@@ -12,6 +12,17 @@ export const StyledContainer = styled.div`
 
   overflow-x: hidden;
   transition: 0.1s;
+  .content {
+    display: flex;
+    justify-content: center;
+    ${'' /* align-items: center; */}
+    height: calc(100vh - (3.625rem + 3rem));
+    border: 1px solid blue;
+    p {
+      margin-top: 5rem;
+      color: #8a98a6;
+    }
+  }
 `;
 
 export const StyledNavArrow = styled.div`
@@ -20,7 +31,7 @@ export const StyledNavArrow = styled.div`
   display: flex;
   align-items: center;
 
-  display: "flex";
+  display: 'flex';
   .cancel {
     cursor: pointer;
   }
@@ -38,17 +49,18 @@ export const StyledMsgSearchHeader = styled.div`
   justify-content: center;
   align-items: flex-end;
 `;
+// this is not in use
 export const StyledMsgSearchContent = styled.div`
   height: calc(100vh - (3.625rem + 3rem));
   width: ${(props) => (props.toggle ? props.width : 0)};
-  display: ${(props) => (props.toggle ? "block" : "none")};
+  display: ${(props) => (props.toggle ? 'block' : 'none')};
   margin: 4px, 4px;
   transition: 0.1s;
   min-width: 28rem;
   overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid blue;
-  ${"" /* background: red; */}
+  background: red;
 
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -127,7 +139,7 @@ export const StyledContactInfo = styled.div`
   }
   .about {
     height: 1.5rem;
-    ${"" /* border: 1px solid blue; */}
+    ${'' /* border: 1px solid blue; */}
     font-size: 0.9rem;
     color: #9d9d9d;
   }
