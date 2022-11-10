@@ -26,5 +26,3 @@ export function Icons() {
     </div>
   );
 }
-
-export default Icons;
