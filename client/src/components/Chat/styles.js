@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { styled as muiStyled } from '@mui/material/styles';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import Box from '@mui/material/Box';
+import { blue } from '@mui/material/colors';
 
 export const StyledChatContainer = styled.div`
   height: auto;
@@ -56,6 +61,7 @@ export const StyledUserChatCont = styled.div`
   }
 `;
 export const StyledCaret = styled.div`
+  color: #6e7e88;
   display: ${(props) => (props.hide ? 'none' : 'block')};
 `;
 
@@ -81,5 +87,30 @@ export const StyledUserChatText = styled.div`
   h3 {
     color: #2f1e21;
     font-weight: 400;
+  }
+`;
+
+export const StyledContextMenu = muiStyled(Menu)(({ theme }) => ({
+  fontSize: '0.8rem',
+}));
+export const StyledContextMenu4MsgSpace = muiStyled(Menu)(({ theme }) => ({
+  fontSize: '1rem',
+}));
+export const StyledContextMenuItem4MsgSpace = muiStyled(MenuItem)(
+  ({ theme }) => ({
+    fontSize: '0.9rem',
+    color: '#48565F',
+    height: '2.5rem',
+  })
+);
+export const StyledContextMenuItem = muiStyled(MenuItem)(({ theme }) => ({
+  fontSize: '0.9rem',
+  paddingTop: '0.5rem ',
+  paddingBottom: '0.5rem ',
+}));
+
+export const StyledBox = styled(Box)`
+  & {
+    background-color: red;
   }
 `;
