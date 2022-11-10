@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 // import "./style.css";
-import ClearIcon from "@mui/icons-material/Clear";
+import ClearIcon from '@mui/icons-material/Clear';
 import {
   toggleMsgSearch,
   toggleContactMsg,
-} from "../../../Redux-State/actionCreators/pageActions";
+} from '../../../Redux-State/actionCreators/pageActions';
 import {
   StyledContainer,
   StyledNavArrow,
@@ -12,18 +12,18 @@ import {
   StyledMsgSearchContent,
   StyledSearchIcon,
   StyledSearchBarContainer,
-} from "./style.js";
-import { DeleteIcon, CancelButton, ArrowBack } from "./icons";
-import { connect } from "react-redux";
+} from './style.js';
+import { DeleteIcon, CancelButton, ArrowBack } from './icons';
+import { connect } from 'react-redux';
 function ContactInfo(props) {
   const countRef = useRef(0);
   const inputRef = useRef();
   const arrowRef = useRef();
   useEffect(() => {
     countRef.current = countRef.current + 1;
-    console.log("contact info " + countRef.current + " times");
+    console.log('contact info ' + countRef.current + ' times');
   });
-  const [searchInput, setSearchInput] = useState(".");
+  const [searchInput, setSearchInput] = useState('.');
 
   //
   const [focused, setFocus] = useState(false);
@@ -35,7 +35,7 @@ function ContactInfo(props) {
 
   const unfocus = () => {
     setFocus(false);
-    divRef.current.style.backgroundColor = "#F0F2F5";
+    divRef.current.style.backgroundColor = '#F0F2F5';
   };
   const focus = () => {
     setFocus(true);
@@ -51,7 +51,7 @@ function ContactInfo(props) {
 
   function handleCancel() {
     setHide((prevState) => !prevState);
-    inputRef.current.value = "";
+    inputRef.current.value = '';
     setCancel(false);
   }
 
@@ -75,26 +75,28 @@ function ContactInfo(props) {
 
         <StyledSearchBarContainer ref={divRef}>
           <span className="searchIconCont">
-            {" "}
+            {' '}
             {focused ? <ArrowBack /> : <StyledSearchIcon fontSize="small" />}
           </span>
           <span className="clearIconCont">
-            {cancel ? <ClearIcon onClick={handleCancel} /> : ""}
+            {cancel ? <ClearIcon onClick={handleCancel} /> : ''}
           </span>
           <input
             ref={inputRef}
             type="text"
             className="inputSearch"
             // autoFocus={true}
-            placeholder={!focused ? "Search..." : ""}
+            placeholder={!focused ? 'Search...' : ''}
             onFocus={focus}
             onBlur={unfocus}
             onChange={handleChange}
             // onClick={handleClick("search")}
           />
         </StyledSearchBarContainer>
-
-        <StyledMsgSearchContent>{/* <h1>hello</h1> */}</StyledMsgSearchContent>
+        <div className="content">
+          <p>search messages with +2348185435689</p>
+        </div>
+        {/* <StyledMsgSearchContent></StyledMsgSearchContent> */}
       </StyledContainer>
     </div>
   );
