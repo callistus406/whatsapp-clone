@@ -254,7 +254,7 @@ function ContactInfo(props) {
             </div>
           </div>
         </StyledGroupInfoActions>
-        <StyledSeparator />
+        {/* <StyledSeparator /> */}
         <StyledDeleteChat>
           <DeleteIcon />
           <p className="deleteText">Delete Chat</p>
