@@ -5,19 +5,19 @@ const passport = require('passport');
 require('dotenv').config();
 const initializePassport = require('../../middleware/passportConfig');
 
-const loginController = async (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.send('No User Exists');
-    else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        res.status(200).json({ success: true, payload: user });
-        // console.log(req.user);
-      });
-    }
-  })(req, res, next);
-};
+// const loginController = async (req, res, next) => {
+//   passport.authenticate('local', (err, user, info) => {
+//     if (err) throw err;
+//     if (!user) res.send('No User Exists');
+//     else {
+//       req.logIn(user, (err) => {
+//         if (err) throw err;
+//         res.status(200).json({ success: true, payload: user });
+//         // console.log(req.user);
+//       });
+//     }
+//   })(req, res, next);
+// };
 //   initializePassport(
 //     passport,
 //     (username) => {
@@ -59,36 +59,36 @@ const loginController = async (req, res, next) => {
 // })(req, res, next);
 // };
 
-// const loginController = async (req, res) => {
-//   try {
-//     const { username, phone } = req.body;
-//     // logged in as splunk
-//     const user = await UserModel.findOne({
-//       username,
-//       phone,
-//     });
-//     const accessToken = generateJwtAccessToken(user);
-//     const refreshToken = generateJwtRefreshToken(user);
-//     // console.log(user._id);
+const loginController = async (req, res) => {
+  try {
+    const { username, phone } = req.body;
+    // logged in as splunk
+    const user = await UserModel.findOne({
+      username,
+      phone,
+    });
+    const accessToken = generateJwtAccessToken(user);
+    const refreshToken = generateJwtRefreshToken(user);
+    // console.log(user._id);
 
-//     const dbTokenStore = await RefreshTokenModel.findOneAndUpdate(
-//       {
-//         user_id: user._id,
-//       },
-//       { refreshToken: refreshToken },
-//       { new: true, runValidators: true }
-//     );
+    const dbTokenStore = await RefreshTokenModel.findOneAndUpdate(
+      {
+        user_id: user._id,
+      },
+      { refreshToken: refreshToken },
+      { new: true, runValidators: true }
+    );
 
-//     // console.log(dbTokenStore);
+    // console.log(dbTokenStore);
 
-//     res.status(200).json({
-//       success: true,
-//       payload: { user, accessToken, refreshToken, dbTokenStore },
-//     });
-//   } catch (error) {
-//     res.status(500).json(error.message);
-//   }
-// };
+    res.status(200).json({
+      success: true,
+      payload: { user, accessToken, refreshToken, dbTokenStore },
+    });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
 
 const generateJwtAccessToken = (user) => {
   // console.log(user._id);
@@ -103,7 +103,7 @@ const generateJwtAccessToken = (user) => {
   );
 };
 const generateJwtRefreshToken = (user) => {
-  console.log(user);
+  // console.log(user);
 
   return jwt.sign(
     {
