@@ -33,6 +33,7 @@ import {
   displayConversationIdReducer,
   getMessageReducer,
   getTokenReducer,
+  getContactProfileReducer,
 } from './reducers/reducers';
 import {
   requestReducer,
@@ -89,6 +90,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   jwtRefresh: refreshTokenReducer,
   jwtToken: getTokenReducer,
+  contactProfile: getContactProfileReducer,
 });
 
 const composeEnhancers = composeWithDevTools({
