@@ -33,6 +33,7 @@ import {
   SHOW_CONVERSATION_ID,
   GET_MESSAGE,
   GET_TOKEN,
+  GET_CONTACT_CHAT_PROFILE,
 } from '../actions/actionTypes';
 const initialState = {
   displayProfileContainer: false,
@@ -496,6 +497,24 @@ const tokenState = {
 export function getTokenReducer(state = tokenState, action) {
   switch (action.type) {
     case GET_TOKEN:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+// get get contact profile
+const getContactProfileState = {
+  data: [],
+};
+export function getContactProfileReducer(
+  state = getContactProfileState,
+  action
+) {
+  switch (action.type) {
+    case GET_CONTACT_CHAT_PROFILE:
       return {
         ...state,
         data: action.payload,

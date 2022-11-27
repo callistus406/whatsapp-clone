@@ -35,6 +35,7 @@ import {
   SHOW_CONVERSATION_ID,
   GET_MESSAGE,
   GET_TOKEN,
+  GET_CONTACT_CHAT_PROFILE,
 } from '../actions/actionTypes';
 
 // section for status bar action creators
@@ -316,5 +317,12 @@ export function getToken(accessToken, refreshToken) {
     type: GET_TOKEN,
     payload: [accessToken, refreshToken],
     info: 'this action  will display current message ',
+  };
+}
+export function getContactProfile(data) {
+  return {
+    type: GET_CONTACT_CHAT_PROFILE,
+    payload: data,
+    info: 'this action  will display the contacts profile info ',
   };
 }

@@ -77,3 +77,6 @@ export const GET_MESSAGE = 'GET_MESSAGE';
 
 // get token
 export const GET_TOKEN = 'GET_TOKEN';
+
+// get
+export const GET_CONTACT_CHAT_PROFILE = 'GET_CONTACT_CHAT_PROFILE';

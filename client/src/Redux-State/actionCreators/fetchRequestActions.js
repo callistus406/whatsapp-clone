@@ -178,6 +178,7 @@ export const fetchMessages = (conversationId) => {
 };
 
 export const fetchUserProfile = (userId) => {
+  console.log(userId);
   return function (dispatch, getState) {
     dispatch(fetchUserProfileRequest);
 
@@ -189,6 +190,7 @@ export const fetchUserProfile = (userId) => {
         // },
       })
       .then((response) => {
+        console.log(response.data);
         dispatch(fetchUseProfileSuccess(response.data));
       })
       .catch((error) => {
