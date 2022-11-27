@@ -51,14 +51,18 @@ import {
   toggleStarredGrpMsgs,
   toggleContactInfo,
 } from '../../../Redux-State/actionCreators/pageActions';
+// import { fetchMessages } from '../../../Redux-State/actionCreators/fetchRequestActions';
+
 import { connect } from 'react-redux';
 import SearchParticipants from '../../SearchParticipants/SearchParticipants.jsx';
 import StarredMsgs from '../../GroupStarredMsgs/StarredMsgs';
 import { AlertDialog } from '../../../components/AlertDialog';
 import Chat from '../../../components/Chat';
 function ContactInfo(props) {
+  const { username, phone, about } = props.userProfile.data;
+
   const membersRef = useRef();
-  const username = '';
+  // const username = '';
   const scrollToBottom = () => {
     membersRef.current.scrollIntoView({ behavior: 'smooth' });
   };
@@ -118,7 +122,7 @@ function ContactInfo(props) {
             onMouseEnter={() => showIcon('title')}
             onMouseLeave={() => hideIcon('title')}
           >
-            <span className="groupName">Generous </span>
+            <span className="groupName">{username} </span>
             {/* {editInfo ? (
               <span className="groupInfoIcon" onClick={handleClickOpen}>
                 <InfoIcon />
@@ -127,7 +131,7 @@ function ContactInfo(props) {
               ""
             )} */}
           </StyledGroupHeading>
-          <p onClick={handleScroll}>+2348143568829</p>
+          <p onClick={handleScroll}>+234 {phone}</p>
         </StyledGroupImg>
         <StyledContactInfo>
           <StyledGroupInstruction
@@ -135,10 +139,7 @@ function ContactInfo(props) {
           // onMouseLeave={() => hideIcon("info")}
           >
             <p className="aboutContact">About</p>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Voluptatem, aspernatur!
-            </p>
+            <p>{about}</p>
             {/* {editInfo ? (
               <span className="groupInfoIcon" onClick={handleClickOpen}>
                 <InfoIcon />
@@ -242,15 +243,19 @@ function ContactInfo(props) {
               <span className="exitIcon">
                 <BlockIcon color="error" />
               </span>
-              <p>Block {username ? username : 'joy'}</p>
+              <p>
+                Block {username ? <span> {username}</span> : '<h5> User</h5>'}
+              </p>
             </div>
           </div>
           <div className="reportCont">
             <div className="report">
               <span className="reportIcon">
-                <ThumbDownAltIcon color="error" />
+                <ThumbDownAltIcon />
               </span>
-              <p>Report {username ? username : 'joy'}</p>
+              <p>
+                Report {username ? <span>{username}</span> : '<h5> User</h5>'}
+              </p>
             </div>
           </div>
         </StyledGroupInfoActions>
@@ -302,6 +307,7 @@ function mapStateToProps(state) {
   return {
     displayStarredGrpMsgs: state.starredGrpMsg.displayStarredGrpMsgs,
     displayContactInfo: state.contactInfo.displayContactInfo,
+    userProfile: state.userProfile,
 
     // search msg state
     displaySearchContactMsg: state.searchContactMsg.displaySearchContactMsg,

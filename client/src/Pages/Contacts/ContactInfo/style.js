@@ -303,9 +303,20 @@ export const StyledGroupInfoActions = styled.div`
       height: 3rem;
       display: flex;
       align-items: center;
+      color: #ea0038;
       p {
+        width: 100%;
         margin-left: 2rem;
-        color: #d32f2f;
+        color: #ea0038;
+        display: flex;
+        align-items: center;
+
+        span {
+          align-self: center;
+
+          margin-left: 0.5rem;
+          ${'' /* font-size: 1.2rem; */}
+        }
       }
     }
     &:hover {
@@ -321,10 +332,16 @@ export const StyledGroupInfoActions = styled.div`
       height: 3rem;
       display: flex;
       align-items: center;
+      color: #ea0038;
 
       p {
         margin-left: 2rem;
-        color: #d32f2f;
+        color: #ea0038;
+        span {
+          align-self: center;
+
+          margin-left: 0.5rem;
+        }
       }
     }
     &:hover {
@@ -337,7 +354,7 @@ export const StyledGroupInfoActions = styled.div`
 export const StyledDeleteChat = styled.div`
   && {
     ${'' /* background: blue; */}
-    color:#D32F2F;
+    color:#EA0038;
     height: 3rem;
     width: 100%;
     ${'' /* border: 1px solid blue; */}
@@ -347,8 +364,8 @@ export const StyledDeleteChat = styled.div`
     align-items: center;
 
     .deleteText {
-      margin-left: 1.5rem;
-      color: #d32f2f;
+      margin-left: 2rem;
+      color: #ea0038;
     }
     &:hover {
       cursor: pointer;
