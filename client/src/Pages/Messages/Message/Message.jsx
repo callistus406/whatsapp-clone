@@ -29,7 +29,7 @@ function Message({
   newMessage,
   userProfile,
 }) {
-  // console.log(getUser.data._id);
+  console.log(userProfile.data);
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
   const prevHeight = useRef(0);

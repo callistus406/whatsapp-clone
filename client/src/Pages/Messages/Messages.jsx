@@ -58,6 +58,7 @@ function Messages(props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    // console.log(props.userProfile.data.username);
     socket.current = io('ws://localhost:8900');
     socket.current.on('getMessage', (data) => {
       setArrivedMessage({
@@ -197,7 +198,7 @@ function Messages(props) {
           }}
         >
           <div className="title">
-            <p>+2348143568829</p>
+            <p>{props.userProfile.data.username}</p>
           </div>
         </div>
         <div className="icons">
