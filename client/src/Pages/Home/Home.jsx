@@ -33,7 +33,7 @@ import {
 } from '../../Redux-State/actionCreators/fetchRequestActions.js';
 // import thunk from "redux-thunk";
 import { StyledContactsCol, StyledChatsCol } from './style';
-// import { StickerIcon } from "./HomeIcons";
+
 import GroupInfo from '../GroupInfo/GroupInfo';
 // import MessageBox from "./MessageBox";
 import HomeContent from './HomeComp/HomeContent';
@@ -42,7 +42,7 @@ import ContactInfo from '../Contacts/ContactInfo/ContactInfo';
 import SearchContactMsg from '../Contacts/SearchContactMsg/SearchContactMsg';
 import Conversation from '../Conversation/Conversation';
 import Messages from '../Messages/Messages';
-
+import { ConversationImage } from './HomeIcons';
 import jwtDecode from 'jwt-decode';
 
 // Menu;
@@ -137,27 +137,19 @@ function Home(props) {
   // let auth = props.authToken[1];
   useEffect(() => {
     console.log(props.userInfo.payload);
-    props.fetchRefreshToken();
   }, []);
   async function now() {
     // const data = await refreshToken();
   }
   useEffect(() => {
-    // props.getToken(
-    //   props.userInfo.payload.accessToken,
-    //   props.userInfo.payload.refreshToken
-    // );
-    // now();
-    // props.fetchRefreshToken(props.userInfo.payload);
-
-    console.log(loggedUser.payload._id);
+    console.log(loggedUser.payload.user._id);
 
     console.log('Home rendered____________________________________________');
 
-    props.fetchConversations(loggedUser.payload._id);
+    props.fetchConversations(loggedUser.payload.user._id);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedUser.payload._id]);
+  }, [loggedUser.payload.user_id]);
 
   function clickHandler() {
     setOpen(!open);
@@ -198,7 +190,7 @@ function Home(props) {
                       <Conversation
                         passMenu={index}
                         conversation={conversation}
-                        currentUser={loggedUser.payload._id}
+                        currentUser={loggedUser.payload.user._id}
                       />
                     </div>
                   );
@@ -219,12 +211,13 @@ function Home(props) {
             {/* commented */}
             <div className="chatColDiv">
               <div className="imageCont">
-                <img
+                <ConversationImage />
+                {/* <img
                   src={image}
                   alt="image"
                   srcset=""
                   className="connectImage"
-                />
+                /> */}
               </div>
               <div className="textContent">
                 <span>Keep Your Phone Connected</span>

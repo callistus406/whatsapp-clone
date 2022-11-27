@@ -23,7 +23,10 @@ import {
   fetchUserProfile,
   fetchMessages,
 } from '../../Redux-State/actionCreators/fetchRequestActions';
-import { getConversationId } from '../../Redux-State/actionCreators/pageActions';
+import {
+  getConversationId,
+  getContactProfile,
+} from '../../Redux-State/actionCreators/pageActions';
 import axios from 'axios';
 // import Messages from "../Messages/Messages";
 import axiosInstance from '../../utils/axiosInstance';
@@ -32,11 +35,9 @@ function Conversation(props) {
   const [getUserProfile, setUserProfile] = useState([]);
   // console.log(props.conversation._id);
   const { conversation, displayChatId } = props;
-  // useEffect(() => {
-  //   props.getConversationId(conversation._id);
-  // }, []);
 
   useEffect(() => {
+    // console.log(props.contactProfile);
     console.log(
       'User chat rendered____________________________________________'
     );
@@ -47,7 +48,6 @@ function Conversation(props) {
           (m) => m !== props.currentUser
         );
         const res = await axiosInstance.get(`/user/${friendId}`);
-        console.log(props.currentUser);
 
         setUserProfile(res.data);
       } catch (error) {
@@ -86,6 +86,8 @@ function Conversation(props) {
       onClick={() => {
         props.displayGrpMsgAction(true);
         props.fetchMessages(conversation._id);
+        props.fetchUserProfile(getUserProfile._id);
+
         props.getConversationId(conversation._id);
       }}
     >
@@ -136,8 +138,8 @@ function mapStateToProps(state) {
     userProfile: state.userProfile,
     messages: state.messages,
     displayChatId: state.displayConversationId.displayChatId,
-
     displayGrpMsgSection: state.grpMsgSection.displayGrpMsgSection,
+    contactProfile: state.contactProfile.getContactProfileState,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -146,7 +148,9 @@ function mapDispatchToProps(dispatch) {
     // login: (data) => dispatch(login(data)),
     fetchUserProfile: (data) => dispatch(fetchUserProfile(data)),
     fetchMessages: (data) => dispatch(fetchMessages(data)),
-
+    getContactProfile: (data) => {
+      dispatch(getContactProfile(data));
+    },
     displayGrpMsgAction: (bool) => dispatch(displayGrpMsgAction(bool)),
     getConversationId: (arg) => dispatch(getConversationId(arg)),
   };
