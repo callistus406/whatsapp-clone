@@ -29,7 +29,7 @@ function Message({
   newMessage,
   userProfile,
 }) {
-  console.log(userProfile.data);
+  console.log(userProfile.data.username);
   const messageScroll = useRef();
   const msgSpaceRef = useRef();
   const prevHeight = useRef(0);
@@ -38,6 +38,7 @@ function Message({
   const scrollToBottom = () => {
     messageScroll.current.scrollIntoView({ behavior: 'smooth' });
   };
+
   let detect = 0;
   useEffect(() => {
     console.log('messages loaded......................................');
@@ -136,10 +137,10 @@ function Message({
           return (
             <ReceivedMsgs
               classValue={
-                item.sender === getUser.data.payload._id ? 'left' : 'right'
+                item.sender === getUser.data.payload.user._id ? 'left' : 'right'
               }
               username={
-                item.sender !== getUser.data.payload._id
+                item.sender !== getUser.data.payload.user._id
                   ? userProfile.data.username
                   : 'you'
               }
@@ -163,6 +164,8 @@ function Message({
 
 function ReceivedMsgs({ classValue, username, msgText, msgTime }) {
   // console.log(username);
+  let isGroupChat = true;
+
   const [borderBottom, setBorderBottom] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   function addBorderBottom(bool) {
@@ -248,7 +251,7 @@ function ReceivedMsgs({ classValue, username, msgText, msgTime }) {
         </StyledContextMenu>
       </StyledMsgInfo>
       <div class="talktext">
-        <div>{username}</div>
+        <div>{isGroupChat ? username : ''}</div>
         <p>{msgText}</p>
         <div className="msgTime">
           <div>

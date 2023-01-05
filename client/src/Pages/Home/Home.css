@@ -89,7 +89,7 @@
 } */
 .topHeader {
   width: 100%;
-  height: 200px;
+  height: auto;
   background-color: #f6f6f6;
   /* position: sticky; */
 }
@@ -484,7 +484,7 @@
 
 /* Right triangle placed top left flush. */
 .tri-right.border.left-top:before {
-  content: "";
+  content: '';
   position: absolute;
   width: -0;
   height: 0;
@@ -496,7 +496,7 @@
   border-color: #666 transparent transparent transparent;
 }
 .tri-right.left-top:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
@@ -509,7 +509,7 @@
 }
 /* sent */
 .tri-right-send.border.right-top:before {
-  content: " ";
+  content: ' ';
   position: absolute;
   width: 0;
   height: 0;
@@ -521,7 +521,7 @@
   border-color: #d9fdd3 transparent transparent transparent;
 }
 .tri-right-send.right-top:after {
-  content: " ";
+  content: ' ';
   position: absolute;
   width: 0;
   height: 0;
