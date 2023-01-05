@@ -28,6 +28,7 @@ import {
   StickerIcon,
 } from './icons';
 // speed dial
+
 import PersonIcon from '@mui/icons-material/Person';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
@@ -58,7 +59,7 @@ function Messages(props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // console.log(props.userProfile.data.username);
+    // console.log(props.userProfi);
     socket.current = io('ws://localhost:8900');
     socket.current.on('getMessage', (data) => {
       setArrivedMessage({
@@ -79,15 +80,15 @@ function Messages(props) {
       setMessages((prev) => [...prev, arrivedMessage]);
   }, [arrivedMessage, currentChat]);
 
-  console.log(getUser.data.payload._id);
+  console.log(getUser.data.payload.user._id);
   useEffect(() => {
     console.log('socket rendered____________________________________________');
     console.log(props.authToken);
-    socket.current.emit('addUser', getUser.data.payload._id);
+    socket.current.emit('addUser', getUser.data.payload.user._id);
     socket.current.on('getUsers', (users) => {
       console.log(users);
     });
-  }, [getUser.data.payload]);
+  }, [getUser.data.payload.user]);
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -120,16 +121,21 @@ function Messages(props) {
         // this makes a post request with the message written
         const msg = {
           conversationId: props.displayChatId,
-          sender: props.getUser.data.payload._id,
+          sender: props.getUser.data.payload.user._id,
           text: documentInput.value,
         };
         console.log(currentChat);
         const receiverId = currentChat.members.find(
-          (member) => member !== getUser.data.payload._id
+          (member) => member !== getUser.data.payload.user._id
         );
-        console.log(receiverId, getUser.data.payload._id, documentInput.value);
+        console.log(
+          receiverId,
+          getUser.data.payload.user._id,
+          documentInput.value
+        );
+        console.log(getUser.data.payload.user._id);
         socket.current.emit('sendMessage', {
-          senderId: getUser.data.payload._id,
+          senderId: getUser.data.payload.user._id,
           receiverId: receiverId,
           text: documentInput.value,
         });
@@ -187,7 +193,13 @@ function Messages(props) {
           className="imageCont"
           onClick={() => props.toggleContactInfo(true)}
         >
-          <div className="image"></div>
+          <div className="image">
+            <PersonIcon
+              style={{
+                color: '#9DE1FE',
+              }}
+            />
+          </div>
         </div>
         <div
           className="chatHeadInfo"

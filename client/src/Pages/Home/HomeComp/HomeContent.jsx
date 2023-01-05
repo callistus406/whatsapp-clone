@@ -2,16 +2,23 @@ import React, { useRef, useCallback, useEffect, useState } from 'react';
 import '../Home.css';
 import { connect } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
-
+import styled from 'styled-components';
 import { CenterDivContent } from '../../Styles/CustomStyles';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import FilterListIcon from '@mui/icons-material/FilterList';
 // menu
 
 import {
   displaySettings,
   logout,
 } from '../../../Redux-State/actionCreators/pageActions';
-import { StatusIcon, MessageIcon, ProfileIcon, ArrowBack } from '../HomeIcons';
+import {
+  StatusIcon,
+  MessageIcon,
+  ProfileIcon,
+  ArrowBack,
+  CommunityIcon,
+} from '../HomeIcons';
 import {
   StyledSpan,
   StyledIcon,
@@ -22,6 +29,25 @@ import {
 } from '../style';
 import CustomMenu from './CustomMenu';
 function Content(props) {
+  const StyledFilterMsg = styled.div`
+    display: ${(prop) => (prop.toggle ? 'flex' : 'none')};
+    padding-left: 2.3rem;
+    transition: 0.6s;
+    height: 70px;
+    width: 100%;
+    align-items: center;
+    color: #31826e;
+    font-weight: 500;
+    ${'' /* } */}
+  `;
+
+  const StyledBorderBottom = styled.div`
+    display: ${(prop) => (prop.toggle ? 'block' : 'none')};
+    border: 1px solid #e9edef;
+    margin-left: auto;
+    width: 81%;
+  `;
+
   const countRef = useRef(0);
 
   useEffect(() => {
@@ -35,20 +61,27 @@ function Content(props) {
   });
   const [searchInput, setSearchInput] = useState('.');
   const inputRef = useRef();
+  const [toggleState, setToggleState] = useState({
+    filterIcon: false,
+    inputFocused: false,
+  });
 
   //
-  const [focused, setFocus] = useState(false);
+  // const [focused, setFocus] = useState(false);
 
   const divRef = useRef();
 
   const [cancel, setCancel] = useState(false);
 
   const unfocus = () => {
-    setFocus(false);
+    setToggleState({ ...toggleState, inputFocused: false });
+    // setFocus(false);
     // divRef.current.style.backgroundColor = "#F7F7F7";
   };
   const focus = () => {
-    setFocus(true);
+    setToggleState({ ...toggleState, inputFocused: true });
+
+    // setFocus(true);
     // divRef.current.style.backgroundColor = "#fff";
   };
   const handleChange = (event) => {
@@ -71,6 +104,9 @@ function Content(props) {
         <div className="profileDisplay">
           <ProfileIcon />
           <div className="profileActions">
+            <StyledActionIcons style={{ color: '#54656F' }}>
+              <CommunityIcon />
+            </StyledActionIcons>
             <StyledActionIcons>
               <StatusIcon />
             </StyledActionIcons>
@@ -107,7 +143,7 @@ function Content(props) {
           <StyledSearchBarContainer ref={divRef}>
             <span className="searchIconCont">
               {' '}
-              {focused ? <ArrowBack /> : <StyledSearchIcon />}
+              {toggleState.inputFocused ? <ArrowBack /> : <StyledSearchIcon />}
             </span>
             <span className="clearIconCont">
               {cancel ? <ClearIcon onClick={handleCancel} /> : ''}
@@ -115,17 +151,42 @@ function Content(props) {
             <input
               ref={inputRef}
               type="text"
-              placeholder={!focused ? 'Search or start new chat' : ''}
+              placeholder={
+                !toggleState.inputFocused
+                  ? 'Search or start new chat'
+                  : toggleState.filterIcon
+                  ? 'Search unread chats'
+                  : ''
+              }
               className="inputSearch"
               onFocus={focus}
               onBlur={unfocus}
               onChange={handleChange}
               // onClick={handleClick("search")}
             />
+            <div
+              className="filterIconCont"
+              style={{
+                background: toggleState.filterIcon ? '#00a884' : '#fff',
+              }}
+              onClick={() =>
+                setToggleState({
+                  ...toggleState,
+                  filterIcon: !toggleState.filterIcon,
+                  inputFocused: !toggleState.inputFocused,
+                })
+              }
+            >
+              <FilterListIcon sx={{ color: '#8696A0' }} />
+            </div>
           </StyledSearchBarContainer>
           {/* <StyledSearchIcon fontSize="small" /> */}
         </CenterDivContent>
       </div>
+      <StyledFilterMsg toggle={toggleState.filterIcon}>
+        <p>FILTERED BY UNREAD</p>
+      </StyledFilterMsg>
+      <StyledBorderBottom toggle={toggleState.filterIcon} />
     </>
   );
 }
