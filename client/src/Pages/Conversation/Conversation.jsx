@@ -5,6 +5,7 @@ import React, {
   useState,
   useReducer,
 } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { groupDialog } from '../../GlobalVariables/variables';
 import { displayGrpMsgAction } from '../../Redux-State/actionCreators/pageActions';
 import { connect, useDispatch, useSelector } from 'react-redux';
@@ -15,6 +16,8 @@ import {
   StyledCircle,
   StyledContextMenu,
   StyledContextMenuItem,
+  StyledDivider,
+  StyledBadge,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
 } from './styles.js';
@@ -33,7 +36,7 @@ import axiosInstance from '../../utils/axiosInstance';
 function Conversation(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
   const [getUserProfile, setUserProfile] = useState([]);
-  // console.log(props.conversation._id);
+
   const { conversation, displayChatId } = props;
 
   useEffect(() => {
@@ -81,54 +84,74 @@ function Conversation(props) {
   // const handleItemClick = ({ event, props }) => console.log(event, props);
 
   return (
-    <StyledUserChatLayout
-      onContextMenu={handleContextMenu}
-      onClick={() => {
-        props.displayGrpMsgAction(true);
-        props.fetchMessages(conversation._id);
-        props.fetchUserProfile(getUserProfile._id);
+    <>
+      <StyledUserChatLayout
+        onContextMenu={handleContextMenu}
+        onClick={() => {
+          props.displayGrpMsgAction(true);
+          props.fetchMessages(conversation._id);
+          props.fetchUserProfile(getUserProfile._id);
 
-        props.getConversationId(conversation._id);
-      }}
-    >
-      <StyledUserChatCont>
-        <div className="chatHead">
-          <StyledCircle />
-        </div>
-        <StyledUserChatText>
-          <h3>{getUserProfile.username}</h3>
-
-          {/* <Messages /> */}
-        </StyledUserChatText>
-      </StyledUserChatCont>
-      <StyledContextMenu
-        PaperProps={{
-          style: {
-            // maxHeight: ITEM_HEIGHT * 4.5,
-            height: '13rem',
-            width: '12rem',
-          },
+          props.getConversationId(conversation._id);
         }}
-        open={contextMenu !== null}
-        onClose={handleClose}
-        anchorReference="anchorPosition"
-        autoFocus={false}
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
-        }
       >
-        {groupDialog.map((item, index) => {
-          return (
-            <StyledContextMenuItem onClick={handleClose} key={index}>
-              {item.text}
-            </StyledContextMenuItem>
-          );
-        })}
-      </StyledContextMenu>
-      <div className="borderBottom"></div>
-    </StyledUserChatLayout>
+        <StyledUserChatCont>
+          <div className="chatHead">
+            <StyledCircle />
+          </div>
+          <StyledUserChatText>
+            <div className="userNameContainer">
+              <span className="username">{getUserProfile.username}</span>
+              <span className="msgTime">10:00 am</span>
+            </div>
+
+            {/* <Messages /> */}
+            {/* TODO: validate for group */}
+            <div className="userMsgContainer">
+              <div className="msgPreview">
+                <p>Hello this is mary from code academy..</p>
+              </div>
+              <div className="msgBadge">
+                {/* <StyledBadge>
+                  {' '}
+                  <span>5</span>
+                </StyledBadge> */}
+                <StyledBadge badgeContent={4} color="secondary"></StyledBadge>
+                <KeyboardArrowDownIcon />
+              </div>
+            </div>
+          </StyledUserChatText>
+        </StyledUserChatCont>
+        <StyledContextMenu
+          PaperProps={{
+            style: {
+              // maxHeight: ITEM_HEIGHT * 4.5,
+              height: '13rem',
+              width: '12rem',
+            },
+          }}
+          open={contextMenu !== null}
+          onClose={handleClose}
+          anchorReference="anchorPosition"
+          autoFocus={false}
+          anchorPosition={
+            contextMenu !== null
+              ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+              : undefined
+          }
+        >
+          {groupDialog.map((item, index) => {
+            return (
+              <StyledContextMenuItem onClick={handleClose} key={index}>
+                {item.text}
+              </StyledContextMenuItem>
+            );
+          })}
+        </StyledContextMenu>
+        <div className="borderBottom"></div>
+      </StyledUserChatLayout>
+      <StyledDivider />
+    </>
   );
 }
 function mapStateToProps(state) {
@@ -144,8 +167,6 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    // search msg action
-    // login: (data) => dispatch(login(data)),
     fetchUserProfile: (data) => dispatch(fetchUserProfile(data)),
     fetchMessages: (data) => dispatch(fetchMessages(data)),
     getContactProfile: (data) => {
