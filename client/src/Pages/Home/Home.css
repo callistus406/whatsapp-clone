@@ -483,6 +483,7 @@
 }
 
 /* Right triangle placed top left flush. */
+
 .tri-right.border.left-top:before {
   content: '';
   position: absolute;
@@ -558,4 +559,8 @@
   font-size: 0.7rem;
   color: #718388;
   margin-left: 0.2rem;
+}
+
+.right {
+  margin-right: auto !important;
 }
