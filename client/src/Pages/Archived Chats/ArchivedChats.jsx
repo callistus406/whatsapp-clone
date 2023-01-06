@@ -1,14 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-import { ArchiveIcon } from "./icons";
+import React from 'react';
+import { connect } from 'react-redux';
+import { ArchiveIcon } from './icons';
 import {
   StyledContainer,
   StyledNavArrow,
   StyledArrowBackIcon,
   StyledArchiveHeader,
   StyledArchiveContent,
-} from "./styles";
-import { archiveToggle } from "../../Redux-State/actionCreators/pageActions.js";
+} from './styles';
+import { archiveToggle } from '../../Redux-State/actionCreators/pageActions.js';
 function ArchivedChats(props) {
   return (
     <div>
