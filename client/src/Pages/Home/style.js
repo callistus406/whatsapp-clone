@@ -122,12 +122,10 @@ export const StyledBox = styled(Box)`
 export const StyledMessageSpace = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
-   position: relative; 
+  position: relative;
   background-image: url(${Image});
-${'' /* z-index:-1; */}
+  ${'' /* z-index:-1; */}
   ${'' /* .......................... */}
-
-  }
 `;
 
 export const StyledMessageCont = styled.div`

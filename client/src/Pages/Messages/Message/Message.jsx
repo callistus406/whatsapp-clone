@@ -139,11 +139,11 @@ function Message({
               classValue={
                 item.sender === getUser.data.payload.user._id ? 'left' : 'right'
               }
-              username={
-                item.sender !== getUser.data.payload.user._id
-                  ? userProfile.data.username
-                  : 'you'
-              }
+              // username={
+              //   item.sender !== getUser.data.payload.user._id
+              //     ? userProfile.data.username
+              //     : ''
+              // }
               key={index}
               msgText={item.text}
               msgTime={item.createdAt}
@@ -171,7 +171,6 @@ function ReceivedMsgs({ classValue, username, msgText, msgTime }) {
   function addBorderBottom(bool) {
     setBorderBottom(bool);
   }
-
   function hideArrow(value) {
     setShowArrow(value);
   }
@@ -220,8 +219,14 @@ function ReceivedMsgs({ classValue, username, msgText, msgTime }) {
           {/* <StyledMsgName border={borderBottom}> ~oladipo</StyledMsgName> */}
         </div>
 
-        <StyledKeyBoardArrow hide={showArrow} onClick={handleContextMenu}>
-          <StyledMsgInfoIcon fontSize="medium" />
+        <StyledKeyBoardArrow hide={showArrow}>
+          <StyledMsgInfoIcon
+            fontSize="medium"
+            onClick={(event) => {
+              hideArrow(false);
+              handleContextMenu(event);
+            }}
+          />
         </StyledKeyBoardArrow>
         <StyledContextMenu
           PaperProps={{
