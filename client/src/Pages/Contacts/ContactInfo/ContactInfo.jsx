@@ -153,9 +153,8 @@ function ContactInfo(props) {
         <GroupInfoLinks>
           <div className="placeholder">
             <p>Media, Links and docs</p>
-            <span>
-              {' '}
-              <ArrowForwardIosIcon fontSize="small" />
+            <span className="iconCont">
+              <span>0</span> <ArrowForwardIosIcon fontSize="small" />
             </span>
           </div>
         </GroupInfoLinks>

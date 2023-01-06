@@ -140,8 +140,10 @@ export const GroupInfoLinks = styled.div`
     p {
       color: #979797;
     }
-    span {
+    .iconCont {
       color: #949494;
+      display: flex;
+      align-items: center;
     }
   }
 `;
