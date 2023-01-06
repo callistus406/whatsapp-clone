@@ -64,6 +64,7 @@ function Content(props) {
   const [toggleState, setToggleState] = useState({
     filterIcon: false,
     inputFocused: false,
+    toggleBg: false,
   });
 
   //
@@ -92,6 +93,9 @@ function Content(props) {
     }
   };
 
+  const handleToggleBg = (bool) => {
+    setToggleState({ ...toggleState, toggleBg: bool });
+  };
   function handleCancel() {
     // setHide((prevState) => !prevState);
     inputRef.current.value = '';
@@ -114,10 +118,8 @@ function Content(props) {
               <MessageIcon />
             </StyledActionIcons>
 
-            <div>
-              <CustomMenu />
-              {/* {"this contains popover menu "} */}
-            </div>
+            <CustomMenu />
+            <div>{/* {"this contains popover menu "} */}</div>
           </div>
         </div>
         <div className="notificationMsgCont">

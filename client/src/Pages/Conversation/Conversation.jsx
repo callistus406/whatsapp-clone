@@ -18,14 +18,17 @@ import {
   StyledContextMenuItem,
   StyledDivider,
   StyledBadge,
+  StyledArrowCont,
   StyledContextMenu4MsgSpace,
   StyledContextMenuItem4MsgSpace,
+  Avatar,
 } from './styles.js';
 import {
   // login,
   fetchUserProfile,
   fetchMessages,
 } from '../../Redux-State/actionCreators/fetchRequestActions';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import {
   getConversationId,
   getContactProfile,
@@ -36,7 +39,12 @@ import axiosInstance from '../../utils/axiosInstance';
 function Conversation(props) {
   const [contextMenu, setContextMenu] = React.useState(null);
   const [getUserProfile, setUserProfile] = useState([]);
-
+  const [toggle, setToggle] = useState({
+    arrow: false,
+  });
+  const handleToggleArrow = (bool) => {
+    setToggle({ ...toggle, arrow: bool });
+  };
   const { conversation, displayChatId } = props;
 
   useEffect(() => {
@@ -87,6 +95,9 @@ function Conversation(props) {
     <>
       <StyledUserChatLayout
         onContextMenu={handleContextMenu}
+        onMouseEnter={() => handleToggleArrow(true)}
+        onMouseLeave={() => handleToggleArrow(false)}
+        toggle={toggle.arrow}
         onClick={() => {
           props.displayGrpMsgAction(true);
           props.fetchMessages(conversation._id);
@@ -97,9 +108,11 @@ function Conversation(props) {
       >
         <StyledUserChatCont>
           <div className="chatHead">
-            <StyledCircle />
+            <StyledCircle>
+              <Avatar />
+            </StyledCircle>
           </div>
-          <StyledUserChatText>
+          <StyledUserChatText toggle={toggle.arrow}>
             <div className="userNameContainer">
               <span className="username">{getUserProfile.username}</span>
               <span className="msgTime">10:00 am</span>
@@ -116,8 +129,11 @@ function Conversation(props) {
                   {' '}
                   <span>5</span>
                 </StyledBadge> */}
-                <StyledBadge badgeContent={4} color="secondary"></StyledBadge>
-                <KeyboardArrowDownIcon />
+                <StyledBadge badgeContent={53}></StyledBadge>
+
+                <div className="arrowAction">
+                  <KeyboardArrowDownIcon sx={{ color: '#8696A0' }} />
+                </div>
               </div>
             </div>
           </StyledUserChatText>
