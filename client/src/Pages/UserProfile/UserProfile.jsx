@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 import {
   StyledContainer,
   StyleProfileBox,
@@ -10,9 +10,9 @@ import {
   StyledProfileHeader,
   StyledNavArrow,
   StyledProfileContent,
-} from "./styles";
-import { hideProfile } from "../../Redux-State/actionCreators/pageActions";
-import { connect } from "react-redux";
+} from './styles';
+import { hideProfile } from '../../Redux-State/actionCreators/pageActions';
+import { connect } from 'react-redux';
 
 function UserProfile(props) {
   const countRef = useRef(0);
@@ -20,7 +20,7 @@ function UserProfile(props) {
   useEffect(() => {
     countRef.current = countRef.current + 1;
 
-    console.log("profile logged " + countRef.current);
+    console.log('profile logged ' + countRef.current);
   });
   return (
     <StyledContainer toggle={props.displayProfileContainer} width="28rem">
@@ -49,7 +49,7 @@ function UserProfile(props) {
           >
             <div className="content">
               <p>Your name</p>
-              <span style={{ color: "#000" }}>Callistus</span>
+              <span style={{ color: '#000' }}>Callistus</span>
             </div>
             <div className="editIcon">
               <StyledEditIcon />
@@ -68,8 +68,8 @@ function UserProfile(props) {
           >
             <p
               style={{
-                alignSelf: "center",
-                width: "90%",
+                alignSelf: 'center',
+                width: '90%',
               }}
             >
               This is not your username or pin.This name will be visible to your
@@ -86,7 +86,7 @@ function UserProfile(props) {
           >
             <div className="status">
               <p>About</p>
-              <span style={{ color: "#000" }}>
+              <span style={{ color: '#000' }}>
                 This is where you enter you status
               </span>
             </div>

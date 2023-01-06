@@ -122,12 +122,10 @@ export const StyledBox = styled(Box)`
 export const StyledMessageSpace = styled.div`
   width: 100%;
   height: calc(100vh - (3.6rem + 3.875rem));
-   position: relative; 
+  position: relative;
   background-image: url(${Image});
-${'' /* z-index:-1; */}
+  ${'' /* z-index:-1; */}
   ${'' /* .......................... */}
-
-  }
 `;
 
 export const StyledMessageCont = styled.div`
@@ -173,7 +171,8 @@ export const StyledMsgInfo = styled.div`
 
   position: relative;
   div {
-    width: 40%;
+    width: auto;
+    max-width: 40%;
   }
   .arrowCont {
     ${'' /* border: 1px solid blue; */}
@@ -185,11 +184,11 @@ export const StyledMsgInfo = styled.div`
 `;
 
 export const StyledKeyBoardArrow = styled.span`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   height: 1rem;
   width: 100%;
   ${'' /* margin-left: 0; */}
-  ${'' /* border: 1px solid red; */}
+  /* border: 1px solid red; */
   position: absolute;
   display: ${(props) => (props.hide ? 'flex' : 'none')};
   flex-direction: column;
