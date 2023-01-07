@@ -6,7 +6,7 @@ function initialize(passport, getUserByUserName, getUserById) {
 
   const authenticateUser = async (username, phone, done) => {
     const user = await getUserByUserName(username);
-    console.log(user);
+    console.log(username, phone);
     if (user == null) {
       return done(null, false, { message: 'Invalid Credentials' });
     }
@@ -30,8 +30,11 @@ function initialize(passport, getUserByUserName, getUserById) {
     passport.use(
       new LocalStrategy({ usernameField: 'username' }, authenticateUser)
     );
-    passport.serializeUser((user, done) => done(null, user.id));
-    console.log(user);
+    passport.serializeUser((user, done) => {
+      console.log(user);
+      done(null, user.id);
+    });
+    // console.log(user);
     passport.deserializeUser(async (id, done) => {
       console.log(await getUserById(id));
       return done(null, await getUserById(id));

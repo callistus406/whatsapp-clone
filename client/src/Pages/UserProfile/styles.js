@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import EditIcon from "@mui/icons-material/Edit";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import styled from 'styled-components';
+import EditIcon from '@mui/icons-material/Edit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
   width: ${(props) =>
     props.toggle ? props.width : 0}; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 2; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #fff;
@@ -14,28 +14,41 @@ export const StyledContainer = styled.div`
   transition: 0.5s;
 
   .content {
-    width: 50%;
+    width: 93%;
     height: 5rem;
-    ${"" /* border: 1px solid blue; */}
+    ${'' /* border: 1px solid blue; */}
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding-left: 2rem;
+    position: relative;
+    p {
+      font-size: 0.9rem;
+    }
   }
   .status {
-    width: 80%;
+    width: 93%;
     height: 8rem;
     /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    position: relative;
+    .aboutHeader {
+      font-size: 0.9rem;
+    }
   }
-  .editIcon {
-    display: flex;
-    align-items: flex-end;
-    margin-left: auto;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+  .editNameIcon {
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+    /* width: 5%; */
+  }
+  .editAboutIcon {
+    position: absolute;
+    right: 0;
+    bottom: 2.2rem;
+    /* width: 5%; */
   }
 `;
 
@@ -49,15 +62,15 @@ export const StyledProfileHeader = styled.div`
 `;
 export const StyledProfileContent = styled.div`
   height: calc(100vh - 6.6rem);
-  width:100%
-  ${"" /* background: #ededed; */}
-  display: ${(props) => (props.toggle ? "block" : "none")};
+  width: 100%;
+  /* background: red;  */
+  /* display: ${(props) => (props.toggle ? 'block' : 'none')}; */
   margin: 4px, 4px;
-  transition:0.1s;
+  transition: 0.1s;
   min-width: 28rem;
   overflow-x: hidden;
   overflow-y: auto;
-  ${"" /* border: 1px solid blue;  */}
+  ${'' /* border: 1px solid blue;  */}
 
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -77,12 +90,11 @@ export const StyledProfileContent = styled.div`
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #bfbfbf;
   }
-  
 `;
 export const StyledNavArrow = styled.div`
   width: 80%;
   height: 3rem;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   display: flex;
   align-items: center;
   color: #fff;
@@ -101,7 +113,9 @@ export const DisplayPic = styled.div`
   height: 202px;
   width: 202px;
   border-radius: 50%;
-  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const StyleProfilePicBox = styled.div`
   height: 16rem;
@@ -118,9 +132,9 @@ export const CustomDiv = styled.div`
   font-size: ${(props) => props.fontSize};
   border: ${(props) => props.border};
   display: ${(props) => props.display};
-  justify-content:${(props) => props.justifyContent}
+  justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
-  padding-left: ${(props) => props.padding}
+  padding-left: ${(props) => props.padding};
 `;
 export const StyledEditIcon = styled(EditIcon)`
   color: #919191;
