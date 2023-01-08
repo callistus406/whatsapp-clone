@@ -1,19 +1,17 @@
-import styled from "styled-components";
-import EditIcon from "@mui/icons-material/Edit";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import styled from 'styled-components';
+import EditIcon from '@mui/icons-material/Edit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
   width: ${(props) =>
     props.toggle ? props.width : 0}; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1;
+  z-index: 2;
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #fff;
-
-  transition: 0.1s;
 `;
 export const StyledDiv = styled.div`
   height: 100%; /* 100% Full-height */
@@ -41,12 +39,12 @@ export const StyledArrowBackIcon = styled(ArrowBackIcon)`
 export const StyledNavArrow = styled.div`
   width: 22rem;
   height: 3rem;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   display: flex;
   align-items: center;
-  ${"" /* justify-content: center; */}
+  ${'' /* justify-content: center; */}
   color: #fff;
-  display: ${(props) => (props.display ? "flex" : "none")};
+  display: ${(props) => (props.display ? 'flex' : 'none')};
 
   p {
     margin-left: 2rem;
@@ -109,6 +107,27 @@ export const StyledSettingsContent = styled.div`
   left: 0;
   background-color: #fff;
   overflow-x: hidden;
+  overflow-y: auto;
+  transition: 0.1s;
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: #bfbfbf;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 10px;
+
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #bfbfbf;
+  }
   .settingsProfileCont {
     width: 100%;
     height: 7rem;
@@ -116,6 +135,9 @@ export const StyledSettingsContent = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+    gap: 1.5rem;
+    /* border: 1px solid blue; */
+
     &:hover {
       background-color: #f5f5f5;
     }
@@ -123,6 +145,7 @@ export const StyledSettingsContent = styled.div`
       width: 100px;
       height: 100px;
       display: flex;
+
       justify-content: center;
       align-items: center;
       .settingsProfilePic {
@@ -135,7 +158,8 @@ export const StyledSettingsContent = styled.div`
         background-color: #dfe5e7;
       }
       .settingsProfileContent {
-        width: 18rem;
+        width: 16rem;
+
         height: 6rem;
         display: flex;
         flex-direction: column;
