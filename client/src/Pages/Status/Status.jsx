@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 
 import {
   StyledStatusContainer,
@@ -7,16 +7,16 @@ import {
   StyledStatusNotification,
   StyledStatusColTwoLayout,
   StyledStatusColTwo,
-} from "./style";
+} from './style';
 
-import { hideStatus } from "../../Redux-State/actionCreators/pageActions";
-import { connect } from "react-redux";
+import { hideStatus } from '../../Redux-State/actionCreators/pageActions';
+import { connect } from 'react-redux';
 function Status(props) {
   const countRef = useRef(0);
 
   useEffect(() => {
     countRef.current = countRef.current + 1;
-    console.log("status rendered " + countRef.current + " times");
+    console.log('status rendered ' + countRef.current + ' times');
   });
   return (
     <StyledStatusContainer toggle={props.displayStatusContainer}>
