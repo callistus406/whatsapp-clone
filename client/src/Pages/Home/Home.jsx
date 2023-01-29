@@ -138,9 +138,7 @@ function Home(props) {
   useEffect(() => {
     console.log(props.userInfo.payload);
   }, []);
-  async function now() {
-    // const data = await refreshToken();
-  }
+
   useEffect(() => {
     console.log(loggedUser.payload.user._id);
 

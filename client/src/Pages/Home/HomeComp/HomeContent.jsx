@@ -67,23 +67,15 @@ function Content(props) {
     toggleBg: false,
   });
 
-  //
-  // const [focused, setFocus] = useState(false);
-
   const divRef = useRef();
 
   const [cancel, setCancel] = useState(false);
 
   const unfocus = () => {
     setToggleState({ ...toggleState, inputFocused: false });
-    // setFocus(false);
-    // divRef.current.style.backgroundColor = "#F7F7F7";
   };
   const focus = () => {
     setToggleState({ ...toggleState, inputFocused: true });
-
-    // setFocus(true);
-    // divRef.current.style.backgroundColor = "#fff";
   };
   const handleChange = (event) => {
     setSearchInput(event.target.value);
@@ -97,7 +89,6 @@ function Content(props) {
     setToggleState({ ...toggleState, toggleBg: bool });
   };
   function handleCancel() {
-    // setHide((prevState) => !prevState);
     inputRef.current.value = '';
     setCancel(false);
   }
@@ -179,10 +170,11 @@ function Content(props) {
                 })
               }
             >
-              <FilterListIcon sx={{ color: '#8696A0' }} />
+              <FilterListIcon
+                sx={{ color: !toggleState.filterIcon ? '#8696A0' : '#fff' }}
+              />
             </div>
           </StyledSearchBarContainer>
-          {/* <StyledSearchIcon fontSize="small" /> */}
         </CenterDivContent>
       </div>
       <StyledFilterMsg toggle={toggleState.filterIcon}>
