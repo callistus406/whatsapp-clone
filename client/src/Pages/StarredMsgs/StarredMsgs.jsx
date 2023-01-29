@@ -1,27 +1,35 @@
-import React from "react";
-import { connect } from "react-redux";
-import { starredMsgsToggle } from "../../Redux-State/actionCreators/pageActions.js";
+import React from 'react';
+import { connect } from 'react-redux';
+import { starredMsgsToggle } from '../../Redux-State/actionCreators/pageActions.js';
 import {
   StyledContainer,
   StyledNavArrow,
   StyledArrowBackIcon,
   StyledStarredMsgsHeader,
   StyledStarredMsgsContent,
-} from "./style.js";
+} from './style.js';
 function StarredMsgs(props) {
   return (
     <StyledContainer toggle={props.displayStarredMgsLayout} width="28rem">
-      <StyledStarredMsgsHeader>
-        <div className="navArrow">
-          <StyledNavArrow display={props.displayStarredMgsLayout}>
-            <div className="">
-              <StyledArrowBackIcon onClick={props.starredMsgsToggle} />
+      {props.displayStarredMgsLayout ? (
+        <>
+          <StyledStarredMsgsHeader>
+            <div className="navArrow">
+              <StyledNavArrow display={props.displayStarredMgsLayout}>
+                <div className="">
+                  <StyledArrowBackIcon onClick={props.starredMsgsToggle} />
+                </div>
+                <p>Starred messages</p>
+              </StyledNavArrow>
             </div>
-            <p>Starred messages</p>
-          </StyledNavArrow>
-        </div>
-      </StyledStarredMsgsHeader>
-      <StyledStarredMsgsContent></StyledStarredMsgsContent>
+          </StyledStarredMsgsHeader>
+          <StyledStarredMsgsContent>
+            <p>No starred Message</p>
+          </StyledStarredMsgsContent>
+        </>
+      ) : (
+        ''
+      )}
     </StyledContainer>
   );
 }

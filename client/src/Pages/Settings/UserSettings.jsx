@@ -1,22 +1,22 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { connect } from "react-redux";
-import NotificationComponent from "../Notification/NotificationComponent";
-import { Help as HelpComponent } from "../Help/Help";
-import BlockedContacts from "../BlockedContacts/BlockedContacts";
-import SelectTheme from "../SelectTheme/SelectTheme";
-import LockIcon from "@mui/icons-material/Lock";
-import Privacy from "../Privacy/Privacy";
+import React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { connect } from 'react-redux';
+import NotificationComponent from '../Notification/NotificationComponent';
+import { Help as HelpComponent } from '../Help/Help';
+import BlockedContacts from '../BlockedContacts/BlockedContacts';
+import SelectTheme from '../SelectTheme/SelectTheme';
+import LockIcon from '@mui/icons-material/Lock';
+import Privacy from '../Privacy/Privacy';
 // import {optionTex}
 import {
   displaySettings,
   togglePrivacy,
-} from "../../Redux-State/actionCreators/pageActions";
+} from '../../Redux-State/actionCreators/pageActions';
 import {
   toggleNotification,
   toggleTheme,
@@ -26,7 +26,7 @@ import {
   toggleHelp,
   showProfile,
   toggleSecurity,
-} from "../../Redux-State/actionCreators/pageActions";
+} from '../../Redux-State/actionCreators/pageActions';
 import {
   StyledContainer,
   StyledArrowBackIcon,
@@ -34,7 +34,7 @@ import {
   StyledSettingsOption,
   StyledSettingsContent,
   StyledSettings,
-} from "./styles";
+} from './styles';
 import {
   Notification,
   Theme,
@@ -45,24 +45,24 @@ import {
   Avatar,
   SecurityIcon,
   PrivacyIcon,
-} from "./icons";
-import Security from "../Security/Security";
-import KeyboardCommands from "../KeyboardCommands/KeyboardCommands";
+} from './icons';
+import Security from '../Security/Security';
+import KeyboardCommands from '../KeyboardCommands/KeyboardCommands';
 
 const optionText = [
-  { id: 1, name: "Notification" },
-  { id: 2, name: "Privacy" },
-  { id: 3, name: "Security" },
-  { id: 4, name: "Theme" },
-  { id: 5, name: "Chat Wallpaper" },
-  { id: 6, name: "Blocked" },
-  { id: 7, name: "Keyboard shortcuts" },
-  { id: 8, name: "Help" },
+  { id: 1, name: 'Notification' },
+  { id: 2, name: 'Privacy' },
+  { id: 3, name: 'Security' },
+  { id: 4, name: 'Theme' },
+  { id: 5, name: 'Chat Wallpaper' },
+  { id: 6, name: 'Blocked' },
+  { id: 7, name: 'Keyboard shortcuts' },
+  { id: 8, name: 'Help' },
 ];
 // const arr = [<Notification />];
 const options = [
   <Notification />,
-  <LockIcon style={{ color: "#919191" }} />,
+  <LockIcon style={{ color: '#919191' }} />,
   <SecurityIcon />,
   <Theme />,
   <ChatWallpaper />,
@@ -92,6 +92,7 @@ function UserSettings(props) {
     },
     props.toggleHelp,
   ];
+  const { username, about } = props.userInfo.data.payload.user;
   // console.log(props);
   const [open, setOpen] = React.useState(false);
   // console.log(open);
@@ -146,8 +147,8 @@ function UserSettings(props) {
                 props.displaySettings(false);
               }}
             >
-              <p>Callistus</p>
-              <span>Loading About...</span>
+              <p>{username}</p>
+              <span>{about ? about : 'Loading about...'}</span>
             </div>
           </div>
           {options.map(function (item, index) {
@@ -204,6 +205,7 @@ function mapStateToProps(state) {
     displaySecurityPage: state.security.displaySecurityPage,
     // search msg state
     displaySettingsLayout: state.settings.displaySettings,
+    userInfo: state.login,
   };
 }
 function mapDispatchToProps(dispatch) {
