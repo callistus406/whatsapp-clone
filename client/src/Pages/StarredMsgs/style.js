@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import styled from 'styled-components';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const StyledContainer = styled.div`
   height: 100%; /* 100% Full-height */
   width: ${(props) =>
     props.toggle ? props.width : 0}; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1;
+  z-index: 2;
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #fff;
@@ -33,12 +33,12 @@ export const StyledArrowBackIcon = styled(ArrowBackIcon)`
 export const StyledNavArrow = styled.div`
   width: 22rem;
   height: 3rem;
-  ${"" /* border: 1px solid blue; */}
+  ${'' /* border: 1px solid blue; */}
   display: flex;
   align-items: center;
-  ${"" /* justify-content: center; */}
+  ${'' /* justify-content: center; */}
   color: #fff;
-  display: ${(props) => (props.display ? "flex" : "none")};
+  display: ${(props) => (props.display ? 'flex' : 'none')};
 
   p {
     margin-left: 2rem;
