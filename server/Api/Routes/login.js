@@ -17,12 +17,13 @@ initializePassport(
   (id) => UserModel.findOne({ _id: id })
 );
 
-router.post('/login', loginController);
+router.post(
+  '/login',
+  loginController
+  // passport.authenticate('local', {
+  //   successRedirect: '/',
+  //   failureRedirect: '/api/v1/login',
+  //   failureFlash: true,
+  // })
+);
 module.exports = router;
-
-// forwardAuthenticated,
-//   passport.authenticate('local', {
-//     successRedirect: '/',
-//     failureRedirect: '/login',
-//     failureFlash: true,
-//   })
