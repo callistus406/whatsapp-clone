@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 
-import { connect } from "react-redux";
-import ClearIcon from "@mui/icons-material/Clear";
-import { newChatToggle } from "../../Redux-State/actionCreators/pageActions";
+import { connect } from 'react-redux';
+import ClearIcon from '@mui/icons-material/Clear';
+import { newChatToggle } from '../../Redux-State/actionCreators/pageActions';
 import {
   StyledDiv,
   StyleProfileBox,
@@ -15,16 +15,19 @@ import {
   StyledSearchBarContainer,
   StyledNewHeader,
   StyledContacts,
-} from "./style";
+} from './style';
+import axiosInstance from '../../utils/axiosInstance';
 function NewChat(props) {
   const countRef = useRef(0);
   const inputRef = useRef();
   const arrowRef = useRef();
+  const [friends, setFriend] = useState(null);
   useEffect(() => {
-    countRef.current = countRef.current + 1;
-    console.log("message search rendered " + countRef.current + " times");
-  });
-  const [searchInput, setSearchInput] = useState(".");
+    axiosInstance.get('/contacts').then((response) => {
+      console.log(response.data);
+    });
+  }, []);
+  const [searchInput, setSearchInput] = useState('.');
 
   //
   const [focused, setFocus] = useState(false);
@@ -52,7 +55,7 @@ function NewChat(props) {
 
   function handleCancel() {
     setHide((prevState) => !prevState);
-    inputRef.current.value = "";
+    inputRef.current.value = '';
     setCancel(false);
   }
   function Contacts(props) {
@@ -99,17 +102,17 @@ function NewChat(props) {
 
         <StyledSearchBarContainer ref={divRef}>
           <span className="searchIconCont">
-            {" "}
+            {' '}
             {focused ? <ArrowBack /> : <StyledSearchIcon />}
           </span>
           <span className="clearIconCont">
-            {cancel ? <ClearIcon onClick={handleCancel} /> : ""}
+            {cancel ? <ClearIcon onClick={handleCancel} /> : ''}
           </span>
           <input
             ref={inputRef}
             type="text"
             className="inputSearch"
-            placeholder={!focused ? "search contacts" : ""}
+            placeholder={!focused ? 'search contacts' : ''}
             // autoFocus={true}
             onFocus={focus}
             onBlur={unfocus}
