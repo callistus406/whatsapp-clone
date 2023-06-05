@@ -18,10 +18,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { styled } from '@mui/material/styles';
 import DoneIcon from '@mui/icons-material/Done';
 import InputAdornment from '@mui/material/InputAdornment';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 
 function UserProfile(props) {
   const countRef = useRef(0);
-
+  const { username, about } = props.userInfo.data.payload.user;
   const [toggle, setToggle] = useState({
     showInput: true,
     editAbout: true,
@@ -39,7 +40,7 @@ function UserProfile(props) {
   };
   useEffect(() => {
     countRef.current = countRef.current + 1;
-
+    console.log(props.userInfo.data.payload.user);
     console.log('profile logged ' + countRef.current);
   });
 
@@ -51,133 +52,152 @@ function UserProfile(props) {
 
   return (
     <StyledContainer toggle={props.displayProfileContainer} width="28rem">
-      <StyledProfileHeader>
-        <StyledNavArrow>
-          {/* profile toggle */}
-          <StyledArrowBackIcon onClick={() => props.hideProfile(false)} />
-          <p>Profile</p>
-        </StyledNavArrow>
-      </StyledProfileHeader>
-      <StyledProfileContent>
-        <div className="profileContent"></div>
-        <StyleProfileBox>
-          <StyleProfilePicBox>
-            <DisplayPic>
-              <Avatar />
-            </DisplayPic>
-          </StyleProfilePicBox>
-
-          <CustomDiv
-            height="5.4rem"
-            width="100%"
-            background="#fff"
-            color="#008069"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <div className="content">
-              <p>Your name</p>
-
-              <TextField
-                id={toggle.showInput ? 'standard' : 'standard-disabled'}
-                variant="standard"
-                sx={{
-                  '& .MuiInput-underline:after': {
-                    borderBottomColor: '#00A884',
-                    width: '100%',
-                  },
-                }}
-                InputProps={{
-                  disableUnderline: toggle.showInput,
-                  readOnly: toggle.showInput,
-                }}
-                // label={<p style={{ fontSize: '1.2rem' }}>Your name</p>}
-                type="text"
-                defaultValue="Callistus"
-              />
-              <div
-                className="editNameIcon"
-                onClick={() => {
-                  handleToggleInput();
-                }}
+      {props.displayProfileContainer ? (
+        <>
+          <StyledProfileHeader>
+            <StyledNavArrow>
+              {/* profile toggle */}
+              <StyledArrowBackIcon onClick={() => props.hideProfile(false)} />
+              <p>Profile</p>
+            </StyledNavArrow>
+          </StyledProfileHeader>
+          <StyledProfileContent>
+            <div className="profileContent"></div>
+            <StyleProfileBox>
+              {props.displayProfileContainer ? (
+                <motion.div
+                  className="box"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.3,
+                    ease: [0, 0.71, 0.2, 1.01],
+                  }}
+                >
+                  <StyleProfilePicBox>
+                    <DisplayPic>
+                      <Avatar />
+                    </DisplayPic>
+                  </StyleProfilePicBox>
+                </motion.div>
+              ) : (
+                ''
+              )}
+              <CustomDiv
+                height="5.4rem"
+                width="100%"
+                background="#fff"
+                color="#008069"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
               >
-                {!toggle.showInput ? (
-                  <StyledDoneIcon />
-                ) : (
-                  <StyledEditIcon onClick={handleToggleInput} />
-                )}
-              </div>
-            </div>
-          </CustomDiv>
-          <CustomDiv
-            height="4.7rem"
-            width="100%"
-            background="#EDEDED"
-            color="#43B1A7"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            fontSize="1rem"
-            padding="1rem"
-          >
-            <p
-              style={{
-                alignSelf: 'center',
-                width: '90%',
-                fontSize: '0.9rem',
-              }}
-            >
-              This is not your username or pin.This name will be visible to your
-              whatsapp contacts
-            </p>
-          </CustomDiv>
-          <CustomDiv
-            height="8.5rem"
-            width="100%"
-            background="#fff"
-            color="#43B1A7"
-            padding="1rem"
-            display="flex"
-          >
-            <div className="status">
-              <p className="aboutHeader">About</p>
-              <TextField
-                id={toggle.editAbout ? 'standard' : 'standard-disabled'}
-                variant="standard"
-                sx={{
-                  '& .MuiInput-underline:after': {
-                    borderBottomColor: '#00A884',
-                    width: '100%',
-                  },
-                }}
-                InputProps={{
-                  disableUnderline: toggle.editAbout,
-                  readOnly: toggle.editAbout,
-                }}
-                // label={<p style={{ fontSize: '1.2rem' }}>Your name</p>}
-                type="text"
-                defaultValue="This is where you enter you status"
-              />
-              <div
-                className="editAboutIcon"
-                onClick={() => {
-                  handleToggleAboutInput();
-                }}
+                <div className="content">
+                  <p>Your name</p>
+
+                  <TextField
+                    id={toggle.showInput ? 'standard' : 'standard-disabled'}
+                    variant="standard"
+                    sx={{
+                      '& .MuiInput-underline:after': {
+                        borderBottomColor: '#00A884',
+                        width: '100%',
+                      },
+                    }}
+                    InputProps={{
+                      disableUnderline: toggle.showInput,
+                      readOnly: toggle.showInput,
+                    }}
+                    // label={<p style={{ fontSize: '1.2rem' }}>Your name</p>}
+                    type="text"
+                    defaultValue={username}
+                  />
+                  <div
+                    className="editNameIcon"
+                    onClick={() => {
+                      handleToggleInput();
+                    }}
+                  >
+                    {!toggle.showInput ? (
+                      <StyledDoneIcon />
+                    ) : (
+                      <StyledEditIcon onClick={handleToggleInput} />
+                    )}
+                  </div>
+                </div>
+              </CustomDiv>
+              <CustomDiv
+                height="4.7rem"
+                width="100%"
+                background="#EDEDED"
+                color="#43B1A7"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                fontSize="1rem"
+                padding="1rem"
               >
-                {!toggle.editAbout ? (
-                  <StyledDoneIcon />
-                ) : (
-                  <StyledEditIcon onClick={handleToggleAboutInput} />
-                )}
-              </div>
-              {/* <span style={{ color: '#000' }}>
+                <p
+                  style={{
+                    alignSelf: 'center',
+                    width: '90%',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  This is not your username or pin.This name will be visible to
+                  your whatsapp contacts
+                </p>
+              </CustomDiv>
+              <CustomDiv
+                height="8.5rem"
+                width="100%"
+                background="#fff"
+                color="#43B1A7"
+                padding="1rem"
+                display="flex"
+              >
+                <div className="status">
+                  <p className="aboutHeader">About</p>
+                  <TextField
+                    id={toggle.editAbout ? 'standard' : 'standard-disabled'}
+                    variant="standard"
+                    sx={{
+                      '& .MuiInput-underline:after': {
+                        borderBottomColor: '#00A884',
+                        width: '100%',
+                      },
+                    }}
+                    InputProps={{
+                      disableUnderline: toggle.editAbout,
+                      readOnly: toggle.editAbout,
+                    }}
+                    type="text"
+                    defaultValue={about}
+                  />
+                  <div
+                    className="editAboutIcon"
+                    onClick={() => {
+                      handleToggleAboutInput();
+                    }}
+                  >
+                    {!toggle.editAbout ? (
+                      <StyledDoneIcon />
+                    ) : (
+                      <StyledEditIcon onClick={handleToggleAboutInput} />
+                    )}
+                  </div>
+                  {/* <span style={{ color: '#000' }}>
                 This is where you enter you status
               </span> */}
-            </div>
-          </CustomDiv>
-        </StyleProfileBox>
-      </StyledProfileContent>
+                </div>
+              </CustomDiv>
+            </StyleProfileBox>
+          </StyledProfileContent>
+        </>
+      ) : (
+        ''
+      )}
     </StyledContainer>
   );
 }
@@ -190,6 +210,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
+    userInfo: state.login,
     displayProfileContainer: state.profile.displayProfileContainer,
   };
 }

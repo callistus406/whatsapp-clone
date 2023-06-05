@@ -11,7 +11,7 @@ export const StyledContainer = styled.div`
   left: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.1s;
 
   .content {
     width: 93%;
