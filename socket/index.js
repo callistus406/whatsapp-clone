@@ -1,15 +1,3 @@
-// const { Server } = require('socket.io');
-// const io = new Server(8900, {
-//   cors: {
-//     origin: 'http://localhost:3000',
-//   },
-// });
-
-// io.on('connection', (socket) => {
-//   console.log('a user connected');
-//   io.emit('welcome', 'hello everyone this is from socket');
-// });
-
 const io = require('socket.io')(8900, {
   cors: {
     origin: 'http://localhost:3000',
@@ -20,17 +8,17 @@ const addUser = (userId, socketId) => {
   console.log(userId, socketId);
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
-  console.log(users);
 };
 const removeUser = (socketId) => {
   users.filter((user) => user.socketId !== socketId);
 };
 
 const getUser = (userId) => {
-  console.log(userId, users[0].userId);
-  console.log(users);
-
-  return users.find((user) => user.userId !== userId);
+  // console.log(userId);
+  console.log('users');
+  users.find((user) => console.log(user.userId === userId));
+  return users.find((user) => user.userId === userId);
+  // return users.find((user) => user.userId !== userId);
 };
 
 io.on('connection', (socket) => {
@@ -43,10 +31,14 @@ io.on('connection', (socket) => {
   });
   //send and ge!
   socket.on('sendMessage', ({ senderId, receiverId, text }) => {
-    console.log('................');
+    console.log('......yuui..........');
     const user = getUser(receiverId);
+    console.log({ senderId, receiverId, text });
+    console.log('......yuui.........ggfgf.');
     console.log(receiverId);
-    io.to(user.socketId).emit('getMessage', {
+    console.log('......yuui.........ggfgf....fdfdfd.');
+    console.log(user);
+    io.to(user?.socketId).emit('getMessage', {
       senderId,
       text,
     });
