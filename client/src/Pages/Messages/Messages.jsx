@@ -62,6 +62,7 @@ function Messages(props) {
     // console.log(props.userProfi);
     socket.current = io('ws://localhost:8900');
     socket.current.on('getMessage', (data) => {
+      console.log(data);
       setArrivedMessage({
         sender: data.senderId,
         text: data.text,
@@ -69,12 +70,13 @@ function Messages(props) {
       });
     });
 
+    console.log(arrivedMessage);
     // console.log(props.userProfile.data.username);
   }, []);
-  console.log(arrivedMessage);
 
   //
   useEffect(() => {
+    console.log(arrivedMessage);
     arrivedMessage &&
       currentChat?.members.includes(arrivedMessage.sender) &&
       setMessages((prev) => [...prev, arrivedMessage]);
@@ -86,7 +88,7 @@ function Messages(props) {
     console.log(props.authToken);
     socket.current.emit('addUser', getUser.data.payload.user._id);
     socket.current.on('getUsers', (users) => {
-      console.log(users);
+      console.log(getUser.data.payload.user._id);
     });
   }, [getUser.data.payload.user]);
   useEffect(() => {
