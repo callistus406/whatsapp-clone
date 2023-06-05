@@ -21,10 +21,10 @@ function Login({ userLogin, userInfo }) {
   //     console.log(message);
   //   });
   // }, []);
-  useEffect(() => {
-    userLogin('splunk admin', '2345433264321');
-    console.log(userInfo.data?.payload);
-  }, []);
+  // useEffect(() => {
+  //   userLogin('splunk admin', '2345433264321');
+  //   console.log(userInfo.data?.payload);
+  // }, []);
 
   const inputUsername = useRef(null);
   const inputPhone = useRef(null);
