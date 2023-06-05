@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema(
       minLength: 10,
       required: [true, 'this field is required'],
     },
+    contacts: {
+      type: Array,
+    },
     profilePic: {
       type: String,
     },
