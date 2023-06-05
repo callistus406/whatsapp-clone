@@ -6,6 +6,7 @@ const conversation = require('./Routes/conversation');
 const message = require('./Routes/message');
 const profile = require('./Routes/profile');
 const user = require('./Routes/user');
+const contacts = require('./Routes/contacts');
 const refresh = require('./Routes/refresh');
 router.use(login);
 router.use(register);
@@ -14,5 +15,6 @@ router.use(message);
 router.use(profile);
 router.use(user);
 router.use(refresh);
+router.use(contacts);
 
 module.exports = router;
